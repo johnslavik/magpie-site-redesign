@@ -464,7 +464,7 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .illustration-sandbox { border: 1px dashed #70a584; border-radius: 10px; padding: 10px; }
 @media (max-width: 600px) { .workflow-illustration { height: 88px; margin-top: 18px; } }
 
-/* Shared rows keep the situation, workflow and outcome on the same reading lines. */
+/* Match card headings while keeping each body directly beneath its own heading. */
 .redesign-home .lifecycle-flow > div { padding: var(--card-padding); border-radius: var(--card-radius); border: 1px solid var(--prepared-border); }
 .redesign-home .lifecycle-incoming { background: #ffffff80; }
 .redesign-home .lifecycle-ready { background: #f3faf5; }
@@ -472,8 +472,8 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .redesign-home .lifecycle-flow .magpie-card-brand { font-size: 22px; font-weight: 600; line-height: 1.45; letter-spacing: -.02em; margin: 0; }
 .redesign-home .lifecycle-flow :is(p,ul) { font-size: var(--text-body); line-height: 1.6; margin: 0; }
 @media(min-width:801px) {
- .redesign-home .lifecycle-flow { grid-template-rows: auto 1fr; column-gap: 20px; row-gap: 24px; }
- .redesign-home .lifecycle-flow > div { display: grid; grid-template-rows: subgrid; grid-row: span 2; align-content: start; }
+ .redesign-home .lifecycle-flow { column-gap: 20px; }
+ .redesign-home .lifecycle-flow > div { display: flex; flex-direction: column; gap: 24px; }
  .redesign-home .lifecycle-flow h3 { align-self: start; }
 }
 @media(max-width:800px) { .redesign-home .lifecycle-flow h3 { margin-bottom: 24px; } }
