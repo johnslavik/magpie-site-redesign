@@ -66,7 +66,7 @@ export function SoftwareLifecycle() {
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
         <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><p className="prepared-workflow-label">We’ve already written this workflow for your agent.</p><ul>{phase.work.map(work => <li key={work}><Check size={18} aria-hidden="true" /><span>{work}</span></li>)}</ul></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
-        <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}>{output}</li>)}</ul></div>
+        <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}><Check size={18} aria-hidden="true" /><span>{output}</span></li>)}</ul></div>
       </div>
       <a className="lifecycle-explore" href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows <ArrowRight size={15} aria-hidden="true" /></a>
     </div>)}</div>

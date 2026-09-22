@@ -82,7 +82,7 @@
 .redesign-home .lifecycle-work>img { filter: brightness(0) invert(1); }
 .redesign-home .lifecycle-work ul { gap: 14px; }
 .redesign-home .lifecycle-work li { color: #e2edf7; font-size: var(--text-body); }
-.redesign-home .lifecycle-ready ul { margin: 0; padding-left: 20px; display: grid; gap: 12px; color: #46664c; font-size: var(--text-body); line-height: 1.6; }
+.redesign-home .lifecycle-ready ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; color: #46664c; font-size: var(--text-body); line-height: 1.6; }
 .redesign-home .lifecycle-ready li::marker { color: #81a475; }
 .redesign-home .setup-request { margin-left: 0; box-shadow: none; border: 0; border-left: 3px solid #d2dccc; border-radius: 0; background: transparent; padding: 8px 0 8px 22px; }
 .redesign-home .setup-prepared { padding: 28px; }
@@ -297,3 +297,18 @@ body.docs-navigation-open { overflow: hidden; }
  .sandbox-contents { gap: 10px; }
  .sandbox-contents>div { font-size: 16px; }
 }
+
+/* Compare the work at each step without adding a second result card. */
+.story-comparison { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-block: 28px; }
+.story-comparison h4 { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 500; line-height: 1.4; margin: 0 0 16px; }
+.story-comparison h4 img { flex-shrink: 0; }
+.story-comparison p { font-size: var(--text-body); line-height: 1.6; margin: 0; }
+.story-manual { color: var(--muted); }
+.story-assisted { color: #2c4c6c; border-left: 2px solid #b9cde2; padding-left: 28px; }
+@media(max-width:800px) {
+ .story-comparison { grid-template-columns: 1fr; gap: 24px; }
+ .story-assisted { padding-left: 20px; }
+}
+
+.redesign-home .lifecycle-ready li { display: flex; align-items: flex-start; gap: 10px; }
+.redesign-home .lifecycle-ready li svg { flex-shrink: 0; margin-top: 6px; color: #63845c; }

@@ -71,8 +71,10 @@ export default function WorkflowExplorer() {
       }}><span className="story-stage-point" aria-hidden="true">{i < stage && <Check size={14} />}</span>{phase.label}</button>)}</div>
       <div className="security-scenes">{securityStory.map((phase, i) => <section className="security-scene" id={`security-stage-${i}`} key={phase.label} role="tabpanel" aria-labelledby={`security-tab-${i}`} aria-hidden={stage !== i} inert={stage !== i} tabIndex={0}>
         <h3>{phase.prompt}</h3>
-        <div className="story-contribution"><img src="/favicon.svg" width="32" height="32" alt="" /><p><BrandName /> {phase.result}</p></div>
-        {phase.kind === "release" ? <div className="release-choice"><div><strong>By hand</strong><p>Find the merged fix, check the published version, and copy the evidence into the tracker.</p></div><div><strong>With Magpie</strong><p>“Check whether this report is ready to disclose.”</p></div></div> : <div className={`story-output output-${phase.kind}`}><Check size={22} aria-hidden="true" /><p>{phase.title}</p></div>}
+        <div className="story-comparison">
+          <div className="story-manual"><h4>Without Magpie</h4><p>{phase.without}</p></div>
+          <div className="story-assisted"><h4><img src="/favicon.svg" width="32" height="32" alt="" /><span>With <BrandName /></span></h4><p>Your agent {phase.result}</p></div>
+        </div>
         <p className="story-decision"><UserRound size={21} aria-hidden="true" />{phase.handoff}</p>
       </section>)}</div>
       <div className="story-navigation">
