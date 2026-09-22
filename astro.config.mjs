@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import { satteri } from '@astrojs/markdown-satteri';
 import callouts from './scripts/markdown-callouts.mjs';
+import projectFiles from './scripts/markdown-project-files.mjs';
 
 // Production is served directly at the apex https://magpie.apache.org/ (root path).
 // Override SITE_URL / SITE_BASE if you ever need to preview under a subpath.
@@ -36,7 +37,7 @@ export default defineConfig({
   site,
   base,
   redirects,
-  markdown: { processor: satteri({ hastPlugins: [callouts] }) },
+  markdown: { processor: satteri({ hastPlugins: [callouts, projectFiles] }) },
   // Markdown twins of docs pages (/docs/<page>.md) are alternates of the HTML
   // page, not pages, so they stay out of the sitemap.
   integrations: [

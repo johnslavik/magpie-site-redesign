@@ -1,4 +1,5 @@
 ---
+import { toolSummaries } from '../lib/tool-summaries';
 import ContentLayout from '../layouts/ContentLayout.astro';
 import { buildToolsView } from '../lib/tools-view';
 const plainDescription = (text: string) => text.replace(/`([^`]+)`/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1');
@@ -8,12 +9,13 @@ const { tools, contractList, substrateList, vendorChips, orgChips, stateBadge } 
   <div class="tool-filters" role="search" aria-label="Filter tools">
     <input type="search" id="tool-query" aria-label="Search tools" placeholder="Search tools…" />
     <select id="tool-capability" aria-label="Filter by capability"><option value="">All capabilities</option><optgroup label="Contracts">{contractList.map(c=><option value={`contract:${c.key}`}>{c.key}</option>)}</optgroup><optgroup label="Low-level capabilities">{substrateList.map(c=><option value={`substrate:${c.key}`}>{c.key}</option>)}</optgroup></select>
+    <details class="tool-extra-filters"><summary>More filters<span id="tool-extra-count"></span></summary><div>
     <select id="tool-vendor" aria-label="Filter by vendor"><option value="">All vendors</option>{vendorChips.map(v=><option value={v.vendor}>{v.vendor}</option>)}<option value="__interface">Interface specifications</option></select>
     <select id="tool-org" aria-label="Filter by organization"><option value="">All organizations</option>{orgChips.map(o=><option value={o.id}>{o.label}</option>)}<option value="__agnostic">Organization agnostic</option></select>
-    <label><input id="tool-mcp" type="checkbox" />MCP tools</label><button id="tool-reset" hidden>Clear filters</button>
+    <label><input id="tool-mcp" type="checkbox" />MCP tools</label></div></details><button id="tool-reset" hidden>Clear filters</button>
   </div>
   <p id="tool-count" class="tool-count" role="status" aria-live="polite">{tools.length} tools</p>
-  <div class="tool-list">{tools.map(tool=><a class="tool-entry" href={`/docs/tools/${tool.name}/readme`} data-search={`${tool.title} ${tool.description} ${tool.name} ${tool.labels.map(label => label.name).join(" ")} ${tool.vendor ?? ""}`.toLowerCase()} data-caps={tool.labels.map(l=>`${l.kind}:${l.name}`).join(' ')} data-vendor={tool.vendorKind === 'interface' ? '__interface' : tool.vendor ?? ''} data-org={tool.organization ?? '__agnostic'} data-mcp={Boolean(tool.mcp)}><h2>{tool.title}</h2><p>{plainDescription(tool.description)}</p><div class="tool-meta"><span class:list={{'tool-unavailable':tool.state !== 'implemented'}}>{stateBadge(tool).label}</span>{tool.vendor && <span>{tool.vendor}</span>}{tool.maturity === 'experimental' && <span>Experimental</span>}</div></a>)}</div>
+  <div class="tool-list">{tools.map(tool=><a class="tool-entry" href={`/docs/tools/${tool.name}/readme`} data-search={`${tool.title} ${tool.description} ${toolSummaries[tool.name] ?? ""} ${tool.name} ${tool.labels.map(label => label.name).join(" ")} ${tool.vendor ?? ""}`.toLowerCase()} data-caps={tool.labels.map(l=>`${l.kind}:${l.name}`).join(' ')} data-vendor={tool.vendorKind === 'interface' ? '__interface' : tool.vendor ?? ''} data-org={tool.organization ?? '__agnostic'} data-mcp={Boolean(tool.mcp)}><h2>{tool.title}</h2><p>{toolSummaries[tool.name] ?? plainDescription(tool.description)}</p><div class="tool-meta">{tool.state !== 'implemented' && <span class="tool-unavailable">{stateBadge(tool).label}</span>}{tool.vendor && <span>{tool.vendor}</span>}{tool.maturity === 'experimental' && <span>Experimental</span>}</div></a>)}</div>
   <p id="tool-empty" hidden>No matching tools. Try another search or clear the filters.</p>
   <div class="link-row"><a href="/architecture">How these tools fit together </a></div>
 </ContentLayout>
@@ -31,6 +33,8 @@ const { tools, contractList, substrateList, vendorChips, orgChips, stateBadge } 
    cards.forEach(card => { const show = terms.every(term=>card.dataset.search!.includes(term)) && (!cap.value || card.dataset.caps!.split(' ').includes(cap.value)) && (!vendor.value || card.dataset.vendor === vendor.value) && (!org.value || card.dataset.org === org.value) && (!mcp.checked || card.dataset.mcp === 'true'); card.hidden = !show; if(show) count++; });
    document.querySelector('#tool-count')!.textContent = `${count} of ${cards.length} tools`;
    document.querySelector<HTMLElement>('#tool-empty')!.hidden = count !== 0;
+   const extras = Number(Boolean(vendor.value)) + Number(Boolean(org.value)) + Number(mcp.checked);
+   document.querySelector('#tool-extra-count')!.textContent = extras ? ` (${extras} active)` : '';
    reset.hidden = !query.value && !cap.value && !vendor.value && !org.value && !mcp.checked;
  };
  query.addEventListener('input',update); [cap,vendor,org,mcp].forEach(control=>control.addEventListener('change',update));

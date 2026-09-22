@@ -20,13 +20,13 @@ export default function HeroWorkflows() {
   return <div className="workflow-reel" role="region" aria-label="Examples of complete Magpie workflows">
     <div className="reel-window" aria-live="polite">
       <div className="reel-example" key={selected}>
-          <a href={withBase(item.path)} className="reel-active" target="_blank" rel="noreferrer">
+          <div className="reel-active">
             <ol className="reel-flow">
               <li className="reel-source"><small>When you have</small><span className="reel-input">{item.input}</span></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We wrote the steps for your agent to follow.</small><div className="reel-skill"><span>Included skill</span><code>{item.skill}<b>/SKILL.md</b></code></div><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We wrote the steps for your agent to follow.</small><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
               <li className="reel-delivery"><span className="delivery-check" aria-hidden="true">✓</span><small>The result</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
-          </a>
+          </div>
       </div>
     </div>
     <div className="example-navigation">

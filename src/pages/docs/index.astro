@@ -9,7 +9,7 @@ const workflows = [
 ];
 const more = [["Repository health", "/docs/repo-health/readme"], ["Mentoring", "/docs/mentoring/readme"], ["Contributor growth", "/docs/contributor-growth/readme"], ["Pairing", "/docs/pairing/readme"], ["Tools & adapters", "/tools"], ["Extending Magpie", "/docs/extending"]];
 ---
-<DocsLayout title="Introduction" currentSlug="" currentSection="_root" editUrl="https://github.com/johnslavik/magpie-site-redesign/edit/main/src/pages/docs/index.astro">
+<DocsLayout title="Introduction" currentSlug="" headings={[{depth: 2, slug: "workflows", text: "Choose a workflow"}, {depth: 2, slug: "understand", text: "Understand the foundations"}]} editUrl="https://github.com/johnslavik/magpie-site-redesign/edit/main/src/pages/docs/index.astro">
   <h1>Documentation</h1>
   <p class="docs-lead">Magpie is a collection of AI agent skills for open-source maintainers. Use it to prepare reviews, triage reports, and move work forward with your judgment at every step.</p>
   <a href="/start" class="docs-start-card"><div><h2>Get up and running</h2><p>Install Magpie, choose a workflow, and try it on your project.</p><span class="text-link">Install Magpie </span></div><Terminal size={37} strokeWidth={1.2} /></a>

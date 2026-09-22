@@ -25,7 +25,7 @@ interface Props {
   editUrl?: string;
 }
 
-const { title, currentSlug, currentSection, headings } = Astro.props;
+const { title, currentSlug, headings } = Astro.props;
 // The first heading is the page title; h4+ is too fine-grained to navigate by.
 // Depth is not fixed at h2: several pages section themselves with repeated H1s
 // rather than H2s, so filtering on h2/h3 alone left them with no page nav.
@@ -403,10 +403,10 @@ for (const g of sortedGroups) {
   const built = buildSection(g);
   let children = built.roots;
   if (g.name === "tools") children = bucketTools(children);
-  // Concepts' overview is the /docs landing page, not a synced markdown file.
-  const href = g.name === "_root" ? "/docs" : built.href;
+  // Concepts is a group; Introduction already links to the docs landing page.
+  const href = g.name === "_root" ? undefined : built.href;
   const isCurrent =
-    g.name === "_root" ? currentSection === "_root" : href === currentSlug;
+    g.name === "_root" ? false : href === currentSlug;
   sectionNodes.set(g.name, { label: g.label, children, href, isCurrent });
 }
 
@@ -493,8 +493,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   <script>
     const toggle = document.querySelector<HTMLButtonElement>('.docs-menu-toggle')!;
     const sidebar = document.querySelector<HTMLElement>('.docs-sidebar')!;
-    const closeSidebar = () => { sidebar.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); };
-    toggle.addEventListener('click', () => { const open = sidebar.classList.toggle('is-open'); toggle.setAttribute('aria-expanded', String(open)); });
+    const background = [...document.querySelectorAll<HTMLElement>('.docs-main, .docs-toc, .site-footer')];
+    const closeSidebar = () => {
+      sidebar.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('docs-navigation-open');
+      background.forEach(element => { element.inert = false; });
+    };
+    toggle.addEventListener('click', () => {
+      if (sidebar.classList.contains('is-open')) { closeSidebar(); return; }
+      sidebar.classList.add('is-open'); toggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('docs-navigation-open');
+      background.forEach(element => { element.inert = true; });
+      sidebar.querySelector<HTMLElement>('a')?.focus();
+    });
+    document.querySelector('[data-search-open]')?.addEventListener('click', closeSidebar);
+    matchMedia('(min-width: 801px)').addEventListener('change', event => { if (event.matches) closeSidebar(); });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Tab' || !sidebar.classList.contains('is-open')) return;
+      const items = [toggle, ...sidebar.querySelectorAll<HTMLElement>('a, summary, button')].filter(element => element.getClientRects().length > 0);
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
     document.addEventListener('keydown', event => { if (event.key === 'Escape' && sidebar.classList.contains('is-open')) { closeSidebar(); toggle.focus(); } });
     sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', closeSidebar));
     document.querySelector<HTMLButtonElement>('.copy-page')?.addEventListener('click', async event => {

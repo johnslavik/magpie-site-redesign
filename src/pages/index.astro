@@ -10,11 +10,10 @@ import BrandName from "../components/landing/BrandName";
 import MoreWays from "../components/landing/MoreWays.astro";
 ---
 <BaseLayout title="Apache Magpie | Software maintenance, automated" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
-  <SiteHeader home revealAfterHero />
+  <SiteHeader />
   <main id="main-content" class="redesign-home">
     <section class="hero container">
       <div class="hero-copy">
-        <img class="hero-wordmark" src="/wordmark.svg" alt="Magpie" width="200" height="57" />
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
         <p class="hero-story">AI brought more contributions to open source and more work for maintainers. To keep up at Apache Airflow, we turned maintenance procedures into <strong>dozens of reusable skills</strong>. <BrandName /> brings those skills to your coding agent, ready for your own project.</p>
       </div>
@@ -34,7 +33,6 @@ import MoreWays from "../components/landing/MoreWays.astro";
         </div>
       </div>
     </section>
-    <span class="diagram-nav-trigger" data-nav-trigger aria-hidden="true"></span>
     <section id="airflow" class="airflow-section">
       <svg class="airflow-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C240 60 310 10 580 14S1010 88 1440 24V80H0Z" /></svg>
       <div class="container">

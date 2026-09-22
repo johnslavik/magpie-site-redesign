@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Copy, ArrowRight } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
@@ -12,12 +12,14 @@ function CopyText({ text, label }: { text: string; label: string }) {
   }}>{status === "Copied" ? <Check size={17} aria-hidden="true" /> : <Copy size={17} aria-hidden="true" />}<span aria-live="polite">{status || "Copy"}</span></button>;
 }
 export default function StartGuide({ agents }: { agents: InstallOption[] }) {
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
   const [selected, setSelected] = useState(agents[0].id);
   const agent = agents.find(item => item.id === selected)!;
   const setupPrompt = "Set up Magpie for my own work on this project, including secure isolation and privacy settings. Show me the proposed changes before installing anything.";
   const reviewPrompt = "Install Magpie’s PR review workflows and help me review a pull request. Ask me for the PR, then prepare findings for my approval.";
   return <div className="start-guide">
-    <div className="agent-choice"><label htmlFor="start-agent">Which agent do you use?</label><select id="start-agent" value={selected} onChange={event => setSelected(event.target.value)}>{agents.map(item => <option value={item.id} key={item.id}>{item.name}</option>)}</select><a href={withBase('/docs/setup/marketplace-install')} target="_blank" rel="noreferrer">Another agent</a></div>
+    <div className="agent-choice"><label htmlFor="start-agent">Which agent do you use?</label><select disabled={!ready} id="start-agent" value={selected} onChange={event => setSelected(event.target.value)}>{agents.map(item => <option value={item.id} key={item.id}>{item.name}</option>)}</select><a href={withBase('/docs/setup/marketplace-install')} target="_blank" rel="noreferrer">Another agent</a></div>
     <section className="start-step" aria-labelledby="install-title">
       <h2 id="install-title">Install Magpie in {agent.name}</h2>
       <p>{agent.where}</p>

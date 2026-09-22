@@ -64,28 +64,7 @@ const ogImage = new URL(
   </head>
   <body>
     <slot />
-    <script>
-      const heroHeader = document.querySelector<HTMLElement>('[data-reveal-after-hero]');
-      const heroTrigger = document.querySelector('[data-nav-trigger]');
-      if (heroHeader && heroTrigger) {
-        const updateHeader = () => {
-          const shown = heroTrigger.getBoundingClientRect().top <= 0;
-          heroHeader.classList.toggle('is-past-hero', shown);
-          heroHeader.inert = !shown;
-          if (!shown) heroHeader.querySelector('details')?.removeAttribute('open');
-        };
-        heroHeader.classList.add('hero-nav-ready');
-        updateHeader();
-        const observer = new IntersectionObserver(updateHeader, { threshold: 0 });
-        observer.observe(heroTrigger);
-        window.addEventListener('scroll', updateHeader, { passive: true });
-        window.addEventListener('resize', updateHeader, { passive: true });
-      }
 
-      document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', () => {
-        link.closest('details')?.removeAttribute('open');
-      }));
-    </script>
 
   </body>
 </html>
