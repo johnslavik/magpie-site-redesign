@@ -20,11 +20,9 @@ export function WorkflowPicker() {
 }
 
 export function ProjectRules() {
-  const [test, setTest] = useState(true);
-  const [changelog, setChangelog] = useState(true);
-  return <div className="rules-demo" aria-label="Example of project instructions changing a fix">
-    <div className="instruction-sheet"><div className="paper-tab">Your project’s instructions</div><h3>When fixing a bug…</h3><label><input type="checkbox" checked={test} onChange={() => setTest(value => !value)} />Add a regression test</label><label><input type="checkbox" checked={changelog} onChange={() => setChangelog(value => !value)} />Write a changelog entry</label><div className="rule-command">Run the project’s tests<br /><code>npm test</code></div><small>Try changing a requirement</small></div>
+  return <div className="rules-demo" aria-label="Example project configuration read by the fix workflow">
+    <div className="instruction-sheet"><div className="paper-tab">Example project configuration</div><h3>How this project works</h3><div className="config-excerpt"><code>runtime-invocation.md</code><p>Install dependencies: <kbd>npm ci</kbd><br />Run tests: <kbd>npm test</kbd></p></div><div className="config-excerpt"><code>fix-workflow.md</code><p>Open fixes from a fork.<br />Include a changelog entry.</p></div><small>Saved in the project’s configuration files</small></div>
     <div className="rule-transfer" aria-hidden="true"><img src="/favicon.svg" width="34" height="34" alt="" /><ArrowRight size={26} /></div>
-    <div className="fix-sheet"><div className="paper-tab">The pull request <BrandName /> prepares</div><h3>Fix crash on empty input</h3><div className="patch-lines" aria-hidden="true"><span>− return items[0].name</span><span>+ return items[0]?.name ?? ""</span></div><ul aria-live="polite"><li><Check size={16} />Code change</li>{test && <li><Check size={16} />Regression test added</li>}{changelog && <li><Check size={16} />Changelog entry written</li>}<li><Check size={16} />Project tests run</li></ul><div className="result-stamp">Ready for your review</div></div>
+    <div className="fix-sheet"><div className="paper-tab"><BrandName />’s fix workflow reads those files</div><h3>A fix prepared for this project</h3><div className="patch-lines" aria-hidden="true"><span>− Code that causes the bug</span><span>+ Patch and regression test</span></div><ul><li><Check size={16} />Changes prepared in your fork</li><li><Check size={16} />Tests run with your command</li><li><Check size={16} />Changelog entry included</li><li><Check size={16} />PR draft with test evidence</li></ul><div className="result-stamp">You review the patch and decide what to merge</div></div>
   </div>;
 }
