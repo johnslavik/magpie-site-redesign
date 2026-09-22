@@ -4,7 +4,7 @@ import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
 import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
-import { Ellipsis, BookOpen } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 ---
 <BaseLayout title="Apache Magpie — Automate maintenance with your AI agent" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
@@ -23,9 +23,12 @@ import HeroWorkflows from "../components/landing/HeroWorkflows";
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
           <p class="diagram-context">In the tools you already use</p>
-          <div class="agent-options"><span><img src="/vendor-logos/claude.png" alt="" width="28" height="28" />Claude Code</span><span><img src="/vendor-logos/openai.png" alt="" width="28" height="28" />Codex</span><span class="other-agents"><Ellipsis size={28} strokeWidth={1.4} />Other agents…</span></div>
+          <div class="supported-agents" aria-label="Supported agent tools">
+            <a href="/docs/quick-start">Claude Code</a><a href="/docs/adapters/codex">Codex</a><a href="/docs/adapters/cursor">Cursor</a>
+            <a href="/docs/adapters/copilot">GitHub Copilot</a><a href="/docs/adapters/gemini">Gemini CLI</a><a href="/docs/adapters/opencode">OpenCode</a>
+          </div>
           <svg class="diagram-wires wires-in" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0V22H250V0M150 0V48" /></svg>
-          <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Runs the workflow, start to finish</span></div>
+          <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Runs the entire process with you</span></div>
           <div class="workflow-connector" aria-hidden="true"></div>
           <HeroWorkflows client:load />
         </div>

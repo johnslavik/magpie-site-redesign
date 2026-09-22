@@ -57,14 +57,14 @@ export default function WorkflowExplorer() {
     <div role="tablist" aria-label="Maintainer workflows" className="workflow-tabs">{workflows.map((item, i) => <button key={item.id} id={`workflow-tab-${i}`} role="tab" aria-selected={selected === i} aria-controls="workflow-panel" tabIndex={selected === i ? 0 : -1} onClick={() => { setSelected(i); setStage(0); }} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); choose(event.key === "Home" ? 0 : event.key === "End" ? workflows.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + workflows.length) % workflows.length); } }}><item.icon size={18} />{item.label}</button>)}</div>
     <div role="tabpanel" id="workflow-panel" aria-labelledby={`workflow-tab-${selected}`} tabIndex={0} className="workflow-panel">
       <div className="workflow-description"><h3>{w.title}</h3><p>{w.text}</p>{selected === 0 && <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStages.map((phase, i) => <button key={phase.label} type="button" aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => setStage(i)}>{phase.label}</button>)}</div>}<a className="text-link" href={withBase(w.path)}>Explore this workflow</a></div>
-      <figure className="agent-session" id="lifecycle-session" key={w.id}>
+      <figure className="agent-session" id="lifecycle-session" aria-label="Example agent conversation" key={w.id}>
         <div className="session-heading"><strong>{selected === 0 ? securityStages[stage].label : "Agent session"}</strong><span>~/your-project</span></div>
         <div className="session-prompt"><span aria-hidden="true">❯</span><span>{session.prompt}</span></div>
         <div className="session-transcript">{session.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span>{label}</span></div><p>{output}</p></div>)}</div>
         <div className="session-result">{session.result}</div>
         <div className="session-approval">{session.approval}<span className="terminal-cursor" aria-hidden="true" /></div>
         {selected === 0 && <SandboxStatus key={stage} setup={stage === 0} interactive={stage === 1} />}
-        {selected === 0 && <div className="session-navigation"><button type="button" disabled={stage === 0} onClick={() => setStage(stage - 1)}>Previous phase</button><button type="button" disabled={stage === securityStages.length - 1} onClick={() => setStage(stage + 1)}>Next phase</button></div>}<figcaption>Illustrative session · {selected === 0 ? "Fictional report; real workflow" : "Magpie workflows"}</figcaption>
+
       </figure>
     </div>
   </div>;
