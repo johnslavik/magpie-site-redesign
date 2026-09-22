@@ -312,3 +312,7 @@ body.docs-navigation-open { overflow: hidden; }
 
 .redesign-home .lifecycle-ready li { display: flex; align-items: flex-start; gap: 10px; }
 .redesign-home .lifecycle-ready li svg { flex-shrink: 0; margin-top: 6px; color: #63845c; }
+
+.redesign-home .learning-links { margin-top: 40px; }
+.redesign-home .learning-links .skill-cta { color: white; font-size: 20px; line-height: 1.4; padding: 18px 28px; gap: 18px; min-height: 60px; }
+.skill-cta svg { flex-shrink: 0; }
