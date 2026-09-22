@@ -768,8 +768,9 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .document-lines { display: grid; gap: 9px; margin-top: 24px; }
 .document-lines i { height: 5px; background: #eaece7; border-radius: 4px; }
 .document-lines i:nth-child(2) { width: 80%; }.document-lines i:last-child { width: 55%; }
-.process-wordmark { display: block; width: 118px; height: auto; margin-bottom: 12px; }
-.reel-process>small { display: block; margin-bottom: 22px; }
+.process-wordmark { display: block; width: 118px; height: auto; margin: 0 auto 12px; }
+.reel-process>small { display: block; margin-bottom: 22px; text-align: center; }
+.reel-process>.reel-work { width: max-content; max-width: 100%; margin-inline: auto; }
 .reel-work li { position: relative; padding-left: 15px; }
 .reel-work li::before { content: '' !important; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; background: #487252; border: 0; border-radius: 50%; }
 .delivery-check { display: block; color: #2b7950; font-size: 26px; margin-bottom: 12px; }
@@ -837,7 +838,9 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .example-links,.learning-links { align-items: start; flex-direction: column; gap: 18px; }.learning-links { margin-top: 28px; }.instruction-sheet label { font-size: 15px; }.airflow-brand { width: 150px; }
 }
 .reel-flow .reel-work li::before { content: '' !important; position: absolute; left: 0; right: auto; top: .65em; bottom: auto; transform: none; width: 4px; height: 4px; border: 0; border-radius: 50%; background: #487252; }
-.text-link:has(>.inline-brand-name) { display: inline; }
+/* Match the logo's letter baseline, allowing for the descender in its g. */
+.inline-wordmark { display: inline-block; width: 3.62em; height: 1.02em; max-width: none; vertical-align: -.248em; object-fit: contain; }
+.text-link:has(>.inline-wordmark) { display: inline; }
 .workflow-scroll-scene { overflow-anchor: none; }
 .hero-copy { max-width: 1020px; }
 .hero h1 { font-size: clamp(40px,5.8vw,74px); }
