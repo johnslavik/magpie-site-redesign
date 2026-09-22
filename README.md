@@ -1,3 +1,31 @@
+# Magpie site redesign preview
+
+Independent design preview for Apache Magpie, hosted at:
+https://magpie-site-redesign.cloudflare-unfrosted480.workers.dev
+
+## Run and publish
+
+Use Node 22.12 or newer. Run `npm ci`, then `npm run sync-docs` on a fresh checkout.
+Start the preview with `npm run dev`. Run `npm test` and `npm run astro -- check`
+for checks. `npm run build` refreshes the upstream docs and builds the site;
+`npm run astro -- build` rebuilds an existing docs snapshot.
+
+Deploy the built `dist` directory and Worker with `npx wrangler@4.131.1 deploy`.
+Authenticate with your Cloudflare account first. Configuration lives in
+`wrangler.jsonc`; there are no production Apache deployment workflows here.
+
+Every Worker response sends `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`.
+HTML also includes robots metadata, robots.txt disallows crawling, and the preview
+has no sitemap. These controls request exclusion from compliant search engines;
+the preview is publicly accessible.
+
+The homepage follows four parts: agent integration, Airflow results, workflow
+examples, and documentation. Airflow charts are rendered locally from the supplied
+artifact data. Definitions and source discrepancies are documented on the story
+page and in `docs/designs/2026-09-22-maintainer-first-redesign.md`.
+
+---
+
 # Apache Magpie — Website
 
 Landing page and documentation hub for [Apache Magpie](https://github.com/apache/magpie), an AI assistant that helps open-source maintainers handle the repetitive parts of running a project — triage, mentoring, drafting fixes, and security-report handling — so they can focus on the work that needs a human.
