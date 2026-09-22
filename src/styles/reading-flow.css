@@ -432,4 +432,11 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 
 .redesign-home .workflow-reuse { display: block; margin-top: 4px; font-size: 18px; font-weight: 400; line-height: 1.5; color: #e6eef9; }
 
-.summary-wordmark { display: block; width: 142px; height: 40px; filter: brightness(0) invert(1); object-fit: contain; }
+.summary-with-magpie { display: flex; align-items: center; gap: 12px; }
+.summary-with-magpie img { flex-shrink: 0; border-radius: 4px; background: white; }
+.redesign-home .story-work { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.redesign-home .story-work li { display: flex; align-items: flex-start; gap: 10px; font-size: var(--text-body); line-height: 1.6; }
+.redesign-home .story-work li > svg { flex: 0 0 18px; margin-top: 5px; color: #a6d5b3; }
+.security-summary-flow .summary-state { align-self: stretch; display: flex; flex-direction: column; }
+.security-summary-flow .summary-card { flex: 1; }
+@media (max-width: 800px) { .summary-with-magpie { justify-content: center; } }
