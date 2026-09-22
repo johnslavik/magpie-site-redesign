@@ -367,5 +367,16 @@ body.docs-navigation-open { overflow: hidden; }
  .isolation-side h3 { font-size: 25px; }
 }
 
-.redesign-home .hero-credibility { display: block; color: var(--blue); font-size: clamp(22px,2.2vw,28px); line-height: 1.4; margin-bottom: 16px; }
+.redesign-home .hero-credibility { display: block; color: #182e2a; font-size: clamp(22px,2.2vw,28px); line-height: 1.4; margin-bottom: 16px; }
 .hero-expertise { display: block; }
+
+.redesign-home .hero-expertise { color: #394e48; }
+.redesign-home .hero-credibility mark { color: inherit; background: linear-gradient(transparent 62%, #e4edb3 62%); padding-inline: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+.redesign-home .example-navigation { margin-top: clamp(48px,6vw,72px); }
+.redesign-home .agent-shell>.diagram-context { margin-top: clamp(64px,8vw,96px); margin-bottom: 32px; }
+.redesign-home .agent-shell>.more-adapters { margin-top: 36px; }
+@media(min-width:801px) {
+ .redesign-home .case-layout { max-width: 1040px; margin-inline: auto; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 64px; }
+ .redesign-home .case-quote blockquote { max-width: none; }
+}

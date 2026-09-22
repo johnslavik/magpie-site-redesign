@@ -4,7 +4,7 @@ import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
 import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
-import { ArrowRight, ArrowDown, ShieldAlert, CircleCheck } from "lucide-react";
+import { ArrowRight, ShieldAlert, CircleCheck } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 import BrandName from "../components/landing/BrandName";
 import SectionWave from "../components/landing/SectionWave.astro";
@@ -16,9 +16,8 @@ import MoreWays from "../components/landing/MoreWays.astro";
     <section class="hero container">
       <div class="hero-copy">
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
-        <p class="hero-story"><strong class="hero-credibility">Thousands of tickets. Software the world depends on.</strong><span class="hero-expertise">Refined at Apache Airflow and beyond, <BrandName /> turns maintenance expertise into <strong>dozens of open-source coding agent skills</strong>. Free to use and adapt.</span></p>
+        <p class="hero-story"><strong class="hero-credibility"><mark>Thousands of tickets.</mark> Software the world depends on.</strong><span class="hero-expertise">Refined at Apache Airflow and beyond, <BrandName /> turns maintenance expertise into <strong>dozens of open-source coding agent skills</strong>. Free to use and adapt.</span></p>
       </div>
-      <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does"><ArrowDown size={22} strokeWidth={1.4} /></a>
     </section>
     <section id="workflow-examples" class="integration-section container" aria-labelledby="workflow-examples-title">
       <h2 id="workflow-examples-title" class="examples-heading">What can Magpie do for you?</h2>
