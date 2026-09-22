@@ -43,9 +43,11 @@ export default function HeroWorkflows() {
         const Icon = item.icon;
         return <div className="reel-example" data-position={offset} key={index} aria-hidden={offset !== 0}>
           {offset === 0 ? <a href={withBase(item.path)} className="reel-active">
-            <span className="reel-input"><Icon size={18} strokeWidth={1.6} />{item.input}</span>
-            <span className="reel-steps">{item.steps.map(step => <span key={step}>{step}</span>)}</span>
-            <strong className="reel-outcome">{item.outcome}</strong>
+            <ol className="reel-flow">
+              <li><span className="flow-number" aria-hidden="true">1</span><div><small>Start with</small><span className="reel-input"><Icon size={17} strokeWidth={1.6} aria-hidden="true" />{item.input}</span></div></li>
+              <li><span className="flow-number" aria-hidden="true">2</span><div><small>Magpie handles</small><span className="reel-steps">{item.steps.map((step, i) => <span key={step}>{i > 0 && <span className="flow-arrow" aria-hidden="true">→</span>}{step}</span>)}</span></div></li>
+              <li><span className="flow-number" aria-hidden="true">3</span><div><small>You get</small><strong className="reel-outcome">{item.outcome}</strong></div></li>
+            </ol>
           </a> : <div className="reel-peek"><Icon size={16} strokeWidth={1.5} /><span>{item.input}</span><span>{item.outcome}</span></div>}
         </div>;
       })}
