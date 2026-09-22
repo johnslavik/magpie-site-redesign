@@ -15,38 +15,37 @@ import MoreWays from "../components/landing/MoreWays.astro";
     <section class="hero container">
       <div class="hero-copy">
         <img class="hero-wordmark" src="/wordmark.svg" alt="Magpie" width="200" height="57" />
-        <h1>We’ve automated software<br /><span>maintenance for you.</span></h1>
-        <p>Plug <BrandName /> into your coding agent. It handles code reviews, security reports, releases, and contributor onboarding with you, including the investigation, checks, tests, and follow-up.</p>
-        <div class="hero-actions"><a class="button" href="/docs/quick-start">Get started</a><a class="text-link" href="#workflow-examples">See how it works</a></div>
+        <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
+        <p>AI brought more contributions to open source. Maintainers needed a way to keep up. We turned the procedures behind that work into <strong>dozens of reusable skills</strong> your coding agent can follow. <BrandName /> grew out of that work at Apache Airflow. Now you can use those procedures in your own project.</p>
       </div>
-      <span class="hero-nav-trigger" data-nav-trigger aria-hidden="true"></span>
     </section>
     <section id="workflow-examples" class="integration-section container" aria-label="How Magpie works with your tools">
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
+          <HeroWorkflows client:load />
           <p class="diagram-context">Works inside your coding agent</p>
           <div class="supported-agents" aria-label="Supported agent tools">
             <a href="/docs/quick-start"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
             <a href="/docs/adapters/copilot"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
           </div>
-          <HeroWorkflows client:load />
         </div>
       </div>
     </section>
+    <span class="diagram-nav-trigger" data-nav-trigger aria-hidden="true"></span>
     <section id="airflow" class="airflow-section">
       <svg class="airflow-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C240 60 310 10 580 14S1010 88 1440 24V80H0Z" /></svg>
       <div class="container">
       <div class="case-layout">
-        <div class="case-quote"><img class="airflow-brand" src="/vendor-logos/airflow.svg" alt="Apache Airflow" width="155" height="60" /><h2>More capacity for Airflow</h2><blockquote>“Using <BrandName /> helped us to do things that matter”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Airflow PMC member</span></div></div><a class="light-link case-story" href="/stories/airflow">Read Jarek’s story</a></div>
+        <div class="case-quote"><h2>More capacity for maintainers</h2><div class="case-example"><span>One example, from</span><img class="airflow-brand" src="/vendor-logos/airflow.svg" alt="Apache Airflow" width="155" height="60" /></div><blockquote>“Using <BrandName /> helped us to do things that matter”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Airflow PMC member</span></div></div><a class="light-link case-story" href="/stories/airflow">Read the Airflow story and results</a></div>
         <div class="case-evidence"><AirflowVelocity /></div>
       </div>
     </div></section>
     <section id="how-it-works" class="section container" data-reveal>
-      <div class="section-heading"><div><h2>See the whole workflow</h2></div><p>From a private vulnerability report to a released fix and a published CVE. From a bug report to a tested PR. <BrandName /> connects the steps, tools, and handoffs that usually fall on you.</p></div>
+      <div class="section-heading"><div><h2>See the whole workflow</h2></div><p>Each <BrandName /> skill is a procedure written for your agent: what to inspect, which tools to use, what evidence to keep, and when to ask you. See those procedures work together on a security report.</p></div>
       <WorkflowExplorer client:load />
     </section>
     <MoreWays />
-    <section class="docs-invitation container" data-reveal><div><h2>Put <BrandName /> to work</h2><p>Set up your agent, choose your workflows, and start with your project.</p></div><a class="button" href="/docs/quick-start"><BookOpen size={20} strokeWidth={1.7} aria-hidden="true" /><span>Open the documentation</span></a></section>
+    <section class="docs-invitation container" data-reveal><div><h2>Put <BrandName logo /> to work</h2><p>Set up your agent, choose your workflows, and start with your project.</p></div><a class="button" href="/docs/quick-start"><BookOpen size={20} strokeWidth={1.7} aria-hidden="true" /><span>Open the documentation</span></a></section>
   </main>
   <SiteFooter />
 </BaseLayout>

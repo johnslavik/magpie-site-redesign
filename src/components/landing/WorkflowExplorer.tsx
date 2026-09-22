@@ -2,8 +2,7 @@ import { BrandText } from "./BrandName";
 import SandboxStatus from "./SandboxStatus";
 import { securityStages } from "./workflow-stages";
 import { useEffect, useRef, useState } from "react";
-import { GitPullRequest, ShieldCheck, Inbox, PackageCheck } from "lucide-react";
-import { withBase } from "@/ui/lib/utils";
+import { GitPullRequest, ShieldCheck, Inbox, PackageCheck, Check } from "lucide-react";
 
 // Illustrative sessions grounded in the synced workflow-family documentation.
 const workflows = [
@@ -51,6 +50,7 @@ const workflows = [
 export default function WorkflowExplorer() {
   const [selected, setSelected] = useState(0);
   const [stage, setStage] = useState(0);
+  const [completed, setCompleted] = useState(0);
   const sceneRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
@@ -71,6 +71,7 @@ export default function WorkflowExplorer() {
       const atEnd = conversation.scrollTop >= conversation.scrollHeight - conversation.clientHeight - 1;
       const index = atEnd ? phases.length - 1 : phases.reduce((current, phase, i) => phase.offsetTop <= conversation.scrollTop + 80 ? i : current, 0);
       setStage(index);
+      setCompleted(atEnd ? phases.length : index);
     };
     const update = () => {
       if (scrollDriven) {
@@ -110,12 +111,19 @@ export default function WorkflowExplorer() {
   };
   const w = workflows[selected];
   const session = selected === 0 ? securityStages[stage] : w;
+  const activeSkills = ["", "pr-management-code-review", "issue-reproducer + issue-fix-workflow", "release-verify-rc + release-vote-draft"];
   const choose = (index: number) => { setSelected(index); setStage(0); document.getElementById(`workflow-tab-${index}`)?.focus(); };
   return <div className="workflow-explorer">
     <div role="tablist" aria-label="Maintainer workflows" className="workflow-tabs">{workflows.map((item, i) => <button key={item.id} id={`workflow-tab-${i}`} role="tab" aria-selected={selected === i} aria-controls="workflow-panel" tabIndex={selected === i ? 0 : -1} onClick={() => { setSelected(i); setStage(0); }} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); choose(event.key === "Home" ? 0 : event.key === "End" ? workflows.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + workflows.length) % workflows.length); } }}><item.icon size={18} />{item.label}</button>)}</div>
-    <div className="workflow-scroll-scene" ref={sceneRef} data-scroll-driven={selected === 0 && scrollDriven}>
-    <div ref={panelRef} role="tabpanel" id="workflow-panel" aria-labelledby={`workflow-tab-${selected}`} tabIndex={0} className="workflow-panel">
-      <div className="workflow-description"><h3><BrandText text={w.title} /></h3><p><BrandText text={w.text} /></p>{selected === 0 && <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStages.map((phase, i) => <button key={phase.label} type="button" aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => jumpToStage(i)}>{phase.label}</button>)}</div>}<a className="text-link" href={withBase(w.path)}>Explore this workflow</a></div>
+    <div role="tabpanel" id="workflow-panel" aria-labelledby={`workflow-tab-${selected}`} tabIndex={0} className="workflow-panel">
+      <div className="workflow-description"><h3><BrandText text={w.title} /></h3><p><BrandText text={w.text} /></p></div>
+      <div className="workflow-scroll-scene" ref={sceneRef} data-scroll-driven={selected === 0 && scrollDriven}>
+      <div ref={panelRef} className="workflow-workbench">
+      {selected === 0 && <div className="workflow-progress">
+        <div className="progress-heading"><span>Follow the report through the prepared skills</span><span>{completed} / {securityStages.length} phases complete in this example</span></div>
+        <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStages.map((phase, i) => <button key={phase.label} type="button" data-complete={i < completed} aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => jumpToStage(i)}><span className="phase-number" aria-hidden="true">{i < completed ? <Check size={13} /> : String(i + 1).padStart(2, "0")}</span>{phase.label}</button>)}</div>
+        <div className="workflow-progress-track" role="progressbar" aria-label="Example phases completed" aria-valuemin={0} aria-valuemax={securityStages.length} aria-valuenow={completed}><span style={{ width: `${completed / securityStages.length * 100}%` }} /></div>
+      </div>}
       {selected === 0 ? <figure className="agent-session lifecycle-conversation" id="lifecycle-session" aria-label="Example security conversation">
         <div className="session-heading"><strong>{securityStages[stage].label}</strong><span>~/your-project</span></div>
         <div className="conversation-scroll" ref={conversationRef} tabIndex={0} aria-label="Security workflow conversation" onKeyDown={event => {
@@ -127,6 +135,7 @@ export default function WorkflowExplorer() {
           <div className="conversation-content">{securityStages.map((phase, i) => <section className="conversation-phase" data-conversation-phase key={phase.label} aria-label={phase.label}>
             <h4>{phase.label}</h4>
             <div className="session-prompt"><span aria-hidden="true">❯</span><span><BrandText text={phase.prompt} /></span></div>
+            <div className="session-skill"><span>Procedure loaded from <BrandText text="Magpie" /></span><code>{phase.skill}</code><p>{phase.procedure}</p></div>
             <div className="session-transcript">{phase.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span><BrandText text={label} /></span></div><p><BrandText text={output} /></p></div>)}</div>
             <div className="session-result"><BrandText text={phase.result} /></div>
             <div className="session-approval"><BrandText text={phase.approval} /></div>
@@ -136,10 +145,12 @@ export default function WorkflowExplorer() {
       </figure> : <figure className="agent-session" id="lifecycle-session" aria-label="Example agent conversation" key={w.id}>
         <div className="session-heading"><strong>Agent session</strong><span>~/your-project</span></div>
         <div className="session-prompt"><span aria-hidden="true">❯</span><span><BrandText text={session.prompt} /></span></div>
+        <div className="session-skill"><span>Prepared skills</span><code>{activeSkills[selected]}</code></div>
         <div className="session-transcript">{session.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span><BrandText text={label} /></span></div><p><BrandText text={output} /></p></div>)}</div>
         <div className="session-result"><BrandText text={session.result} /></div>
         <div className="session-approval"><BrandText text={session.approval} /><span className="terminal-cursor" aria-hidden="true" /></div>
       </figure>}
+    </div>
     </div>
     </div>
   </div>;

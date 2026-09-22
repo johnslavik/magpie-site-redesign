@@ -77,6 +77,7 @@ const ogImage = new URL(
         updateHeader();
         const observer = new IntersectionObserver(updateHeader, { threshold: 0 });
         observer.observe(heroTrigger);
+        window.addEventListener('scroll', updateHeader, { passive: true });
         window.addEventListener('resize', updateHeader, { passive: true });
       }
 

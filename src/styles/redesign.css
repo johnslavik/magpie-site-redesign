@@ -745,12 +745,7 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .conversation-phase+ .conversation-phase { border-top: 1px solid #48617a; }
 .conversation-phase h4 { color: #9dc1ee; margin: 0 24px 18px; font-size: 12px; font-weight: 500; }
 .conversation-phase .sandbox-demo { border-bottom: 0; padding-bottom: 24px; }
-.workflow-scroll-scene[data-scroll-driven=true]>.workflow-panel { position: sticky; top: 100px; padding-block: 16px; }
-.workflow-scroll-scene[data-scroll-driven=true] .lifecycle-conversation { height: min(700px,calc(100svh - 148px)); }
 .workflow-scroll-scene[data-scroll-driven=true] .conversation-scroll { overflow: hidden; }
-.workflow-scroll-scene[data-scroll-driven=true] .workflow-description { padding-top: 0; }
-.workflow-scroll-scene[data-scroll-driven=true] .workflow-description h3 { font-size: 26px; margin-top: 0; }
-.workflow-scroll-scene[data-scroll-driven=true] .workflow-description>p { font-size: 14px; }
 @media(max-width:800px) { .conversation-phase h4 { margin-inline: 16px; } .lifecycle-conversation { height: 65svh; min-height: 400px; } }
 
 /* Tangible examples: the incoming document, the work, and its deliverable. */
@@ -839,7 +834,8 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 }
 .reel-flow .reel-work li::before { content: '' !important; position: absolute; left: 0; right: auto; top: .65em; bottom: auto; transform: none; width: 4px; height: 4px; border: 0; border-radius: 50%; background: #487252; }
 /* Match the logo's letter baseline, allowing for the descender in its g. */
-.inline-wordmark { display: inline-block; width: 3.25em; height: 1.12em; max-width: none; vertical-align: -.272em; object-fit: fill; }
+.inline-wordmark { display: inline-block; width: auto; height: 1.02em; max-width: none; vertical-align: -.248em; object-fit: contain; }
+.brand-name { color: inherit; font-weight: 650; }
 .text-link:has(>.inline-wordmark) { display: inline; }
 .workflow-scroll-scene { overflow-anchor: none; }
 .hero-copy { max-width: 1020px; }
@@ -849,3 +845,62 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .config-excerpt>code { font: 12px monospace; color: #406851; }
 .config-excerpt p { font-size: 14px; line-height: 1.9; margin: 10px 0 0; }
 .config-excerpt kbd { font: 12px monospace; border: 1px solid #dce5d8; padding: 2px 5px; border-radius: 3px; background: #f4f7f0; }
+
+/* Introduce the procedure, then give the walkthrough the full reading width. */
+.diagram-nav-trigger { display: block; height: 1px; pointer-events: none; }
+.hero-copy>p { max-width: 660px; }
+.hero-copy>p strong { color: var(--ink); font-weight: 650; }
+.workflow-panel { display: block; padding: 36px 0 0; }
+.workflow-description { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; padding: 0 0 46px; }
+.workflow-description h3 { margin: 0; font-size: 30px; line-height: 1.2; }
+.workflow-description>p { margin: 0; font-size: 16px; line-height: 1.75; }
+.workflow-workbench { width: 100%; max-width: 1000px; margin-inline: auto; }
+.workflow-scroll-scene[data-scroll-driven=true]>.workflow-workbench { position: sticky; top: 100px; padding-block: 10px; }
+.workflow-progress { margin-bottom: 16px; }
+.progress-heading { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; font-size: 12px; color: var(--ink); margin-bottom: 12px; }
+.progress-heading>span:last-child { color: var(--muted); font-size: 11px; }
+.workflow-workbench .lifecycle-stages { grid-template-columns: repeat(5,minmax(0,1fr)); gap: 6px; margin: 0; }
+.workflow-workbench .lifecycle-stages button { display: flex; align-items: center; gap: 7px; padding: 9px; min-height: 36px; font-size: 11px; }
+.phase-number { display: inline-flex; align-items: center; justify-content: center; width: 18px; flex-shrink: 0; font-size: 10px; opacity: .75; }
+.lifecycle-stages button[data-complete=true] { background: #e8f2df; border-color: #cbdcb8; color: #315b38; }
+.lifecycle-stages button[aria-pressed=true] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.workflow-progress-track { height: 3px; background: #e2e6da; margin-top: 10px; overflow: hidden; border-radius: 2px; }
+.workflow-progress-track>span { display: block; height: 100%; background: #629259; transition: width .2s; }
+.workflow-workbench .lifecycle-conversation { height: min(660px,calc(100svh - 285px)); min-height: 350px; }
+.workflow-workbench .session-heading { padding: 16px 28px; }
+.workflow-workbench .conversation-phase { padding-top: 24px; }
+.workflow-workbench .conversation-phase h4 { margin-inline: 28px; }
+.session-skill { margin: 20px 28px 0; padding: 14px 18px; border: 1px solid #355274; border-radius: 5px; background: #172d48; }
+.session-skill>span { display: block; font: 11px/1.5 var(--font-sans, sans-serif); color: #aac4e5; margin-bottom: 5px; }
+.session-skill code { display: block; font-size: 12px; color: #e6f1ff; overflow-wrap: anywhere; }
+.session-skill p { color: #b8cce4; font-size: 12px; line-height: 1.65; margin: 8px 0 0; }
+.workflow-workbench .session-transcript { padding-inline: 28px; }
+.agent-session .inline-wordmark { filter: brightness(0) invert(1); opacity: .92; }
+.workflow-choices label>span>small { display: block; margin-top: 3px; font-size: 11px; color: var(--muted); font-weight: 400; }
+.selected-result>div>strong { color: #264e35; font-weight: 500; }
+.selected-result>div>p { font-size: 12px; line-height: 1.6; color: var(--muted); margin: 8px 0 0; }
+.included-procedure { padding-left: 20px; margin: 0 0 26px; color: #284e38; font-size: 14px; line-height: 1.8; }
+.config-heading { padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 550; }
+.skill-evals { margin: 14px 0 24px; padding: 12px 16px; border-left: 2px solid #c9dba7; }
+.skill-evals>span { display: block; font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+.skill-evals>div { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-evals code { font-size: 10px; color: #476447; padding: 4px 6px; background: #eef3e6; border-radius: 3px; }
+@media(max-width:800px) {
+ .workflow-description { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; }
+ .workflow-description h3 { font-size: 28px; }.workflow-description>p { font-size: 15px; }
+ .workflow-workbench .lifecycle-stages { grid-template-columns: repeat(5,minmax(0,1fr)); }
+ .workflow-workbench .lifecycle-stages button { flex-direction: column; text-align: center; padding: 7px 4px; font-size: 10px; gap: 3px; }
+ .progress-heading { align-items: start; flex-direction: column; gap: 5px; }
+ .workflow-workbench .lifecycle-conversation { height: 65svh; min-height: 400px; }
+ .session-skill { margin-inline: 16px; padding: 12px; }
+}
+
+/* Keep the opening story spacious; tool compatibility follows the example. */
+.hero { min-height: 90svh; padding-block: clamp(100px,13svh,180px); }
+.agent-shell>.diagram-context { margin-top: 56px; }
+.agent-shell>.supported-agents { margin-bottom: 0; }
+@media(max-width:800px) { .hero { min-height: 90svh; padding-block: 80px; }.agent-shell>.diagram-context { margin-top: 36px; } }
+
+.case-example { display: flex; align-items: center; gap: 20px; margin: 0 0 28px; }
+.case-example>span { font-size: 13px; color: #4b624d; }
+.case-example .airflow-brand { width: 150px; margin: 0; }

@@ -4,22 +4,22 @@ import BrandName from "./BrandName";
 import { ArrowRight } from "lucide-react";
 ---
 <section class="choose-work container" aria-labelledby="choose-work-title">
-  <div class="section-heading"><h2 id="choose-work-title">Only need help<br />with code reviews?</h2><p>You can install that on its own. Choose the jobs you want <BrandName /> to handle and see what each one gives you.</p></div>
+  <div class="section-heading"><h2 id="choose-work-title">A library of<br />maintainer workflows.</h2><p>Choose the work your project needs. Each <BrandName /> family brings a set of procedures for the investigation, decisions, evidence, and follow-up. Install the families you want to use.</p></div>
   <WorkflowPicker client:load />
 </section>
 <section class="project-fit" aria-labelledby="project-fit-title">
   <div class="container">
-    <div class="section-heading"><h2 id="project-fit-title">Tell <BrandName /> how your<br />project builds and tests.</h2><p><BrandName /> reads project configuration before running a workflow. You specify things like test commands and how fixes should be submitted. The agent uses them to prepare the patch and pull request.</p></div>
+    <div class="section-heading"><h2 id="project-fit-title">Adapt an existing procedure<br />to your project.</h2><p><BrandName /> supplies the fix procedure: reproduce the bug, add a regression test, prepare the patch, and draft the PR. Your configuration supplies the test commands and contribution rules. You can override individual steps when your project needs something different.</p></div>
     <ProjectRules />
-    <div class="example-links"><span>Workflow changes live in project override files.</span><a class="text-link" href="/docs/setup/agentic-overrides">Adapt <BrandName /> to your project</a></div>
+    <div class="example-links"><span>The shared procedure stays reusable. Your changes stay in project override files.</span><a class="text-link" href="/docs/setup/agentic-overrides">Adapt <BrandName /> to your project</a></div>
   </div>
 </section>
 <section class="learn-skills container" aria-labelledby="learn-skills-title">
-  <div class="section-heading"><h2 id="learn-skills-title">That checklist you keep<br />pasting into chat?</h2><p>Save it as a skill: a text file your agent can follow again. <BrandName />’s guides show you how to write it, test it, and share it with your team.</p></div>
+  <div class="section-heading"><h2 id="learn-skills-title">That checklist you keep<br />pasting into chat?</h2><p><BrandName />’s write-skill procedure helps turn it into a reusable skill, with clear steps and approval points. Its evaluation tools run example cases so you can check whether the agent follows the procedure before sharing it.</p></div>
   <div class="skill-demo">
     <div class="checklist-sheet"><span class="paper-tab">Your checklist</span><h3>Before adding a dependency</h3><ul><li>Check its licence</li><li>Look for known vulnerabilities</li><li>Explain any risks in the review</li></ul><span class="pencil-note">You already know the steps.</span></div>
-    <div class="skill-transfer" aria-hidden="true"><span>Save the instructions</span><ArrowRight size={36} strokeWidth={1.3} /></div>
-    <div class="skill-run"><div class="skill-file"><span aria-hidden="true">↓</span><div><strong>check-dependency / SKILL.md</strong><small>Your checklist, saved in the project</small></div></div><div class="skill-prompt">“Check this new dependency.”</div><div class="skill-answer"><img src="/favicon.svg" alt="Magpie" width="24" height="24" /><p>Your agent checks the licence and vulnerabilities, then prepares its findings for your review.</p></div></div>
+    <div class="skill-transfer" aria-hidden="true"><span>Build it with <BrandName logo /></span><ArrowRight size={36} strokeWidth={1.3} /></div>
+    <div class="skill-run"><div class="skill-file"><span aria-hidden="true">↓</span><div><strong>check-dependency / SKILL.md</strong><small>Procedure + example cases + expected results</small></div></div><div class="skill-evals"><span>Example cases to test the skill</span><div><code>Allowed licence</code><code>Known vulnerability</code><code>Missing licence</code></div></div><div class="skill-prompt">“Check this new dependency.”</div><div class="skill-answer"><img src="/favicon.svg" alt="Magpie" width="24" height="24" /><p>Your agent follows the saved procedure and prepares the findings. The example cases help you check that it catches the risks you care about.</p></div></div>
   </div>
   <div class="learning-links"><a class="text-link" href="/docs/education/your-first-skill">Write your first skill</a><a href="/docs/education/eval-driven-development">Test it on real examples</a><a href="/docs/education/portable-skills">Share it across agents</a></div>
 </section>

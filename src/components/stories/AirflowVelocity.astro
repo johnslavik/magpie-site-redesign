@@ -29,5 +29,4 @@ const adoptionX = (x(2) + x(3)) / 2;
     <text class="velocity-value" x={x(7)} y={y(points[7].count)-12} text-anchor="middle">44</text>
     {points.map((p, i) => <text class="velocity-axis" x={x(i)} y="218" text-anchor="middle">{new Date(`${p.month}-01T12:00:00Z`).toLocaleString('en', { month: 'short', timeZone: 'UTC' })}</text>)}
   </svg>
-  <div class="velocity-caption"><span>Jan–Mar vs Apr–Aug 2026</span><a href="/stories/airflow#data">See the data</a></div>
 </figure>
