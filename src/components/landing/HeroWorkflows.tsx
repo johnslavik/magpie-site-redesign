@@ -3,15 +3,15 @@ import { Pause, Play, ChevronRight } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 const examples = [
-  { input: "A vulnerability is reported", work: "Investigates the report, tests a fix, and coordinates the release and disclosure.", outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
-  { input: "A pull request needs review", work: "Reads the changes, checks test results, and drafts feedback tied to the code.", outcome: "A code review ready for your approval", path: "/docs/pr-management/readme" },
-  { input: "Someone reports a bug", work: "Reproduces the failure, writes a fix, and adds a regression test.", outcome: "A tested fix, ready as a pull request", path: "/docs/issue-management/readme" },
-  { input: "You have a release candidate", work: "Checks the build and signatures, prepares the vote, and drafts the announcement.", outcome: "A verified release, ready for you to publish", path: "/docs/release-management/readme" },
-  { input: "A newcomer wants to contribute", work: "Finds a suitable issue and explains the code to change and tests to run.", outcome: "A clear path to a first contribution", path: "/docs/mentoring/readme" },
-  { input: "Your project depends on outdated packages", work: "Checks for vulnerabilities and abandoned packages, then ranks the fixes.", outcome: "A prioritised list of dependency fixes", path: "/docs/repo-health/readme" },
-  { input: "You want a second look before opening a PR", work: "Reviews your local changes and separates blocking problems from minor suggestions.", outcome: "Specific fixes to make before code review", path: "/docs/pairing/readme" },
-  { input: "A contributor is becoming a committer", work: "Tracks paperwork and access setup, flags steps for your team, and drafts the welcome.", outcome: "Onboarding organised through to completion", path: "/docs/contributor-growth/readme" },
-  { input: "Your agent needs an isolated workspace", work: "Configures the sandbox, limits access, and checks that the protections work.", outcome: "An agent ready to work in a sandbox", path: "/docs/setup/secure-agent-setup" },
+  { input: "Security report", work: ["Investigate the report", "Write and test the fix", "Coordinate release & CVE"], outcome: "Fix released. CVE published.", path: "/docs/security/readme" },
+  { input: "Pull request", work: ["Read the code changes", "Check tests and conventions", "Draft comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
+  { input: "Bug report", work: ["Reproduce the failure", "Write the fix", "Add a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
+  { input: "Release candidate", work: ["Verify the build and signatures", "Prepare the release vote", "Draft the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
+  { input: "First-time contributor", work: ["Find a suitable issue", "Explain the code to change", "Show how to test the change"], outcome: "A clear first task to work on", path: "/docs/mentoring/readme" },
+  { input: "Outdated dependencies", work: ["Find vulnerable packages", "Flag abandoned dependencies", "Prioritise the fixes"], outcome: "An actionable upgrade plan", path: "/docs/repo-health/readme" },
+  { input: "Your uncommitted code", work: ["Review the local diff", "Find bugs and missing tests", "Suggest specific fixes"], outcome: "Problems caught before a PR", path: "/docs/pairing/readme" },
+  { input: "New committer", work: ["Check required paperwork", "Track access setup", "Prepare the welcome"], outcome: "Onboarding covered, step by step", path: "/docs/contributor-growth/readme" },
+  { input: "Agent setup", work: ["Configure the sandbox", "Limit file and tool access", "Verify the protections"], outcome: "An isolated workspace to code in", path: "/docs/setup/secure-agent-setup" },
 ];
 
 export default function HeroWorkflows() {
@@ -41,8 +41,8 @@ export default function HeroWorkflows() {
       <div className="reel-example" key={selected}>
           <a href={withBase(item.path)} className="reel-active">
             <ol className="reel-flow">
-              <li><small>You start with</small><span className="reel-input">{item.input}</span></li>
-              <li><small className="reel-work-label"><img src={withBase("/favicon.svg")} width="16" height="16" alt="" />Magpie handles the work</small><p className="reel-work">{item.work}</p></li>
+              <li><small>Start with</small><span className="reel-input">{item.input}</span></li>
+              <li><small className="reel-work-label"><img src={withBase("/favicon.svg")} width="16" height="16" alt="" />Magpie handles</small><ul className="reel-work">{item.work.map(step => <li key={step}>{step}</li>)}</ul></li>
               <li><small>You get</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </a>

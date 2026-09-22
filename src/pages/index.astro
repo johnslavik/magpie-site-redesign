@@ -7,14 +7,14 @@ import WorkflowExplorer from "../components/landing/WorkflowExplorer";
 import { BookOpen } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 ---
-<BaseLayout title="Apache Magpie — Automate maintenance with your AI agent" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
+<BaseLayout title="Apache Magpie — Review code. Fix bugs. Ship releases." description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
   <SiteHeader home revealAfterHero />
   <main id="main-content" class="redesign-home">
     <section class="hero container">
       <div class="hero-copy">
         <img class="hero-wordmark" src="/wordmark.svg" alt="Magpie" width="200" height="57" />
-        <h1>Automate maintenance<br /><span>with your agent.</span></h1>
-        <p>Magpie plugs into your existing AI tools to automate entire maintenance workflows, from reviewing code and fixing vulnerabilities to preparing releases and onboarding contributors.</p>
+        <h1>Review code. Fix bugs.<br /><span>Ship releases.</span></h1>
+        <p>Magpie plugs into your AI agent to automate the work behind code reviews, security fixes, releases, and contributor onboarding. It carries each process from start to finish with you.</p>
         <div class="hero-actions"><a class="button" href="/docs/quick-start">Get started</a><a class="text-link" href="#workflow-examples">See how it works</a></div>
       </div>
       <span class="hero-nav-trigger" data-nav-trigger aria-hidden="true"></span>
@@ -24,10 +24,10 @@ import HeroWorkflows from "../components/landing/HeroWorkflows";
         <div class="agent-shell">
           <p class="diagram-context">In the tools you already use</p>
           <div class="supported-agents" aria-label="Supported agent tools">
-            <a href="/docs/quick-start">Claude Code</a><a href="/docs/adapters/codex">Codex</a><a href="/docs/adapters/cursor">Cursor</a>
-            <a href="/docs/adapters/copilot">GitHub Copilot</a><a href="/docs/adapters/gemini">Gemini CLI</a><a href="/docs/adapters/opencode">OpenCode</a>
+            <a href="/docs/quick-start"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
+            <a href="/docs/adapters/copilot"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
           </div>
-          <svg class="diagram-wires wires-in" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0V22H250V0M150 0V48" /></svg>
+          <svg class="diagram-wires wires-in" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path class="wires-six" d="M25 0V22H275V0M75 0V22M125 0V22M175 0V22M225 0V22M150 22V48" /><path class="wires-three" d="M50 0V22H250V0M150 0V48" /></svg>
           <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Runs the entire process with you</span></div>
           <div class="workflow-connector" aria-hidden="true"></div>
           <HeroWorkflows client:load />

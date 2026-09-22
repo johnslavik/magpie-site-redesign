@@ -649,30 +649,39 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .integration-section .integration-art { padding: 16px 0; max-width: 530px; }
 }
 
-/* Explain each example in words; the rail carries the direction. */
-.reel-active { height: auto; min-height: 330px; padding: 30px 32px; }
-.reel-flow { gap: 32px; }
-.reel-flow li { display: block; padding-left: 24px; }
-.reel-flow li:not(:last-child)::after { left: 0; top: 20px; height: calc(100% + 8px); }
-.reel-flow li:not(:last-child)::before { left: -3px; bottom: -28px; }
-.reel-flow small { font-size: 12px; margin-bottom: 6px; }
-.reel-input { display: block; font-size: 18px; line-height: 1.4; }
-.reel-work-label { display: flex !important; gap: 6px; align-items: center; }
+/* A compact left-to-right journey, with the work in the middle. */
+.integration-section .integration-art { max-width: 880px; }
+.supported-agents { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 12px; }
+.supported-agents a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 72px; padding: 8px 2px; color: var(--ink); font-size: 12px; text-align: center; text-decoration: none; }
+.supported-agents img { width: 30px; height: 30px; object-fit: contain; }
+.supported-agents a:hover { color: var(--blue); }
+.wires-three { display: none; }
+.reel-active { height: auto; min-height: 224px; padding: 36px 28px; justify-content: center; border-color: #d8e2ee; border-radius: 12px; box-shadow: 0 10px 32px #22497305; background: linear-gradient(105deg,#fff 48%,#f3f7fd); }
+.reel-flow { display: grid; grid-template-columns: 1fr 1.6fr 1.15fr; align-items: center; gap: 44px; }
+.reel-flow>li { display: block; padding: 0; }
+.reel-flow>li:not(:last-child)::after { content: none; }
+.reel-flow>li:not(:last-child)::before { content: '→'; left: auto; right: -31px; top: 50%; bottom: auto; width: auto; height: auto; border: 0; transform: translateY(-50%); font-size: 22px; color: #8ea8c8; }
+.reel-flow small { font-size: 11px; margin-bottom: 12px; }
+.reel-input { display: block; font-size: 20px; line-height: 1.4; font-weight: 500; }
+.reel-flow .reel-work-label { display: flex; gap: 6px; align-items: center; color: var(--blue); }
 .reel-work-label img { display: block; flex-shrink: 0; }
-.reel-work { margin: 0; color: var(--ink); font-size: 16px; line-height: 1.6; }
-.reel-outcome { font-size: 21px; line-height: 1.35; }
+.reel-work { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; color: #43576b; font-size: 14px; line-height: 1.5; }
+.reel-work li { display: block; padding: 0; }
+.reel-work li::before, .reel-work li::after { content: none !important; }
+.reel-outcome { font-size: 21px; line-height: 1.4; font-weight: 550; }
+.reel-window { min-height: 224px; }
 @media(max-width:600px) {
- .reel-active { min-height: 370px; padding: 28px 20px; }
- .reel-flow { gap: 28px; }
- .reel-flow li { padding-left: 18px; }
- .reel-flow li:not(:last-child)::after { height: calc(100% + 4px); }
- .reel-flow li:not(:last-child)::before { bottom: -24px; }
- .reel-input { font-size: 17px; }
- .reel-work { font-size: 15px; }
- .reel-outcome { font-size: 19px; }
+ .supported-agents { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px 8px; }
+ .supported-agents a { font-size: 11px; gap: 10px; }
+ .wires-six { display: none; }
+ .wires-three { display: block; }
+ .reel-active { min-height: 350px; padding: 24px 26px; }
+ .reel-window { min-height: 350px; }
+ .reel-flow { grid-template-columns: 1fr; gap: 28px; }
+ .reel-flow>li { padding-left: 20px; }
+ .reel-flow>li:not(:last-child)::before { content: '↓'; right: auto; left: -7px; top: auto; bottom: -24px; transform: none; font-size: 21px; }
+ .reel-flow small { margin-bottom: 5px; }
+ .reel-input { font-size: 18px; }
+ .reel-work { gap: 3px; font-size: 14px; }
+ .reel-outcome { font-size: 20px; }
 }
-
-.supported-agents { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
-.supported-agents a { display: grid; place-items: center; min-height: 44px; padding: 10px 6px; border: 1px solid #dbe4ef; border-radius: 6px; color: var(--ink); background: #ffffffb3; font-size: 14px; text-align: center; text-decoration: none; }
-.supported-agents a:hover { color: var(--blue); border-color: #9bb9df; }
-@media(max-width:600px) { .supported-agents { gap: 8px; } .supported-agents a { font-size: 12px; } }
