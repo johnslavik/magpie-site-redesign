@@ -1,33 +1,25 @@
 ---
-const jobs = [
-  { title: 'Clear your review queue', text: 'Triage incoming pull requests, check the code and tests, and prepare reviews you can approve.', href: '/docs/pr-management/readme' },
-  { title: 'Turn bug reports into tested fixes', text: 'Find duplicates, reproduce the failure, and prepare a patch with a regression test.', href: '/docs/issue-management/readme' },
-  { title: 'Take security reports through disclosure', text: 'Investigate privately, prepare the fix, coordinate the release, and publish the CVE with your team.', href: '/docs/security/readme' },
-  { title: 'Get a release ready to publish', text: 'Verify the candidate, prepare the vote, and draft the announcement for your release manager.', href: '/docs/release-management/readme' },
-  { title: 'Help newcomers make their first contribution', text: 'Find a suitable task and explain the relevant code, expected change, and tests to run.', href: '/docs/mentoring/readme' },
-  { title: 'Find problems before they become incidents', text: 'Audit dependencies, CI workflows, licenses, and flaky tests, then prioritise what to fix.', href: '/docs/repo-health/readme' },
-];
-const lessons = [
-  { title: 'Describe the task', text: 'Turn a process you know into instructions your agent can repeat.', href: '/docs/education/your-first-skill', link: 'Write your first skill' },
-  { title: 'Check the results', text: 'Test the skill against examples and improve the parts that fail.', href: '/docs/education/eval-driven-development', link: 'Learn to test skills' },
-  { title: 'Use it across your tools', text: 'Keep the workflow portable so your team can run it in different agents.', href: '/docs/education/portable-skills', link: 'Build a portable skill' },
-];
+import { WorkflowPicker, ProjectRules } from "./ProjectExamples";
+import BrandName from "./BrandName";
+import { ArrowRight } from "lucide-react";
 ---
 <section class="choose-work container" aria-labelledby="choose-work-title">
-  <div class="section-heading"><h2 id="choose-work-title">Start with the work<br />you want off your plate.</h2><p>Install just the workflows you need. Start with one recurring task and add more as your project needs them.</p></div>
-  <div class="job-list">{jobs.map(job => <a href={job.href}><h3>{job.title}</h3><p>{job.text}</p><span>See the workflow</span></a>)}</div>
+  <div class="section-heading"><h2 id="choose-work-title">Only need help<br />with code reviews?</h2><p>You can install that on its own. Choose the jobs you want <BrandName /> to handle and see what each one gives you.</p></div>
+  <WorkflowPicker client:load />
 </section>
 <section class="project-fit" aria-labelledby="project-fit-title">
-  <div class="container fit-layout">
-    <div><h2 id="project-fit-title">Your tools.<br />Your rules.<br /><span>Your way of working.</span></h2><p>Tell Magpie how your project builds, reviews, releases, and communicates. Its workflows use that context every time.</p><a class="text-link" href="/docs/setup/team-adoption">Set up Magpie for your team</a></div>
-    <div class="fit-details">
-      <article><h3>Reviews that follow your standards</h3><p>Your build commands, test requirements, and review conventions become the instructions your agent follows.</p></article>
-      <article><h3>Work stays in the tools you use</h3><p>Connect your repository, issue tracker, and communication channels. Change providers without rewriting the workflow.</p><a href="/docs/adapters/readme">Explore supported tools</a></article>
-      <article><h3>A process you can make your own</h3><p>Adjust a workflow for your project, share it across your organisation, or add a tool Magpie does not support yet.</p><a href="/docs/extending">See how to customise Magpie</a></article>
-    </div>
+  <div class="container">
+    <div class="section-heading"><h2 id="project-fit-title">Tell it what a good fix<br />looks like in your project.</h2><p>A test for every bug fix? A changelog entry? Put it in your project’s instructions. <BrandName /> follows them when it prepares the change.</p></div>
+    <ProjectRules client:load />
+    <div class="example-links"><span>Project instructions stay in your repository.</span><a class="text-link" href="/docs/extending">Adapt <BrandName /> to your project <span aria-hidden="true">↗</span></a></div>
   </div>
 </section>
 <section class="learn-skills container" aria-labelledby="learn-skills-title">
-  <div class="section-heading"><h2 id="learn-skills-title">Turn your own process<br />into a reusable skill.</h2><p>A skill is a set of instructions your agent can follow. Magpie’s guides take you from writing your first one to testing and sharing it.</p></div>
-  <div class="lesson-list">{lessons.map(lesson => <article><h3>{lesson.title}</h3><p>{lesson.text}</p><a class="text-link" href={lesson.href}>{lesson.link}</a></article>)}</div>
+  <div class="section-heading"><h2 id="learn-skills-title">That checklist you keep<br />pasting into chat?</h2><p>Save it as a skill: a text file your agent can follow again. <BrandName />’s guides show you how to write it, test it, and share it with your team.</p></div>
+  <div class="skill-demo">
+    <div class="checklist-sheet"><span class="paper-tab">Your checklist</span><h3>Before adding a dependency</h3><ul><li>Check its licence</li><li>Look for known vulnerabilities</li><li>Explain any risks in the review</li></ul><span class="pencil-note">You already know the steps.</span></div>
+    <div class="skill-transfer" aria-hidden="true"><span>Save the instructions</span><ArrowRight size={36} strokeWidth={1.3} /></div>
+    <div class="skill-run"><div class="skill-file"><span aria-hidden="true">↓</span><div><strong>check-dependency / SKILL.md</strong><small>Your checklist, saved in the project</small></div></div><div class="skill-prompt">“Check this new dependency.”</div><div class="skill-answer"><img src="/favicon.svg" alt="Magpie" width="24" height="24" /><p>Your agent checks the licence and vulnerabilities, then prepares its findings for your review.</p></div></div>
+  </div>
+  <div class="learning-links"><a class="text-link" href="/docs/education/your-first-skill">Write your first skill <span aria-hidden="true">↗</span></a><a href="/docs/education/eval-driven-development">Test it on real examples</a><a href="/docs/education/portable-skills">Share it across agents</a></div>
 </section>

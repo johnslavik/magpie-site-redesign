@@ -41,9 +41,9 @@ export default function HeroWorkflows() {
       <div className="reel-example" key={selected}>
           <a href={withBase(item.path)} className="reel-active">
             <ol className="reel-flow">
-              <li><small>Start with</small><span className="reel-input">{item.input}</span></li>
-              <li><small className="reel-work-label"><img src={withBase("/favicon.svg")} width="16" height="16" alt="" />Magpie handles</small><ul className="reel-work">{item.work.map(step => <li key={step}>{step}</li>)}</ul></li>
-              <li><small>You get</small><strong className="reel-outcome">{item.outcome}</strong></li>
+              <li className="reel-source"><small>It starts with</small><span className="reel-input">{item.input}</span><div className="document-lines" aria-hidden="true"><i /><i /><i /></div></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>Runs the entire process with you</small><ul className="reel-work">{item.work.map(step => <li key={step}>{step}</li>)}</ul></li>
+              <li className="reel-delivery"><span className="delivery-check" aria-hidden="true">✓</span><small>The result</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </a>
       </div>
