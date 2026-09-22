@@ -560,16 +560,17 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .sandbox-mode-picker p { margin: 0; color: #aaa69b; font-size: 11px; }
 @media(max-width:800px) { .sandbox-demo { padding-inline: 16px; } }
 
-/* Explicit numbered stages make the start, work, and result unmistakable. */
+/* Task, work, and completion icons form one directional workflow. */
 .reel-window { height: 354px; }
 .reel-example[data-position="-1"] { transform: translateY(calc(-50% - 154px)) rotateX(20deg) scale(.95); }
 .reel-example[data-position="1"] { transform: translateY(calc(-50% + 154px)) rotateX(-20deg) scale(.95); }
 .reel-active { height: 246px; padding: 20px 24px; align-items: stretch; justify-content: center; }
 .reel-flow { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
 .reel-flow li { position: relative; display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 13px; align-items: start; }
-.reel-flow li:not(:last-child)::after { content: ''; position: absolute; left: 12px; top: 30px; height: calc(100% - 12px); width: 1px; background: #b6c9e2; }
-.flow-number { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid #c7d6e9; border-radius: 5px; color: var(--blue); font-size: 12px; background: #f1f5fb; }
-.reel-flow li:last-child .flow-number { color: white; background: var(--blue); border-color: var(--blue); }
+.reel-flow li:not(:last-child)::after { content: ''; position: absolute; left: 12px; top: 30px; height: calc(100% - 18px); width: 1px; background: #b6c9e2; }
+.reel-flow li:not(:last-child)::before { content: ''; position: absolute; left: 9px; bottom: -12px; width: 7px; height: 7px; border-right: 1px solid #b6c9e2; border-bottom: 1px solid #b6c9e2; transform: rotate(45deg); }
+.flow-node { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid #c7d6e9; border-radius: 5px; color: var(--blue); font-size: 12px; background: #f1f5fb; }
+.reel-flow li:last-child .flow-node { color: white; background: var(--blue); border-color: var(--blue); }
 .reel-flow small { display: block; font-size: 10px; color: var(--muted); margin: 0 0 5px; }
 .reel-steps { justify-content: flex-start; flex-wrap: wrap; gap: 4px 0; line-height: 1.5; }
 .reel-steps span + span::before { content: none; }
@@ -583,3 +584,9 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .reel-outcome { font-size: 16px; }
  .flow-arrow { margin-inline: 5px; }
 }
+
+.reel-input { font-size: 16px; }
+.reel-steps { font-size: 13px; }
+.reel-outcome { font-size: 20px; }
+.reel-flow small { font-size: 11px; }
+@media(max-width:800px) { .reel-input { font-size: 14px; } .reel-steps { font-size: 12px; } .reel-outcome { font-size: 18px; } .reel-flow small { font-size: 10px; } }

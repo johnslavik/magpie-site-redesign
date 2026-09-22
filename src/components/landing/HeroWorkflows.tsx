@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ShieldCheck, PackageCheck, ScanSearch, GitPullRequest, Bug, Users, UserPlus, FileCheck2, Settings2 } from "lucide-react";
+import { ShieldCheck, PackageCheck, ScanSearch, GitPullRequest, Bug, Users, UserPlus, FileCheck2, Settings2, Cog, Check } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 const examples = [
@@ -11,7 +11,7 @@ const examples = [
   { input: "Repository", steps: ["Audit", "Diagnose", "Prioritise"], outcome: "Repository health action plan", path: "/docs/repo-health/readme", icon: ScanSearch },
   { input: "Local changes", steps: ["Read", "Review", "Suggest fixes"], outcome: "Changes checked before a PR", path: "/docs/pairing/readme", icon: FileCheck2 },
   { input: "New committer", steps: ["Prepare", "Coordinate", "Onboard"], outcome: "Committer onboarding completed", path: "/docs/contributor-growth/readme", icon: UserPlus },
-  { input: "Your agent", steps: ["Isolate", "Guard", "Verify"], outcome: "Sandboxed workspace", path: "/docs/setup/secure-agent-setup", icon: Settings2 },
+  { input: "Your agent", steps: ["Isolate", "Guard", "Verify"], outcome: "Sandboxed workspace", path: "/docs/setup/secure-agent-setup", icon: Settings2, Cog, Check },
 ];
 
 export default function HeroWorkflows() {
@@ -44,14 +44,14 @@ export default function HeroWorkflows() {
         return <div className="reel-example" data-position={offset} key={index} aria-hidden={offset !== 0}>
           {offset === 0 ? <a href={withBase(item.path)} className="reel-active">
             <ol className="reel-flow">
-              <li><span className="flow-number" aria-hidden="true">1</span><div><small>Start with</small><span className="reel-input"><Icon size={17} strokeWidth={1.6} aria-hidden="true" />{item.input}</span></div></li>
-              <li><span className="flow-number" aria-hidden="true">2</span><div><small>Magpie handles</small><span className="reel-steps">{item.steps.map((step, i) => <span key={step}>{i > 0 && <span className="flow-arrow" aria-hidden="true">→</span>}{step}</span>)}</span></div></li>
-              <li><span className="flow-number" aria-hidden="true">3</span><div><small>You get</small><strong className="reel-outcome">{item.outcome}</strong></div></li>
+              <li><span className="flow-node" aria-hidden="true"><Icon size={17} strokeWidth={1.6} /></span><div><small>Start with</small><span className="reel-input">{item.input}</span></div></li>
+              <li><span className="flow-node" aria-hidden="true"><Cog size={17} strokeWidth={1.6} /></span><div><small>Magpie handles</small><span className="reel-steps">{item.steps.map((step, i) => <span key={step}>{i > 0 && <span className="flow-arrow" aria-hidden="true">→</span>}{step}</span>)}</span></div></li>
+              <li><span className="flow-node flow-finished" aria-hidden="true"><Check size={17} strokeWidth={2} /></span><div><small>You get</small><strong className="reel-outcome">{item.outcome}</strong></div></li>
             </ol>
           </a> : <div className="reel-peek"><Icon size={16} strokeWidth={1.5} /><span>{item.input}</span><span>{item.outcome}</span></div>}
         </div>;
       })}
     </div>
-    <div className="reel-controls"><button type="button" onClick={() => move(-1)} aria-label="Previous workflow">Previous</button><span>{selected + 1} / {examples.length} workflows</span>{!reduced && <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play workflow rotation" : "Pause workflow rotation"}>{paused ? "Play" : "Pause"}</button>}<button type="button" onClick={() => move(1)} aria-label="Next workflow">Next</button></div>
+    <div className="reel-controls"><button type="button" onClick={() => move(-1)} aria-label="Previous workflow">Previous</button><span>Explore workflows</span>{!reduced && <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play workflow rotation" : "Pause workflow rotation"}>{paused ? "Play" : "Pause"}</button>}<button type="button" onClick={() => move(1)} aria-label="Next workflow">Next</button></div>
   </div>;
 }
