@@ -16,11 +16,12 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <div class="hero-copy">
         <img class="hero-wordmark" src="/wordmark.svg" alt="Magpie" width="200" height="57" />
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
-        <p>AI brought more contributions to open source. Maintainers needed a way to keep up. We turned the procedures behind that work into <strong>dozens of reusable skills</strong> your coding agent can follow. <BrandName /> grew out of that work at Apache Airflow. Now you can use those procedures in your own project.</p>
+        <p class="hero-story">AI brought more contributions. Maintainers needed a way to keep up. Born at Apache Airflow, <BrandName /> turns that work into <strong>dozens of reusable skills</strong> for your coding agent—and your project.</p>
       </div>
       <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does" hidden><ArrowDown size={22} strokeWidth={1.4} /></a>
     </section>
-    <section id="workflow-examples" class="integration-section container" aria-label="How Magpie works with your tools">
+    <section id="workflow-examples" class="integration-section container" aria-labelledby="workflow-examples-title">
+      <h2 id="workflow-examples-title" class="examples-heading">What can Magpie do for you?</h2>
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
           <HeroWorkflows client:load />
@@ -35,7 +36,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
     </section>
     <span class="diagram-nav-trigger" data-nav-trigger aria-hidden="true"></span>
     <section id="how-it-works" class="section container security-story-section">
-      <div class="security-intro"><p class="story-question">What could Magpie do for your project?</p><h2>See how Magpie<br />helps scale security.</h2><p>Apache Airflow powers workflows at Airbnb, Adobe, and Spotify.<br />Here’s how Magpie helps its maintainers handle security reports.</p></div>
+      <div class="security-intro"><h2>See how Magpie<br />helps scale security.</h2><p>Apache Airflow powers workflows at Airbnb, Adobe, and Spotify.<br />Here’s how Magpie helps its maintainers handle security reports.</p></div>
       <WorkflowExplorer client:load />
     </section>
     <section id="airflow" class="airflow-section">
@@ -54,14 +55,17 @@ import MoreWays from "../components/landing/MoreWays.astro";
 
 <script>
   const cue = document.querySelector<HTMLAnchorElement>('.hero-read-cue');
-  const hero = document.querySelector('.hero');
-  if (cue && hero) {
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    const observer = new IntersectionObserver(([entry]) => {
-      clearTimeout(timer);
-      cue.hidden = true;
-      if (entry.intersectionRatio >= .7) timer = setTimeout(() => { cue.hidden = false; }, 16000);
-    }, { threshold: [.7] });
-    observer.observe(hero);
+  if (cue) {
+    let hasScrolled = window.scrollY > 4;
+    const hideAfterScroll = () => {
+      if (window.scrollY > 4) hasScrolled = true;
+      if (hasScrolled) cue.hidden = true;
+    };
+    window.addEventListener('scroll', hideAfterScroll, { passive: true });
+    const showCue = () => window.setTimeout(() => {
+      cue.hidden = hasScrolled || window.scrollY > 4;
+    }, 4000);
+    if (document.readyState === 'complete') showCue();
+    else window.addEventListener('load', showCue, { once: true });
   }
 </script>

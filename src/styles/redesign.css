@@ -341,7 +341,7 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .preview-body li svg { flex: 0 0 14px; margin-top: 3px; }
 .draft-preview>div, .draft-preview p { font-size: 13px; }
 .draft-preview a { font-size: 12px; }
-.docs-invitation { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-block: 56px 72px; border-top: 1px solid var(--line); }
+.docs-invitation { display: flex; flex-direction: column; text-align: center; align-items: center; justify-content: center; gap: 32px; padding-block: 56px 72px; border-top: 1px solid var(--line); }
 .docs-invitation h2 { margin: 0 0 16px; font-size: 36px; }
 .docs-invitation p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--muted); }
 .docs-invitation .button { flex-shrink: 0; }
@@ -402,7 +402,7 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .preview-body { padding: 20px 16px; }
  .preview-top, .preview-bottom { padding: 12px 16px; }
  .draft-preview { padding: 14px; }
- .docs-invitation { flex-direction: column; align-items: flex-start; padding-block: 40px 48px; gap: 24px; }
+ .docs-invitation { flex-direction: column; align-items: center; padding-block: 40px 48px; gap: 24px; }
  .docs-invitation h2 { font-size: 32px; }
  .footer-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px 24px; }
  .footer-intro { grid-column: 1/-1; }
@@ -980,3 +980,15 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .learn-skills .learning-links { justify-content: center; margin-top: 35px; }
 @media(max-width:800px) { .lifecycle-detail { padding: 26px; gap: 28px; }.project-adaptation { gap: 20px; }.provided-procedure,.project-example { padding: 24px; }.skill-manual,.skill-assisted { padding: 25px; }.skill-comparison { gap: 20px; } }
 @media(max-width:600px) { .software-phases { grid-template-columns: repeat(3,1fr); }.software-phases button { padding-block: 14px; font-size: 12px; gap: 8px; }.lifecycle-detail,.project-adaptation,.skill-comparison { grid-template-columns: 1fr; }.lifecycle-detail { padding: 25px; gap: 30px; }.lifecycle-situation h3 { font-size: 26px; margin-bottom: 16px; }.lifecycle-situation p { max-width: none; }.lifecycle-situation>a { margin-top: 8px; }.lifecycle-heading { margin-bottom: 32px; }.lifecycle-heading p { font-size: 14px; }.provided-procedure>img { margin-bottom: 22px; }.project-command code { font-size: 12px; }.learn-skills .learning-links { align-items: center; }.skill-comparison h3 { font-size: 23px; } }
+
+/* Let the reader set the pace. */
+.hero-story { animation: hero-story-in .4s ease 2s both; }
+@keyframes hero-story-in { from { opacity: 0; } to { opacity: 1; } }
+.examples-heading { text-align: center; font-size: clamp(30px,4vw,46px); line-height: 1.15; margin: 0 0 55px; letter-spacing: -.035em; }
+.another-use-case { display: flex; align-items: center; gap: 10px; margin: 30px auto 0; padding: 12px 18px; background: #edf3fc; color: var(--blue); border: 1px solid #d2def0; border-radius: 30px; cursor: pointer; font: 500 14px Inter,sans-serif; }
+.another-use-case:hover { background: #dfeafb; }
+.supported-agents a { font-size: 11px; font-weight: 500; color: #667571; gap: 14px; }
+.supported-agents img { width: 34px; height: 34px; }
+.docs-invitation { padding-block: 90px; gap: 28px; }
+.docs-invitation h2 { margin: 0; font-size: clamp(32px,4vw,48px); }
+@media(prefers-reduced-motion:reduce) { .hero-story { animation-duration: 0s; } }
