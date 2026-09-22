@@ -232,3 +232,25 @@ body.docs-navigation-open { overflow: hidden; }
  .redesign-home .section-band::before { height: 18px; top: -17px; }
  .redesign-home .section-band::after { height: 14px; bottom: -13px; }
 }
+
+/* Match the security story: centered, complete phases driven by page scroll. */
+.software-lifecycle { position: relative; overflow-anchor: none; }
+.software-workbench { background: var(--band-color, var(--paper)); padding-bottom: 12px; }
+.software-lifecycle[data-scroll-driven=true] .software-workbench { position: sticky; top: var(--scene-top,104px); }
+.software-scenes { display: grid; }
+.software-scenes>.lifecycle-detail { grid-area: 1/1; min-width: 0; }
+.software-scenes>.lifecycle-detail[aria-hidden=true] { visibility: hidden; pointer-events: none; }
+
+/* Small editorial details drawn from the bird and paper motifs. */
+.redesign-home .choose-work::before { border-radius: 72% 28% 0 0 / 100% 100% 0 0; }
+.redesign-home .choose-work::after { border-radius: 0 0 68% 32% / 0 0 100% 100%; }
+.redesign-home .project-fit::before { border-radius: 30% 70% 0 0 / 100% 100% 0 0; }
+.redesign-home .project-fit::after { border-radius: 0 0 28% 72% / 0 0 100% 100%; }
+.workflow-chapter-heading { position: relative; }
+.chapter-bird { position: absolute; width: 110px; height: 110px; object-fit: contain; top: -98px; right: -70px; transform: rotate(-9deg); pointer-events: none; }
+.redesign-home .reel-source { border-radius: 4px 18px 4px 4px; box-shadow: 4px 5px 0 #ece7d9; }
+.redesign-home .reel-delivery { border-radius: 18px 4px 18px 4px; }
+.redesign-home .summary-after strong { width: fit-content; background: linear-gradient(transparent 70%, #e4e9a9 70%, #e4e9a9 95%, transparent 95%); }
+.redesign-home .project-adaptation .rule-example { border-radius: 2px 14px 14px 2px; box-shadow: 3px 4px 0 #dedcb94d; }
+@media(max-width:1000px) { .chapter-bird { right: 0; width: 86px; height: 86px; top: -88px; } }
+@media(max-width:700px) { .chapter-bird { width: 66px; height: 66px; top: -70px; right: 8px; } }

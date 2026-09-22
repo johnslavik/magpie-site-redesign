@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Inbox, Code2, GitPullRequest, PackageCheck, ShieldCheck, Users, Check, ArrowRight } from "lucide-react";
 
 const lifecycle = [
@@ -12,11 +12,54 @@ const lifecycle = [
 
 export function SoftwareLifecycle() {
   const [active, setActive] = useState(0);
-  const phase = lifecycle[active];
-  const select = (index: number) => { setActive(index); document.getElementById(`lifecycle-tab-${index}`)?.focus(); };
-  return <div className="software-lifecycle">
-    <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-label={item.label} aria-controls="lifecycle-detail" aria-selected={active === i} tabIndex={active === i ? 0 : -1} data-complete={i < active} onClick={() => setActive(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); select(event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length); } }}><span className="software-phase-icon"><item.icon size={24} strokeWidth={1.5} aria-hidden="true" /></span><span>{item.label}</span></button>)}</div>
-    <div id="lifecycle-detail" className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${active}`}>
+  const [scrollDriven, setScrollDriven] = useState(false);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const stepRef = useRef(220);
+  const pinTopRef = useRef(104);
+
+  useEffect(() => {
+    const scene = sceneRef.current, panel = panelRef.current;
+    if (!scene || !panel) return;
+    const media = matchMedia("(min-width: 901px) and (prefers-reduced-motion: no-preference)");
+    let frame = 0, driven = false;
+    const update = () => {
+      if (!driven) return;
+      const distance = pinTopRef.current - scene.getBoundingClientRect().top;
+      setActive(Math.max(0, Math.min(lifecycle.length - 1, Math.round(distance / stepRef.current))));
+    };
+    const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
+    const measure = () => {
+      driven = media.matches && panel.offsetHeight + 124 <= window.innerHeight;
+      setScrollDriven(driven);
+      pinTopRef.current = Math.max(104, (window.innerHeight - panel.offsetHeight + 80) / 2);
+      scene.style.setProperty("--scene-top", `${pinTopRef.current}px`);
+      stepRef.current = Math.min(260, Math.max(180, window.innerHeight * .22));
+      scene.style.height = driven ? `${panel.offsetHeight + stepRef.current * (lifecycle.length - .5)}px` : "auto";
+      update();
+    };
+    const observer = new ResizeObserver(measure);
+    observer.observe(panel);
+    media.addEventListener("change", measure);
+    window.addEventListener("resize", measure);
+    window.addEventListener("scroll", schedule, { passive: true });
+    measure();
+    return () => {
+      observer.disconnect(); cancelAnimationFrame(frame);
+      media.removeEventListener("change", measure);
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", schedule);
+    };
+  }, []);
+
+  const select = (index: number) => {
+    setActive(index);
+    if (scrollDriven && sceneRef.current) window.scrollTo({ top: sceneRef.current.getBoundingClientRect().top + window.scrollY - pinTopRef.current + index * stepRef.current, behavior: "instant" });
+  };
+  return <div className="software-lifecycle" ref={sceneRef} data-scroll-driven={scrollDriven}>
+    <div className="software-workbench" ref={panelRef}>
+    <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-label={item.label} aria-controls={`lifecycle-detail-${i}`} aria-selected={active === i} tabIndex={active === i ? 0 : -1} data-complete={i < active} onClick={() => select(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); const next = event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length; select(next); document.getElementById(`lifecycle-tab-${next}`)?.focus(); } }}><span className="software-phase-icon"><item.icon size={24} strokeWidth={1.5} aria-hidden="true" /></span><span>{item.label}</span></button>)}</div>
+    <div className="software-scenes">{lifecycle.map((phase, index) => <div key={phase.label} id={`lifecycle-detail-${index}`} className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${index}`} aria-hidden={active !== index} inert={active !== index} tabIndex={0}>
       <div className="lifecycle-flow">
         <div className="lifecycle-incoming"><h3>{phase.input}</h3><p>{phase.inputs.join(" ")}</p></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
@@ -25,6 +68,7 @@ export function SoftwareLifecycle() {
         <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}>{output}</li>)}</ul></div>
       </div>
       <a className="lifecycle-explore" href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows <ArrowRight size={15} aria-hidden="true" /></a>
+    </div>)}</div>
     </div>
   </div>;
 }
