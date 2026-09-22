@@ -9,6 +9,6 @@ const columns = [
 export function SiteFooter() {
   return <footer className="site-footer"><div className="container footer-grid">
     <div className="footer-intro"><a className="brand-lockup" href={withBase("/")} aria-label="Apache Magpie home"><img className="official-wordmark" src={withBase("/wordmark.svg")} alt="Apache Magpie" width="160" height="45" /></a><span className="footer-asf">An Apache Software Foundation project.</span></div>
-    {columns.map(col => <div key={col.title} className="footer-column"><h2>{col.title}</h2>{col.links.map(([label, href]) => <a key={label} href={href.startsWith("/") ? withBase(href) : href} {...(!href.startsWith("/") ? { target: "_blank", rel: "noreferrer" } : {})}>{label}</a>)}</div>)}
+    {columns.map(col => <div key={col.title} className="footer-column"><h2>{col.title}</h2>{col.links.map(([label, href]) => <a key={label} href={href.startsWith("/") ? withBase(href) : href} {...((!href.startsWith("/") || href.startsWith("/docs")) ? { target: "_blank", rel: "noreferrer" } : {})}>{label}</a>)}</div>)}
   </div><div className="container footer-bottom"><p>© 2026 The Apache Software Foundation. Licensed under Apache 2.0.</p><p>Apache <BrandName />, <BrandName />, and Apache are trademarks of The Apache Software Foundation.</p><a href="https://github.com/johnslavik/magpie-site-redesign" target="_blank" rel="noreferrer">Preview source </a></div></footer>;
 }

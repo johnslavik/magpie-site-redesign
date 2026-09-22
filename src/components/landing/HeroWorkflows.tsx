@@ -3,7 +3,7 @@ import { ArrowRight, ArrowDown } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 const examples = [
-  { input: "Security report", skill: "security-issue-triage", work: ["Investigate the report", "Write and test the fix", "Coordinate release & CVE"], outcome: "Fix released. CVE published.", path: "/docs/security/readme" },
+  { input: "Security report", skill: "security-issue-triage", work: ["Investigate the report", "Write and test the fix", "Coordinate release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
   { input: "Pull request", skill: "pr-management-code-review", work: ["Read the code changes", "Check tests and conventions", "Draft comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
   { input: "Bug report", skill: "issue-fix-workflow", work: ["Reproduce the failure", "Write the fix", "Add a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
   { input: "Release candidate", skill: "release-verify-rc", work: ["Verify the build and signatures", "Prepare the release vote", "Draft the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
@@ -23,7 +23,7 @@ export default function HeroWorkflows() {
           <a href={withBase(item.path)} className="reel-active" target="_blank" rel="noreferrer">
             <ol className="reel-flow">
               <li className="reel-source"><small>When you have</small><span className="reel-input">{item.input}</span><div className="document-lines" aria-hidden="true"><i /><i /><i /></div></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>guides your agent through every step.</small><div className="reel-skill"><span>Written and included for you</span><code>{item.skill}<b>/SKILL.md</b></code></div><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We wrote the steps for your agent to follow.</small><div className="reel-skill"><span>Included skill</span><code>{item.skill}<b>/SKILL.md</b></code></div><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul></li>
               <li className="reel-delivery"><span className="delivery-check" aria-hidden="true">✓</span><small>The result</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </a>

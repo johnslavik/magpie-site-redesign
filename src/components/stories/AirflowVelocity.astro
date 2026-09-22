@@ -17,7 +17,7 @@ const ratio = (after / before).toFixed(1);
 const adoptionX = (x(2) + x(3)) / 2;
 ---
 <figure class="velocity-chart">
-  <figcaption><strong>{ratio}×</strong><span>monthly security-report closures<br />after <BrandName /> adoption</span></figcaption>
+  <figcaption><strong>{ratio}×</strong><span>as many security reports closed per month after <BrandName /> adoption</span></figcaption>
   <svg viewBox="0 0 448 238" role="img" aria-labelledby="velocity-title velocity-description">
     <title id="velocity-title">Security reports closed per month at Apache Airflow</title>
     <desc id="velocity-description">January to August 2026: {points.map(p => p.count).join(', ')} reports closed. Magpie adoption is marked at April. Monthly averages: {before.toFixed(1)} before, {after} after. September is excluded because it is incomplete.</desc>
