@@ -120,3 +120,14 @@
  .site-header .docs-menu-toggle span { display: none; }
  .site-header .docs-menu-toggle { padding: 7px 0; }
 }
+
+/* Match the shared header at both breakpoints. */
+.docs-sidebar, .docs-toc { top: 80px; height: calc(100dvh - 80px); }
+@media(max-width:800px) {
+ .docs-sidebar.is-open { top: 72px; height: calc(100dvh - 72px); }
+ .site-header .header-actions { margin-left: auto; }
+ .site-header .docs-search-trigger { width: auto; min-height: 40px; }
+ .docs-prose.prose h1 { font-size: clamp(28px,7vw,35px); overflow-wrap: anywhere; }
+ .docs-main { padding-inline: 20px; }
+}
+@media(max-width:360px) { .site-header .docs-search-trigger span { display: none; } }

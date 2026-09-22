@@ -64,18 +64,6 @@ const ogImage = new URL(
   <body>
     <slot />
     <script>
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const observer = new IntersectionObserver(entries => {
-          for (const entry of entries) if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        }, { threshold: 0.08 });
-        document.querySelectorAll('[data-reveal]').forEach(element => {
-          element.classList.add('will-reveal');
-          observer.observe(element);
-        });
-      }
       document.querySelectorAll('.mobile-menu a').forEach(link => link.addEventListener('click', () => {
         link.closest('details')?.removeAttribute('open');
       }));
