@@ -2,12 +2,14 @@
 import SetupUtilities from "./SetupUtilities.astro";
 import { SoftwareLifecycle, ProjectRules, SkillComparison } from "./ProjectExamples";
 ---
-<section class="choose-work container" aria-labelledby="choose-work-title">
+<section class="choose-work section-band band-blue" aria-labelledby="choose-work-title">
+  <div class="container">
   <div class="lifecycle-heading"><h2 id="choose-work-title">We’ve prepared workflows for the rest of your project, too.</h2></div>
   <SoftwareLifecycle client:load />
+  </div>
 </section>
 <SetupUtilities />
-<section class="project-fit" aria-labelledby="project-fit-title">
+<section class="project-fit section-band band-mint" aria-labelledby="project-fit-title">
   <div class="container">
     <div class="lifecycle-heading"><h2 id="project-fit-title">Make the procedures fit the way your team works.</h2></div>
     <ProjectRules />

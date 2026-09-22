@@ -207,3 +207,28 @@ body.docs-navigation-open { overflow: hidden; }
  .redesign-home .project-adaptation { grid-template-columns: 1fr; gap: 28px; }
  .project-adaptation .adaptation-arrow { transform: rotate(90deg); justify-self: center; }
 }
+
+/* Consistent chapter spacing, with quiet full-width color changes. */
+.redesign-home { --space-section: clamp(104px, 10vw, 160px); --space-heading: clamp(44px, 5vw, 72px); }
+.redesign-home :is(.lifecycle-heading, .security-intro) { margin-bottom: var(--space-heading); }
+.redesign-home .integration-section { padding-top: 40px; padding-bottom: var(--space-section); }
+.redesign-home .examples-heading { margin-bottom: var(--space-heading); }
+.redesign-home .airflow-section { padding-block: var(--space-section); }
+.redesign-home .case-heading { margin-bottom: var(--space-heading); }
+.redesign-home .security-summary { margin-top: 104px; padding-top: 64px; }
+.redesign-home .section-band { position: relative; background: var(--band-color); }
+.redesign-home .band-blue { --band-color: #eef3fa; }
+.redesign-home .band-mint { --band-color: #e7f3ed; }
+.redesign-home .section-band::before { content: ''; position: absolute; height: 32px; top: -31px; left: 0; right: 0; background: var(--band-color); border-radius: 50% 50% 0 0 / 100% 100% 0 0; pointer-events: none; }
+.redesign-home .section-band::after { content: ''; position: absolute; height: 24px; bottom: -23px; left: 0; right: 0; background: var(--band-color); border-radius: 0 0 50% 50% / 0 0 100% 100%; pointer-events: none; }
+.redesign-home .choose-work { max-width: none; width: 100%; padding-inline: 0; }
+.redesign-home .setup-utilities { padding-block: var(--space-section); }
+.redesign-home .learn-skills { padding-block: var(--space-section); }
+.redesign-home .docs-invitation { padding-block: var(--space-section); border-top: 0; }
+.redesign-home .invitation-band::after { content: none; }
+@media(max-width:700px) {
+ .redesign-home { --space-section: 88px; --space-heading: 40px; }
+ .redesign-home .security-summary { margin-top: 72px; padding-top: 48px; }
+ .redesign-home .section-band::before { height: 18px; top: -17px; }
+ .redesign-home .section-band::after { height: 14px; bottom: -13px; }
+}
