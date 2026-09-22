@@ -21,7 +21,7 @@ export default function AnimationLab() {
     <main className="animation-lab">
       <header>
         <div><p className="lab-eyebrow">MAGPIE / ESTÚDIO DE MOVIMENTO</p><h1>Voo, pouso e interação.</h1></div>
-        <a href={withBase("/")}>Voltar ao site ↗</a>
+        <a href={withBase("/")}>Voltar ao site</a>
       </header>
       <p className="lab-intro">Página de teste independente. Modelo 3D articulado, reconstruído com a imagem azul original como referência. Depois que ele pousar, mova o mouse pelo cenário e clique no pássaro para ver suas gracinhas.</p>
       <div className="lab-controls" aria-label="Controles da animação">

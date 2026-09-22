@@ -1,8 +1,38 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import KineticHome from "../components/landing/KineticHome";
+import { SiteHeader } from "../components/landing/SiteHeader";
+import { SiteFooter } from "../components/landing/SiteFooter";
+import WorkflowExplorer from "../components/landing/WorkflowExplorer";
+import { ShieldCheck, GitPullRequest, Inbox } from "lucide-react";
 ---
-
-<BaseLayout title="Apache Magpie | Give maintainers time back" description="Carefully curated AI agent skills for open-source maintainers. Triage, draft, mentor, and pair. The agent proposes; the human decides.">
-  <KineticHome client:load />
+<BaseLayout title="Apache Magpie — Maintainer skills for your AI agent" description="Plug Magpie into your existing AI agent to help with security reports, pull requests, and issues.">
+  <SiteHeader home />
+  <main id="main-content" class="redesign-home">
+    <section class="hero container">
+      <div class="hero-copy">
+        <h1>Your agent,<br /><span>with maintainer<br />know-how.</span></h1>
+        <p>Magpie plugs into Claude Code, Codex, and other agent harnesses to help you handle security reports, pull requests, and issues.</p>
+        <div class="hero-actions"><a class="button" href="/docs/quick-start">Get started</a><a class="text-link" href="#how-it-works">How it works</a></div>
+      </div>
+      <div class="integration-art" aria-label="Magpie adds maintainer skills to your existing agent for security reports, pull requests, and issues">
+        <div class="agent-shell">
+          <div class="agent-options"><span><img src="/vendor-logos/claude.png" alt="" width="28" height="28" />Claude Code</span><span><img src="/vendor-logos/openai.png" alt="" width="28" height="28" />Codex</span><span class="other-agents">Your agent</span></div>
+          <div class="plugin-connection" aria-hidden="true"></div>
+          <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Maintainer skills</span></div>
+          <div class="skill-branches" aria-hidden="true"></div>
+          <div class="agent-outcomes"><span><ShieldCheck size={22} strokeWidth={1.5} />Security</span><span><GitPullRequest size={22} strokeWidth={1.5} />Pull requests</span><span><Inbox size={22} strokeWidth={1.5} />Issues</span></div>
+        </div>
+      </div>
+    </section>
+    <section id="airflow" class="airflow-section" data-reveal><div class="container">
+      <div class="case-heading"><a class="light-link" href="/stories/airflow">Read the Airflow story </a></div>
+      <div class="case-layout"><div class="case-quote"><h2>How Airflow keeps up</h2><blockquote>“Using Magpie helped us to do things that matter and let our agents do all the stuff that made us […] go down the spiral of burn-out and desperation.”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Magpie PMC chair<br />Apache Airflow PMC member</span></div></div></div><div class="case-evidence"><div class="testimonial-metrics"><div><strong>10<span>×</span></strong><p>the issues and PRs handled</p></div><div><strong>3<span>×</span></strong><p>the speed</p></div></div><p class="metric-attribution">As reported by Jarek Potiuk, reflecting the team’s experience.</p><div class="tracker-snapshot"><div><span>Airflow security tracker</span><span>21 Sep 2026</span></div><div class="tracker-number"><strong>332 <span>/ 365</span></strong><span>tracked reports closed</span></div><div class="tracker-bar" role="img" aria-label="332 closed reports out of 365 tracked; 33 remain open"><span></span></div><div class="tracker-legend"><span>Closed</span><span>33 open · 7 awaiting triage</span></div></div><a class="light-link source-link" href="/stories/airflow#data">Explore the data </a></div></div>
+    </div></section>
+    <section id="how-it-works" class="section container" data-reveal>
+      <div class="section-heading"><div><h2>Skills your agent can put to work</h2></div><p>Magpie gives your agent project context and repeatable workflows. It investigates and prepares the work; you review the result.</p></div>
+      <WorkflowExplorer client:load />
+    </section>
+    <section class="docs-invitation container" data-reveal><div><h2>Put Magpie to work</h2><p>Set up your agent, choose your workflows, and start with your project.</p></div><a class="button" href="/docs/quick-start">Open the documentation</a></section>
+  </main>
+  <SiteFooter />
 </BaseLayout>

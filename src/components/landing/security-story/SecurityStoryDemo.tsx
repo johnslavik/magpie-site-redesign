@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowUpRight, Pause, Play, RotateCcw } from "lucide-react";
+import { Pause, Play, RotateCcw } from "lucide-react";
 import { BlurFade } from "@/ui/components/ui/blur-fade";
 import { withBase } from "@/ui/lib/utils";
 import { SCRIPT, transcript } from "./script";
@@ -193,7 +193,7 @@ function SecurityStoryDemo() {
         className="mt-5 inline-flex items-center gap-1.5 rounded-md border border-solid border-brand-200 bg-default-background px-3 py-1.5 text-caption font-caption text-brand-700 hover:border-brand-300 hover:bg-brand-100"
       >
         How the security family actually works
-        <ArrowUpRight className="size-3.5" />
+
       </a>
 
       <p className="mt-3 max-w-[760px] text-center text-caption font-caption text-subtext-color">

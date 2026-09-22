@@ -37,3 +37,16 @@ Cloudflare Worker with static assets. Every response carries X-Robots-Tag;
 HTML also carries a noindex meta tag. robots.txt disallows all crawling, the
 sitemap is disabled, and production analytics are removed. These are indexing
 requests, not authentication: the preview remains publicly accessible.
+
+## Refinements after review
+
+Remove promotional eyebrow labels, the trust strip, floating status cards,
+repeated positioning, and decorative link arrows across every page. Keep the
+bird and quiet motion, with plain headings and direct navigation. Airflow
+charts render locally from extracted observed data, with a monthly/quarterly
+selector, exact data tables, and sample counts. Do not link to Claude artifacts
+from the public UI. Source artifacts remain documented here for provenance.
+
+The lifecycle series disagrees with the cumulative series by three records in
+the final open/closed split. Preserve the supplied series, disclose the
+discrepancy in that chart, and use cumulative figures for the headline totals.
