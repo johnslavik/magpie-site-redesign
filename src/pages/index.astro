@@ -16,8 +16,8 @@ import MoreWays from "../components/landing/MoreWays.astro";
   <main id="main-content" class="redesign-home">
     <section class="hero hero-overview container" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <h1 id="hero-title">Software maintenance in 2026...<br /><span>Been there, done that.</span></h1>
-        <p class="hero-story"><span class="hero-expertise">Apache Magpie helps maintain software the world depends on, with <strong><mark>open-source skills</mark></strong> your agent can use and you can adapt.</span></p>
+        <h1 id="hero-title">Maintenance skills<br /><span>for your agent.</span></h1>
+        <p class="hero-story"><span class="hero-expertise">Open-source Apache workflows, used to handle <strong><mark>thousands of software issues.</mark></strong></span></p>
       </div>
       <div id="workflow-examples" class="hero-workflows">
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
@@ -44,7 +44,8 @@ import MoreWays from "../components/landing/MoreWays.astro";
     </div></section>
     <section id="how-it-works" class="section container security-story-section">
       <WorkflowExplorer client:load />
-      <div id="security-summary" class="security-summary" aria-label="What changed during the security workflow">
+      <div id="security-summary" class="security-summary" aria-labelledby="security-summary-title">
+        <h2 id="security-summary-title">From report to resolution, with less coordination.</h2>
         <div class="security-summary-flow">
           <div class="summary-state"><div class="summary-card summary-before"><h3>Without Magpie</h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
           <div class="summary-route"><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>

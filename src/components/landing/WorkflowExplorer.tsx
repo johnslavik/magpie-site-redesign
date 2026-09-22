@@ -78,7 +78,6 @@ export default function WorkflowExplorer() {
       </section>)}</div>
       <div className="story-navigation">
         <button type="button" onClick={() => select(stage - 1)} disabled={stage === 0} aria-label="Previous security stage"><ArrowLeft size={18} aria-hidden="true" />Previous</button>
-        {stage < securityStory.length - 1 && <a className="story-onward" href="#security-summary">Continue reading</a>}
         {stage < securityStory.length - 1 ? <button type="button" onClick={() => select(stage + 1)} aria-label={`Next security stage: ${securityStory[stage + 1].label}`}>{securityStory[stage + 1].label}<ArrowRight size={18} aria-hidden="true" /></button> : <a href="#security-summary">See the result<ArrowRight size={18} aria-hidden="true" /></a>}
       </div>
     </div>

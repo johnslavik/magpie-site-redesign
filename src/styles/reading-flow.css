@@ -62,11 +62,10 @@
 .release-choice strong { font-weight: 550; font-size: 16px; }
 .release-choice p { font-size: var(--text-body); line-height: 1.55; margin: 8px 0 0; color: var(--muted); }
 .release-choice>div:last-child p { color: #2c4c6c; }
-.story-navigation { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; padding-top: 16px; }
+.story-navigation { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; padding-top: 16px; }
 .story-navigation :is(button,a) { border: 0; background: none; display: inline-flex; gap: 9px; align-items: center; min-height: 44px; font-size: 16px; text-decoration: none; color: var(--blue); padding: 4px; }
 .story-navigation :first-child { justify-self: start; }
 .story-navigation :last-child { justify-self: end; }
-.story-navigation .story-onward { color: var(--muted); }
 .story-navigation button:disabled { opacity: .35; cursor: default; }
 .redesign-home .security-summary { margin-top: 56px; padding-top: 40px; }
 .redesign-home .summary-card { box-shadow: none; padding: 26px; }
@@ -139,7 +138,6 @@
  .story-contribution img { width: 26px; height: 26px; }
  .story-output { padding: 16px; margin-block: 22px; }
  .story-navigation { gap: 8px; grid-template-columns: 1fr 1fr; }
- .story-navigation .story-onward { grid-column: 1/-1; grid-row: 2; justify-self: center; }
  .story-navigation>:last-child { grid-column: 2; grid-row: 1; }
  .release-choice { grid-template-columns: 1fr; gap: 16px; }
 
@@ -168,7 +166,6 @@
 .redesign-home .reel-active { cursor: default; }
 .reel-doc-link { display: inline-flex; align-items: center; gap: 9px; color: #dceaff; font-size: 16px; margin-top: 22px; text-underline-offset: 5px; }
 .reel-doc-link:hover { color: white; }
-.story-navigation>a:last-child:nth-child(2) { grid-column: 3; }
 body.docs-navigation-open { overflow: hidden; }
 @media(max-width:800px) {
  .site-header .header-inner { height: 72px; padding: 12px 20px; gap: 16px; }
@@ -178,7 +175,6 @@ body.docs-navigation-open { overflow: hidden; }
  .site-header .official-wordmark { width: 120px; }
  .redesign-home .hero { min-height: 0; padding-block: 64px 80px; }
 }
-@media(max-width:600px) { .story-navigation>a:last-child:nth-child(2) { grid-column: 2; } }
 @media(max-width:360px) {
  .site-header .header-inner { padding-inline: 16px; gap: 12px; }
  .site-header .official-wordmark { width: 96px; }
@@ -400,8 +396,8 @@ body.docs-navigation-open { overflow: hidden; }
 .redesign-home .example-navigation :is(.example-back,.example-next) { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 1px solid #cbd8cd; border-radius: 50%; background: #fffefa; }
 .example-position { min-width: 48px; font-size: 17px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
 main.redesign-home { position: relative; isolation: isolate; }
-main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-network.svg') center top / 1440px 1800px repeat-y; }
-@media(max-width:800px) { main.redesign-home::before { opacity: .5; background-size: 1100px 1500px; } }
+main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-edge.svg') left top / 72px 1200px repeat-y, url('/illustrations/maintenance-edge.svg') right 600px / 72px 1200px repeat-y; }
+@media(max-width:800px) { main.redesign-home::before { opacity: .3; background-size: 28px 1200px; } }
 
 
 .security-summary-flow .summary-state { align-self: stretch; display: flex; flex-direction: column; }
@@ -450,7 +446,7 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .hero-workflows { margin-top: clamp(36px,5vw,64px); }
 .redesign-home .hero-overview .integration-art { padding: 0; }
 .redesign-home .hero-overview .example-navigation { margin-top: 32px; }
-.redesign-home .hero-overview .agent-shell>.diagram-context { margin-top: 56px; }
+.redesign-home .hero-overview .agent-shell>.diagram-context { margin: 32px auto 12px; font-size: 14px; }
 
 /* Small artifacts use the same line icons and access-diagram vocabulary as setup. */
 .workflow-illustration { height: 100px; margin-top: 22px; display: flex; align-items: center; justify-content: center; }
@@ -485,7 +481,7 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 /* A restrained technical texture and crisp surfaces carry the brand through the page. */
 .redesign-home { --card-radius: 16px; }
 .redesign-home .hero-overview { position: relative; padding-top: 64px; }
-.redesign-home .hero-overview::before { content: ''; position: absolute; inset: 0 -40px; pointer-events: none; z-index: -1; background-image: radial-gradient(#004aad20 .7px, transparent .7px); background-size: 24px 24px; mask-image: linear-gradient(transparent, #0005 35%, transparent 90%); }
+.redesign-home .hero-overview::before { content: ''; position: absolute; inset: 0 -40px; pointer-events: none; z-index: -1; background: url('/illustrations/maintenance-globe.svg') center top / 1440px 900px no-repeat; mask-image: linear-gradient(#000 55%, transparent 95%); }
 .redesign-home .magpie-card { background: linear-gradient(140deg,#f4f8ff,var(--prepared-bg)); box-shadow: 0 2px 3px #193f6b03, 0 12px 36px -28px #193f6b40; }
 .redesign-home .reel-flow > li { border-radius: var(--card-radius); }
 .redesign-home .example-navigation button:hover { border-color: var(--blue); background: #edf4ff; }
@@ -493,5 +489,14 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 
 /* Continue the network through the tinted bands without crossing the reading column. */
 .redesign-home .section-band { position: relative; isolation: isolate; }
-.redesign-home .section-band::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-network.svg') center top / 1440px 1800px repeat-y; opacity: .6; }
-@media(max-width:800px) { main.redesign-home::before { background-size: 1100px 1375px; opacity: .5; } .redesign-home .section-band::after { opacity: .25; background-size: 1100px 1375px; } }
+.redesign-home .section-band::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-edge.svg') left top / 72px 1200px repeat-y, url('/illustrations/maintenance-edge.svg') right 600px / 72px 1200px repeat-y; opacity: .6; mask-image: linear-gradient(transparent, #000 120px, #000 calc(100% - 120px), transparent); }
+@media(max-width:800px) { main.redesign-home::before { background-size: 28px 1200px; opacity: .3; } .redesign-home .section-band::after { opacity: .25; background-size: 28px 1200px; } }
+
+/* Keep adapter support together as a compact signature below the example. */
+.redesign-home .supported-agents { max-width: 700px; gap: 8px; margin-inline: auto; }
+.redesign-home .supported-agents a { min-height: 58px; padding: 4px 0; gap: 7px; font-size: 12px; }
+.redesign-home .supported-agents img { width: 26px; height: 26px; }
+.redesign-home .agent-shell > .more-adapters { margin-top: 12px; font-size: 14px; }
+@media(max-width:600px) { .redesign-home .supported-agents { max-width: 340px; gap: 12px 8px; } }
+
+.redesign-home #security-summary-title { max-width: 760px; margin: 0 auto 40px; text-align: center; font-size: clamp(30px,3.2vw,42px); line-height: 1.2; }

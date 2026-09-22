@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" fill="none"><defs><radialGradient id="halo"><stop stop-color="#90c4ef" stop-opacity=".28"/><stop offset="1" stop-color="#90c4ef" stop-opacity="0"/></radialGradient><linearGradient id="wire"><stop stop-color="#004aad" stop-opacity=".26"/><stop offset="1" stop-color="#004aad" stop-opacity=".04"/></linearGradient></defs><ellipse cx="1340" cy="380" rx="410" ry="520" fill="url(#halo)"/><g stroke="url(#wire)"><g transform="translate(1450 360) rotate(-22)">
+<circle r="330"/><ellipse rx="240" ry="330"/><ellipse rx="125" ry="330"/><ellipse rx="40" ry="330"/>
+<ellipse rx="330" ry="75"/><ellipse rx="330" ry="190"/><ellipse rx="330" ry="280"/>
+<path d="M-330 0H330M0-330V330"/><ellipse rx="390" ry="120" transform="rotate(-25)"/>
+</g></g></svg>
