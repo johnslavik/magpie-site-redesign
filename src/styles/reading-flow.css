@@ -429,3 +429,5 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .redesign-home .reel-process>small { max-width: none; margin: 0 0 24px; }
 
 .redesign-home :is(.prepared-workflow-label,.story-comparison .story-prepared,.reel-process>.prepared-workflow-label) { color: #b8dec7; font-size: 18px; font-weight: 700; line-height: 1.5; }
+
+.redesign-home .workflow-reuse { display: block; margin-top: 4px; font-size: 18px; font-weight: 400; line-height: 1.5; color: #e6eef9; }
