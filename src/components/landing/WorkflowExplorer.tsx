@@ -73,7 +73,7 @@ export default function WorkflowExplorer() {
         <h3>{phase.prompt}</h3>
         <div className="story-comparison">
           <div className="story-manual"><h4>Without Magpie</h4><p>{phase.without}</p></div>
-          <div className="story-assisted"><h4><img src="/favicon.svg" width="32" height="32" alt="" /><span>With <BrandName /></span></h4><p>Your agent {phase.result}</p></div>
+          <div className="story-assisted"><h4><img src="/favicon.svg" width="32" height="32" alt="" /><span>With <BrandName /></span></h4><p className="story-prepared">We’ve already written this workflow for your agent.</p><p>Your agent {phase.result}</p></div>
         </div>
       </section>)}</div>
       <div className="story-navigation">
