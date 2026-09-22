@@ -1,28 +1,36 @@
 ---
-import { Check, ArrowRight, ShieldCheck, Bot, FolderCode, LockKeyhole } from "lucide-react";
+import { ArrowRight, ShieldCheck, Bot, FolderCode, LockKeyhole, KeyRound, UserRound, Folder, Globe } from "lucide-react";
 ---
-<section class="setup-utilities container" aria-labelledby="setup-utilities-title">
+<section class="setup-utilities container isolation-comparison" aria-labelledby="setup-utilities-title">
   <div class="setup-explanation">
-    <h2 id="setup-utilities-title">We’ve packaged the agent setup for you, too.</h2>
-    <p>Magpie includes the tools to set up and verify an isolated workspace, so you don’t have to assemble them yourself.</p>
-    <a class="text-link" href="/docs/setup/secure-agent-setup" target="_blank" rel="noreferrer">See what the setup includes <ArrowRight size={18} aria-hidden="true" /></a>
+    <h2 id="setup-utilities-title">Give your agent a workspace, not your whole machine.</h2>
+    <p>Work on untrusted software locally. Magpie installs and verifies layered protection, without a separate VM on macOS or Linux.</p>
   </div>
-  <div class="setup-example">
-    <div class="setup-request">“Set up an isolated workspace for my agent.”</div>
-    <div class="setup-prepared setup-diagram" role="img" aria-label="Magpie configures an isolated workspace for your agent and project files, sets access rules, and verifies the setup using protections supported by your agent.">
-      <img src="/wordmark.svg" alt="Magpie" width="142" height="40" />
-      <div class="sandbox-boundary">
-        <span class="sandbox-label"><ShieldCheck size={20} aria-hidden="true" />Isolated workspace</span>
-        <div class="sandbox-contents">
-          <div><Bot size={38} strokeWidth={1.4} aria-hidden="true" /><span>Your agent</span></div>
-          <ArrowRight className="sandbox-connection" size={28} aria-hidden="true" />
-          <div><FolderCode size={38} strokeWidth={1.4} aria-hidden="true" /><span>Project files</span></div>
-        </div>
+  <div class="isolation-sides">
+    <div class="isolation-side isolation-open">
+      <h3>In YOLO mode</h3>
+      <p>Protections off. Your agent can reach what your session can.</p>
+      <div class="open-agent"><Bot size={40} strokeWidth={1.5} aria-hidden="true" /><span>Your agent</span></div>
+      <div class="open-access" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="exposed-resources">
+        <div><Folder size={30} aria-hidden="true" /><span>Personal files</span></div>
+        <div><KeyRound size={30} aria-hidden="true" /><span>Credentials</span></div>
+        <div><Globe size={30} aria-hidden="true" /><span>Network</span></div>
       </div>
-      <div class="sandbox-checks"><span><LockKeyhole size={20} aria-hidden="true" />Sets access rules</span><span><Check size={20} aria-hidden="true" />Verifies the setup</span></div>
-      <p class="sandbox-support">Uses the protections supported by your agent.</p>
+      <p class="isolation-consequence">One bad command or malicious instruction can reach beyond the project.</p>
     </div>
-    <p class="setup-approval"><ShieldCheck size={22} aria-hidden="true" /><span>You approve the proposed changes before installation.</span></p>
+    <div class="isolation-side isolation-protected">
+      <h3 class="isolation-brand"><span>With</span><img src="/wordmark.svg" alt="Magpie" width="142" height="40" /></h3>
+      <p>Access scoped. Sensitive actions gated.</p>
+      <div class="protection-stack">
+        <div class="protection-layer"><KeyRound size={20} aria-hidden="true" /><span>Credentials stripped from the environment</span></div>
+        <div class="protection-layer"><ShieldCheck size={20} aria-hidden="true" /><span>File and network access sandboxed</span></div>
+        <div class="protection-layer"><LockKeyhole size={20} aria-hidden="true" /><span>Agent tools restricted</span></div>
+        <div class="protection-layer"><UserRound size={20} aria-hidden="true" /><span>External writes require approval</span></div>
+        <div class="protected-workspace"><span class="sandbox-label"><ShieldCheck size={20} aria-hidden="true" />Your allowed workspace</span><div class="sandbox-contents"><div><Bot size={32} aria-hidden="true" /><span>Your agent</span></div><ArrowRight size={24} aria-hidden="true" /><div><FolderCode size={32} aria-hidden="true" /><span>Project files</span></div></div>
+      </div>
+    </div>
   </div>
-
+  </div>
+  <div class="isolation-footer"><p class="isolation-limits">Protections vary by agent. Allowed project files remain accessible; sandboxing reduces risk rather than making arbitrary code safe.</p><a class="button" href="/docs/setup/secure-agent-setup" target="_blank" rel="noreferrer">Set up agent isolation <ArrowRight size={20} aria-hidden="true" /></a></div>
 </section>

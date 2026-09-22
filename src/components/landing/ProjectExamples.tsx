@@ -77,14 +77,14 @@ export function SoftwareLifecycle() {
 export function ProjectRules() {
   return <div className="project-procedures project-adaptation">
     <div className="prepared-procedures">
-      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies ready-made procedures</span></div>
-      <ul className="procedure-list"><li><GitPullRequest size={22} aria-hidden="true" />Review a pull request</li><li><ShieldCheck size={22} aria-hidden="true" />Resolve a security report</li><li><PackageCheck size={22} aria-hidden="true" />Prepare a release</li></ul>
+      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>provides the review workflow</span></div>
+      <ul className="procedure-list"><li><Check size={22} aria-hidden="true" />Check the changes and CI results</li><li><Check size={22} aria-hidden="true" />Review the code for problems</li><li><Check size={22} aria-hidden="true" />Draft actionable feedback</li></ul>
     </div>
     <ArrowRight className="adaptation-arrow" size={28} aria-hidden="true" />
     <div className="adapted-procedures">
-      <h3>They follow your project’s rules.</h3>
+      <h3>Your team adds its review rules.</h3>
       <blockquote className="rule-example">“Use our review checklist. Ask the owning team to review changes. Include a changelog entry.”</blockquote>
-      <p>Save your rules once. Magpie reads them whenever it runs these workflows.</p>
+      <p>Save your rules once. Magpie applies them each time your agent runs this review workflow.</p>
       <a className="project-rules-link" href="/docs/setup/agentic-overrides" target="_blank" rel="noreferrer">See how project rules work <ArrowRight size={15} aria-hidden="true" /></a>
     </div>
   </div>;
