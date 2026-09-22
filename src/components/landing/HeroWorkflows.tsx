@@ -22,16 +22,17 @@ export default function HeroWorkflows() {
       <div className="reel-example" key={selected}>
           <div className="reel-active">
             <ol className="reel-flow">
-              <li className="reel-source"><span className="reel-input">{item.input}</span></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>Ready-made steps for your agent:</small><ul className="reel-work">{item.work.map(step => <li key={step}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
-              <li className="reel-delivery"><span className="delivery-check" aria-hidden="true">✓</span><small>The result</small><strong className="reel-outcome">{item.outcome}</strong></li>
+              <li className="reel-source"><small>When this happens</small><span className="reel-input">{item.input}</span></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small className="prepared-workflow-label">We’ve already written this workflow for your agent.</small><ul className="reel-work">{item.work.map(step => <li key={step}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
+              <li className="reel-delivery"><small>So you get</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>
       </div>
     </div>
     <div className="example-navigation">
       <button className="example-back" type="button" aria-label="Previous use case" onClick={() => setSelected(value => (value - 1 + examples.length) % examples.length)}><ArrowLeft size={22} aria-hidden="true" /></button>
-      <button className="another-use-case" type="button" onClick={() => setSelected(value => (value + 1) % examples.length)}>See another use case <ArrowRight size={22} aria-hidden="true" /></button>
+      <span className="example-position" aria-live="polite">{selected + 1} / {examples.length}</span>
+      <button className="example-next" type="button" aria-label="Next use case" onClick={() => setSelected(value => (value + 1) % examples.length)}><ArrowRight size={22} aria-hidden="true" /></button>
     </div>
   </div>;
 }

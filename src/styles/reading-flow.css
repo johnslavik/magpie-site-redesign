@@ -399,3 +399,33 @@ body.docs-navigation-open { overflow: hidden; }
  .redesign-home .story-comparison { grid-template-columns: 1fr; }
  .redesign-home :is(.story-manual,.story-assisted,.skill-manual) { padding: 22px; }
 }
+
+/* The closing invitation is the page's primary action. */
+.redesign-home .docs-invitation h2 { font-size: clamp(38px,4.8vw,62px); max-width: 820px; line-height: 1.12; }
+.redesign-home .docs-invitation>.button { min-height: 82px; min-width: min(460px,100%); padding: 24px 40px; font-size: 26px; line-height: 1.25; gap: 24px; margin-top: 16px; box-shadow: 0 8px 24px #004aad18; }
+.redesign-home .docs-invitation>.button svg { width: 28px; height: 28px; }
+.redesign-home .learning-links .skill-cta { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+.redesign-home .learning-links .skill-cta:hover { background: #e8eff9; }
+@media(max-width:600px) {
+ .redesign-home .docs-invitation>.button { font-size: 23px; padding: 22px 26px; min-height: 74px; }
+}
+
+/* Read the example in one direction, from situation to prepared work to result. */
+.redesign-home .reel-flow { align-items: stretch; }
+.redesign-home :is(.reel-source,.reel-process,.reel-delivery) { padding: 28px; text-align: left; }
+.redesign-home .reel-source { background: var(--manual-bg); color: var(--manual-ink); border-color: var(--manual-border); }
+.redesign-home .reel-source small { color: var(--manual-ink); }
+.redesign-home .reel-process .process-wordmark { width: 142px; height: 40px; margin: 0 0 24px; }
+.redesign-home .reel-process>small { text-align: left; margin-bottom: 24px; }
+.redesign-home :is(.reel-source,.reel-delivery)>small { font-size: 19px; margin-bottom: 24px; }
+.redesign-home .reel-input,.redesign-home .reel-outcome { font-size: 26px; line-height: 1.4; }
+
+.redesign-home .example-navigation { gap: 18px; }
+.redesign-home .example-navigation :is(.example-back,.example-next) { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 1px solid #cbd8cd; border-radius: 50%; background: #fffefa; }
+.example-position { min-width: 48px; font-size: 17px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+main.redesign-home { position: relative; isolation: isolate; }
+main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-thread.svg') center top / 100% 1800px repeat-y; }
+@media(max-width:800px) { main.redesign-home::before { opacity: .5; background-size: 1100px 1500px; } }
+.redesign-home .reel-process>small { max-width: none; margin: 0 0 24px; }
+
+.redesign-home :is(.prepared-workflow-label,.story-comparison .story-prepared,.reel-process>.prepared-workflow-label) { color: #b8dec7; font-size: 18px; font-weight: 700; line-height: 1.5; }
