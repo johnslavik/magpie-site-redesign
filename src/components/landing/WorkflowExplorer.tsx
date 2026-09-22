@@ -1,3 +1,4 @@
+import { securityStages } from "./workflow-stages";
 import { useState } from "react";
 import { GitPullRequest, ShieldCheck, Inbox, PackageCheck } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
@@ -5,8 +6,8 @@ import { withBase } from "@/ui/lib/utils";
 // Illustrative sessions grounded in the synced workflow-family documentation.
 const workflows = [
   { id: "security", label: "Security reports", icon: ShieldCheck,
-    title: "Handle a security report from intake to disclosure.",
-    text: "Import the report, check it against your security model, investigate the vulnerability, prepare a private fix, and draft the advisory. Magpie carries the context through the lifecycle and asks before changing the tracker or contacting anyone.",
+    title: "From the first report to a published CVE.",
+    text: "A complete 16-step security lifecycle, with setup and privacy controls built in. Magpie handles the investigation, fix, CVE paperwork, release handoffs, and tracker updates. Your team approves decisions, merges the fix, and sends the advisory.",
     path: "/docs/security/readme", prompt: "Investigate this security report and prepare the fix.",
     steps: [
       ["Read", "Project security model and report", "The reported path crosses a trust boundary."],
@@ -47,19 +48,21 @@ const workflows = [
 ];
 export default function WorkflowExplorer() {
   const [selected, setSelected] = useState(0);
+  const [stage, setStage] = useState(0);
   const w = workflows[selected];
-  const choose = (index: number) => { setSelected(index); document.getElementById(`workflow-tab-${index}`)?.focus(); };
+  const session = selected === 0 ? securityStages[stage] : w;
+  const choose = (index: number) => { setSelected(index); setStage(0); document.getElementById(`workflow-tab-${index}`)?.focus(); };
   return <div className="workflow-explorer">
-    <div role="tablist" aria-label="Maintainer workflows" className="workflow-tabs">{workflows.map((item, i) => <button key={item.id} id={`workflow-tab-${i}`} role="tab" aria-selected={selected === i} aria-controls="workflow-panel" tabIndex={selected === i ? 0 : -1} onClick={() => setSelected(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); choose(event.key === "Home" ? 0 : event.key === "End" ? workflows.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + workflows.length) % workflows.length); } }}><item.icon size={18} />{item.label}</button>)}</div>
+    <div role="tablist" aria-label="Maintainer workflows" className="workflow-tabs">{workflows.map((item, i) => <button key={item.id} id={`workflow-tab-${i}`} role="tab" aria-selected={selected === i} aria-controls="workflow-panel" tabIndex={selected === i ? 0 : -1} onClick={() => { setSelected(i); setStage(0); }} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); choose(event.key === "Home" ? 0 : event.key === "End" ? workflows.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + workflows.length) % workflows.length); } }}><item.icon size={18} />{item.label}</button>)}</div>
     <div role="tabpanel" id="workflow-panel" aria-labelledby={`workflow-tab-${selected}`} tabIndex={0} className="workflow-panel">
-      <div className="workflow-description"><h3>{w.title}</h3><p>{w.text}</p><a className="text-link" href={withBase(w.path)}>Explore this workflow</a></div>
-      <figure className="agent-session" key={w.id}>
-        <div className="session-heading"><strong>Agent session</strong><span>~/your-project</span></div>
-        <div className="session-prompt"><span aria-hidden="true">❯</span><span>{w.prompt}</span></div>
-        <div className="session-transcript">{w.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span>{label}</span></div><p>{output}</p></div>)}</div>
-        <div className="session-result">{w.result}</div>
-        <div className="session-approval">{w.approval}<span className="terminal-cursor" aria-hidden="true" /></div>
-        <figcaption>Illustrative session · Magpie workflows</figcaption>
+      <div className="workflow-description"><h3>{w.title}</h3><p>{w.text}</p>{selected === 0 && <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStages.map((phase, i) => <button key={phase.label} type="button" aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => setStage(i)}>{phase.label}</button>)}</div>}<a className="text-link" href={withBase(w.path)}>Explore this workflow</a></div>
+      <figure className="agent-session" id="lifecycle-session" key={w.id}>
+        <div className="session-heading"><strong>{selected === 0 ? securityStages[stage].label : "Agent session"}</strong><span>~/your-project</span></div>
+        <div className="session-prompt"><span aria-hidden="true">❯</span><span>{session.prompt}</span></div>
+        <div className="session-transcript">{session.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span>{label}</span></div><p>{output}</p></div>)}</div>
+        <div className="session-result">{session.result}</div>
+        <div className="session-approval">{session.approval}<span className="terminal-cursor" aria-hidden="true" /></div>
+        {selected === 0 && <div className="session-navigation"><button type="button" disabled={stage === 0} onClick={() => setStage(stage - 1)}>Previous phase</button><button type="button" disabled={stage === securityStages.length - 1} onClick={() => setStage(stage + 1)}>Next phase</button></div>}<figcaption>Illustrative session · {selected === 0 ? "Fictional report; real workflow" : "Magpie workflows"}</figcaption>
       </figure>
     </div>
   </div>;
