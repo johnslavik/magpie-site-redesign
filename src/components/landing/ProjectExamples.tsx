@@ -1,3 +1,4 @@
+import MagpieCard from "./MagpieCard";
 import { useEffect, useRef, useState } from "react";
 import { Inbox, Code2, GitPullRequest, PackageCheck, ShieldCheck, Users, Check, ArrowRight } from "lucide-react";
 
@@ -64,7 +65,7 @@ export function SoftwareLifecycle() {
       <div className="lifecycle-flow">
         <div className="lifecycle-incoming"><h3>{phase.input}</h3><p>{phase.inputs.join(" ")}</p></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
-        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><p className="prepared-workflow-label">Been there, done that.<span className="workflow-reuse">Reuse our workflow.</span></p><ul>{phase.work.map(work => <li key={work}><Check size={18} aria-hidden="true" /><span>{work}</span></li>)}</ul></div>
+        <MagpieCard className="lifecycle-work" work={phase.work} />
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
         <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}><Check size={18} aria-hidden="true" /><span>{output}</span></li>)}</ul></div>
       </div>
@@ -76,10 +77,7 @@ export function SoftwareLifecycle() {
 
 export function ProjectRules() {
   return <div className="project-procedures project-adaptation">
-    <div className="prepared-procedures">
-      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>provides the review workflow</span></div>
-      <ul className="procedure-list"><li><Check size={22} aria-hidden="true" />Check the changes and CI results</li><li><Check size={22} aria-hidden="true" />Review the code for problems</li><li><Check size={22} aria-hidden="true" />Draft actionable feedback</li></ul>
-    </div>
+    <MagpieCard className="prepared-procedures" work={["Check the changes and CI results", "Review the code for problems", "Draft actionable feedback"]} />
     <ArrowRight className="adaptation-arrow" size={28} aria-hidden="true" />
     <div className="adapted-procedures">
       <h3>Your team adds its review rules.</h3>
@@ -93,6 +91,6 @@ export function ProjectRules() {
 export function SkillComparison() {
   return <div className="skill-comparison">
     <div className="skill-manual"><h3>Writing a skill from scratch</h3><ol className="manual-steps">{["Learn the format and write the procedure.", "Define approval points, edge cases, and tests.", "Run the tests and revise the skill."].map(step => <li key={step}>{step}</li>)}</ol></div>
-    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="110" height="31" /></div><blockquote className="authoring-request">“Make a skill that checks new dependencies.”</blockquote><p className="authoring-result">Magpie helps your agent write, test, and improve the skill <strong>faster</strong>.</p></div>
+    <MagpieCard className="skill-assisted"><blockquote className="authoring-request">“Make a skill that checks new dependencies.”</blockquote><p className="authoring-result">Magpie helps your agent write, test, and improve the skill <strong>faster</strong>.</p></MagpieCard>
   </div>;
 }

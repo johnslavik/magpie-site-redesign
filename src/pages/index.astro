@@ -4,10 +4,11 @@ import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
 import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
-import { ArrowRight, ShieldAlert } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 import BrandName from "../components/landing/BrandName";
 import SectionWave from "../components/landing/SectionWave.astro";
+import MagpieCard from "../components/landing/MagpieCard";
 import MoreWays from "../components/landing/MoreWays.astro";
 ---
 <BaseLayout title="Apache Magpie | Software maintenance, automated" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
@@ -46,9 +47,9 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <WorkflowExplorer client:load />
       <div id="security-summary" class="security-summary" aria-label="What changed during the security workflow">
         <div class="security-summary-flow">
-          <div class="summary-state"><h3>Without Magpie</h3><div class="summary-card summary-before"><ShieldAlert size={32} strokeWidth={1.5} aria-hidden="true" /><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
+          <div class="summary-state"><div class="summary-card summary-before"><h3>Without Magpie</h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
           <div class="summary-route"><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>
-          <div class="summary-state"><h3 class="summary-with-magpie"><img src="/favicon.svg" alt="" width="32" height="32" />With Magpie</h3><div class="summary-card summary-after"><strong>Your agent prepares the work</strong><p>Magpie’s ready-made workflows guide your agent through the investigation, fix, and disclosure, keeping the evidence together.</p></div></div>
+          <MagpieCard className="summary-state summary-card summary-after"><strong class="summary-title">Your agent prepares the work</strong><p>Magpie’s ready-made workflows guide your agent through the investigation, fix, and disclosure, keeping the evidence together.</p></MagpieCard>
         </div>
       </div>
     </section>

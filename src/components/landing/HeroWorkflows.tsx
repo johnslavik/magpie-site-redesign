@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import { withBase } from "@/ui/lib/utils";
+import MagpieCard from "./MagpieCard";
 
 const examples = [
   { input: "A security report arrives", skill: "security-issue-triage", work: ["Investigate the report", "Write and test the fix", "Coordinate release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
@@ -23,7 +23,7 @@ export default function HeroWorkflows() {
           <div className="reel-active">
             <ol className="reel-flow">
               <li className="reel-source"><small>When this happens</small><span className="reel-input">{item.input}</span></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small className="prepared-workflow-label">Been there, done that.<span className="workflow-reuse">Reuse our workflow.</span></small><ul className="reel-work">{item.work.map(step => <li key={step}><span aria-hidden="true">✓</span>{step}</li>)}</ul></li>
+              <MagpieCard as="li" className="reel-process" work={item.work} />
               <li className="reel-delivery"><small>So you get</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>

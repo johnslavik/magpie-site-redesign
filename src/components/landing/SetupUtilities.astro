@@ -1,5 +1,6 @@
 ---
 import { ArrowRight, ShieldCheck, Bot, FolderCode, LockKeyhole, KeyRound, UserRound, Folder, Globe } from "lucide-react";
+import MagpieCard from "./MagpieCard";
 ---
 <section class="setup-utilities container isolation-comparison" aria-labelledby="setup-utilities-title">
   <div class="setup-explanation">
@@ -19,8 +20,7 @@ import { ArrowRight, ShieldCheck, Bot, FolderCode, LockKeyhole, KeyRound, UserRo
       </div>
       <p class="isolation-consequence">One bad command or malicious instruction can reach beyond the project.</p>
     </div>
-    <div class="isolation-side isolation-protected">
-      <h3 class="isolation-brand"><span>With</span><img src="/wordmark.svg" alt="Magpie" width="142" height="40" /></h3>
+    <MagpieCard className="isolation-side isolation-protected">
       <p>Access scoped. Sensitive actions gated.</p>
       <div class="protection-stack">
         <div class="protection-layer"><KeyRound size={20} aria-hidden="true" /><span>Credentials stripped from the environment</span></div>
@@ -30,7 +30,7 @@ import { ArrowRight, ShieldCheck, Bot, FolderCode, LockKeyhole, KeyRound, UserRo
         <div class="protected-workspace"><span class="sandbox-label"><ShieldCheck size={20} aria-hidden="true" />Your allowed workspace</span><div class="sandbox-contents"><div><Bot size={32} aria-hidden="true" /><span>Your agent</span></div><ArrowRight size={24} aria-hidden="true" /><div><FolderCode size={32} aria-hidden="true" /><span>Project files</span></div></div>
       </div>
     </div>
-  </div>
+  </MagpieCard>
   </div>
   <div class="isolation-footer"><p class="isolation-limits">Protections vary by agent. Allowed project files remain accessible; sandboxing reduces risk rather than making arbitrary code safe.</p><a class="button" href="/docs/setup/secure-agent-setup" target="_blank" rel="noreferrer">Set up agent isolation <ArrowRight size={20} aria-hidden="true" /></a></div>
 </section>
