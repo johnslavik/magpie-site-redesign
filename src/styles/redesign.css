@@ -489,13 +489,49 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .velocity-caption { display: flex; justify-content: space-between; gap: 16px; color: #a8bcb0; font-size: 11px; }
 .velocity-caption a { color: #e6eddc; text-decoration: none; }
 @media(max-width:800px) { .velocity-chart { max-width: 500px; } .velocity-chart figcaption strong { font-size: 56px; } }
-.skill-tree { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
-.skill-column { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding-inline: 5px; background: linear-gradient(#b6c9e2,#b6c9e2) center/1px calc(100% - 18px) no-repeat; background-position-y: top; }
-.skill-column a { position: relative; min-height: 38px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 5px; border: 1px solid #dbe3ed; border-radius: 5px; background: var(--paper); color: #4c6478; font-size: 11px; line-height: 1.4; text-decoration: none; transition: border-color .2s, color .2s; }
-.skill-column a:hover { color: var(--blue); border-color: #91b2dd; }
-@media(max-width:800px) { .integration-art { max-width: 440px; } .skill-column { padding-inline: 4px; gap: 11px; } .skill-column a { min-height: 42px; font-size: 10px; } }
-/* Keep outcome rows aligned even when a label wraps on a phone. */
-.skill-column a { height: 48px; min-height: 48px; font-size: 11px; }
+/* Visible start-to-finish examples explain what the plugin adds. */
+.diagram-context { margin: 0 0 16px; text-align: center; color: var(--muted); font-size: 13px; }
+.hero h1 { font-size: clamp(44px,4.7vw,62px); }
+.magpie-plugin { width: min(264px,100%); }
+.magpie-plugin span { font-size: 12px; }
+.workflow-connector { height: 24px; width: 1px; background: #b6c9e2; margin-inline: auto; }
+.hero-journeys { background: #fff; border: 1px solid #dbe3ed; border-radius: 9px; overflow: hidden; }
+.journey-head, .hero-journey { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 14px; align-items: center; padding: 13px 14px; }
+.journey-head { font-size: 11px; color: var(--muted); padding-block: 12px; background: #f1f5fa; }
+.journey-head span:nth-child(2) { color: var(--blue); }
+.hero-journey { min-height: 54px; border-top: 1px solid #e7ebef; text-decoration: none; color: var(--ink); font-size: 12px; line-height: 1.4; }
+.journey-input { display: flex; align-items: center; gap: 7px; }
+.journey-input svg { flex: 0 0 auto; color: #687e94; }
+.journey-steps { position: relative; color: var(--muted); font-size: 11px; }
+.journey-steps::before, .journey-steps::after { content: ''; position: absolute; width: 7px; height: 1px; background: #b6c9e2; top: 50%; }
+.journey-steps::before { left: -11px; }
+.journey-steps::after { right: -11px; }
+.hero-journey strong { color: var(--blue); font-weight: 550; }
+.hero-journey:hover { background: #f4f7fc; }
+.journey-more { margin: 14px auto 0; font-size: 11px; line-height: 1.6; text-align: center; color: var(--muted); max-width: 400px; }
+.journey-more a { color: inherit; text-decoration-color: #b7c5d1; }
+@media(min-width:801px) {
+ .hero { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 40px; padding-block: 48px; }
+ .agent-shell { padding-inline: 0; }
+}
+@media(max-width:800px) {
+ .hero h1 { font-size: clamp(34px,7vw,52px); }
+ .integration-art { max-width: 530px; }
+ .diagram-context { font-size: 12px; margin-bottom: 14px; }
+ .agent-options>span, .agent-options .other-agents { min-height: 54px; }
+ .diagram-wires { height: 24px; }
+ .magpie-plugin { padding: 14px; width: 250px; }
+ .magpie-plugin img { width: 132px; }
+ .magpie-plugin span { font-size: 11px; }
+ .journey-head, .hero-journey { padding: 10px; gap: 12px; grid-template-columns: 1fr 1.15fr 1fr; }
+ .hero-journey { font-size: 11px; }
+ .journey-steps, .journey-head { font-size: 10px; }
+ .journey-input { gap: 5px; }
+ .journey-input svg { width: 14px; height: 14px; }
+ .journey-steps::before { left: -9px; width: 5px; }
+ .journey-steps::after { right: -9px; width: 5px; }
+}
+@media(max-width:380px) { .journey-input { flex-direction: column; align-items: flex-start; } }
 .lifecycle-stages { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin: 24px 0; }
 .lifecycle-stages button { min-height: 40px; padding: 10px 12px; text-align: left; font-size: 12px; line-height: 1.4; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; background: transparent; }
 .lifecycle-stages button[aria-pressed=true] { color: var(--blue); background: #edf3fc; border-color: #9ebce3; }
@@ -506,3 +542,18 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .session-navigation button:disabled { opacity: .35; cursor: default; }
 .workflow-description { animation: none; }
 @media(max-width:800px) { .session-navigation { padding-inline: 16px; } .lifecycle-stages { gap: 7px; } }
+
+.sandbox-demo { border-bottom: 1px solid #49453d; padding: 14px 24px; }
+.sandbox-statusline { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; font-size: 11px; line-height: 1.65; color: #aaa69b; }
+.sandbox-statusline strong { font-weight: 650; color: #a5d49a; }
+.sandbox-statusline strong[data-mode=auto] { color: #e4c779; }
+.sandbox-statusline strong[data-mode=off] { color: #ff9292; font-weight: 750; }
+.sandbox-statusline .status-project { color: #9abce7; }
+.statusline-docs { display: inline-block; margin-top: 7px; color: #aaa69b; font-size: 10px; text-decoration: underline; text-underline-offset: 3px; }
+.sandbox-mode-picker { margin-bottom: 16px; }
+.sandbox-mode-picker>code { color: #e2dfd5; }
+.sandbox-mode-picker>div { display: flex; flex-wrap: wrap; gap: 6px; margin: 9px 0; }
+.sandbox-mode-picker button { border: 1px solid #555249; padding: 6px 9px; border-radius: 4px; font-size: 11px; background: transparent; color: #ccc8bc; }
+.sandbox-mode-picker button[aria-pressed=true] { background: #393c32; border-color: #9fa98b; color: #eef1e5; }
+.sandbox-mode-picker p { margin: 0; color: #aaa69b; font-size: 11px; }
+@media(max-width:800px) { .sandbox-demo { padding-inline: 16px; } }

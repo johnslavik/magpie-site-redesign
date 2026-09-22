@@ -4,28 +4,37 @@ import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
 import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
-import { Ellipsis } from "lucide-react";
+import { Ellipsis, ShieldCheck, PackageCheck, ScanSearch, GitPullRequest, Bug, Users } from "lucide-react";
+const journeys = [
+  { input: "Security report", steps: "Investigate · fix · disclose", outcome: "Fix + public CVE", path: "/docs/security/readme", icon: ShieldCheck },
+  { input: "Pull request", steps: "Read · check · review", outcome: "Review posted", path: "/docs/pr-management/readme", icon: GitPullRequest },
+  { input: "Bug report", steps: "Reproduce · fix · test", outcome: "Tested fix PR", path: "/docs/issue-management/readme", icon: Bug },
+  { input: "Release candidate", steps: "Verify · vote · announce", outcome: "Published release", path: "/docs/release-management/readme", icon: PackageCheck },
+  { input: "New contributor", steps: "Find a task · guide · review", outcome: "First contribution", path: "/docs/mentoring/readme", icon: Users },
+  { input: "Repository", steps: "Audit · diagnose · prioritise", outcome: "Health action plan", path: "/docs/repo-health/readme", icon: ScanSearch },
+];
 ---
-<BaseLayout title="Apache Magpie — Maintainer skills for your AI agent" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
+<BaseLayout title="Apache Magpie — Automate maintenance with your AI agent" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
   <SiteHeader home revealAfterHero />
   <main id="main-content" class="redesign-home">
     <section class="hero container">
       <div class="hero-copy">
-        <h1>Maintainer skills<br />for <span>your agent.</span></h1>
-        <p>Magpie plugs into the AI tools you already use to automate software maintenance end to end—with you in control. Review code, resolve vulnerabilities, ship releases, and onboard contributors.</p>
+        <h1>Automate maintenance<br /><span>with your agent.</span></h1>
+        <p>Magpie plugs into your existing AI tools to automate entire maintenance workflows, from reviewing code and fixing vulnerabilities to preparing releases and onboarding contributors.</p>
         <div class="hero-actions"><a class="button" href="/docs/quick-start">Get started</a><a class="text-link" href="#how-it-works">How it works</a></div>
       </div>
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
+          <p class="diagram-context">In the tools you already use</p>
           <div class="agent-options"><span><img src="/vendor-logos/claude.png" alt="" width="28" height="28" />Claude Code</span><span><img src="/vendor-logos/openai.png" alt="" width="28" height="28" />Codex</span><span class="other-agents"><Ellipsis size={28} strokeWidth={1.4} />Other agents…</span></div>
           <svg class="diagram-wires wires-in" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0V22H250V0M150 0V48" /></svg>
-          <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Ready-to-use workflows</span></div>
-          <svg class="diagram-wires wires-out" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path d="M150 0V48M50 48V24H250V48" /></svg>
-          <div class="skill-tree">
-            <div class="skill-column"><a href="/docs/security/readme">Fix vulnerabilities</a><a href="/docs/release-management/readme">Verify release builds</a><a href="/docs/repo-health/readme">Find risky dependencies</a></div>
-            <div class="skill-column"><a href="/docs/pr-management/readme">Review pull requests</a><a href="/docs/issue-management/readme">Reproduce reported bugs</a><a href="/docs/pairing/readme">Check your local changes</a></div>
-            <div class="skill-column"><a href="/docs/mentoring/readme">Guide new contributors</a><a href="/docs/contributor-growth/readme">Onboard new committers</a><a href="/docs/setup/readme">Set up your agent</a></div>
+          <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Runs the workflow, start to finish</span></div>
+          <div class="workflow-connector" aria-hidden="true"></div>
+          <div class="hero-journeys">
+            <div class="journey-head" aria-hidden="true"><span>Start with</span><span>Magpie handles</span><span>Get to</span></div>
+            {journeys.map(({ input, steps, outcome, path, icon: Icon }) => <a class="hero-journey" href={path}><span class="journey-input"><Icon size={16} strokeWidth={1.6} aria-hidden="true" />{input}</span><span class="journey-steps">{steps}</span><strong>{outcome}</strong></a>)}
           </div>
+          <p class="journey-more">Plus <a href="/docs/setup/secure-agent-setup">secure agent setup</a>, <a href="/docs/pairing/readme">local code review</a>, and <a href="/docs/contributor-growth/readme">committer onboarding</a>.</p>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import SandboxStatus from "./SandboxStatus";
 import { securityStages } from "./workflow-stages";
 import { useState } from "react";
 import { GitPullRequest, ShieldCheck, Inbox, PackageCheck } from "lucide-react";
@@ -62,6 +63,7 @@ export default function WorkflowExplorer() {
         <div className="session-transcript">{session.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span>{label}</span></div><p>{output}</p></div>)}</div>
         <div className="session-result">{session.result}</div>
         <div className="session-approval">{session.approval}<span className="terminal-cursor" aria-hidden="true" /></div>
+        {selected === 0 && <SandboxStatus key={stage} setup={stage === 0} interactive={stage === 1} />}
         {selected === 0 && <div className="session-navigation"><button type="button" disabled={stage === 0} onClick={() => setStage(stage - 1)}>Previous phase</button><button type="button" disabled={stage === securityStages.length - 1} onClick={() => setStage(stage + 1)}>Next phase</button></div>}<figcaption>Illustrative session · {selected === 0 ? "Fictional report; real workflow" : "Magpie workflows"}</figcaption>
       </figure>
     </div>
