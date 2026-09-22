@@ -494,3 +494,5 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .skill-column a { position: relative; min-height: 38px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 5px; border: 1px solid #dbe3ed; border-radius: 5px; background: var(--paper); color: #4c6478; font-size: 11px; line-height: 1.4; text-decoration: none; transition: border-color .2s, color .2s; }
 .skill-column a:hover { color: var(--blue); border-color: #91b2dd; }
 @media(max-width:800px) { .integration-art { max-width: 440px; } .skill-column { padding-inline: 4px; gap: 11px; } .skill-column a { min-height: 42px; font-size: 10px; } }
+/* Keep outcome rows aligned even when a label wraps on a phone. */
+.skill-column a { height: 48px; min-height: 48px; font-size: 11px; }
