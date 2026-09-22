@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, ShieldCheck, ShieldAlert, Search, Code2, PackageCheck, Megaphone, CircleCheck } from "lucide-react";
+import { Check, ShieldAlert, Search, Code2, PackageCheck, Megaphone, CircleCheck } from "lucide-react";
 import { securityStory } from "./security-story";
+import BrandName from "./BrandName";
 
 export default function WorkflowExplorer() {
   const [stage, setStage] = useState(0);
@@ -65,11 +66,10 @@ export default function WorkflowExplorer() {
   return <div className="workflow-scroll-scene security-story" ref={sceneRef} data-scroll-driven={scrollDriven}>
     <div ref={panelRef} className="workflow-workbench">
       <div className="workflow-progress">
-        <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStory.map((phase, i) => <button key={phase.label} type="button" data-complete={i < completed} aria-label={phase.label} aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => jumpToStage(i)}>{phase.label}</button>)}</div>
+        <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStory.map((phase, i) => <button key={phase.label} type="button" data-complete={i < completed} aria-label={phase.label} aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => jumpToStage(i)}><span className="phase-point" aria-hidden="true">{i < completed && <Check size={11} />}</span><span>{phase.label}</span></button>)}</div>
         <div className="workflow-progress-track" role="progressbar" aria-label="Security story progress" aria-valuemin={0} aria-valuemax={securityStory.length} aria-valuenow={completed}><span style={{ width: `${completed / securityStory.length * 100}%` }} /></div>
       </div>
       <figure className="agent-session lifecycle-conversation" id="lifecycle-session" aria-label="Example security workflow">
-        <div className="session-heading"><span><img src="/favicon.svg" width="22" height="22" alt="Magpie" /> Your project · Security workflow</span><span><ShieldCheck size={14} /> Private investigation</span></div>
         <div className="conversation-scroll" ref={conversationRef} tabIndex={0} aria-label="Security workflow conversation" onKeyDown={event => {
           if (!scrollDriven || !["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"].includes(event.key)) return;
           event.preventDefault();
@@ -79,14 +79,18 @@ export default function WorkflowExplorer() {
           <div className="conversation-content">{securityStory.map(phase => {
             const StageIcon = { report: ShieldAlert, triage: Search, fix: Code2, release: PackageCheck, advisory: Megaphone, closed: CircleCheck }[phase.kind]!;
             return <section className="conversation-phase story-phase" data-conversation-phase key={phase.label} aria-label={phase.label}>
-            <div className="story-prompt"><span aria-hidden="true">❯</span>{phase.prompt}</div>
+            <p className="story-prompt">{phase.prompt}</p>
 
             <div className={`security-artifact artifact-${phase.kind}`}>
               <div className="security-stage-icon"><StageIcon size={44} strokeWidth={1.4} aria-hidden="true" /></div>
               <span className="artifact-type">{phase.artifact}</span><h3>{phase.title}</h3>
-              <div className="security-outputs">{phase.outputs.map(output => <span key={output}>{phase.kind !== "report" && <Check size={15} aria-hidden="true" />}{output}</span>)}</div>
-              <div className="artifact-result"><Check size={17} />{phase.result}</div>
+              {phase.kind === "closed" ? <div className="closure-records"><div><Code2 size={24}/><strong>Fix</strong><span><Check size={14}/>Merged</span></div><div><PackageCheck size={24}/><strong>Release</strong><span><Check size={14}/>Published</span></div><div><Megaphone size={24}/><strong>Advisory</strong><span><Check size={14}/>Sent</span></div></div> : <div className="security-outputs">{phase.outputs.map(output => <span key={output}>{phase.kind !== "report" && <Check size={15} aria-hidden="true" />}{output}</span>)}</div>}
+              {phase.kind === "release" && <div className="release-comparison">
+                <div className="release-by-hand"><span>By hand</span><ul><li>Find the merged fix</li><li>Check the published version</li><li>Copy evidence into the tracker</li></ul></div>
+                <div className="release-with-magpie"><span>With <BrandName /></span><p>“Check whether this report is ready to disclose.”</p><small><Check size={14} />Release checked and linked</small></div>
+              </div>}
             </div>
+            <div className="magpie-contribution"><img src="/favicon.svg" width="26" height="26" alt="" /><p><BrandName /> {phase.result}</p></div>
             <p className="story-handoff">{phase.handoff}</p>
 
           </section>; })}</div>

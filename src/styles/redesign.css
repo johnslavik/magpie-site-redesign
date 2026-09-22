@@ -1041,4 +1041,37 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 
 /* Fit the pinned story to tall viewports as well as laptop screens. */
 .security-story[data-scroll-driven=true] .lifecycle-conversation { height: calc(100svh - 210px); }
-.security-story[data-scroll-driven=true] .story-phase { min-height: calc(100svh - 266px); display: flex; flex-direction: column; justify-content: center; }
+.security-story[data-scroll-driven=true] .story-phase { min-height: calc(100svh - 212px); display: flex; flex-direction: column; justify-content: center; }
+
+/* Explain the work Magpie takes on at every point in the story. */
+.security-story .story-prompt { font-size: clamp(21px,2.5vw,29px); font-weight: 500; line-height: 1.35; letter-spacing: -.025em; max-width: 760px; text-align: center; margin: 0 auto 27px; }
+.magpie-contribution { display: flex; align-items: flex-start; gap: 13px; max-width: 800px; margin: 24px auto 0; padding: 18px 22px; border-radius: 8px; background: #edf2fa; color: #365270; }
+.magpie-contribution>img { flex-shrink: 0; margin-top: 2px; }.magpie-contribution p { margin: 0; font: 16px/1.65 Inter,sans-serif; text-align: left; }
+.story-handoff { font-size: 13px; margin-top: 15px; }
+.release-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-top: 24px; }
+.release-comparison>div { padding: 18px 20px; border-radius: 7px; }.release-by-hand { background: #f3efe5; color: #7e7769; }.release-with-magpie { background: #eaf1fc; color: #375c8e; }
+.release-comparison>div>span { font: 500 12px Inter,sans-serif; }.release-comparison ul { margin: 12px 0 0; padding-left: 16px; font: 12px/1.9 Inter,sans-serif; }.release-comparison p { font: 14px/1.6 Inter,sans-serif; margin: 12px 0; }.release-comparison small { display: flex; align-items: center; gap: 7px; font: 11px/1.5 Inter,sans-serif; }
+.artifact-release .security-stage-icon { width: 56px; height: 56px; margin-bottom: 14px; }.artifact-release .security-stage-icon>svg { width: 32px; height: 32px; }.artifact-release .security-outputs { display: none; }.artifact-release h3 { font-size: 27px; margin-bottom: 18px; }
+.security-summary { max-width: 940px; }.security-summary-flow { display: grid; grid-template-columns: 1fr 130px 1fr; gap: 28px; align-items: center; text-align: left; }
+.security-summary-flow>div:not(.summary-route) { padding: 28px; border-radius: 9px; border: 1px solid; }
+.summary-before { background: #fff6f1; border-color: #edd4c7 !important; color: #985c46; }.summary-after { background: #edf6e7; border-color: #d0e0c4 !important; color: #477044; }
+.security-summary-flow small { display: block; font-size: 12px; margin-top: 18px; opacity: .85; }.security-summary-flow strong { display: block; font-size: 24px; line-height: 1.3; letter-spacing: -.025em; font-weight: 500; margin: 10px 0; }.security-summary-flow span { display: block; font-size: 14px; line-height: 1.7; }.summary-route { display: flex; flex-direction: column; align-items: center; gap: 15px; color: #729478; }.summary-route img { width: 110px; height: auto; }
+.security-summary>p { max-width: 700px; margin: 35px auto 0; }
+@media(max-width:700px) { .security-summary-flow { grid-template-columns: 1fr; gap: 20px; }.summary-route { flex-direction: row; justify-content: center; }.summary-route>svg { transform: rotate(90deg); }.security-story .story-prompt { font-size: 22px; }.magpie-contribution { padding: 16px; gap: 10px; }.magpie-contribution p { font-size: 14px; }.release-comparison { grid-template-columns: 1fr; gap: 10px; }.release-comparison>div { padding: 15px; }.artifact-release h3 { font-size: 23px; } }
+
+/* A connected timeline makes progression clear without a row of pills. */
+.security-story .lifecycle-stages { gap: 0; padding-block: 4px; }
+.security-story .lifecycle-stages button { display: flex; flex-direction: column; gap: 9px; padding: 0; min-height: 52px; border: 0; border-radius: 0; background: transparent; color: #74806d; font-size: 12px; }
+.security-story .lifecycle-stages button[aria-pressed=true],.security-story .lifecycle-stages button:hover { background: transparent; color: var(--blue); border: 0; }
+.security-story .lifecycle-stages button[data-complete=true] { background: transparent; color: #547649; }
+.security-story .lifecycle-stages button:not(:last-child)::after { content: ''; position: absolute; top: 9px; left: calc(50% + 13px); width: calc(100% - 26px); height: 2px; background: #dce4d5; }
+.security-story .lifecycle-stages button[data-complete=true]:not(:last-child)::after { background: #9db891; }
+.phase-point { display: grid; place-items: center; width: 19px; height: 19px; border: 2px solid #c5d1bd; border-radius: 50%; background: #fffdf5; color: #fff; }
+.security-story button[data-complete=true] .phase-point { background: #6b9359; border-color: #6b9359; }
+.security-story button[aria-pressed=true] .phase-point { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px #e9eff8; }
+.security-story .workflow-progress-track { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); overflow: hidden; margin: 0; }
+.closure-records { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; max-width: 620px; margin: 28px auto 5px; }
+.closure-records>div { display: flex; flex-direction: column; align-items: center; gap: 12px; background: #fffefa; border: 1px solid #c6dbb9; border-radius: 8px; padding: 20px 12px; box-shadow: 3px 3px 0 #dce9d2; color: #558043; }
+.closure-records strong { font: 500 17px Inter,sans-serif; color: #355a33; }.closure-records span { display: flex; align-items: center; gap: 5px; font: 12px Inter,sans-serif; }
+.artifact-closed { background: #eef6e6; border-color: #c9ddbb; }.artifact-closed .security-stage-icon { width: 55px; height: 55px; background: transparent; margin-bottom: 12px; }
+@media(max-width:600px) { .security-story .lifecycle-stages button { font-size: 10px; }.closure-records { gap: 8px; }.closure-records>div { padding: 16px 5px; }.closure-records strong { font-size: 14px; }.closure-records span { font-size: 10px; gap: 3px; } }
