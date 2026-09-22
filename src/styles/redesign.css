@@ -462,8 +462,6 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .magpie-plugin { padding: 18px; }
  .agent-options>span, .agent-options .other-agents { font-size: 11px; }
  .agent-outcomes span { font-size: 11px; }
- .site-header[data-reveal-after-hero].hero-nav-ready { position: fixed; inset: 0 0 auto; transform: translateY(-100%); opacity: 0; visibility: hidden; transition: transform .3s ease, opacity .3s ease, visibility .3s; }
- .site-header[data-reveal-after-hero].hero-nav-ready.is-past-hero { transform: translateY(0); opacity: 1; visibility: visible; box-shadow: 0 4px 20px #17272308; }
  .case-layout { gap: 32px; }
  .case-evidence { width: 100%; }
  .testimonial-metrics p { max-width: 180px; }
@@ -589,3 +587,7 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 @media(hover:none) { .reel-controls { opacity: .55; pointer-events: auto; } }
 .sandbox-state { color: inherit; text-decoration: none; }
 .sandbox-state:hover { text-decoration: underline; }
+
+/* The homepage navigation emerges only after the hero, at every screen size. */
+.site-header[data-reveal-after-hero] { position: fixed; inset: 0 0 auto; transform: translateY(-100%); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .3s ease, opacity .3s ease, visibility .3s; }
+.site-header[data-reveal-after-hero].is-past-hero { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; box-shadow: 0 4px 20px #17272308; }

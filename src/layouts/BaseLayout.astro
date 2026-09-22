@@ -67,18 +67,16 @@ const ogImage = new URL(
       const heroHeader = document.querySelector<HTMLElement>('[data-reveal-after-hero]');
       const hero = document.querySelector('.hero');
       if (heroHeader && hero) {
-        const mobile = matchMedia('(max-width: 800px)');
         const updateHeader = () => {
-          const shown = !mobile.matches || hero.getBoundingClientRect().bottom <= 72;
+          const shown = hero.getBoundingClientRect().bottom <= 0;
           heroHeader.classList.toggle('is-past-hero', shown);
           heroHeader.inert = !shown;
           if (!shown) heroHeader.querySelector('details')?.removeAttribute('open');
         };
         heroHeader.classList.add('hero-nav-ready');
         updateHeader();
-        const observer = new IntersectionObserver(updateHeader, { rootMargin: '-72px 0px 0px 0px', threshold: 0 });
+        const observer = new IntersectionObserver(updateHeader, { threshold: 0 });
         observer.observe(hero);
-        mobile.addEventListener('change', updateHeader);
         window.addEventListener('resize', updateHeader, { passive: true });
       }
 

@@ -8,7 +8,7 @@ export function SiteHeader({ home = false, search = false, revealAfterHero = fal
     ["Documentation", "/docs"],
   ];
   return (
-    <header className="site-header" data-reveal-after-hero={revealAfterHero || undefined}>
+    <header className="site-header" data-reveal-after-hero={revealAfterHero || undefined} inert={revealAfterHero || undefined}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="header-inner">
         <a className="brand-lockup" href={withBase("/")} aria-label="Apache Magpie home">
