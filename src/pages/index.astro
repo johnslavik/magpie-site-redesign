@@ -4,15 +4,8 @@ import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
 import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
-import { Ellipsis, ShieldCheck, PackageCheck, ScanSearch, GitPullRequest, Bug, Users } from "lucide-react";
-const journeys = [
-  { input: "Security report", steps: "Investigate · fix · disclose", outcome: "Fix + public CVE", path: "/docs/security/readme", icon: ShieldCheck },
-  { input: "Pull request", steps: "Read · check · review", outcome: "Review posted", path: "/docs/pr-management/readme", icon: GitPullRequest },
-  { input: "Bug report", steps: "Reproduce · fix · test", outcome: "Tested fix PR", path: "/docs/issue-management/readme", icon: Bug },
-  { input: "Release candidate", steps: "Verify · vote · announce", outcome: "Published release", path: "/docs/release-management/readme", icon: PackageCheck },
-  { input: "New contributor", steps: "Find a task · guide · review", outcome: "First contribution", path: "/docs/mentoring/readme", icon: Users },
-  { input: "Repository", steps: "Audit · diagnose · prioritise", outcome: "Health action plan", path: "/docs/repo-health/readme", icon: ScanSearch },
-];
+import { Ellipsis } from "lucide-react";
+import HeroWorkflows from "../components/landing/HeroWorkflows";
 ---
 <BaseLayout title="Apache Magpie — Automate maintenance with your AI agent" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
   <SiteHeader home revealAfterHero />
@@ -30,11 +23,7 @@ const journeys = [
           <svg class="diagram-wires wires-in" viewBox="0 0 300 48" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0V22H250V0M150 0V48" /></svg>
           <div class="magpie-plugin"><img src="/wordmark.svg" alt="Magpie" width="158" height="45" /><span>Runs the workflow, start to finish</span></div>
           <div class="workflow-connector" aria-hidden="true"></div>
-          <div class="hero-journeys">
-            <div class="journey-head" aria-hidden="true"><span>Start with</span><span>Magpie handles</span><span>Get to</span></div>
-            {journeys.map(({ input, steps, outcome, path, icon: Icon }) => <a class="hero-journey" href={path}><span class="journey-input"><Icon size={16} strokeWidth={1.6} aria-hidden="true" />{input}</span><span class="journey-steps">{steps}</span><strong>{outcome}</strong></a>)}
-          </div>
-          <p class="journey-more">Plus <a href="/docs/setup/secure-agent-setup">secure agent setup</a>, <a href="/docs/pairing/readme">local code review</a>, and <a href="/docs/contributor-growth/readme">committer onboarding</a>.</p>
+          <HeroWorkflows client:load />
         </div>
       </div>
     </section>

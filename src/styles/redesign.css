@@ -495,21 +495,25 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .magpie-plugin { width: min(264px,100%); }
 .magpie-plugin span { font-size: 12px; }
 .workflow-connector { height: 24px; width: 1px; background: #b6c9e2; margin-inline: auto; }
-.hero-journeys { background: #fff; border: 1px solid #dbe3ed; border-radius: 9px; overflow: hidden; }
-.journey-head, .hero-journey { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 14px; align-items: center; padding: 13px 14px; }
-.journey-head { font-size: 11px; color: var(--muted); padding-block: 12px; background: #f1f5fa; }
-.journey-head span:nth-child(2) { color: var(--blue); }
-.hero-journey { min-height: 54px; border-top: 1px solid #e7ebef; text-decoration: none; color: var(--ink); font-size: 12px; line-height: 1.4; }
-.journey-input { display: flex; align-items: center; gap: 7px; }
-.journey-input svg { flex: 0 0 auto; color: #687e94; }
-.journey-steps { position: relative; color: var(--muted); font-size: 11px; }
-.journey-steps::before, .journey-steps::after { content: ''; position: absolute; width: 7px; height: 1px; background: #b6c9e2; top: 50%; }
-.journey-steps::before { left: -11px; }
-.journey-steps::after { right: -11px; }
-.hero-journey strong { color: var(--blue); font-weight: 550; }
-.hero-journey:hover { background: #f4f7fc; }
-.journey-more { margin: 14px auto 0; font-size: 11px; line-height: 1.6; text-align: center; color: var(--muted); max-width: 400px; }
-.journey-more a { color: inherit; text-decoration-color: #b7c5d1; }
+/* A quiet vertical reel keeps one full workflow readable at a time. */
+.workflow-reel { min-width: 0; }
+.reel-window { height: 264px; position: relative; perspective: 900px; overflow: hidden; }
+.reel-example { position: absolute; width: 100%; top: 50%; transform: translateY(-50%); transition: transform .65s cubic-bezier(.22,.68,0,1), opacity .65s; }
+.reel-example[data-position="-1"] { transform: translateY(calc(-50% - 113px)) rotateX(20deg) scale(.95); opacity: .4; }
+.reel-example[data-position="1"] { transform: translateY(calc(-50% + 113px)) rotateX(-20deg) scale(.95); opacity: .4; }
+.reel-example[data-position="0"] { z-index: 2; }
+.reel-active { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 23px 16px; border: 1px solid #b9cce4; border-radius: 10px; background: white; box-shadow: 0 8px 24px #27486b0a; text-decoration: none; color: var(--ink); }
+.reel-input { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+.reel-input svg { color: var(--blue); }
+.reel-steps { display: flex; align-items: center; width: 100%; justify-content: center; color: var(--muted); font-size: 12px; }
+.reel-steps span { display: flex; align-items: center; white-space: nowrap; }
+.reel-steps span + span::before { content: ''; width: 24px; height: 1px; background: #b6c9e2; margin-inline: 10px; }
+.reel-outcome { color: var(--blue); font-size: 19px; line-height: 1.3; font-weight: 550; text-align: center; }
+.reel-peek { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border: 1px solid #dbe3ed; border-radius: 7px; font-size: 11px; background: var(--paper); }
+.reel-peek span:last-child { margin-left: auto; }
+.reel-controls { display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 11px; color: var(--muted); margin-top: 10px; }
+.reel-controls button { border: 0; background: none; padding: 8px 0; font-size: 11px; color: var(--ink); }
+.reel-controls button:hover { color: var(--blue); }
 @media(min-width:801px) {
  .hero { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 40px; padding-block: 48px; }
  .agent-shell { padding-inline: 0; }
@@ -523,15 +527,13 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .magpie-plugin { padding: 14px; width: 250px; }
  .magpie-plugin img { width: 132px; }
  .magpie-plugin span { font-size: 11px; }
- .journey-head, .hero-journey { padding: 10px; gap: 12px; grid-template-columns: 1fr 1.15fr 1fr; }
- .hero-journey { font-size: 11px; }
- .journey-steps, .journey-head { font-size: 10px; }
- .journey-input { gap: 5px; }
- .journey-input svg { width: 14px; height: 14px; }
- .journey-steps::before { left: -9px; width: 5px; }
- .journey-steps::after { right: -9px; width: 5px; }
+ .reel-active { padding: 20px 12px; gap: 14px; }
+ .reel-steps { font-size: 11px; }
+ .reel-steps span + span::before { width: 12px; margin-inline: 7px; }
+ .reel-outcome { font-size: 17px; }
+ .reel-peek { font-size: 10px; gap: 6px; }
+ .reel-controls { gap: 15px; }
 }
-@media(max-width:380px) { .journey-input { flex-direction: column; align-items: flex-start; } }
 .lifecycle-stages { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin: 24px 0; }
 .lifecycle-stages button { min-height: 40px; padding: 10px 12px; text-align: left; font-size: 12px; line-height: 1.4; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; background: transparent; }
 .lifecycle-stages button[aria-pressed=true] { color: var(--blue); background: #edf3fc; border-color: #9ebce3; }
