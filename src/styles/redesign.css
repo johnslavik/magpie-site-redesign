@@ -992,8 +992,8 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .hero-story { animation: hero-story-in .4s ease 2s both; }
 @keyframes hero-story-in { from { opacity: 0; } to { opacity: 1; } }
 .examples-heading { text-align: center; font-size: clamp(30px,4vw,46px); line-height: 1.15; margin: 0 0 55px; letter-spacing: -.035em; }
-.another-use-case { display: flex; align-items: center; gap: 10px; margin: 30px auto 0; padding: 12px 18px; background: #edf3fc; color: var(--blue); border: 1px solid #d2def0; border-radius: 30px; cursor: pointer; font: 500 14px Inter,sans-serif; }
-.another-use-case:hover { background: #dfeafb; }
+.another-use-case { display: flex; align-items: center; gap: 10px; margin: 30px auto 0; padding: 12px 18px; background: transparent; color: #4c6356; border: 1px solid #cbd4c5; border-radius: 30px; cursor: pointer; font: 500 14px Inter,sans-serif; }
+.another-use-case:hover { background: #f0f3e8; border-color: #98ad94; }
 .supported-agents a { font-size: 11px; font-weight: 500; color: #667571; gap: 14px; }
 .supported-agents img { width: 34px; height: 34px; }
 .docs-invitation { padding-block: 90px; gap: 28px; }
@@ -1011,3 +1011,34 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .artifact-triage .security-stage-icon { background: #f8edc8; color: #937021; }.artifact-advisory .security-stage-icon { background: #e3ecfb; color: #3265ac; }
 .story-handoff { text-align: center; }.story-prompt { justify-content: center; }.story-prompt>span { display: none; }
 @media(max-width:600px) { .security-artifact { padding: 22px 16px; }.security-stage-icon { width: 68px; height: 68px; }.security-outputs { gap: 7px; }.security-outputs>span { padding: 7px; font-size: 11px; } }
+
+/* Read each lifecycle example from incoming work to a prepared result. */
+.lifecycle-sequence { display: block; padding: 38px; min-height: 480px; }
+.lifecycle-story-title { text-align: center; font-size: clamp(25px,3vw,34px); line-height: 1.25; font-weight: 500; letter-spacing: -.035em; max-width: 650px; margin: 0 auto 36px; }
+.lifecycle-flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; gap: 16px; align-items: center; }
+.lifecycle-flow>div { min-width: 0; }.flow-label { display: block; font-size: 11px; color: #718072; margin-bottom: 10px; }
+.lifecycle-flow h4 { font-size: 18px; line-height: 1.35; letter-spacing: -.02em; font-weight: 500; margin: 0 0 22px; }
+.flow-connector { color: #73917c; }
+.contributor-crowd { display: grid; grid-template-columns: repeat(9,minmax(0,1fr)); gap: 5px; margin-bottom: 18px; max-width: 220px; }.contributor-crowd>span { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; color: #fff; }
+.incoming-items { display: grid; gap: 7px; }.incoming-items>div { display: flex; align-items: center; gap: 8px; padding: 10px; background: #ffffff8c; border: 1px solid #d6dece; border-radius: 5px; color: #61715e; font-size: 12px; line-height: 1.35; }.incoming-items svg { flex-shrink: 0; }.incoming-prs { grid-template-columns: repeat(2,minmax(0,1fr)); }.incoming-prs>div { font-size: 10px; padding: 8px 6px; gap: 5px; }.incoming-prs>div:last-child { background: none; border-style: dashed; }
+.lifecycle-work { background: #fffefa; border: 1px solid #c6d4e3; box-shadow: 4px 5px 0 #afbfda40; border-radius: 10px; padding: 24px 20px; }
+.lifecycle-work>img { width: 120px; height: auto; margin-bottom: 16px; }.lifecycle-work .flow-label { color: #73839c; }.lifecycle-work ul { margin: 20px 0 0; padding: 0; list-style: none; display: grid; gap: 17px; }.lifecycle-work li { display: flex; gap: 8px; font-size: 13px; line-height: 1.5; color: #2e4c67; }.lifecycle-work li svg { flex-shrink: 0; margin-top: 2px; color: #5c8e75; }
+.ready-items { display: grid; gap: 9px; }.ready-item { display: flex; align-items: center; gap: 9px; padding: 14px 12px; background: #fffefa; border: 1px solid #cbdcc4; border-radius: 6px; font-size: 12px; line-height: 1.5; color: #375b3c; }.status-dot { width: 7px; height: 7px; background: #579865; border-radius: 50%; flex-shrink: 0; }.tone-blue .status-1 .status-dot { background: #d6a154; }.tone-blue .status-2 .status-dot { background: #c48178; }
+.lifecycle-explore,.project-rules-link { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 32px auto 0; color: var(--blue); font-size: 13px; text-underline-offset: 4px; }
+.project-procedures { max-width: 1000px; margin: auto; }
+.procedure-library { background: #fffefa; border: 1px solid #c7d9cb; box-shadow: 5px 6px 0 #cadfce; border-radius: 12px; padding: 34px; }
+.procedure-library-heading { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 30px; font-size: 16px; color: #4f6d55; }.procedure-library-heading img { height: auto; }
+.procedure-books { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }.procedure-books>div { padding: 24px 20px; border: 1px solid #d9e2d0; border-left: 5px solid #9dbb93; border-radius: 4px 9px 9px 4px; background: #f6f8f0; box-shadow: 3px 3px 0 #e1e7d6; }.procedure-books svg { color: #5b8162; }.procedure-books h3 { font-size: 18px; font-weight: 500; margin: 17px 0 10px; letter-spacing: -.025em; }.procedure-books p { font-size: 13px; line-height: 1.7; color: #6a785e; margin: 0; }
+.procedure-caption { text-align: center; margin: 28px 0 0; color: #57714d; font-size: 14px; }
+.project-rule-bridge { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 25px 0; color: #5c845c; }.project-rule-bridge>span { font-size: 29px; font-weight: 300; }.project-rule-bridge strong { font-size: 16px; font-weight: 500; }
+.shared-project-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: center; }
+.rule-example { padding: 25px 30px; background: #f6f0d8; border: 1px solid #e1d9b9; border-radius: 6px; transform: rotate(-1deg); }.rule-example>span { color: #948a62; font-size: 11px; }.rule-example>p { font-size: 16px; line-height: 1.65; margin: 10px 0 0; color: #5c6244; }
+.rules-applied { display: flex; align-items: flex-start; gap: 15px; }.rules-applied>svg { flex-shrink: 0; color: #538366; }.rules-applied strong { font-size: 18px; font-weight: 500; }.rules-applied p { font-size: 14px; line-height: 1.8; margin: 12px 0 0; color: #57725d; }
+.authoring-steps { list-style: none; padding: 0 0 0 18px; margin: 22px 0; border-left: 2px solid #b7cdeb; display: grid; gap: 17px; }.authoring-steps strong { display: block; color: #36547f; font-size: 13px; font-weight: 600; }.authoring-steps span { display: block; font-size: 12px; line-height: 1.7; color: #637691; margin-top: 4px; }.authoring-tool { flex-wrap: wrap; }.authoring-tool>span { margin-left: 0; }.authoring-finish { font-size: 13px; line-height: 1.7; color: #36547f; margin: 24px 0 0; }
+.docs-invitation { position: relative; padding-block: 100px; }.docs-invitation h2 { max-width: 650px; }.invitation-bird { position: absolute; width: clamp(140px,17vw,205px); height: auto; right: -15px; bottom: 28px; transform: rotate(-6deg); pointer-events: none; }
+@media(max-width:1000px) { .lifecycle-sequence { padding: 28px; }.lifecycle-flow { gap: 10px; grid-template-columns: 1fr 16px 1fr 16px 1fr; }.lifecycle-work { padding: 20px 14px; }.lifecycle-flow h4 { font-size: 16px; }.lifecycle-work li { font-size: 12px; }.incoming-prs { grid-template-columns: 1fr; }.contributor-crowd { grid-template-columns: repeat(6,minmax(0,1fr)); max-width: 155px; }.invitation-bird { width: 150px; right: 0; bottom: 5px; } }
+@media(max-width:700px) { .lifecycle-flow { display: flex; flex-direction: column; gap: 20px; }.lifecycle-flow>div { width: 100%; }.lifecycle-flow>.flow-connector { transform: rotate(90deg); }.lifecycle-work { padding: 24px; }.lifecycle-flow h4 { font-size: 20px; }.incoming-prs { grid-template-columns: repeat(2,minmax(0,1fr)); }.incoming-prs>div { font-size: 12px; }.contributor-crowd { grid-template-columns: repeat(9,minmax(0,1fr)); max-width: 235px; }.lifecycle-work li { font-size: 14px; }.ready-item { font-size: 13px; }.lifecycle-story-title { text-align: left; font-size: 26px; }.procedure-library { padding: 25px; }.procedure-library-heading { flex-direction: column; gap: 10px; }.procedure-books { grid-template-columns: 1fr; gap: 14px; }.procedure-books>div { padding: 18px; }.procedure-books h3 { margin-block: 10px; }.shared-project-rules { grid-template-columns: 1fr; gap: 25px; }.docs-invitation { padding-block: 60px 20px; gap: 24px; }.invitation-bird { position: static; order: 3; width: 130px; align-self: flex-end; }.docs-invitation h2 { font-size: 32px; } }
+
+/* Fit the pinned story to tall viewports as well as laptop screens. */
+.security-story[data-scroll-driven=true] .lifecycle-conversation { height: calc(100svh - 210px); }
+.security-story[data-scroll-driven=true] .story-phase { min-height: calc(100svh - 266px); display: flex; flex-direction: column; justify-content: center; }

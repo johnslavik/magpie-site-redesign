@@ -2,44 +2,60 @@ import { useState } from "react";
 import { Inbox, Code2, GitPullRequest, PackageCheck, ShieldCheck, Users, FileText, Check, ArrowRight } from "lucide-react";
 
 const lifecycle = [
-  { label: "Triage", icon: Inbox, input: "An incoming bug report", title: "Know which reports need attention.", outputs: ["Duplicates identified", "Issue classified", "Reproduction steps"], detail: "Issue intake, classification, reproduction, and follow-up.", link: "/docs/issue-management/readme", color: "peach" },
-  { label: "Develop", icon: Code2, input: "A bug to fix", title: "Prepare the patch and prove it works.", outputs: ["Regression test", "Tested patch", "PR draft"], detail: "Fix workflows, local self-review, and independent review passes.", link: "/docs/pairing/readme", color: "mint" },
-  { label: "Review", icon: GitPullRequest, input: "A pull request", title: "Arrive at the review with the evidence.", outputs: ["CI checked", "Code findings", "Review comments"], detail: "Queue triage, code review, contributor feedback, and merge readiness.", link: "/docs/pr-management/readme", color: "blue" },
-  { label: "Release", icon: PackageCheck, input: "A release candidate", title: "Prepare everything the release manager needs.", outputs: ["Verified candidate", "Vote draft & tally", "Announcement draft"], detail: "Preparation, verification, voting, publication handoffs, and archiving.", link: "/docs/release-management/readme", color: "yellow" },
-  { label: "Maintain", icon: ShieldCheck, input: "A repository that keeps changing", title: "Find the risks and prepare the next fix.", outputs: ["Dependency findings", "CI & licence checks", "Prioritised fixes"], detail: "Security reports, dependency audits, workflow checks, and flaky tests.", link: "/docs/repo-health/readme", color: "mint" },
-  { label: "Grow", icon: Users, input: "A new contributor", title: "Help the next maintainer get started.", outputs: ["Suitable first issue", "Code explained", "Onboarding checklist"], detail: "Newcomer guidance, mentoring, contributor growth, and committer onboarding.", link: "/docs/mentoring/readme", color: "peach" },
+  { label: "Triage", icon: Inbox, input: "New reports keep arriving", inputs: ["Something broke", "Is this a duplicate?", "More details needed"], work: ["Check for duplicates", "Reproduce and classify"], title: "Know which reports need your attention", outcome: "An organised issue queue", outputs: ["Ready to investigate", "Needs more information", "Duplicate found"], link: "/docs/issue-management/readme", color: "peach" },
+  { label: "Develop", icon: Code2, input: "A bug needs a fix", inputs: ["Reported failure", "Steps to reproduce"], work: ["Write the patch and test", "Run checks and review the diff"], title: "Get a tested patch ready for review", outcome: "A pull request you can review", outputs: ["Patch prepared", "Regression test included", "Test results attached"], link: "/docs/issue-management/readme", color: "mint" },
+  { label: "Review", icon: GitPullRequest, input: "Dozens of contributors", inputs: ["Bug fixes", "New features", "Documentation", "Dependency updates", "Tests", "More pull requests…"], work: ["Triage the queue", "Check CI and review code", "Draft feedback for each PR"], title: "Keep up with a growing review queue", outcome: "Know where you’re needed", outputs: ["Ready for your review", "Contributor changes needed", "CI needs attention"], link: "/docs/pr-management/readme", color: "blue" },
+  { label: "Release", icon: PackageCheck, input: "A release is coming", inputs: ["Release candidate", "Checksums & signatures"], work: ["Verify the candidate", "Prepare the vote and announcement"], title: "Give the release manager a prepared handoff", outcome: "Ready for the release manager", outputs: ["Verification results", "Vote draft & tally", "Announcement draft"], link: "/docs/release-management/readme", color: "yellow" },
+  { label: "Maintain", icon: ShieldCheck, input: "The repository keeps changing", inputs: ["Dependencies", "CI workflows", "Test failures"], work: ["Audit dependencies and licences", "Investigate failing workflows"], title: "Turn repository checks into work you can act on", outcome: "A prioritised maintenance list", outputs: ["Upgrade recommendations", "Workflow findings", "Suggested fixes"], link: "/docs/repo-health/readme", color: "mint" },
+  { label: "Grow", icon: Users, input: "Someone wants to contribute", inputs: ["Where do I start?", "How does this code work?"], work: ["Find a suitable first issue", "Explain the code and how to test it"], title: "Help a new contributor make their first change", outcome: "A clear next step", outputs: ["First issue selected", "Relevant code explained", "Test instructions ready"], link: "/docs/mentoring/readme", color: "peach" },
 ];
 
 export function SoftwareLifecycle() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(2);
   const phase = lifecycle[active];
   const select = (index: number) => { setActive(index); document.getElementById(`lifecycle-tab-${index}`)?.focus(); };
   return <div className="software-lifecycle">
     <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-controls="lifecycle-detail" aria-selected={active === i} tabIndex={active === i ? 0 : -1} onClick={() => setActive(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); select(event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length); } }}><item.icon size={24} strokeWidth={1.5} /><span>{item.label}</span></button>)}</div>
-    <div id="lifecycle-detail" className={`lifecycle-detail tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${active}`}>
-      <div className="lifecycle-situation"><span>When you have</span><h3>{phase.input}</h3><p>{phase.detail}</p><a href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows</a></div>
-      <div className="lifecycle-deliverables"><div className="lifecycle-deliverables-label"><img src="/favicon.svg" alt="Magpie" width="26" height="26" /><h3>{phase.title}</h3></div><div className="deliverable-stack">{phase.outputs.map((output, i) => <div className="deliverable-sheet" key={output}><FileText size={21} strokeWidth={1.5} /><span>{output}</span><Check size={17} /><div className="sheet-lines" aria-hidden="true"><i /><i style={{width:`${70 - i * 12}%`}} /></div></div>)}</div></div>
+    <div id="lifecycle-detail" className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${active}`}>
+      <h3 className="lifecycle-story-title">{phase.title}</h3>
+      <div className="lifecycle-flow">
+        <div className="lifecycle-incoming"><span className="flow-label">Your project</span><h4>{phase.input}</h4>
+          {phase.label === "Review" && <div className="contributor-crowd" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <span key={i} style={{background: ["#a1b9d6", "#b9ccaa", "#d8bfa8", "#bcb3d2"][i % 4]}}><Users size={13} /></span>)}</div>}
+          <div className={`incoming-items ${phase.label === "Review" ? "incoming-prs" : ""}`}>{phase.inputs.map(input => <div key={input}><phase.icon size={15} aria-hidden="true" /><span>{input}</span></div>)}</div>
+        </div>
+        <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
+        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><span className="flow-label">guides your agent to</span><ul>{phase.work.map(work => <li key={work}><Check size={15} aria-hidden="true" />{work}</li>)}</ul></div>
+        <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
+        <div className="lifecycle-ready"><span className="flow-label">For your team</span><h4>{phase.outcome}</h4><div className="ready-items">{phase.outputs.map((output, i) => <div key={output} className={`ready-item status-${i}`}><span className="status-dot" aria-hidden="true" />{output}</div>)}</div></div>
+      </div>
+      <a className="lifecycle-explore" href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows <ArrowRight size={15} aria-hidden="true" /></a>
     </div>
   </div>;
 }
 
-const projects = [
-  {name: "Python", label: "Python library", setup: "uv sync", test: "uv run pytest", change: "Regression test in tests/", file: "test_archive.py"},
-  {name: "TypeScript", label: "TypeScript app", setup: "npm ci", test: "npm test", change: "Regression test beside the code", file: "archive.test.ts"},
-  {name: "Java", label: "Java service", setup: "./mvnw install -DskipTests", test: "./mvnw test", change: "Regression test in src/test/", file: "ArchiveTest.java"},
-];
 export function ProjectRules() {
-  const [active, setActive] = useState(0);
-  const project = projects[active];
-  return <div className="project-adaptation">
-    <div className="provided-procedure"><img src="/wordmark.svg" alt="Magpie" width="142" height="40" /><span>Already written for you</span><h3>The bug-fix procedure</h3><ul>{["Reproduce the failure", "Write a regression test", "Prepare and verify the patch", "Draft the PR for review"].map(step => <li key={step}><Check size={17} />{step}</li>)}</ul></div>
-    <div className="project-customisation"><div className="project-selector" role="group" aria-label="Example project language">{projects.map((item,i)=><button key={item.name} type="button" aria-pressed={i===active} onClick={()=>setActive(i)}>{item.name}</button>)}</div><div className="project-example"><span>Your project’s commands</span><h3>{project.label}</h3><div className="project-command"><span>Install</span><code>{project.setup}</code></div><div className="project-command"><span>Test</span><code>{project.test}</code></div><div className="adaptation-result"><FileText size={24}/><div><strong>Same procedure. A fix for this project.</strong><span>{project.file} · patch · PR draft</span></div><Check size={20}/></div></div></div>
+  return <div className="project-procedures">
+    <div className="procedure-library">
+      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies the procedures</span></div>
+      <div className="procedure-books">
+        <div><GitPullRequest size={23}/><h3>Review a PR</h3><p>Check CI, inspect the diff, draft feedback.</p></div>
+        <div><ShieldCheck size={23}/><h3>Resolve a report</h3><p>Investigate, fix, coordinate disclosure.</p></div>
+        <div><PackageCheck size={23}/><h3>Prepare a release</h3><p>Verify, prepare the vote, draft the announcement.</p></div>
+      </div>
+      <p className="procedure-caption">The steps, checks, and approval points are already written.</p>
+    </div>
+    <div className="project-rule-bridge"><span aria-hidden="true">+</span><strong>Your project’s rules</strong></div>
+    <div className="shared-project-rules">
+      <div className="rule-example"><span>For example</span><p>“Use our review checklist. Ask the owning team to review changes. Include a changelog entry.”</p></div>
+      <div className="rules-applied"><FileText size={26} aria-hidden="true"/><div><strong>Save the rules with your project.</strong><p>Magpie reads them when running its workflows. Your team can reuse the procedures and change the steps that need to work differently.</p></div></div>
+    </div>
+    <a className="project-rules-link" href="/docs/setup/agentic-overrides" target="_blank" rel="noreferrer">See how project rules work <ArrowRight size={15} aria-hidden="true" /></a>
   </div>;
 }
 
 export function SkillComparison() {
   return <div className="skill-comparison">
     <div className="skill-manual"><span className="comparison-label">Writing a skill from scratch</span><h3>You assemble every part.</h3><div className="manual-notes">{["Learn the skill format", "Write the procedure", "Think through edge cases", "Add approval points", "Create test cases", "Check the results and revise"].map((step,i)=><div key={step}><span aria-hidden="true">□</span>{step}<i aria-hidden="true" style={{width:`${70-i*4}%`}} /></div>)}</div></div>
-    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="96" height="27" /></div><h3>Describe the job. Build it with your agent.</h3><div className="authoring-prompt">“Make a skill that checks new dependencies.”</div><div className="authoring-tool"><FileText size={16}/><code>write-skill</code><span>Procedure loaded</span></div><div className="authored-skill"><div><FileText size={22}/><strong>check-dependency / SKILL.md</strong></div><ul><li><Check size={16}/>Instructions and approval points</li><li><Check size={16}/>Edge cases and example inputs</li><li><Check size={16}/>Expected results to test against</li></ul></div><div className="authoring-review"><span>Draft</span><ArrowRight size={14}/><span>Test</span><ArrowRight size={14}/><span>Improve</span><strong>You review and share.</strong></div></div>
+    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="96" height="27" /></div><h3>Follow Magpie’s skill-writing procedure.</h3><div className="authoring-prompt">“Make a skill that checks new dependencies.”</div><div className="authoring-tool"><FileText size={16}/><code>write-skill</code><span>Magpie’s authoring procedure</span></div><ol className="authoring-steps"><li><strong>Define the job</strong><span>Clarify examples and the decisions that need your approval.</span></li><li><strong>Write the procedure</strong><span>Use Magpie’s templates and validation checks.</span></li><li><strong>Test and improve it</strong><span>Create example cases, run them, and refine the skill.</span></li></ol><div className="authored-skill"><div><FileText size={22}/><strong>check-dependency / SKILL.md</strong></div><ul><li><Check size={16}/>Instructions and approval points</li><li><Check size={16}/>Edge cases and example inputs</li><li><Check size={16}/>Expected results to test against</li></ul></div><p className="authoring-finish">You review the skill and its test results before sharing it.</p></div>
   </div>;
 }
