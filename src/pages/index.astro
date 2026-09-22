@@ -16,7 +16,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <div class="hero-copy">
         <img class="hero-wordmark" src="/wordmark.svg" alt="Magpie" width="200" height="57" />
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
-        <p class="hero-story">AI brought more contributions. Maintainers needed a way to keep up. Born at Apache Airflow, <BrandName /> turns that work into <strong>dozens of reusable skills</strong> for your coding agent—and your project.</p>
+        <p class="hero-story">AI brought more contributions to open source and more work for maintainers. To keep up at Apache Airflow, we turned maintenance procedures into <strong>dozens of reusable skills</strong>. <BrandName /> brings those skills to your coding agent, ready for your own project.</p>
       </div>
       <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does" hidden><ArrowDown size={22} strokeWidth={1.4} /></a>
     </section>
@@ -25,7 +25,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
           <HeroWorkflows client:load />
-          <p class="diagram-context">Works everywhere</p>
+          <p class="diagram-context">Works in</p>
           <div class="supported-agents" aria-label="Supported agent tools">
             <a href="/docs/quick-start" target="_blank" rel="noreferrer"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex" target="_blank" rel="noreferrer"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor" target="_blank" rel="noreferrer"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
             <a href="/docs/adapters/copilot" target="_blank" rel="noreferrer"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini" target="_blank" rel="noreferrer"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode" target="_blank" rel="noreferrer"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
@@ -36,8 +36,13 @@ import MoreWays from "../components/landing/MoreWays.astro";
     </section>
     <span class="diagram-nav-trigger" data-nav-trigger aria-hidden="true"></span>
     <section id="how-it-works" class="section container security-story-section">
-      <div class="security-intro"><h2>See how Magpie<br />helps scale security.</h2><p>Apache Airflow powers workflows at Airbnb, Adobe, and Spotify.<br />Here’s how Magpie helps its maintainers handle security reports.</p></div>
+      <div class="security-intro"><h2>See how Magpie<br />helps scale security.</h2><p>Apache Airflow powers workflows at Airbnb, Adobe, and Spotify.<br />Follow an example report from investigation to disclosure.</p></div>
       <WorkflowExplorer client:load />
+      <div class="security-summary">
+        <span class="summary-eyebrow">From one incoming report</span>
+        <h3>A tested fix. A released update.<br />Users who know what to do.</h3>
+        <p><BrandName /> prepares the investigation, patch, and disclosure.<br />Your team reviews the evidence and makes the decisions.</p>
+      </div>
     </section>
     <section id="airflow" class="airflow-section">
       <svg class="airflow-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C240 60 310 10 580 14S1010 88 1440 24V80H0Z" /></svg>
