@@ -591,3 +591,60 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 /* The homepage navigation emerges only after the hero, at every screen size. */
 .site-header[data-reveal-after-hero] { position: fixed; inset: 0 0 auto; transform: translateY(-100%); opacity: 0; visibility: hidden; pointer-events: none; transition: transform .3s ease, opacity .3s ease, visibility .3s; }
 .site-header[data-reveal-after-hero].is-past-hero { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; box-shadow: 0 4px 20px #17272308; }
+
+/* Leave a quiet transition after the hero before navigation and results meet. */
+.hero { position: relative; padding-block: 96px 200px; column-gap: clamp(56px,6vw,88px); }
+.hero h1 { line-height: 1.1; }
+.hero-copy>p { line-height: 1.8; }
+.diagram-context { margin-bottom: 24px; }
+.hero-nav-trigger { position: absolute; bottom: 176px; left: 0; width: 1px; height: 1px; pointer-events: none; }
+.airflow-section { position: relative; padding-block: 96px 88px; scroll-margin-top: 88px; }
+.airflow-curve { position: absolute; left: 0; bottom: calc(100% - 1px); width: 100%; height: 80px; fill: var(--deep); pointer-events: none; }
+.docs-invitation .button { gap: 10px; }
+.docs-invitation .button svg { flex-shrink: 0; }
+/* Match the terminal to Magpie's blue rather than mixing orange and olive. */
+.agent-session { background: #101f35; border-color: #253b56; color: #e5edf7; box-shadow: 0 16px 40px #1533530c; }
+.session-heading { background: #12243d; }
+.session-heading>span, .agent-session figcaption, .sandbox-statusline, .sandbox-mode-picker p { color: #9fb0c4; }
+.session-prompt { background: #1b3352; color: #f0f5fc; }
+.session-prompt>span:first-child, .session-step strong { color: #94bff5; }
+.session-step p { color: #aabbd0; border-color: #344960; }
+.session-result, .sandbox-mode-picker>code { color: #e5edf7; }
+.session-approval { border-color: #2b405a; color: #bdd4f3; }
+.terminal-cursor { background: #bdd4f3; }
+.sandbox-demo { border-color: #2b405a; }
+.session-navigation button { color: #dbe8f8; }
+.sandbox-mode-picker button { border-color: #3b5370; color: #bbcee5; }
+.sandbox-mode-picker button[aria-pressed=true] { background: #233f62; border-color: #79a7e3; color: #eef5ff; }
+.lifecycle-stages button { background: #fff; color: #526477; border-color: #dbe3ed; }
+.lifecycle-stages button:hover { background: #f1f5fb; border-color: #a2bcdc; }
+.lifecycle-stages button[aria-pressed=true] { background: var(--blue); border-color: var(--blue); color: white; }
+@media(max-width:800px) {
+ .hero { padding-block: 48px 184px; row-gap: 48px; }
+ .hero-nav-trigger { bottom: 168px; }
+ .airflow-section { padding-block: 64px 64px; }
+ .airflow-curve { height: 48px; }
+ .diagram-context { margin-bottom: 20px; }
+}
+
+/* One opening message; the moving explanation gets its own section. */
+.hero { display: flex; align-items: center; justify-content: center; min-height: min(760px,95svh); padding-block: 96px 160px; text-align: center; }
+.hero-copy { width: 100%; max-width: 860px; margin-inline: auto; }
+.hero-wordmark { display: block; width: 188px; height: auto; margin: 0 auto 42px; }
+.hero h1 { font-size: clamp(48px,6.4vw,80px); line-height: 1.08; letter-spacing: -.055em; margin-bottom: 28px; }
+.hero-copy>p { max-width: 620px; margin-inline: auto; line-height: 1.75; font-size: 18px; }
+.hero-actions { justify-content: center; margin-top: 32px; }
+.hero-nav-trigger { bottom: 136px; }
+.integration-section { padding-block: 24px 168px; }
+.integration-section .integration-art { max-width: 660px; margin-inline: auto; padding: 24px 0; }
+.integration-section .agent-shell { padding: 0; }
+@media(max-width:800px) {
+ .hero { min-height: 0; padding-block: 64px 144px; }
+ .hero-wordmark { width: 156px; margin-bottom: 32px; }
+ .hero h1 { font-size: clamp(36px,7vw,54px); }
+ .hero-copy>p { max-width: 560px; font-size: 16px; }
+ .hero-actions { gap: 20px; }
+ .hero-nav-trigger { bottom: 120px; }
+ .integration-section { padding-block: 8px 128px; }
+ .integration-section .integration-art { padding: 16px 0; max-width: 530px; }
+}
