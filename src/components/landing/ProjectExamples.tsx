@@ -1,29 +1,45 @@
-import BrandName from "./BrandName";
-import skillCounts from "../../data/skill-counts.json";
 import { useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { Inbox, Code2, GitPullRequest, PackageCheck, ShieldCheck, Users, FileText, Check, ArrowRight } from "lucide-react";
 
-const choices = [
-  { name: "Code reviews", count: skillCounts.counts["pr-management"], procedure: "Triage the queue, check CI and project criteria, then prepare an evidence-backed review.", result: "Review comments, with code references", input: "Pull request" },
-  { name: "Bug fixes", count: skillCounts.counts.issue, procedure: "Classify the report, reproduce the bug, prepare a regression test and draft the fix PR.", result: "A patch and a regression test", input: "Bug report" },
-  { name: "Security reports", count: skillCounts.counts.security, procedure: "Import and triage reports, coordinate the fix and release, and prepare the CVE and disclosure.", result: "A tested fix, advisory, and CVE", input: "Private report" },
-  { name: "Releases", count: skillCounts.counts["release-management"], procedure: "Prepare and verify the candidate, draft the vote, tally replies, and prepare the announcement.", result: "Verified build, vote, and announcement drafts", input: "Release candidate" },
-  { name: "New contributors", count: skillCounts.counts.mentoring, procedure: "Find a suitable first task, explain the code, and guide the contributor through review.", result: "A suitable issue and instructions to get started", input: "Someone wants to help" },
-  { name: "Repository checks", count: skillCounts.counts["repo-health"], procedure: "Audit dependencies, CI, licences and flaky tests, then prioritise the findings.", result: "Problems found and fixes prioritised", input: "Dependencies, CI, and tests" },
+const lifecycle = [
+  { label: "Triage", icon: Inbox, input: "An incoming bug report", title: "Know which reports need attention.", outputs: ["Duplicates identified", "Issue classified", "Reproduction steps"], detail: "Issue intake, classification, reproduction, and follow-up.", link: "/docs/issue-management/readme", color: "peach" },
+  { label: "Develop", icon: Code2, input: "A bug to fix", title: "Prepare the patch and prove it works.", outputs: ["Regression test", "Tested patch", "PR draft"], detail: "Fix workflows, local self-review, and independent review passes.", link: "/docs/pairing/readme", color: "mint" },
+  { label: "Review", icon: GitPullRequest, input: "A pull request", title: "Arrive at the review with the evidence.", outputs: ["CI checked", "Code findings", "Review comments"], detail: "Queue triage, code review, contributor feedback, and merge readiness.", link: "/docs/pr-management/readme", color: "blue" },
+  { label: "Release", icon: PackageCheck, input: "A release candidate", title: "Prepare everything the release manager needs.", outputs: ["Verified candidate", "Vote draft & tally", "Announcement draft"], detail: "Preparation, verification, voting, publication handoffs, and archiving.", link: "/docs/release-management/readme", color: "yellow" },
+  { label: "Maintain", icon: ShieldCheck, input: "A repository that keeps changing", title: "Find the risks and prepare the next fix.", outputs: ["Dependency findings", "CI & licence checks", "Prioritised fixes"], detail: "Security reports, dependency audits, workflow checks, and flaky tests.", link: "/docs/repo-health/readme", color: "mint" },
+  { label: "Grow", icon: Users, input: "A new contributor", title: "Help the next maintainer get started.", outputs: ["Suitable first issue", "Code explained", "Onboarding checklist"], detail: "Newcomer guidance, mentoring, contributor growth, and committer onboarding.", link: "/docs/mentoring/readme", color: "peach" },
 ];
 
-export function WorkflowPicker() {
-  const [selected, setSelected] = useState([0, 2]);
-  return <div className="selection-demo">
-    <fieldset className="workflow-choices"><legend>Choose workflow families</legend>{choices.map((choice, i) => <label key={choice.name}><input type="checkbox" checked={selected.includes(i)} onChange={() => setSelected(current => current.includes(i) ? current.filter(value => value !== i) : [...current, i].sort())} /><span>{choice.name}<small>{choice.count} skills</small></span><Check size={16} aria-hidden="true" /></label>)}</fieldset>
-    <div className="selected-workflows"><div className="setup-label"><img src="/favicon.svg" width="22" height="22" alt="Magpie" /><span>Procedures your agent can follow</span></div><div className="selected-results" aria-live="polite">{selected.length ? selected.map(i => <div className="selected-result" key={i}><span>{choices[i].input}</span><ArrowRight size={18} aria-hidden="true" /><div><strong>{choices[i].result}</strong><p>{choices[i].procedure}</p></div></div>) : <p className="empty-selection">Choose a task on the left to see what your agent can produce.</p>}</div><a className="text-link" href="/docs/setup/team-adoption">Install workflow families</a></div>
+export function SoftwareLifecycle() {
+  const [active, setActive] = useState(0);
+  const phase = lifecycle[active];
+  const select = (index: number) => { setActive(index); document.getElementById(`lifecycle-tab-${index}`)?.focus(); };
+  return <div className="software-lifecycle">
+    <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-controls="lifecycle-detail" aria-selected={active === i} tabIndex={active === i ? 0 : -1} onClick={() => setActive(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); select(event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length); } }}><item.icon size={24} strokeWidth={1.5} /><span>{item.label}</span></button>)}</div>
+    <div id="lifecycle-detail" className={`lifecycle-detail tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${active}`}>
+      <div className="lifecycle-situation"><span>When you have</span><h3>{phase.input}</h3><p>{phase.detail}</p><a href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows</a></div>
+      <div className="lifecycle-deliverables"><div className="lifecycle-deliverables-label"><img src="/favicon.svg" alt="Magpie" width="26" height="26" /><h3>{phase.title}</h3></div><div className="deliverable-stack">{phase.outputs.map((output, i) => <div className="deliverable-sheet" key={output}><FileText size={21} strokeWidth={1.5} /><span>{output}</span><Check size={17} /><div className="sheet-lines" aria-hidden="true"><i /><i style={{width:`${70 - i * 12}%`}} /></div></div>)}</div></div>
+    </div>
   </div>;
 }
 
+const projects = [
+  {name: "Python", label: "Python library", setup: "uv sync", test: "uv run pytest", change: "Regression test in tests/", file: "test_archive.py"},
+  {name: "TypeScript", label: "TypeScript app", setup: "npm ci", test: "npm test", change: "Regression test beside the code", file: "archive.test.ts"},
+  {name: "Java", label: "Java service", setup: "./mvnw install -DskipTests", test: "./mvnw test", change: "Regression test in src/test/", file: "ArchiveTest.java"},
+];
 export function ProjectRules() {
-  return <div className="rules-demo" aria-label="Example project configuration read by the fix workflow">
-    <div className="instruction-sheet"><div className="paper-tab">The procedure comes with <BrandName logo /></div><h3>Fix a reported bug</h3><ol className="included-procedure"><li>Reproduce the failure</li><li>Add a regression test</li><li>Prepare and verify the patch</li><li>Draft the PR for review</li></ol><div className="config-heading">Your project supplies the details</div><div className="config-excerpt"><code>runtime-invocation.md</code><p>Install dependencies: <kbd>npm ci</kbd><br />Run tests: <kbd>npm test</kbd></p></div><div className="config-excerpt"><code>fix-workflow.md</code><p>Open fixes from a fork.<br />Include a changelog entry.</p></div><small>Saved in the project’s configuration files</small></div>
-    <div className="rule-transfer" aria-hidden="true"><img src="/favicon.svg" width="34" height="34" alt="" /><ArrowRight size={26} /></div>
-    <div className="fix-sheet"><div className="paper-tab">Existing procedure + your configuration</div><h3>A fix ready for your review</h3><div className="patch-lines" aria-hidden="true"><span>− Code that causes the bug</span><span>+ Patch and regression test</span></div><ul><li><Check size={16} />Changes prepared in your fork</li><li><Check size={16} />Tests run with your command</li><li><Check size={16} />Changelog entry included</li><li><Check size={16} />PR draft with test evidence</li></ul><div className="result-stamp">You review the patch and decide what to merge</div></div>
+  const [active, setActive] = useState(0);
+  const project = projects[active];
+  return <div className="project-adaptation">
+    <div className="provided-procedure"><img src="/wordmark.svg" alt="Magpie" width="142" height="40" /><span>Already written for you</span><h3>The bug-fix procedure</h3><ul>{["Reproduce the failure", "Write a regression test", "Prepare and verify the patch", "Draft the PR for review"].map(step => <li key={step}><Check size={17} />{step}</li>)}</ul></div>
+    <div className="project-customisation"><div className="project-selector" role="group" aria-label="Example project language">{projects.map((item,i)=><button key={item.name} type="button" aria-pressed={i===active} onClick={()=>setActive(i)}>{item.name}</button>)}</div><div className="project-example"><span>Your project’s commands</span><h3>{project.label}</h3><div className="project-command"><span>Install</span><code>{project.setup}</code></div><div className="project-command"><span>Test</span><code>{project.test}</code></div><div className="adaptation-result"><FileText size={24}/><div><strong>Same procedure. A fix for this project.</strong><span>{project.file} · patch · PR draft</span></div><Check size={20}/></div></div></div>
+  </div>;
+}
+
+export function SkillComparison() {
+  return <div className="skill-comparison">
+    <div className="skill-manual"><span className="comparison-label">Writing a skill from scratch</span><h3>You assemble every part.</h3><div className="manual-notes">{["Learn the skill format", "Write the procedure", "Think through edge cases", "Add approval points", "Create test cases", "Check the results and revise"].map((step,i)=><div key={step}><span aria-hidden="true">□</span>{step}<i aria-hidden="true" style={{width:`${70-i*4}%`}} /></div>)}</div></div>
+    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="96" height="27" /></div><h3>Describe the job. Build it with your agent.</h3><div className="authoring-prompt">“Make a skill that checks new dependencies.”</div><div className="authoring-tool"><FileText size={16}/><code>write-skill</code><span>Procedure loaded</span></div><div className="authored-skill"><div><FileText size={22}/><strong>check-dependency / SKILL.md</strong></div><ul><li><Check size={16}/>Instructions and approval points</li><li><Check size={16}/>Edge cases and example inputs</li><li><Check size={16}/>Expected results to test against</li></ul></div><div className="authoring-review"><span>Draft</span><ArrowRight size={14}/><span>Test</span><ArrowRight size={14}/><span>Improve</span><strong>You review and share.</strong></div></div>
   </div>;
 }
