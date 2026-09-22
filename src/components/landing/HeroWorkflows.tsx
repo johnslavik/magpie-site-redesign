@@ -23,7 +23,7 @@ export default function HeroWorkflows() {
           <div className="reel-active">
             <ol className="reel-flow">
               <li className="reel-source"><small>When this happens</small><span className="reel-input">{item.input}</span></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small className="prepared-workflow-label">We’ve already written this workflow for your agent.</small><ul className="reel-work">{item.work.map(step => <li key={step}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small className="prepared-workflow-label">Been there, built the workflow.</small><ul className="reel-work">{item.work.map(step => <li key={step}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
               <li className="reel-delivery"><small>So you get</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>
