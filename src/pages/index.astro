@@ -6,6 +6,7 @@ import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
 import { BookOpen } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
+import MoreWays from "../components/landing/MoreWays.astro";
 ---
 <BaseLayout title="Apache Magpie — Review code. Fix bugs. Ship releases." description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
   <SiteHeader home revealAfterHero />
@@ -46,6 +47,7 @@ import HeroWorkflows from "../components/landing/HeroWorkflows";
       <div class="section-heading"><div><h2>See the whole workflow</h2></div><p>From a private vulnerability report to a released fix and a published CVE. From a bug report to a tested PR. Magpie connects the steps, tools, and handoffs that usually fall on you.</p></div>
       <WorkflowExplorer client:load />
     </section>
+    <MoreWays />
     <section class="docs-invitation container" data-reveal><div><h2>Put Magpie to work</h2><p>Set up your agent, choose your workflows, and start with your project.</p></div><a class="button" href="/docs/quick-start"><BookOpen size={20} strokeWidth={1.7} aria-hidden="true" /><span>Open the documentation</span></a></section>
   </main>
   <SiteFooter />

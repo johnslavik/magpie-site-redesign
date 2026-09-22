@@ -1,0 +1,33 @@
+---
+const jobs = [
+  { title: 'Clear your review queue', text: 'Triage incoming pull requests, check the code and tests, and prepare reviews you can approve.', href: '/docs/pr-management/readme' },
+  { title: 'Turn bug reports into tested fixes', text: 'Find duplicates, reproduce the failure, and prepare a patch with a regression test.', href: '/docs/issue-management/readme' },
+  { title: 'Take security reports through disclosure', text: 'Investigate privately, prepare the fix, coordinate the release, and publish the CVE with your team.', href: '/docs/security/readme' },
+  { title: 'Get a release ready to publish', text: 'Verify the candidate, prepare the vote, and draft the announcement for your release manager.', href: '/docs/release-management/readme' },
+  { title: 'Help newcomers make their first contribution', text: 'Find a suitable task and explain the relevant code, expected change, and tests to run.', href: '/docs/mentoring/readme' },
+  { title: 'Find problems before they become incidents', text: 'Audit dependencies, CI workflows, licenses, and flaky tests, then prioritise what to fix.', href: '/docs/repo-health/readme' },
+];
+const lessons = [
+  { title: 'Describe the task', text: 'Turn a process you know into instructions your agent can repeat.', href: '/docs/education/your-first-skill', link: 'Write your first skill' },
+  { title: 'Check the results', text: 'Test the skill against examples and improve the parts that fail.', href: '/docs/education/eval-driven-development', link: 'Learn to test skills' },
+  { title: 'Use it across your tools', text: 'Keep the workflow portable so your team can run it in different agents.', href: '/docs/education/portable-skills', link: 'Build a portable skill' },
+];
+---
+<section class="choose-work container" aria-labelledby="choose-work-title">
+  <div class="section-heading"><h2 id="choose-work-title">Start with the work<br />you want off your plate.</h2><p>Install just the workflows you need. Start with one recurring task and add more as your project needs them.</p></div>
+  <div class="job-list">{jobs.map(job => <a href={job.href}><h3>{job.title}</h3><p>{job.text}</p><span>See the workflow</span></a>)}</div>
+</section>
+<section class="project-fit" aria-labelledby="project-fit-title">
+  <div class="container fit-layout">
+    <div><h2 id="project-fit-title">Your tools.<br />Your rules.<br /><span>Your way of working.</span></h2><p>Tell Magpie how your project builds, reviews, releases, and communicates. Its workflows use that context every time.</p><a class="text-link" href="/docs/setup/team-adoption">Set up Magpie for your team</a></div>
+    <div class="fit-details">
+      <article><h3>Reviews that follow your standards</h3><p>Your build commands, test requirements, and review conventions become the instructions your agent follows.</p></article>
+      <article><h3>Work stays in the tools you use</h3><p>Connect your repository, issue tracker, and communication channels. Change providers without rewriting the workflow.</p><a href="/docs/adapters/readme">Explore supported tools</a></article>
+      <article><h3>A process you can make your own</h3><p>Adjust a workflow for your project, share it across your organisation, or add a tool Magpie does not support yet.</p><a href="/docs/extending">See how to customise Magpie</a></article>
+    </div>
+  </div>
+</section>
+<section class="learn-skills container" aria-labelledby="learn-skills-title">
+  <div class="section-heading"><h2 id="learn-skills-title">Turn your own process<br />into a reusable skill.</h2><p>A skill is a set of instructions your agent can follow. Magpie’s guides take you from writing your first one to testing and sharing it.</p></div>
+  <div class="lesson-list">{lessons.map(lesson => <article><h3>{lesson.title}</h3><p>{lesson.text}</p><a class="text-link" href={lesson.href}>{lesson.link}</a></article>)}</div>
+</section>
