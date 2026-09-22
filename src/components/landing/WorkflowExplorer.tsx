@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { securityStory } from "./security-story";
 import BrandName from "./BrandName";
 
@@ -75,7 +75,6 @@ export default function WorkflowExplorer() {
           <div className="story-manual"><h4>Without Magpie</h4><p>{phase.without}</p></div>
           <div className="story-assisted"><h4><img src="/favicon.svg" width="32" height="32" alt="" /><span>With <BrandName /></span></h4><p>Your agent {phase.result}</p></div>
         </div>
-        <p className="story-decision"><UserRound size={21} aria-hidden="true" />{phase.handoff}</p>
       </section>)}</div>
       <div className="story-navigation">
         <button type="button" onClick={() => select(stage - 1)} disabled={stage === 0} aria-label="Previous security stage"><ArrowLeft size={18} aria-hidden="true" />Previous</button>
