@@ -836,9 +836,8 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .rules-demo,.skill-demo { grid-template-columns: 1fr; gap: 24px; padding-inline: 8px; }.rule-transfer { flex-direction: row; justify-content: center; }.rule-transfer svg,.skill-transfer svg { transform: rotate(90deg); }.skill-transfer { padding: 0; }.skill-file { padding: 18px; }
  .example-links,.learning-links { align-items: start; flex-direction: column; gap: 18px; }.learning-links { margin-top: 28px; }.instruction-sheet label { font-size: 15px; }.airflow-brand { width: 150px; }
 }
-.inline-wordmark { display: inline-block; width: 2.85em; height: .8em; vertical-align: -.13em; background-color: currentColor; -webkit-mask: url("/wordmark.svg") center / contain no-repeat; mask: url("/wordmark.svg") center / contain no-repeat; }
 .reel-flow .reel-work li::before { content: '' !important; position: absolute; left: 0; right: auto; top: .65em; bottom: auto; transform: none; width: 4px; height: 4px; border: 0; border-radius: 50%; background: #487252; }
-.text-link:has(>.inline-wordmark) { display: inline; }
+.text-link:has(>.inline-brand-name) { display: inline; }
 .workflow-scroll-scene { overflow-anchor: none; }
 .hero-copy { max-width: 1020px; }
 .hero h1 { font-size: clamp(40px,5.8vw,74px); }
