@@ -354,7 +354,7 @@ body.docs-navigation-open { overflow: hidden; }
 .hero-expertise { display: block; }
 
 .redesign-home .hero-expertise { color: #394e48; }
-.redesign-home .hero-credibility mark { color: inherit; background: linear-gradient(transparent 62%, #e4edb3 62%); padding-inline: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.redesign-home .hero-expertise mark { color: inherit; background: linear-gradient(transparent 62%, #e4edb3 62%); padding-inline: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 
 .redesign-home .example-navigation { margin-top: clamp(48px,6vw,72px); }
 .redesign-home .agent-shell>.diagram-context { margin-top: clamp(64px,8vw,96px); margin-bottom: 32px; }
