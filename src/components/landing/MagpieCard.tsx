@@ -11,7 +11,7 @@ export default function MagpieCard({ children, work, className = "", as: Element
   work?: string[];
   className?: string;
   as?: "div" | "li";
-  headingLevel?: "h3" | "h4";
+  headingLevel?: "h2" | "h3" | "h4";
 }) {
   const Heading = headingLevel;
   return <Element className={`magpie-card ${className}`}>

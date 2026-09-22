@@ -23,7 +23,7 @@ export default function HeroWorkflows() {
           <div className="reel-active">
             <ol className="reel-flow">
               <li className="reel-source"><span className="reel-input">{item.input}</span></li>
-              <MagpieCard as="li" className="reel-process" work={item.work} />
+              <MagpieCard as="li" headingLevel="h2" className="reel-process" work={item.work} />
               <li className="reel-delivery"><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>

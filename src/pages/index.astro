@@ -14,15 +14,12 @@ import MoreWays from "../components/landing/MoreWays.astro";
 <BaseLayout title="Apache Magpie | Software maintenance, automated" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
   <SiteHeader />
   <main id="main-content" class="redesign-home">
-    <section class="hero container">
+    <section class="hero hero-overview container" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <h1>We’ve <span>automated software <br />maintenance</span> for everyone.</h1>
-        <p class="hero-story"><strong class="hero-credibility">Already used to handle <mark>thousands of software issues</mark>.</strong><span class="hero-expertise">Built for software the world depends on, <BrandName /> shares that expertise as <strong>dozens of open-source coding agent skills</strong>. Free to use and adapt.</span></p>
+        <h1 id="hero-title">Software maintenance.<br /><span>Been there, done that.</span></h1>
+        <p class="hero-story"><strong class="hero-credibility">Experience from <mark>thousands of software issues</mark>, ready for your agent.</strong><span class="hero-expertise">We’ve packaged that know-how into <strong>dozens of open-source skills</strong>, from code reviews and bug fixes to security and releases. Pick what you need. Adapt it to your project.</span></p>
       </div>
-    </section>
-    <section id="workflow-examples" class="integration-section container" aria-labelledby="workflow-examples-title">
-      <h2 id="workflow-examples-title" class="examples-heading">What can Magpie do for you?</h2>
-      <p class="examples-premise"><strong>Been there, done that.</strong> Real maintenance experience, packaged as reusable workflows for your agent.</p>
+      <div id="workflow-examples" class="hero-workflows">
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
           <HeroWorkflows client:load />
@@ -33,6 +30,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
           </div>
           <a class="more-adapters" href="/docs/adapters/readme" target="_blank" rel="noreferrer">and much more</a>
         </div>
+      </div>
       </div>
     </section>
     <section id="airflow" class="airflow-section">

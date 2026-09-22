@@ -435,10 +435,19 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .redesign-home :is(.story-manual h4,.isolation-open h3) { font-size: 22px; font-weight: 600; line-height: 1.45; margin: 0 0 24px; }
 .redesign-home .magpie-card > p { font-size: var(--text-body); line-height: 1.6; }
 
-.redesign-home .examples-heading { margin-bottom: 20px; }
-.examples-premise { max-width: 730px; margin: 0 auto var(--space-heading); text-align: center; color: var(--muted); font-size: var(--text-body); line-height: 1.6; }
-.examples-premise strong { color: var(--blue); }
 /* The opening example reads as one sentence across three equally sized voices. */
-.redesign-home .reel-flow { --flow-text: clamp(18px, 1.8vw, 22px); }
+.redesign-home .reel-flow { --flow-text: var(--text-body); }
 .redesign-home .reel-flow :is(.reel-input,.reel-outcome,.magpie-card-brand,.workflow-checklist li) { font-size: var(--flow-text); line-height: 1.5; }
 .redesign-home .reel-flow :is(.reel-input,.reel-outcome) { font-weight: 500; }
+
+/* One introduction, followed immediately by a concrete workflow. */
+.redesign-home .hero-overview { display: block; min-height: 0; padding-block: clamp(72px,8vw,112px) var(--space-section); }
+.redesign-home .hero-overview .hero-copy { max-width: 1000px; margin: 0 auto; }
+.redesign-home .hero-overview h1 { font-size: clamp(42px,5.5vw,72px); line-height: 1.08; margin: 0 0 28px; }
+.redesign-home .hero-overview .hero-credibility { font-size: clamp(20px,2vw,24px); }
+.redesign-home .hero-overview .hero-story { max-width: 800px; margin-inline: auto; }
+.redesign-home .hero-overview .hero-expertise { font-size: var(--text-body); line-height: 1.7; }
+.hero-workflows { margin-top: clamp(36px,5vw,64px); }
+.redesign-home .hero-overview .integration-art { padding: 0; }
+.redesign-home .hero-overview .example-navigation { margin-top: 32px; }
+.redesign-home .hero-overview .agent-shell>.diagram-context { margin-top: 56px; }
