@@ -74,7 +74,7 @@
 
 /* A situation and a result need less framing than the prepared procedure. */
 .redesign-home .lifecycle-sequence { min-height: 0; padding: 36px 0 0; border-radius: 0; background: transparent; }
-.redesign-home .lifecycle-flow { gap: 24px; grid-template-columns: 1fr 18px 1.1fr 18px 1fr; align-items: start; }
+.redesign-home .lifecycle-flow { gap: 24px; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: stretch; }
 .redesign-home .lifecycle-flow h3 { font-size: var(--title-detail); line-height: 1.3; letter-spacing: -.025em; font-weight: 500; margin: 0 0 18px; }
 .redesign-home .lifecycle-incoming p { font-size: var(--text-body); color: var(--muted); line-height: 1.7; margin: 0; }
 .redesign-home .lifecycle-ready ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; color: #46664c; font-size: var(--text-body); line-height: 1.6; }
@@ -400,7 +400,7 @@ body.docs-navigation-open { overflow: hidden; }
 .redesign-home .example-navigation :is(.example-back,.example-next) { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 1px solid #cbd8cd; border-radius: 50%; background: #fffefa; }
 .example-position { min-width: 48px; font-size: 17px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
 main.redesign-home { position: relative; isolation: isolate; }
-main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-thread.svg') center top / 100% 1800px repeat-y; }
+main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-network.svg') center top / 1440px 1800px repeat-y; }
 @media(max-width:800px) { main.redesign-home::before { opacity: .5; background-size: 1100px 1500px; } }
 
 
@@ -451,3 +451,47 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .redesign-home .hero-overview .integration-art { padding: 0; }
 .redesign-home .hero-overview .example-navigation { margin-top: 32px; }
 .redesign-home .hero-overview .agent-shell>.diagram-context { margin-top: 56px; }
+
+/* Small artifacts use the same line icons and access-diagram vocabulary as setup. */
+.workflow-illustration { height: 100px; margin-top: 22px; display: flex; align-items: center; justify-content: center; }
+.illustration-document { position: relative; display: flex; align-items: center; gap: 16px; width: 150px; height: 88px; padding: 18px; border: 1px solid #d6ad99; border-radius: 8px; background: #fffaf5; }
+.illustration-document > svg { flex-shrink: 0; }
+.illustration-lines { display: grid; gap: 8px; flex: 1; }
+.illustration-lines i { display: block; height: 3px; border-radius: 2px; background: #dfbeab; }
+.illustration-lines i:last-child { width: 65%; }
+.illustration-badge { position: absolute; right: -12px; bottom: -8px; display: grid; place-items: center; width: 34px; height: 34px; background: var(--manual-bg); border: 1px solid #d6ad99; border-radius: 50%; }
+.illustration-pair { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; }
+.illustration-pair > div { display: grid; justify-items: center; gap: 8px; }
+.illustration-pair > div > svg { box-sizing: content-box; padding: 12px; border: 1px solid #afd0b8; border-radius: 8px; background: #f6fcf7; }
+.illustration-pair span { font-size: 13px; line-height: 1.4; }
+.illustration-pair > svg { flex-shrink: 0; margin-top: -25px; }
+.illustration-sandbox { border: 1px dashed #70a584; border-radius: 10px; padding: 10px; }
+@media (max-width: 600px) { .workflow-illustration { height: 88px; margin-top: 18px; } }
+
+/* Shared rows keep the situation, workflow and outcome on the same reading lines. */
+.redesign-home .lifecycle-flow > div { padding: var(--card-padding); border-radius: var(--card-radius); border: 1px solid var(--prepared-border); }
+.redesign-home .lifecycle-incoming { background: #ffffff80; }
+.redesign-home .lifecycle-ready { background: #f3faf5; }
+.redesign-home .lifecycle-flow h3,
+.redesign-home .lifecycle-flow .magpie-card-brand { font-size: 22px; font-weight: 600; line-height: 1.45; letter-spacing: -.02em; margin: 0; }
+.redesign-home .lifecycle-flow :is(p,ul) { font-size: var(--text-body); line-height: 1.6; margin: 0; }
+@media(min-width:801px) {
+ .redesign-home .lifecycle-flow { grid-template-rows: auto 1fr; column-gap: 20px; row-gap: 24px; }
+ .redesign-home .lifecycle-flow > div { display: grid; grid-template-rows: subgrid; grid-row: span 2; align-content: start; }
+ .redesign-home .lifecycle-flow h3 { align-self: start; }
+}
+@media(max-width:800px) { .redesign-home .lifecycle-flow h3 { margin-bottom: 24px; } }
+
+/* A restrained technical texture and crisp surfaces carry the brand through the page. */
+.redesign-home { --card-radius: 16px; }
+.redesign-home .hero-overview { position: relative; padding-top: 64px; }
+.redesign-home .hero-overview::before { content: ''; position: absolute; inset: 0 -40px; pointer-events: none; z-index: -1; background-image: radial-gradient(#004aad20 .7px, transparent .7px); background-size: 24px 24px; mask-image: linear-gradient(transparent, #0005 35%, transparent 90%); }
+.redesign-home .magpie-card { background: linear-gradient(140deg,#f4f8ff,var(--prepared-bg)); box-shadow: 0 2px 3px #193f6b03, 0 12px 36px -28px #193f6b40; }
+.redesign-home .reel-flow > li { border-radius: var(--card-radius); }
+.redesign-home .example-navigation button:hover { border-color: var(--blue); background: #edf4ff; }
+@media(max-width:600px) { .redesign-home .hero-overview::before { inset-inline: 0; } }
+
+/* Continue the network through the tinted bands without crossing the reading column. */
+.redesign-home .section-band { position: relative; isolation: isolate; }
+.redesign-home .section-band::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-network.svg') center top / 1440px 1800px repeat-y; opacity: .6; }
+@media(max-width:800px) { main.redesign-home::before { background-size: 1100px 1375px; opacity: .5; } .redesign-home .section-band::after { opacity: .25; background-size: 1100px 1375px; } }

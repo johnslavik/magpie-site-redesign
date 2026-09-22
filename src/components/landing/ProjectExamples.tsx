@@ -64,9 +64,7 @@ export function SoftwareLifecycle() {
     <div className="software-scenes">{lifecycle.map((phase, index) => <div key={phase.label} id={`lifecycle-detail-${index}`} className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${index}`} aria-hidden={active !== index} inert={active !== index} tabIndex={0}>
       <div className="lifecycle-flow">
         <div className="lifecycle-incoming"><h3>{phase.input}</h3><p>{phase.inputs.join(" ")}</p></div>
-        <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
         <MagpieCard className="lifecycle-work" work={phase.work} />
-        <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
         <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}><Check size={18} aria-hidden="true" /><span>{output}</span></li>)}</ul></div>
       </div>
       <a className="lifecycle-explore" href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows <ArrowRight size={15} aria-hidden="true" /></a>

@@ -5,12 +5,12 @@ import MagpieCard from "./MagpieCard";
 <section class="setup-utilities container isolation-comparison" aria-labelledby="setup-utilities-title">
   <div class="setup-explanation">
     <h2 id="setup-utilities-title">Give your agent a workspace, not your whole machine.</h2>
-    <p>Work on untrusted software locally. Magpie installs and verifies layered protection, without a separate VM on macOS or Linux.</p>
+    <p>Magpie installs and verifies layered protection so you can work on untrusted software locally, without a separate VM on macOS or Linux.</p>
   </div>
   <div class="isolation-sides">
     <div class="isolation-side isolation-open">
       <h3>In YOLO mode</h3>
-      <p>Protections off. Your agent can reach what your session can.</p>
+      <p>With protections disabled, your agent can access the same files, credentials and network as your session.</p>
       <div class="open-agent"><Bot size={40} strokeWidth={1.5} aria-hidden="true" /><span>Your agent</span></div>
       <div class="open-access" aria-hidden="true"><span></span><span></span><span></span></div>
       <div class="exposed-resources">
@@ -21,7 +21,7 @@ import MagpieCard from "./MagpieCard";
       <p class="isolation-consequence">One bad command or malicious instruction can reach beyond the project.</p>
     </div>
     <MagpieCard className="isolation-side isolation-protected">
-      <p>Access scoped. Sensitive actions gated.</p>
+      <p>Magpie limits what your agent can access and requires approval for external writes, reducing the damage a bad instruction can cause.</p>
       <div class="protection-stack">
         <div class="protection-layer"><KeyRound size={20} aria-hidden="true" /><span>Strips credentials from the environment</span></div>
         <div class="protection-layer"><ShieldCheck size={20} aria-hidden="true" /><span>Sandboxes file and network access</span></div>
