@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import { HIDDEN_DOCS } from "../../lib/site";
+
+export async function getStaticPaths() {
+  // HIDDEN_DOCS lives in src/lib/site.ts so llms.txt hides the same pages.
+  const docs = await getCollection("docs");
+  return docs
+    .filter((entry) => !HIDDEN_DOCS.has(entry.id.replace(/\.md$/, "")))
+    .map((entry) => ({
+      params: { slug: entry.id.replace(/\.md$/, "") },
+      props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+// Prefer the document's own H1 (skipping the SPDX/doctoc HTML comments) over
+// the prettified slug: every section overview is a README or index, so slugs
+// alone titled a dozen pages "readme — Apache Magpie Docs" in tabs, history
+// and search results.
+const firstH1 = (body: string | undefined): string | null => {
+  const m = (body ?? "").replace(/<!--[\s\S]*?-->/g, "").match(/^#\s+(.+?)\s*$/m);
+  return m ? m[1].trim() : null;
+};
+const title =
+  entry.data.title ??
+  firstH1(entry.body) ??
+  entry.id.split("/").pop()?.replace(/\.md$/, "").replace(/-/g, " ");
+// Docs markdown is synced from apache/magpie/docs — edits go to that repo.
+// Use filePath (preserves original name + case, e.g. README.md) rather than
+// entry.id, which the glob loader lowercases and strips the extension from.
+const docRelPath = entry.filePath
+  ? entry.filePath.replace(/^.*\/content\/docs\//, "")
+  : `${entry.id.replace(/\.md$/, "")}.md`;
+const editUrl = `https://github.com/apache/magpie/edit/main/docs/${docRelPath}`;
+---
+
+<DocsLayout title={title} currentSlug={entry.id.replace(/\.md$/, "")} editUrl={editUrl} headings={headings}>
+  <Content />
+</DocsLayout>
