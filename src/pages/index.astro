@@ -4,7 +4,7 @@ import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
 import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
-import { BookOpen } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 import BrandName from "../components/landing/BrandName";
 import MoreWays from "../components/landing/MoreWays.astro";
@@ -18,12 +18,13 @@ import MoreWays from "../components/landing/MoreWays.astro";
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
         <p>AI brought more contributions to open source. Maintainers needed a way to keep up. We turned the procedures behind that work into <strong>dozens of reusable skills</strong> your coding agent can follow. <BrandName /> grew out of that work at Apache Airflow. Now you can use those procedures in your own project.</p>
       </div>
+      <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does" hidden><ArrowDown size={22} strokeWidth={1.4} /></a>
     </section>
     <section id="workflow-examples" class="integration-section container" aria-label="How Magpie works with your tools">
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
           <HeroWorkflows client:load />
-          <p class="diagram-context">Works inside your coding agent</p>
+          <p class="diagram-context">Works everywhere</p>
           <div class="supported-agents" aria-label="Supported agent tools">
             <a href="/docs/quick-start"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
             <a href="/docs/adapters/copilot"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
@@ -36,7 +37,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <svg class="airflow-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C240 60 310 10 580 14S1010 88 1440 24V80H0Z" /></svg>
       <div class="container">
       <div class="case-layout">
-        <div class="case-quote"><h2>More capacity for maintainers</h2><div class="case-example"><span>One example, from</span><img class="airflow-brand" src="/vendor-logos/airflow.svg" alt="Apache Airflow" width="155" height="60" /></div><blockquote>“Using <BrandName /> helped us to do things that matter”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Airflow PMC member</span></div></div><a class="light-link case-story" href="/stories/airflow">Read the Airflow story and results</a></div>
+        <div class="case-quote"><h2>What could Magpie do<br />for your project?</h2><div class="case-example"><span>One example, from</span><img class="airflow-brand" src="/vendor-logos/airflow.svg" alt="Apache Airflow" width="155" height="60" /></div><blockquote>“Using <BrandName /> helped us to do things that matter”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Airflow PMC member</span></div></div><a class="light-link case-story" href="/stories/airflow">Read the Airflow story and results</a></div>
         <div class="case-evidence"><AirflowVelocity /></div>
       </div>
     </div></section>
@@ -45,7 +46,21 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <WorkflowExplorer client:load />
     </section>
     <MoreWays />
-    <section class="docs-invitation container" data-reveal><div><h2>Put <BrandName logo /> to work</h2><p>Set up your agent, choose your workflows, and start with your project.</p></div><a class="button" href="/docs/quick-start"><BookOpen size={20} strokeWidth={1.7} aria-hidden="true" /><span>Open the documentation</span></a></section>
+    <section class="docs-invitation container" data-reveal><div><h2>Ready to change how<br />you maintain software?</h2></div><a class="button" href="/docs/quick-start"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></section>
   </main>
   <SiteFooter />
 </BaseLayout>
+
+<script>
+  const cue = document.querySelector<HTMLAnchorElement>('.hero-read-cue');
+  const hero = document.querySelector('.hero');
+  if (cue && hero) {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const observer = new IntersectionObserver(([entry]) => {
+      clearTimeout(timer);
+      cue.hidden = true;
+      if (entry.intersectionRatio >= .7) timer = setTimeout(() => { cue.hidden = false; }, 16000);
+    }, { threshold: [.7] });
+    observer.observe(hero);
+  }
+</script>
