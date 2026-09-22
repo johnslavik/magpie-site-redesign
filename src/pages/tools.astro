@@ -1,6 +1,7 @@
 ---
 import ContentLayout from '../layouts/ContentLayout.astro';
 import { buildToolsView } from '../lib/tools-view';
+const plainDescription = (text: string) => text.replace(/`([^`]+)`/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1');
 const { tools, contractList, substrateList, vendorChips, orgChips, stateBadge } = buildToolsView('');
 ---
 <ContentLayout title="Tools" description="Find the adapters and utilities that connect Magpie to the services you use." wide>
@@ -12,7 +13,7 @@ const { tools, contractList, substrateList, vendorChips, orgChips, stateBadge } 
     <label><input id="tool-mcp" type="checkbox" />MCP tools</label><button id="tool-reset" hidden>Clear filters</button>
   </div>
   <p id="tool-count" class="tool-count" role="status" aria-live="polite">{tools.length} tools</p>
-  <div class="tool-list">{tools.map(tool=><a class="tool-entry" href={`/docs/tools/${tool.name}/readme`} data-search={`${tool.title} ${tool.description} ${tool.name}`.toLowerCase()} data-caps={tool.labels.map(l=>`${l.kind}:${l.name}`).join(' ')} data-vendor={tool.vendorKind === 'interface' ? '__interface' : tool.vendor ?? ''} data-org={tool.organization ?? '__agnostic'} data-mcp={Boolean(tool.mcp)}><h2>{tool.title}</h2><p>{tool.description}</p><div class="tool-meta"><span class:list={{'tool-unavailable':tool.state !== 'implemented'}}>{stateBadge(tool).label}</span>{tool.vendor && <span>{tool.vendor}</span>}{tool.maturity === 'experimental' && <span>Experimental</span>}</div></a>)}</div>
+  <div class="tool-list">{tools.map(tool=><a class="tool-entry" href={`/docs/tools/${tool.name}/readme`} data-search={`${tool.title} ${tool.description} ${tool.name} ${tool.labels.map(label => label.name).join(" ")} ${tool.vendor ?? ""}`.toLowerCase()} data-caps={tool.labels.map(l=>`${l.kind}:${l.name}`).join(' ')} data-vendor={tool.vendorKind === 'interface' ? '__interface' : tool.vendor ?? ''} data-org={tool.organization ?? '__agnostic'} data-mcp={Boolean(tool.mcp)}><h2>{tool.title}</h2><p>{plainDescription(tool.description)}</p><div class="tool-meta"><span class:list={{'tool-unavailable':tool.state !== 'implemented'}}>{stateBadge(tool).label}</span>{tool.vendor && <span>{tool.vendor}</span>}{tool.maturity === 'experimental' && <span>Experimental</span>}</div></a>)}</div>
   <p id="tool-empty" hidden>No matching tools. Try another search or clear the filters.</p>
   <div class="link-row"><a href="/architecture">How these tools fit together </a></div>
 </ContentLayout>

@@ -176,7 +176,7 @@ export default function TerminalDemo() {
   }
   function reset() { if (timer.current) clearTimeout(timer.current); timer.current = null; setEntries([intro]); setPending(false); setBusy(false); setInput(''); setScenario('prs'); setSecurityStep(0); field.current?.focus(); }
   return <div className="t-demo-page">
-    <header className="t-demo-header"><a href={withBase('/')} aria-label="Back to Magpie homepage"><img src={withBase('/subframe-mark.svg')} width="32" height="32" alt="" />Magpie</a><span>INTERACTIVE DEMO</span><a href={withBase('/docs/quick-start')}>Get started </a></header>
+    <header className="t-demo-header"><a href={withBase('/')} aria-label="Back to Magpie homepage"><img src={withBase('/subframe-mark.svg')} width="32" height="32" alt="" />Magpie</a><span>INTERACTIVE DEMO</span><a href={withBase('/start')}>Get started </a></header>
     <main className="t-demo-main"><div className="t-demo-intro"><div><span>YOUR AGENT. YOUR CALL.</span><h1>Give it a task.<br />Keep the final say.</h1></div><p>Explore a simulated maintainer session. Read the findings, inspect a diff, and choose what happens next.</p></div>
       <div className="t-window t-interactive"><div className="t-bar"><span>magpie / example-project</span><span>SIMULATION</span><button onClick={reset} aria-label="Restart demo"><RotateCcw size={16} />Restart</button></div>
         <div className="t-transcript" ref={output} role="log" aria-label="Demo terminal output" aria-live="polite" aria-relevant="additions" tabIndex={0}><CodexStartup />{entries.map((entry,index) => <pre key={index} className={`t-${entry.kind}`}>{entry.text}</pre>)}</div>

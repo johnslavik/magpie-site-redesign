@@ -17,7 +17,7 @@ export function SiteHeader({ home = false, search = false, revealAfterHero = fal
         {home ? <nav className="desktop-nav" aria-label="Main navigation">{links.map(([label, href]) => <a key={label} href={withBase(href)} {...(href.startsWith("/docs") ? { target: "_blank", rel: "noreferrer" } : {})}>{label}</a>)}</nav> : <a className="docs-header-label" href={withBase("/docs")}>Documentation</a>}
         <div className="header-actions">
           {search && <><button className="docs-menu-toggle" aria-label="Browse documentation" aria-expanded="false" aria-controls="docs-sidebar"><Menu size={19}/><span>Browse</span></button><button className="docs-search-trigger" data-search-open><Search size={15}/><span>Search docs</span><kbd>⌘ K</kbd></button></>}
-          {!search && <a className="button button-small" href={withBase("/docs/quick-start")} target="_blank" rel="noreferrer">Get started</a>}
+          {!search && <a className="button button-small" href={withBase("/start")} target="_blank" rel="noreferrer">Get started</a>}
           {home && <details className="mobile-menu"><summary aria-label="Toggle navigation"><Menu className="menu-open" size={22} /><X className="menu-close" size={22} /></summary><nav aria-label="Mobile navigation">{links.map(([label, href]) => <a key={label} href={withBase(href)} {...(href.startsWith("/docs") ? { target: "_blank", rel: "noreferrer" } : {})}>{label}</a>)}</nav></details>}
         </div>
       </div>

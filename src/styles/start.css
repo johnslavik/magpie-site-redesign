@@ -1,0 +1,28 @@
+.start-guide { max-width: 850px; }
+.agent-choice { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; margin-bottom: 36px; }
+.agent-choice label { font-size: 18px; font-weight: 550; }
+.agent-choice select { max-width: 100%; min-height: 48px; padding: 10px 38px 10px 14px; background: white; border: 1px solid #aabdad; border-radius: 6px; color: var(--ink); font: inherit; }
+.agent-choice a { font-size: 16px; }
+.content-page .start-step { padding-block: 32px; }
+.content-page .start-step h2 { font-size: clamp(25px,3vw,32px); }
+.content-page .start-step p { font-size: 18px; line-height: 1.7; }
+.install-code { position: relative; background: #132a46; border-radius: 10px; margin-block: 24px; }
+.content-page .install-code pre { margin: 0; padding: 64px 24px 26px; background: transparent; border-radius: 0; font-size: 16px; line-height: 1.8; color: #e4edf8; }
+.copy-command { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; min-height: 44px; padding: 6px 12px; border-radius: 5px; border: 1px solid #b9cbe050; color: #e4edf8; background: #203b5a; position: absolute; right: 12px; top: 12px; }
+.start-request { position: relative; padding: 62px 24px 24px; border-radius: 8px; background: #edf2fa; margin-block: 22px; }
+.content-page .start-request p { margin: 0; color: #294c73; font-size: 20px; }
+.start-request .copy-command { background: transparent; color: #294c73; border-color: #bccde0; }
+.content-page .install-verify { font-size: 16px; }
+.install-verify a { white-space: nowrap; }
+.start-next { display: inline-flex; align-items: center; gap: 10px; font-size: 17px; }
+.start-reference { display: flex; flex-wrap: wrap; gap: 18px 30px; border-top: 1px solid var(--line); padding-top: 30px; font-size: 16px; }
+@media(max-width:600px) {
+ .agent-choice label { flex-basis: 100%; }
+ .agent-choice select { width: 100%; }
+ .content-page .install-code pre { padding-inline: 18px; font-size: 14px; }
+ .content-page .start-request p { font-size: 18px; }
+ .start-request { padding-inline: 20px; }
+}
+
+.content-page:has(.start-guide) { padding-top: 44px; }
+.content-page:has(.start-guide) .content-page-heading { margin-bottom: 32px; }

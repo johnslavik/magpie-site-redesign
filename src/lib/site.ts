@@ -34,6 +34,7 @@ export const DEV_LIST = "dev@magpie.apache.org";
  */
 export const STATIC_ROUTES: { path: string; title: string; description: string }[] = [
   { path: "/", title: "Home", description: "What Magpie is, the five agentic modes, and the ten skill families." },
+  { path: "/start/", title: "Get started", description: "Choose an agent, install Magpie, and try a workflow on your project." },
   { path: "/docs/", title: "Documentation", description: "Setup, skill families, education stream, principles and RFCs." },
   { path: "/architecture/", title: "Architecture", description: "Organizations, tools and capability contracts behind vendor neutrality." },
   { path: "/tools/", title: "Tools", description: "The adapters that fulfil each capability, and which vendors each supports." },

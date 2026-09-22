@@ -17,16 +17,12 @@ export function SoftwareLifecycle() {
   return <div className="software-lifecycle">
     <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-label={item.label} aria-controls="lifecycle-detail" aria-selected={active === i} tabIndex={active === i ? 0 : -1} data-complete={i < active} onClick={() => setActive(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); select(event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length); } }}><span className="software-phase-icon"><item.icon size={24} strokeWidth={1.5} aria-hidden="true" /></span><span>{item.label}</span></button>)}</div>
     <div id="lifecycle-detail" className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${active}`}>
-      <h3 className="lifecycle-story-title">{phase.title}</h3>
       <div className="lifecycle-flow">
-        <div className="lifecycle-incoming"><span className="flow-label">Your project</span><h4>{phase.input}</h4>
-          {phase.label === "Review" && <div className="contributor-crowd" aria-hidden="true">{Array.from({ length: 18 }, (_, i) => <span key={i} style={{background: ["#a1b9d6", "#b9ccaa", "#d8bfa8", "#bcb3d2"][i % 4]}}><Users size={13} /></span>)}</div>}
-          <div className={`incoming-items ${phase.label === "Review" ? "incoming-prs" : ""}`}>{phase.inputs.map(input => <div key={input}><phase.icon size={15} aria-hidden="true" /><span>{input}</span></div>)}</div>
-        </div>
+        <div className="lifecycle-incoming"><h3>{phase.input}</h3><p>{phase.inputs.join(" ")}</p></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
-        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><ul>{phase.work.map(work => <li key={work}><Check size={15} aria-hidden="true" />{work}</li>)}</ul></div>
+        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><ul>{phase.work.map(work => <li key={work}>{work}</li>)}</ul></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
-        <div className="lifecycle-ready"><span className="flow-label">For your team</span><h4>{phase.outcome}</h4><div className="ready-items">{phase.outputs.map((output, i) => <div key={output} className={`ready-item status-${i}`}><span className="status-dot" aria-hidden="true" />{output}</div>)}</div></div>
+        <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}>{output}</li>)}</ul></div>
       </div>
       <a className="lifecycle-explore" href={phase.link} target="_blank" rel="noreferrer">Explore {phase.label.toLowerCase()} workflows <ArrowRight size={15} aria-hidden="true" /></a>
     </div>
@@ -37,11 +33,7 @@ export function ProjectRules() {
   return <div className="project-procedures">
     <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies the procedures</span></div>
     <div className="procedure-library">
-      <div className="procedure-books">
-        <div><GitPullRequest size={23}/><h3>Review a PR</h3><p>Magpie checks CI, inspects the diff, and drafts feedback.</p></div>
-        <div><ShieldCheck size={23}/><h3>Resolve a report</h3><p>Magpie prepares the investigation, fix, and disclosure.</p></div>
-        <div><PackageCheck size={23}/><h3>Prepare a release</h3><p>Magpie verifies the candidate and drafts the vote and announcement.</p></div>
-      </div>
+      <ul className="procedure-list"><li><GitPullRequest size={22} aria-hidden="true" />Review a pull request</li><li><ShieldCheck size={22} aria-hidden="true" />Resolve a security report</li><li><PackageCheck size={22} aria-hidden="true" />Prepare a release</li></ul>
       <p className="procedure-caption">The steps, checks, and approval points are already written.</p>
     </div>
     <div className="project-rule-bridge"><strong>Magpie’s workflows adapt to your project.</strong></div>
@@ -55,7 +47,7 @@ export function ProjectRules() {
 
 export function SkillComparison() {
   return <div className="skill-comparison">
-    <div className="skill-manual"><span className="comparison-label">Writing a skill from scratch</span><h3>You assemble every part.</h3><div className="manual-notes">{["Learn the skill format", "Write the procedure", "Think through edge cases", "Add approval points", "Create test cases", "Check the results and revise"].map((step,i)=><div key={step}><span aria-hidden="true">□</span>{step}<i aria-hidden="true" style={{width:`${70-i*4}%`}} /></div>)}</div></div>
-    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="96" height="27" /></div><h3>Follow Magpie’s skill-writing procedure.</h3><div className="authoring-prompt">“Make a skill that checks new dependencies.”</div><div className="authoring-tool"><FileText size={16}/><code>write-skill</code><span>Magpie’s authoring procedure</span></div><ol className="authoring-steps"><li><strong>Define the job</strong><span>Clarify examples and the decisions that need your approval.</span></li><li><strong>Write the procedure</strong><span>Use Magpie’s templates and validation checks.</span></li><li><strong>Test and improve it</strong><span>Create example cases, run them, and refine the skill.</span></li></ol><div className="authored-skill"><div><FileText size={22}/><strong>check-dependency / SKILL.md</strong></div><ul><li><Check size={16}/>Instructions and approval points</li><li><Check size={16}/>Edge cases and example inputs</li><li><Check size={16}/>Expected results to test against</li></ul></div><p className="authoring-finish">You review the skill and its test results before sharing it.</p></div>
+    <div className="skill-manual"><h3>Writing a skill from scratch</h3><ol className="manual-steps">{["Learn the skill format.", "Write the procedure and approval points.", "Think through the edge cases.", "Create examples and expected results.", "Run the tests and revise the skill."].map(step => <li key={step}>{step}</li>)}</ol></div>
+    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="110" height="31" /></div><blockquote className="authoring-request">“Make a skill that checks new dependencies.”</blockquote><p className="authoring-result">Magpie helps your agent write the skill, test it against examples, and improve the results.</p><p className="authoring-finish"><Check size={22} aria-hidden="true" />You review the skill and its test results before sharing it.</p></div>
   </div>;
 }

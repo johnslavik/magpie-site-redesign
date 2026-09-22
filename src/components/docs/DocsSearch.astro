@@ -21,7 +21,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   let selected = -1;
   let matches: SearchEntry[] = [];
   let loadFailed = false;
-  const defaults = ['quick-start', 'security/readme', 'pr-management/readme', 'setup/privacy-llm', 'education/readme'];
+  const defaults = ['/start', '/docs/security/readme', '/docs/pr-management/readme', '/docs/setup/privacy-llm', '/docs/education/readme'];
   const render = () => {
     if (!entries) return;
     const query = input.value.trim().toLowerCase();
@@ -31,7 +31,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       const haystack = `${title} ${entry.section} ${entry.text}`.toLowerCase();
       const score = terms.every(term => haystack.includes(term)) ? terms.reduce((score, term) => score + (title.includes(term) ? 15 : 1), 0) + (title.includes(query) ? 30 : 0) : 0;
       return { entry, score };
-    }).filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 12).map(item => item.entry) : defaults.map(slug => entries!.find(entry => entry.path.endsWith(`/docs/${slug}`))).filter((entry): entry is SearchEntry => Boolean(entry));
+    }).filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 12).map(item => item.entry) : defaults.map(slug => entries!.find(entry => entry.path.endsWith(slug))).filter((entry): entry is SearchEntry => Boolean(entry));
     results.replaceChildren(); selected = -1;
     for (const entry of matches) {
       const link = document.createElement('a'); link.href = entry.path;

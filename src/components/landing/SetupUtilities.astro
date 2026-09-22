@@ -4,7 +4,7 @@ import { Check, ArrowRight, ShieldCheck } from "lucide-react";
 <section class="setup-utilities container" aria-labelledby="setup-utilities-title">
   <div class="setup-explanation">
     <h2 id="setup-utilities-title">We’ve packaged the agent setup for you, too.</h2>
-    <p>Setting up isolation by hand means configuring permissions, protecting credentials, and checking that it all works.</p>
+    <p>Configuring permissions, protecting credentials, and verifying isolation takes work before you even start.</p>
     <p><strong>Magpie supplies the tools and walks your agent through installation and verification.</strong> It is part of the default setup flow.</p>
     <a class="text-link" href="/docs/setup/secure-agent-setup" target="_blank" rel="noreferrer">See what the setup includes <ArrowRight size={18} aria-hidden="true" /></a>
   </div>
@@ -14,11 +14,11 @@ import { Check, ArrowRight, ShieldCheck } from "lucide-react";
       <img src="/wordmark.svg" alt="Magpie" width="142" height="40" />
       <ul>
         <li><Check size={20} aria-hidden="true" /><span>Configures isolation for your agent.</span></li>
-        <li><Check size={20} aria-hidden="true" /><span>Limits inherited credentials and wires supported guards.</span></li>
+        <li><Check size={20} aria-hidden="true" /><span>Limits access to credentials and checks commands where your agent supports it.</span></li>
         <li><Check size={20} aria-hidden="true" /><span>Checks the setup and reports anything missing.</span></li>
       </ul>
     </div>
     <p class="setup-approval"><ShieldCheck size={22} aria-hidden="true" /><span>You approve the proposed changes before installation.</span></p>
   </div>
-  <p class="setup-start">You can start in your own agent without changing the shared repository or asking your whole team to adopt Magpie. <a href="/docs/quick-start" target="_blank" rel="noreferrer">Get started on your project <ArrowRight size={17} aria-hidden="true" /></a></p>
+
 </section>

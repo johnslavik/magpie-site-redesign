@@ -12,7 +12,7 @@ const more = [["Repository health", "/docs/repo-health/readme"], ["Mentoring", "
 <DocsLayout title="Introduction" currentSlug="" currentSection="_root" editUrl="https://github.com/johnslavik/magpie-site-redesign/edit/main/src/pages/docs/index.astro">
   <h1>Documentation</h1>
   <p class="docs-lead">Magpie is a collection of AI agent skills for open-source maintainers. Use it to prepare reviews, triage reports, and move work forward with your judgment at every step.</p>
-  <a href="/docs/quick-start" class="docs-start-card"><div><h2>Get up and running</h2><p>Install Magpie, choose a workflow, and try it on your project.</p><span class="text-link">Open the quick start </span></div><Terminal size={37} strokeWidth={1.2} /></a>
+  <a href="/start" class="docs-start-card"><div><h2>Get up and running</h2><p>Install Magpie, choose a workflow, and try it on your project.</p><span class="text-link">Install Magpie </span></div><Terminal size={37} strokeWidth={1.2} /></a>
   <h2 id="workflows">What would you like help with?</h2>
   <div class="docs-card-grid">{workflows.map(item => <a href={item.href} class="docs-card"><item.icon size={22} strokeWidth={1.5} /><h3>{item.title}</h3><p>{item.description}</p></a>)}</div>
   <div class="docs-more-links">{more.map(([title,href]) => <a href={href}>{title}</a>)}</div>

@@ -475,6 +475,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   <div class="docs-shell">
     <aside id="docs-sidebar" class="docs-sidebar" aria-label="Documentation navigation">
       <div id="docs-nav-scroll">
+        <a href={`${base}/start`} class="docs-overview-link">Install Magpie</a>
         <a href={`${base}/docs`} class:list={["docs-overview-link", { active: !currentSlug }]} aria-current={!currentSlug ? 'page' : undefined}>Introduction</a>
         <nav aria-label="Documentation sections"><DocsNavTree nodes={navTree} base={base} level={0} /></nav>
       </div>
@@ -484,7 +485,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
       <article class="prose docs-prose"><slot /></article>
     </main>
     <aside class="docs-toc" aria-label="On this page">
-      {toc.length > 0 ? <><span class="eyebrow">On this page</span><nav><ul>{toc.map(h => <li><a href={`#${h.slug}`} style={`padding-left: ${(h.depth - tocBase) * 0.75}rem`}>{h.text}</a></li>)}</ul></nav></> : <><span class="eyebrow">Get started</span><a href={`${base}/docs/quick-start`}>Install Magpie </a><a href={`${base}/docs/quick-start/families`}>Choose a workflow </a><a href={`${base}/docs/education/readme`}>Learn about agents </a></>}
+      {toc.length > 0 ? <><span class="eyebrow">On this page</span><nav><ul>{toc.map(h => <li><a href={`#${h.slug}`} style={`padding-left: ${(h.depth - tocBase) * 0.75}rem`}>{h.text}</a></li>)}</ul></nav></> : <><span class="eyebrow">Get started</span><a href={`${base}/start`}>Install Magpie </a><a href={`${base}/docs/quick-start/families`}>Choose a workflow </a><a href={`${base}/docs/education/readme`}>Learn about agents </a></>}
 
     </aside>
   </div>
