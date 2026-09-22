@@ -77,7 +77,7 @@ export function SoftwareLifecycle() {
 
 export function ProjectRules() {
   return <div className="project-procedures project-adaptation">
-    <MagpieCard className="prepared-procedures" work={["Check the changes and CI results", "Review the code for problems", "Draft actionable feedback"]} />
+    <MagpieCard className="prepared-procedures" work={["Checks the changes and CI results", "Reviews the code for problems", "Drafts actionable feedback"]} />
     <ArrowRight className="adaptation-arrow" size={28} aria-hidden="true" />
     <div className="adapted-procedures">
       <h3>Your team adds its review rules.</h3>

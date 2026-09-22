@@ -23,10 +23,10 @@ import MagpieCard from "./MagpieCard";
     <MagpieCard className="isolation-side isolation-protected">
       <p>Access scoped. Sensitive actions gated.</p>
       <div class="protection-stack">
-        <div class="protection-layer"><KeyRound size={20} aria-hidden="true" /><span>Credentials stripped from the environment</span></div>
-        <div class="protection-layer"><ShieldCheck size={20} aria-hidden="true" /><span>File and network access sandboxed</span></div>
-        <div class="protection-layer"><LockKeyhole size={20} aria-hidden="true" /><span>Agent tools restricted</span></div>
-        <div class="protection-layer"><UserRound size={20} aria-hidden="true" /><span>External writes require approval</span></div>
+        <div class="protection-layer"><KeyRound size={20} aria-hidden="true" /><span>Strips credentials from the environment</span></div>
+        <div class="protection-layer"><ShieldCheck size={20} aria-hidden="true" /><span>Sandboxes file and network access</span></div>
+        <div class="protection-layer"><LockKeyhole size={20} aria-hidden="true" /><span>Restricts agent tools</span></div>
+        <div class="protection-layer"><UserRound size={20} aria-hidden="true" /><span>Requires approval for external writes</span></div>
         <div class="protected-workspace"><span class="sandbox-label"><ShieldCheck size={20} aria-hidden="true" />Your allowed workspace</span><div class="sandbox-contents"><div><Bot size={32} aria-hidden="true" /><span>Your agent</span></div><ArrowRight size={24} aria-hidden="true" /><div><FolderCode size={32} aria-hidden="true" /><span>Project files</span></div></div>
       </div>
     </div>

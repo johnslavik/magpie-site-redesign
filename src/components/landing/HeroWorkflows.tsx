@@ -3,15 +3,15 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import MagpieCard from "./MagpieCard";
 
 const examples = [
-  { input: "A security report arrives", skill: "security-issue-triage", work: ["Investigate the report", "Write and test the fix", "Coordinate release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
-  { input: "A pull request needs review", skill: "pr-management-code-review", work: ["Read the code changes", "Check tests and conventions", "Draft comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
-  { input: "A bug needs fixing", skill: "issue-fix-workflow", work: ["Reproduce the failure", "Write the fix", "Add a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
-  { input: "A release needs checking", skill: "release-verify-rc", work: ["Verify the build and signatures", "Prepare the release vote", "Draft the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
-  { input: "Someone wants to contribute", skill: "newcomer-issue-explainer", work: ["Find a suitable issue", "Explain the code to change", "Show how to test the change"], outcome: "A clear first task to work on", path: "/docs/mentoring/readme" },
-  { input: "Your dependencies need updating", skill: "dependency-audit", work: ["Find vulnerable packages", "Flag abandoned dependencies", "Prioritise the fixes"], outcome: "An actionable upgrade plan", path: "/docs/repo-health/readme" },
-  { input: "Your code needs a second look", skill: "pairing-self-review", work: ["Review the local diff", "Find bugs and missing tests", "Suggest specific fixes"], outcome: "Problems caught before a PR", path: "/docs/pairing/readme" },
-  { input: "A new committer joins", skill: "committer-onboarding", work: ["Check required paperwork", "Track access setup", "Prepare the welcome"], outcome: "Onboarding covered, step by step", path: "/docs/contributor-growth/readme" },
-  { input: "Your agent needs a sandbox", skill: "setup-isolated-setup-install", work: ["Configure the sandbox", "Limit file and tool access", "Verify the protections"], outcome: "An isolated workspace to code in", path: "/docs/setup/secure-agent-setup" },
+  { input: "A security report arrives", skill: "security-issue-triage", work: ["Investigates the report", "Writes and tests the fix", "Coordinates release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
+  { input: "A pull request needs review", skill: "pr-management-code-review", work: ["Reads the code changes", "Checks tests and conventions", "Drafts comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
+  { input: "A bug needs fixing", skill: "issue-fix-workflow", work: ["Reproduces the failure", "Writes the fix", "Adds a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
+  { input: "A release needs checking", skill: "release-verify-rc", work: ["Verifies the build and signatures", "Prepares the release vote", "Drafts the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
+  { input: "Someone wants to contribute", skill: "newcomer-issue-explainer", work: ["Finds a suitable issue", "Explains the code to change", "Shows how to test the change"], outcome: "A clear first task to work on", path: "/docs/mentoring/readme" },
+  { input: "Your dependencies need updating", skill: "dependency-audit", work: ["Finds vulnerable packages", "Flags abandoned dependencies", "Prioritises the fixes"], outcome: "An actionable upgrade plan", path: "/docs/repo-health/readme" },
+  { input: "Your code needs a second look", skill: "pairing-self-review", work: ["Reviews the local diff", "Finds bugs and missing tests", "Suggests specific fixes"], outcome: "Problems caught before a PR", path: "/docs/pairing/readme" },
+  { input: "A new committer joins", skill: "committer-onboarding", work: ["Checks required paperwork", "Tracks access setup", "Prepares the welcome"], outcome: "Onboarding covered, step by step", path: "/docs/contributor-growth/readme" },
+  { input: "Your agent needs a sandbox", skill: "setup-isolated-setup-install", work: ["Configures the sandbox", "Limits file and tool access", "Verifies the protections"], outcome: "An isolated workspace to code in", path: "/docs/setup/secure-agent-setup" },
 ];
 
 export default function HeroWorkflows() {
@@ -22,9 +22,9 @@ export default function HeroWorkflows() {
       <div className="reel-example" key={selected}>
           <div className="reel-active">
             <ol className="reel-flow">
-              <li className="reel-source"><small>When this happens</small><span className="reel-input">{item.input}</span></li>
+              <li className="reel-source"><span className="reel-input">{item.input}</span></li>
               <MagpieCard as="li" className="reel-process" work={item.work} />
-              <li className="reel-delivery"><small>So you get</small><strong className="reel-outcome">{item.outcome}</strong></li>
+              <li className="reel-delivery"><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>
       </div>

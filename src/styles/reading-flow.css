@@ -420,9 +420,6 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
   margin: 0 0 24px;
 }
 .redesign-home .magpie-card-brand img { width: 32px; height: 32px; flex: 0 0 32px; filter: none; border-radius: 4px; }
-.redesign-home .magpie-card .magpie-card-promise { font-size: var(--text-body); line-height: 1.6; margin: 0 0 24px; color: var(--prepared-ink); }
-.redesign-home .magpie-card-promise strong { display: block; color: var(--prepared-accent); font-size: inherit; font-weight: 700; line-height: inherit; margin: 0; letter-spacing: normal; }
-.redesign-home .magpie-card-promise span { display: block; }
 .redesign-home .magpie-card .workflow-checklist { display: grid; gap: 12px; list-style: none; margin: 0; padding: 0; }
 .redesign-home .magpie-card .workflow-checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: var(--text-body); line-height: 1.6; color: var(--prepared-ink); }
 .redesign-home .workflow-checklist svg { flex: 0 0 18px; margin-top: 5px; color: #28784c; }
@@ -436,4 +433,12 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .redesign-home .protected-workspace { color: #28613e; }
 @media(max-width:800px) { .redesign-home { --card-padding: 22px; } }
 .redesign-home :is(.story-manual h4,.isolation-open h3) { font-size: 22px; font-weight: 600; line-height: 1.45; margin: 0 0 24px; }
-.redesign-home .magpie-card > p:not(.magpie-card-promise) { font-size: var(--text-body); line-height: 1.6; }
+.redesign-home .magpie-card > p { font-size: var(--text-body); line-height: 1.6; }
+
+.redesign-home .examples-heading { margin-bottom: 20px; }
+.examples-premise { max-width: 730px; margin: 0 auto var(--space-heading); text-align: center; color: var(--muted); font-size: var(--text-body); line-height: 1.6; }
+.examples-premise strong { color: var(--blue); }
+/* The opening example reads as one sentence across three equally sized voices. */
+.redesign-home .reel-flow { --flow-text: clamp(18px, 1.8vw, 22px); }
+.redesign-home .reel-flow :is(.reel-input,.reel-outcome,.magpie-card-brand,.workflow-checklist li) { font-size: var(--flow-text); line-height: 1.5; }
+.redesign-home .reel-flow :is(.reel-input,.reel-outcome) { font-weight: 500; }

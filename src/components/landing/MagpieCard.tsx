@@ -15,8 +15,8 @@ export default function MagpieCard({ children, work, className = "", as: Element
 }) {
   const Heading = headingLevel;
   return <Element className={`magpie-card ${className}`}>
-    <Heading className="magpie-card-brand"><img src={withBase("/favicon.svg")} alt="" width="32" height="32" /><span>With Magpie</span></Heading>
-    {work && <><p className="magpie-card-promise"><strong>Been there, done that.</strong><span>Reuse our workflow.</span></p><Checklist items={work} /></>}
+    <Heading className="magpie-card-brand"><img src={withBase("/favicon.svg")} alt="" width="32" height="32" /><span>Magpie</span></Heading>
+    {work && <Checklist items={work} />}
     {children}
   </Element>;
 }
