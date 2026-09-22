@@ -839,7 +839,7 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 }
 .reel-flow .reel-work li::before { content: '' !important; position: absolute; left: 0; right: auto; top: .65em; bottom: auto; transform: none; width: 4px; height: 4px; border: 0; border-radius: 50%; background: #487252; }
 /* Match the logo's letter baseline, allowing for the descender in its g. */
-.inline-wordmark { display: inline-block; width: 3.62em; height: 1.02em; max-width: none; vertical-align: -.248em; object-fit: contain; }
+.inline-wordmark { display: inline-block; width: 3.25em; height: 1.12em; max-width: none; vertical-align: -.272em; object-fit: fill; }
 .text-link:has(>.inline-wordmark) { display: inline; }
 .workflow-scroll-scene { overflow-anchor: none; }
 .hero-copy { max-width: 1020px; }
