@@ -497,11 +497,6 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .workflow-connector { height: 24px; width: 1px; background: #b6c9e2; margin-inline: auto; }
 /* A quiet vertical reel keeps one full workflow readable at a time. */
 .workflow-reel { min-width: 0; }
-.reel-window { height: 264px; position: relative; perspective: 900px; overflow: hidden; }
-.reel-example { position: absolute; width: 100%; top: 50%; transform: translateY(-50%); transition: transform .65s cubic-bezier(.22,.68,0,1), opacity .65s; }
-.reel-example[data-position="-1"] { transform: translateY(calc(-50% - 113px)) rotateX(20deg) scale(.95); opacity: .4; }
-.reel-example[data-position="1"] { transform: translateY(calc(-50% + 113px)) rotateX(-20deg) scale(.95); opacity: .4; }
-.reel-example[data-position="0"] { z-index: 2; }
 .reel-active { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 23px 16px; border: 1px solid #b9cce4; border-radius: 10px; background: white; box-shadow: 0 8px 24px #27486b0a; text-decoration: none; color: var(--ink); }
 .reel-input { display: flex; gap: 8px; align-items: center; font-size: 14px; }
 .reel-input svg { color: var(--blue); }
@@ -509,11 +504,6 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .reel-steps span { display: flex; align-items: center; white-space: nowrap; }
 .reel-steps span + span::before { content: ''; width: 24px; height: 1px; background: #b6c9e2; margin-inline: 10px; }
 .reel-outcome { color: var(--blue); font-size: 19px; line-height: 1.3; font-weight: 550; text-align: center; }
-.reel-peek { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border: 1px solid #dbe3ed; border-radius: 7px; font-size: 11px; background: var(--paper); }
-.reel-peek span:last-child { margin-left: auto; }
-.reel-controls { display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 11px; color: var(--muted); margin-top: 10px; }
-.reel-controls button { border: 0; background: none; padding: 8px 0; font-size: 11px; color: var(--ink); }
-.reel-controls button:hover { color: var(--blue); }
 @media(min-width:801px) {
  .hero { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 40px; padding-block: 48px; }
  .agent-shell { padding-inline: 0; }
@@ -531,8 +521,6 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .reel-steps { font-size: 11px; }
  .reel-steps span + span::before { width: 12px; margin-inline: 7px; }
  .reel-outcome { font-size: 17px; }
- .reel-peek { font-size: 10px; gap: 6px; }
- .reel-controls { gap: 15px; }
 }
 .lifecycle-stages { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin: 24px 0; }
 .lifecycle-stages button { min-height: 40px; padding: 10px 12px; text-align: left; font-size: 12px; line-height: 1.4; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; background: transparent; }
@@ -551,7 +539,6 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .sandbox-statusline strong[data-mode=auto] { color: #e4c779; }
 .sandbox-statusline strong[data-mode=off] { color: #ff9292; font-weight: 750; }
 .sandbox-statusline .status-project { color: #9abce7; }
-.statusline-docs { display: inline-block; margin-top: 7px; color: #aaa69b; font-size: 10px; text-decoration: underline; text-underline-offset: 3px; }
 .sandbox-mode-picker { margin-bottom: 16px; }
 .sandbox-mode-picker>code { color: #e2dfd5; }
 .sandbox-mode-picker>div { display: flex; flex-wrap: wrap; gap: 6px; margin: 9px 0; }
@@ -561,9 +548,6 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 @media(max-width:800px) { .sandbox-demo { padding-inline: 16px; } }
 
 /* Task, work, and completion icons form one directional workflow. */
-.reel-window { height: 354px; }
-.reel-example[data-position="-1"] { transform: translateY(calc(-50% - 154px)) rotateX(20deg) scale(.95); }
-.reel-example[data-position="1"] { transform: translateY(calc(-50% + 154px)) rotateX(-20deg) scale(.95); }
 .reel-active { height: 246px; padding: 20px 24px; align-items: stretch; justify-content: center; }
 .reel-flow { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }
 .reel-flow li { position: relative; display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 13px; align-items: start; }
@@ -590,3 +574,18 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
 .reel-outcome { font-size: 20px; }
 .reel-flow small { font-size: 11px; }
 @media(max-width:800px) { .reel-input { font-size: 14px; } .reel-steps { font-size: 12px; } .reel-outcome { font-size: 18px; } .reel-flow small { font-size: 10px; } }
+
+/* One example, with secondary controls only when the reader interacts. */
+.workflow-reel { position: relative; }
+.reel-window { min-height: 246px; }
+.reel-example { width: 100%; }
+@media(prefers-reduced-motion:no-preference) { .reel-example { animation: workflow-enter .45s ease both; } }
+@keyframes workflow-enter { from { opacity: .4; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.flow-node img { display: block; width: 20px; height: 20px; object-fit: contain; }
+.reel-controls { position: absolute; top: 8px; right: 8px; display: flex; gap: 2px; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.reel-controls button { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 4px; background: white; color: var(--muted); }
+.reel-controls button:hover { color: var(--blue); background: #edf3fc; }
+.workflow-reel:hover .reel-controls, .workflow-reel:focus-within .reel-controls { opacity: 1; pointer-events: auto; }
+@media(hover:none) { .reel-controls { opacity: .55; pointer-events: auto; } }
+.sandbox-state { color: inherit; text-decoration: none; }
+.sandbox-state:hover { text-decoration: underline; }

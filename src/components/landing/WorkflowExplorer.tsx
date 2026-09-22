@@ -7,8 +7,8 @@ import { withBase } from "@/ui/lib/utils";
 // Illustrative sessions grounded in the synced workflow-family documentation.
 const workflows = [
   { id: "security", label: "Security reports", icon: ShieldCheck,
-    title: "From the first report to a published CVE.",
-    text: "A complete 16-step security lifecycle, with setup and privacy controls built in. Magpie handles the investigation, fix, CVE paperwork, release handoffs, and tracker updates. Your team approves decisions, merges the fix, and sends the advisory.",
+    title: "Magpie handles the full 16-step security workflow.",
+    text: "Magpie takes each report through investigation, a tested fix, release coordination, CVE publication, and closure. It keeps the evidence and tracker in sync while your team reviews decisions, merges fixes, and sends the advisory.",
     path: "/docs/security/readme", prompt: "Investigate this security report and prepare the fix.",
     steps: [
       ["Read", "Project security model and report", "The reported path crosses a trust boundary."],

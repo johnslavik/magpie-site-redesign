@@ -18,11 +18,10 @@ export default function SandboxStatus({ setup, interactive }: { setup: boolean; 
       <p>{current.detail}</p>
     </div>}
     <div className="sandbox-statusline" aria-live="polite" aria-label="Example sandbox status line">
-      <strong data-mode={mode}>{current.tag}</strong>
+      <a className="sandbox-state" href={withBase("/docs/setup/secure-agent-setup#sandbox-state-status-line")} aria-label={`${current.tag}: Magpie sandbox status for Claude Code`} title="About this sandbox status"><strong data-mode={mode}>{current.tag}</strong></a>
       <span className="status-project">example-app{setup ? "" : "/security-fix"}</span>
       <span aria-hidden="true">|</span><span>{setup ? "main" : "fix/archive-path * +2"}</span>
       <span aria-hidden="true">|</span><span>Opus</span>
     </div>
-    <a className="statusline-docs" href={withBase("/docs/setup/secure-agent-setup#sandbox-state-status-line")}>Magpie’s status line for Claude Code</a>
   </div>;
 }

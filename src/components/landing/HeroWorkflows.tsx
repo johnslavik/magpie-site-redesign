@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ShieldCheck, PackageCheck, ScanSearch, GitPullRequest, Bug, Users, UserPlus, FileCheck2, Settings2, Cog, Check } from "lucide-react";
+import { ShieldCheck, PackageCheck, ScanSearch, GitPullRequest, Bug, Users, UserPlus, FileCheck2, Settings2, Check, Pause, Play, ChevronRight } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 const examples = [
@@ -11,7 +11,7 @@ const examples = [
   { input: "Repository", steps: ["Audit", "Diagnose", "Prioritise"], outcome: "Repository health action plan", path: "/docs/repo-health/readme", icon: ScanSearch },
   { input: "Local changes", steps: ["Read", "Review", "Suggest fixes"], outcome: "Changes checked before a PR", path: "/docs/pairing/readme", icon: FileCheck2 },
   { input: "New committer", steps: ["Prepare", "Coordinate", "Onboard"], outcome: "Committer onboarding completed", path: "/docs/contributor-growth/readme", icon: UserPlus },
-  { input: "Your agent", steps: ["Isolate", "Guard", "Verify"], outcome: "Sandboxed workspace", path: "/docs/setup/secure-agent-setup", icon: Settings2, Cog, Check },
+  { input: "Your agent", steps: ["Isolate", "Guard", "Verify"], outcome: "Sandboxed workspace", path: "/docs/setup/secure-agent-setup", icon: Settings2 },
 ];
 
 export default function HeroWorkflows() {
@@ -34,24 +34,21 @@ export default function HeroWorkflows() {
     const timer = window.setInterval(() => setSelected(value => (value + 1) % examples.length), 7000);
     return () => window.clearInterval(timer);
   }, [paused, held, reduced, inView]);
+  const item = examples[selected];
+  const Icon = item.icon;
   const move = (direction: number) => { setPaused(true); setSelected(value => (value + direction + examples.length) % examples.length); };
   return <div className="workflow-reel" ref={ref} role="region" aria-label="Examples of complete Magpie workflows" onMouseEnter={() => setHeld(true)} onMouseLeave={() => setHeld(false)} onFocusCapture={() => setHeld(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHeld(false); }}>
     <div className="reel-window" aria-live="off">
-      {[-1, 0, 1].map(offset => {
-        const index = (selected + offset + examples.length) % examples.length;
-        const item = examples[index];
-        const Icon = item.icon;
-        return <div className="reel-example" data-position={offset} key={index} aria-hidden={offset !== 0}>
-          {offset === 0 ? <a href={withBase(item.path)} className="reel-active">
+      <div className="reel-example" key={selected}>
+          <a href={withBase(item.path)} className="reel-active">
             <ol className="reel-flow">
               <li><span className="flow-node" aria-hidden="true"><Icon size={17} strokeWidth={1.6} /></span><div><small>Start with</small><span className="reel-input">{item.input}</span></div></li>
-              <li><span className="flow-node" aria-hidden="true"><Cog size={17} strokeWidth={1.6} /></span><div><small>Magpie handles</small><span className="reel-steps">{item.steps.map((step, i) => <span key={step}>{i > 0 && <span className="flow-arrow" aria-hidden="true">→</span>}{step}</span>)}</span></div></li>
+              <li><span className="flow-node" aria-hidden="true"><img src={withBase("/favicon.svg")} width="20" height="20" alt="" /></span><div><small>Magpie handles</small><span className="reel-steps">{item.steps.map((step, i) => <span key={step}>{i > 0 && <span className="flow-arrow" aria-hidden="true">→</span>}{step}</span>)}</span></div></li>
               <li><span className="flow-node flow-finished" aria-hidden="true"><Check size={17} strokeWidth={2} /></span><div><small>You get</small><strong className="reel-outcome">{item.outcome}</strong></div></li>
             </ol>
-          </a> : <div className="reel-peek"><Icon size={16} strokeWidth={1.5} /><span>{item.input}</span><span>{item.outcome}</span></div>}
-        </div>;
-      })}
+          </a>
+      </div>
     </div>
-    <div className="reel-controls"><button type="button" onClick={() => move(-1)} aria-label="Previous workflow">Previous</button><span>Explore workflows</span>{!reduced && <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play workflow rotation" : "Pause workflow rotation"}>{paused ? "Play" : "Pause"}</button>}<button type="button" onClick={() => move(1)} aria-label="Next workflow">Next</button></div>
+    <div className="reel-controls">{!reduced && <button type="button" onClick={() => setPaused(value => !value)} aria-label={paused ? "Play workflow rotation" : "Pause workflow rotation"} title={paused ? "Play" : "Pause"}>{paused ? <Play size={14} /> : <Pause size={14} />}</button>}<button type="button" onClick={() => move(1)} aria-label="Next workflow" title="Next workflow"><ChevronRight size={17} /></button></div>
   </div>;
 }
