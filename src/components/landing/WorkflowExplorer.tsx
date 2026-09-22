@@ -1,54 +1,8 @@
-import { BrandText } from "./BrandName";
-import SandboxStatus from "./SandboxStatus";
-import { securityStages } from "./workflow-stages";
 import { useEffect, useRef, useState } from "react";
-import { GitPullRequest, ShieldCheck, Inbox, PackageCheck, Check } from "lucide-react";
+import { Check, FileText, ShieldCheck } from "lucide-react";
+import { securityStory } from "./security-story";
 
-// Illustrative sessions grounded in the synced workflow-family documentation.
-const workflows = [
-  { id: "security", label: "Security reports", icon: ShieldCheck,
-    title: "Magpie handles the full 16-step security workflow.",
-    text: "Magpie takes each report through investigation, a tested fix, release coordination, CVE publication, and closure. It keeps the evidence and tracker in sync while your team reviews decisions, merges fixes, and sends the advisory.",
-    path: "/docs/security/readme", prompt: "Investigate this security report and prepare the fix.",
-    steps: [
-      ["Read", "Project security model and report", "The reported path crosses a trust boundary."],
-      ["Investigate", "Reproduce in an isolated workspace", "Reproducer confirms the reported behaviour."],
-      ["Edit", "Private fix and regression test", "Regression test passes with the patch."],
-      ["Draft", "Reporter response and advisory", "Prepared for review. Nothing sent or published."],
-    ], result: "The fix and disclosure drafts are ready for your review.", approval: "Review the private patch before proceeding." },
-  { id: "reviews", label: "Pull requests", icon: GitPullRequest,
-    title: "Turn an incoming PR into a review you can post.",
-    text: "Read the diff, check CI and project conventions, inspect the affected code, and draft line-by-line comments. Magpie proposes approve, request changes, or comment; you confirm before the review is posted.",
-    path: "/docs/pr-management/readme", prompt: "Review this pull request against our project conventions.",
-    steps: [
-      ["Read", "Pull request diff and review criteria", "Loaded the changed files and project conventions."],
-      ["Check", "CI status and affected code paths", "CI passes. One unhandled edge case needs attention."],
-      ["Review", "Draft an inline comment", "Added a file reference and a suggested regression test."],
-      ["Draft", "REQUEST_CHANGES review", "Review prepared locally. Nothing posted."],
-    ], result: "One actionable finding, with evidence and a suggested test.", approval: "Post this review? Awaiting your confirmation." },
-  { id: "issues", label: "Bug fixes", icon: Inbox,
-    title: "Take a bug report through to a fix PR.",
-    text: "Classify the issue, find duplicates, reproduce the bug, and prepare a fix with a regression test. Magpie follows your build and contribution instructions, then drafts the PR for your review.",
-    path: "/docs/issue-management/readme", prompt: "Reproduce this bug and prepare a fix PR.",
-    steps: [
-      ["Triage", "Issue report and related issues", "No existing fix found. The report has enough detail."],
-      ["Test", "Add a minimal reproducer", "The regression test fails on the current branch."],
-      ["Edit", "Apply the fix and rerun tests", "The reproducer and related tests now pass."],
-      ["Draft", "PR description and test evidence", "Included the root cause, patch, and verification."],
-    ], result: "The patch, regression test, and PR draft are ready.", approval: "Review the changes before opening the PR." },
-  { id: "releases", label: "Releases", icon: PackageCheck,
-    title: "Carry a release from preparation to announcement.",
-    text: "Prepare the release, verify the candidate, draft the vote, tally the result, and write the announcement. Your release manager keeps signing, publishing, and sending in their hands.",
-    path: "/docs/release-management/readme", prompt: "Verify this release candidate and prepare the vote.",
-    steps: [
-      ["Read", "Release configuration and candidate", "Loaded the project’s verification requirements."],
-      ["Verify", "Checksums, signatures, and source build", "Recorded verification evidence for the candidate."],
-      ["Draft", "Release vote email", "Included candidate links and the voting window."],
-      ["Prepare", "Release manager handoff", "Vote draft ready. No mail sent."],
-    ], result: "Candidate verification and the vote draft are ready.", approval: "Review the evidence and send the vote when ready." },
-];
 export default function WorkflowExplorer() {
-  const [selected, setSelected] = useState(0);
   const [stage, setStage] = useState(0);
   const [completed, setCompleted] = useState(0);
   const sceneRef = useRef<HTMLDivElement>(null);
@@ -62,7 +16,6 @@ export default function WorkflowExplorer() {
     return () => media.removeEventListener("change", update);
   }, []);
   useEffect(() => {
-    if (selected !== 0) return;
     const scene = sceneRef.current, panel = panelRef.current, conversation = conversationRef.current;
     if (!scene || !panel || !conversation) return;
     const phases = Array.from(conversation.querySelectorAll<HTMLElement>("[data-conversation-phase]"));
@@ -97,7 +50,7 @@ export default function WorkflowExplorer() {
       conversation.removeEventListener("scroll", schedule);
       scene.style.removeProperty("height");
     };
-  }, [selected, scrollDriven]);
+  }, [scrollDriven]);
   const jumpToStage = (index: number) => {
     const conversation = conversationRef.current;
     const phase = conversation?.querySelectorAll<HTMLElement>("[data-conversation-phase]")[index];
@@ -109,49 +62,32 @@ export default function WorkflowExplorer() {
     } else conversation.scrollTo({ top: offset, behavior });
     setStage(index);
   };
-  const w = workflows[selected];
-  const session = selected === 0 ? securityStages[stage] : w;
-  const activeSkills = ["", "pr-management-code-review", "issue-reproducer + issue-fix-workflow", "release-verify-rc + release-vote-draft"];
-  const choose = (index: number) => { setSelected(index); setStage(0); document.getElementById(`workflow-tab-${index}`)?.focus(); };
-  return <div className="workflow-explorer">
-    <div role="tablist" aria-label="Maintainer workflows" className="workflow-tabs">{workflows.map((item, i) => <button key={item.id} id={`workflow-tab-${i}`} role="tab" aria-selected={selected === i} aria-controls="workflow-panel" tabIndex={selected === i ? 0 : -1} onClick={() => { setSelected(i); setStage(0); }} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); choose(event.key === "Home" ? 0 : event.key === "End" ? workflows.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + workflows.length) % workflows.length); } }}><item.icon size={18} />{item.label}</button>)}</div>
-    <div role="tabpanel" id="workflow-panel" aria-labelledby={`workflow-tab-${selected}`} tabIndex={0} className="workflow-panel">
-      <div className="workflow-description"><h3><BrandText text={w.title} /></h3><p><BrandText text={w.text} /></p></div>
-      <div className="workflow-scroll-scene" ref={sceneRef} data-scroll-driven={selected === 0 && scrollDriven}>
-      <div ref={panelRef} className="workflow-workbench">
-      {selected === 0 && <div className="workflow-progress">
-        <div className="progress-heading"><span>Follow the report through the prepared skills</span><span>{completed} / {securityStages.length} phases complete in this example</span></div>
-        <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStages.map((phase, i) => <button key={phase.label} type="button" data-complete={i < completed} aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => jumpToStage(i)}><span className="phase-number" aria-hidden="true">{i < completed ? <Check size={13} /> : String(i + 1).padStart(2, "0")}</span>{phase.label}</button>)}</div>
-        <div className="workflow-progress-track" role="progressbar" aria-label="Example phases completed" aria-valuemin={0} aria-valuemax={securityStages.length} aria-valuenow={completed}><span style={{ width: `${completed / securityStages.length * 100}%` }} /></div>
-      </div>}
-      {selected === 0 ? <figure className="agent-session lifecycle-conversation" id="lifecycle-session" aria-label="Example security conversation">
-        <div className="session-heading"><strong>{securityStages[stage].label}</strong><span>~/your-project</span></div>
+  return <div className="workflow-scroll-scene security-story" ref={sceneRef} data-scroll-driven={scrollDriven}>
+    <div ref={panelRef} className="workflow-workbench">
+      <div className="workflow-progress">
+        <div className="lifecycle-stages" role="group" aria-label="Security lifecycle phases">{securityStory.map((phase, i) => <button key={phase.label} type="button" data-complete={i < completed} aria-pressed={stage === i} aria-controls="lifecycle-session" onClick={() => jumpToStage(i)}>{phase.label}</button>)}</div>
+        <div className="workflow-progress-track" role="progressbar" aria-label="Security story progress" aria-valuemin={0} aria-valuemax={securityStory.length} aria-valuenow={completed}><span style={{ width: `${completed / securityStory.length * 100}%` }} /></div>
+      </div>
+      <figure className="agent-session lifecycle-conversation" id="lifecycle-session" aria-label="Example security workflow">
+        <div className="session-heading"><span><img src="/favicon.svg" width="22" height="22" alt="Magpie" /> Security workflow</span><span><ShieldCheck size={14} /> Private workspace</span></div>
         <div className="conversation-scroll" ref={conversationRef} tabIndex={0} aria-label="Security workflow conversation" onKeyDown={event => {
           if (!scrollDriven || !["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"].includes(event.key)) return;
           event.preventDefault();
-          if (event.key === "Home" || event.key === "End") jumpToStage(event.key === "Home" ? 0 : securityStages.length - 1);
+          if (event.key === "Home" || event.key === "End") jumpToStage(event.key === "Home" ? 0 : securityStory.length - 1);
           else window.scrollBy({ top: (event.key.includes("Up") ? -1 : 1) * (event.key.startsWith("Page") ? 400 : 80), behavior: "instant" });
         }}>
-          <div className="conversation-content">{securityStages.map((phase, i) => <section className="conversation-phase" data-conversation-phase key={phase.label} aria-label={phase.label}>
-            <h4>{phase.label}</h4>
-            <div className="session-prompt"><span aria-hidden="true">❯</span><span><BrandText text={phase.prompt} /></span></div>
-            <div className="session-skill"><span>Procedure loaded from <BrandText text="Magpie" /></span><code>{phase.skill}</code><p>{phase.procedure}</p></div>
-            <div className="session-transcript">{phase.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span><BrandText text={label} /></span></div><p><BrandText text={output} /></p></div>)}</div>
-            <div className="session-result"><BrandText text={phase.result} /></div>
-            <div className="session-approval"><BrandText text={phase.approval} /></div>
-            <SandboxStatus setup={i === 0} interactive={i === 1} />
+          <div className="conversation-content">{securityStory.map(phase => <section className="conversation-phase story-phase" data-conversation-phase key={phase.label} aria-label={phase.label}>
+            <div className="story-prompt"><span aria-hidden="true">❯</span>{phase.prompt}</div>
+            <div className="story-skill"><FileText size={15} /><span>Read skill</span><code>{phase.skill}</code></div>
+            <div className={`security-artifact artifact-${phase.kind}`}>
+              <span className="artifact-type">{phase.artifact}</span><h3>{phase.title}</h3>
+              <div className="artifact-rows">{phase.rows.map(([key, value]) => <div key={key}><span>{key}</span><strong>{value}</strong></div>)}</div>
+              <div className="artifact-result"><Check size={17} />{phase.result}</div>
+            </div>
+            <p className="story-handoff">{phase.handoff}</p>
           </section>)}</div>
         </div>
-      </figure> : <figure className="agent-session" id="lifecycle-session" aria-label="Example agent conversation" key={w.id}>
-        <div className="session-heading"><strong>Agent session</strong><span>~/your-project</span></div>
-        <div className="session-prompt"><span aria-hidden="true">❯</span><span><BrandText text={session.prompt} /></span></div>
-        <div className="session-skill"><span>Prepared skills</span><code>{activeSkills[selected]}</code></div>
-        <div className="session-transcript">{session.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span><BrandText text={label} /></span></div><p><BrandText text={output} /></p></div>)}</div>
-        <div className="session-result"><BrandText text={session.result} /></div>
-        <div className="session-approval"><BrandText text={session.approval} /><span className="terminal-cursor" aria-hidden="true" /></div>
-      </figure>}
-    </div>
-    </div>
+      </figure>
     </div>
   </div>;
 }

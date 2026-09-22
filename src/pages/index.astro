@@ -26,27 +26,28 @@ import MoreWays from "../components/landing/MoreWays.astro";
           <HeroWorkflows client:load />
           <p class="diagram-context">Works everywhere</p>
           <div class="supported-agents" aria-label="Supported agent tools">
-            <a href="/docs/quick-start"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
-            <a href="/docs/adapters/copilot"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
+            <a href="/docs/quick-start" target="_blank" rel="noreferrer"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex" target="_blank" rel="noreferrer"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor" target="_blank" rel="noreferrer"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
+            <a href="/docs/adapters/copilot" target="_blank" rel="noreferrer"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini" target="_blank" rel="noreferrer"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode" target="_blank" rel="noreferrer"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
           </div>
+          <a class="more-adapters" href="/docs/adapters/readme" target="_blank" rel="noreferrer">And much more</a>
         </div>
       </div>
     </section>
     <span class="diagram-nav-trigger" data-nav-trigger aria-hidden="true"></span>
+    <section id="how-it-works" class="section container security-story-section">
+      <div class="security-intro"><p class="story-question">What could Magpie do for your project?</p><h2>See how Magpie<br />helps scale security.</h2><p>Apache Airflow powers workflows at Airbnb, Adobe, and Spotify.<br />Here’s how Magpie helps its maintainers handle security reports.</p></div>
+      <WorkflowExplorer client:load />
+    </section>
     <section id="airflow" class="airflow-section">
       <svg class="airflow-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C240 60 310 10 580 14S1010 88 1440 24V80H0Z" /></svg>
       <div class="container">
       <div class="case-layout">
-        <div class="case-quote"><h2>What could Magpie do<br />for your project?</h2><div class="case-example"><span>One example, from</span><img class="airflow-brand" src="/vendor-logos/airflow.svg" alt="Apache Airflow" width="155" height="60" /></div><blockquote>“Using <BrandName /> helped us to do things that matter”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Airflow PMC member</span></div></div><a class="light-link case-story" href="/stories/airflow">Read the Airflow story and results</a></div>
+        <div class="case-quote"><h2>More reports resolved.<br />More time to maintain.</h2><div class="case-example"><span>At</span><img class="airflow-brand" src="/vendor-logos/airflow.svg" alt="Apache Airflow" width="155" height="60" /></div><blockquote>“Using <BrandName /> helped us to do things that matter”</blockquote><div class="quote-person"><img src="/community-avatars/potiuk.png" alt="" width="44" height="44" loading="lazy" /><div><strong>Jarek Potiuk</strong><span>Apache Airflow PMC member</span></div></div><a class="light-link case-story" href="/stories/airflow" target="_blank" rel="noreferrer">Read the Airflow story and results</a></div>
         <div class="case-evidence"><AirflowVelocity /></div>
       </div>
     </div></section>
-    <section id="how-it-works" class="section container" data-reveal>
-      <div class="section-heading"><div><h2>See the whole workflow</h2></div><p>Each <BrandName /> skill is a procedure written for your agent: what to inspect, which tools to use, what evidence to keep, and when to ask you. See those procedures work together on a security report.</p></div>
-      <WorkflowExplorer client:load />
-    </section>
     <MoreWays />
-    <section class="docs-invitation container" data-reveal><div><h2>Ready to change how<br />you maintain software?</h2></div><a class="button" href="/docs/quick-start"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></section>
+    <section class="docs-invitation container" data-reveal><div><h2>Ready to change how<br />you maintain software?</h2></div><a class="button" href="/docs/quick-start" target="_blank" rel="noreferrer"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></section>
   </main>
   <SiteFooter />
 </BaseLayout>
