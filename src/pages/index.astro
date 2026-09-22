@@ -7,6 +7,7 @@ import WorkflowExplorer from "../components/landing/WorkflowExplorer";
 import { ArrowRight, ArrowDown, ShieldAlert, CircleCheck } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 import BrandName from "../components/landing/BrandName";
+import SectionWave from "../components/landing/SectionWave.astro";
 import MoreWays from "../components/landing/MoreWays.astro";
 ---
 <BaseLayout title="Apache Magpie | Software maintenance, automated" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
@@ -15,7 +16,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
     <section class="hero container">
       <div class="hero-copy">
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
-        <p class="hero-story">AI brought more contributions to open source and more work for maintainers. To keep up at Apache Airflow, we turned maintenance procedures into <strong>dozens of reusable skills</strong>. <BrandName /> brings those skills to your coding agent, ready for your own project.</p>
+        <p class="hero-story">We turned the procedures we use to maintain Apache Airflow into <strong>ready-made skills for your coding agent</strong>. <BrandName /> comes with the steps, checks, and approval points already written, ready to use in your project.</p>
       </div>
       <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does" hidden><ArrowDown size={22} strokeWidth={1.4} /></a>
     </section>
@@ -34,7 +35,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
       </div>
     </section>
     <section id="airflow" class="airflow-section">
-      <svg class="airflow-curve" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C240 60 310 10 580 14S1010 88 1440 24V80H0Z" /></svg>
+      <SectionWave reverse /><SectionWave bottom />
       <div class="container">
       <h2 class="case-heading">How Airflow uses Magpie to keep up with security reports</h2>
       <div class="case-layout">
@@ -43,19 +44,18 @@ import MoreWays from "../components/landing/MoreWays.astro";
       </div>
     </div></section>
     <section id="how-it-works" class="section container security-story-section">
-      <div class="security-intro"><h2>See how Magpie helps resolve a security report.</h2></div>
       <WorkflowExplorer client:load />
       <div id="security-summary" class="security-summary" aria-label="What changed during the security workflow">
         <div class="security-summary-flow">
-          <div class="summary-state"><h3>You started with</h3><div class="summary-card summary-before"><ShieldAlert size={32} strokeWidth={1.5} aria-hidden="true" /><strong>A report to investigate</strong><p>You need to gather evidence, coordinate a fix, check the release, and tell users how to update.</p></div></div>
-          <div class="summary-route"><span>But with</span><img src="/wordmark.svg" alt="Magpie" width="130" height="37" /><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>
-          <div class="summary-state"><h3>Now you have</h3><div class="summary-card summary-after"><CircleCheck size={32} strokeWidth={1.5} aria-hidden="true" /><strong>A resolved case</strong><p>The fix is released, users know what to do, and the evidence is ready for the next investigation.</p></div></div>
+          <div class="summary-state"><h3>Without Magpie</h3><div class="summary-card summary-before"><ShieldAlert size={32} strokeWidth={1.5} aria-hidden="true" /><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
+          <div class="summary-route"><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>
+          <div class="summary-state"><h3>With Magpie</h3><div class="summary-card summary-after"><CircleCheck size={32} strokeWidth={1.5} aria-hidden="true" /><strong>Your agent prepares the work</strong><p>Magpie’s ready-made workflows guide your agent through the investigation, fix, and disclosure, keeping the evidence together.</p></div></div>
         </div>
-        <p><BrandName /> carries the evidence forward. Your team reviews the decisions.</p>
+        <p>You review the evidence and approve what happens next.</p>
       </div>
     </section>
     <MoreWays />
-    <section class="invitation-band section-band band-blue"><div class="docs-invitation container" data-reveal><img class="invitation-bird" src="/illustrations/magpie/magpie-looking-back.png" width="220" height="220" alt="" loading="lazy" /><div><h2>Ready to change how you maintain software?</h2></div><a class="button" href="/start" target="_blank" rel="noreferrer"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></div></section>
+    <section class="invitation-band section-band band-blue"><SectionWave /><div class="docs-invitation container" data-reveal><img class="invitation-bird" src="/illustrations/magpie/magpie-looking-back.png" width="220" height="220" alt="" loading="lazy" /><div><h2>Ready to change how you maintain software?</h2></div><a class="button" href="/start" target="_blank" rel="noreferrer"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></div></section>
   </main>
   <SiteFooter />
 </BaseLayout>

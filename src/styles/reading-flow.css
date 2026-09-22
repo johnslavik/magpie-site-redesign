@@ -219,18 +219,13 @@ body.docs-navigation-open { overflow: hidden; }
 .redesign-home .section-band { position: relative; background: var(--band-color); }
 .redesign-home .band-blue { --band-color: #eef3fa; }
 .redesign-home .band-mint { --band-color: #e7f3ed; }
-.redesign-home .section-band::before { content: ''; position: absolute; height: 32px; top: -31px; left: 0; right: 0; background: var(--band-color); border-radius: 50% 50% 0 0 / 100% 100% 0 0; pointer-events: none; }
-.redesign-home .section-band::after { content: ''; position: absolute; height: 24px; bottom: -23px; left: 0; right: 0; background: var(--band-color); border-radius: 0 0 50% 50% / 0 0 100% 100%; pointer-events: none; }
 .redesign-home .choose-work { max-width: none; width: 100%; padding-inline: 0; }
 .redesign-home .setup-utilities { padding-block: var(--space-section); }
 .redesign-home .learn-skills { padding-block: var(--space-section); }
 .redesign-home .docs-invitation { padding-block: var(--space-section); border-top: 0; }
-.redesign-home .invitation-band::after { content: none; }
 @media(max-width:700px) {
  .redesign-home { --space-section: 88px; --space-heading: 40px; }
  .redesign-home .security-summary { margin-top: 72px; padding-top: 48px; }
- .redesign-home .section-band::before { height: 18px; top: -17px; }
- .redesign-home .section-band::after { height: 14px; bottom: -13px; }
 }
 
 /* Match the security story: centered, complete phases driven by page scroll. */
@@ -241,16 +236,28 @@ body.docs-navigation-open { overflow: hidden; }
 .software-scenes>.lifecycle-detail { grid-area: 1/1; min-width: 0; }
 .software-scenes>.lifecycle-detail[aria-hidden=true] { visibility: hidden; pointer-events: none; }
 
-/* Small editorial details drawn from the bird and paper motifs. */
-.redesign-home .choose-work::before { border-radius: 72% 28% 0 0 / 100% 100% 0 0; }
-.redesign-home .choose-work::after { border-radius: 0 0 68% 32% / 0 0 100% 100%; }
-.redesign-home .project-fit::before { border-radius: 30% 70% 0 0 / 100% 100% 0 0; }
-.redesign-home .project-fit::after { border-radius: 0 0 28% 72% / 0 0 100% 100%; }
-.workflow-chapter-heading { position: relative; }
-.chapter-bird { position: absolute; width: 110px; height: 110px; object-fit: contain; top: -98px; right: -70px; transform: rotate(-9deg); pointer-events: none; }
-.redesign-home .reel-source { border-radius: 4px 18px 4px 4px; box-shadow: 4px 5px 0 #ece7d9; }
-.redesign-home .reel-delivery { border-radius: 18px 4px 18px 4px; }
-.redesign-home .summary-after strong { width: fit-content; background: linear-gradient(transparent 70%, #e4e9a9 70%, #e4e9a9 95%, transparent 95%); }
-.redesign-home .project-adaptation .rule-example { border-radius: 2px 14px 14px 2px; box-shadow: 3px 4px 0 #dedcb94d; }
-@media(max-width:1000px) { .chapter-bird { right: 0; width: 86px; height: 86px; top: -88px; } }
-@media(max-width:700px) { .chapter-bird { width: 66px; height: 66px; top: -70px; right: 8px; } }
+
+/* Flowing color fields frame each chapter; contours stay in the quiet margins. */
+.redesign-home .airflow-section { --band-color: var(--citrus); }
+.section-wave { position: absolute; width: 100%; height: clamp(56px, 7vw, 100px); left: 0; bottom: calc(100% - 1px); pointer-events: none; overflow: visible; }
+.section-wave .wave-fill { fill: var(--band-color); }
+.section-wave .wave-contour { fill: none; stroke: #799a891f; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.section-wave.wave-reverse { transform: scaleX(-1); }
+.section-wave.wave-bottom { top: calc(100% - 1px); bottom: auto; transform: rotate(180deg); }
+.section-wave.wave-bottom.wave-reverse { transform: scaleY(-1); }
+.redesign-home .band-blue { --band-color: #edf2f8; }
+.redesign-home .band-mint { --band-color: #e7f2eb; }
+@media(max-width:700px) { .section-wave { height: 42px; } }
+
+/* Keep the story title inside the measured, centered scrolling composition. */
+.redesign-home .security-workbench .security-intro { margin: 0 auto 36px; }
+.redesign-home .security-workbench .security-intro h2 { font-size: clamp(28px, 3.2vw, 40px); }
+@media(min-width:901px) and (max-height:850px) {
+ .redesign-home .security-workbench .security-intro { margin-bottom: 24px; }
+ .redesign-home .security-workbench .security-intro h2 { font-size: 28px; }
+ .security-workbench .security-scene { padding-block: 24px; }
+}
+
+.redesign-home .prepared-workflow-label { color: #c4d5e7; font-size: 16px; line-height: 1.5; margin: 16px 0 24px; }
+.redesign-home .lifecycle-work li { display: flex; gap: 10px; align-items: flex-start; }
+.redesign-home .lifecycle-work li>svg { flex: 0 0 18px; margin-top: 4px; color: #a6d5b3; }

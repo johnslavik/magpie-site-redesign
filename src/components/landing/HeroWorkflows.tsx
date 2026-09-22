@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, ArrowDown, ArrowLeft } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 const examples = [
@@ -23,16 +23,14 @@ export default function HeroWorkflows() {
           <div className="reel-active">
             <ol className="reel-flow">
               <li className="reel-source"><small>When you have</small><span className="reel-input">{item.input}</span></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We wrote the steps for your agent to follow.</small><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We’ve already written this workflow for your agent.</small><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
               <li className="reel-delivery"><span className="delivery-check" aria-hidden="true">✓</span><small>The result</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>
       </div>
     </div>
     <div className="example-navigation">
-      <button className="example-previous" type="button" aria-label="Previous use case" disabled={selected === 0} onClick={() => setSelected(value => value - 1)}><ArrowLeft size={18} aria-hidden="true" /></button>
       {selected < examples.length - 1 ? <button className="another-use-case" type="button" onClick={() => setSelected(value => value + 1)}>See another use case <ArrowRight size={18} aria-hidden="true" /></button> : <a className="another-use-case" href="#airflow">Keep reading <ArrowDown size={18} aria-hidden="true" /></a>}
-      {selected < examples.length - 1 && <a className="example-onward" href="#airflow">Keep reading <ArrowDown size={18} aria-hidden="true" /></a>}
     </div>
   </div>;
 }

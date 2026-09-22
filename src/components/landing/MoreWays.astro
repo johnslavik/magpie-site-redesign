@@ -1,15 +1,20 @@
 ---
+import SectionWave from "./SectionWave.astro";
 import SetupUtilities from "./SetupUtilities.astro";
 import { SoftwareLifecycle, ProjectRules, SkillComparison } from "./ProjectExamples";
 ---
 <section class="choose-work section-band band-blue" aria-labelledby="choose-work-title">
+  <SectionWave />
+  <SectionWave bottom reverse />
   <div class="container">
-  <div class="lifecycle-heading workflow-chapter-heading"><img class="chapter-bird" src="/illustrations/magpie/magpie-flying.png" width="110" height="110" alt="" loading="lazy" /><h2 id="choose-work-title">We’ve prepared workflows for the rest of your project, too.</h2></div>
+  <div class="lifecycle-heading"><h2 id="choose-work-title">We’ve prepared workflows for the rest of your project, too.</h2></div>
   <SoftwareLifecycle client:load />
   </div>
 </section>
 <SetupUtilities />
 <section class="project-fit section-band band-mint" aria-labelledby="project-fit-title">
+  <SectionWave reverse />
+  <SectionWave bottom />
   <div class="container">
     <div class="lifecycle-heading"><h2 id="project-fit-title">Make the procedures fit the way your team works.</h2></div>
     <ProjectRules />

@@ -62,6 +62,7 @@ export default function WorkflowExplorer() {
   };
   return <div className="security-walkthrough" ref={sceneRef} data-scroll-driven={scrollDriven}>
     <div className="security-workbench" ref={panelRef}>
+      <div className="security-intro"><h2>See how Magpie helps resolve a security report.</h2></div>
       <div className="story-stages" role="tablist" aria-label="Security lifecycle phases">{securityStory.map((phase, i) => <button key={phase.label} type="button" role="tab" id={`security-tab-${i}`} aria-selected={stage === i} aria-controls={`security-stage-${i}`} tabIndex={stage === i ? 0 : -1} data-complete={i < stage} onClick={() => select(i)} onKeyDown={event => {
         if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
         event.preventDefault();

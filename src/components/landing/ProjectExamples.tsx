@@ -63,7 +63,7 @@ export function SoftwareLifecycle() {
       <div className="lifecycle-flow">
         <div className="lifecycle-incoming"><h3>{phase.input}</h3><p>{phase.inputs.join(" ")}</p></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
-        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><ul>{phase.work.map(work => <li key={work}>{work}</li>)}</ul></div>
+        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><p className="prepared-workflow-label">The steps are already written.</p><ul>{phase.work.map(work => <li key={work}><Check size={18} aria-hidden="true" /><span>{work}</span></li>)}</ul></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
         <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}>{output}</li>)}</ul></div>
       </div>
@@ -76,7 +76,7 @@ export function SoftwareLifecycle() {
 export function ProjectRules() {
   return <div className="project-procedures project-adaptation">
     <div className="prepared-procedures">
-      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies the procedures</span></div>
+      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies ready-made procedures</span></div>
       <ul className="procedure-list"><li><GitPullRequest size={22} aria-hidden="true" />Review a pull request</li><li><ShieldCheck size={22} aria-hidden="true" />Resolve a security report</li><li><PackageCheck size={22} aria-hidden="true" />Prepare a release</li></ul>
     </div>
     <ArrowRight className="adaptation-arrow" size={28} aria-hidden="true" />
