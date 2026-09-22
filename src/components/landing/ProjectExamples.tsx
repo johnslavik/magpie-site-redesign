@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Inbox, Code2, GitPullRequest, PackageCheck, ShieldCheck, Users, FileText, Check, ArrowRight } from "lucide-react";
+import { Inbox, Code2, GitPullRequest, PackageCheck, ShieldCheck, Users, Check, ArrowRight } from "lucide-react";
 
 const lifecycle = [
   { label: "Triage", icon: Inbox, input: "New reports keep arriving", inputs: ["A user reports a failure.", "Another report looks familiar.", "Some details are missing."], work: ["Checks for duplicates", "Reproduces and classifies reports", "Drafts the next response"], title: "Know which reports need your attention", outcome: "You know what to investigate", outputs: ["The issue has steps to reproduce it.", "Missing information is requested in a draft.", "Related reports are linked."], link: "/docs/issue-management/readme", color: "peach" },
@@ -30,24 +30,24 @@ export function SoftwareLifecycle() {
 }
 
 export function ProjectRules() {
-  return <div className="project-procedures">
-    <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies the procedures</span></div>
-    <div className="procedure-library">
+  return <div className="project-procedures project-adaptation">
+    <div className="prepared-procedures">
+      <div className="procedure-library-heading"><img src="/wordmark.svg" alt="Magpie" width="126" height="36" /><span>supplies the procedures</span></div>
       <ul className="procedure-list"><li><GitPullRequest size={22} aria-hidden="true" />Review a pull request</li><li><ShieldCheck size={22} aria-hidden="true" />Resolve a security report</li><li><PackageCheck size={22} aria-hidden="true" />Prepare a release</li></ul>
-      <p className="procedure-caption">The steps, checks, and approval points are already written.</p>
     </div>
-    <div className="project-rule-bridge"><strong>Magpie’s workflows adapt to your project.</strong></div>
-    <div className="shared-project-rules">
-      <div className="rule-example"><span>For example</span><p>“Use our review checklist. Ask the owning team to review changes. Include a changelog entry.”</p></div>
-      <div className="rules-applied"><FileText size={26} aria-hidden="true"/><div><strong>Save the rules with your project.</strong><p>Magpie reads them when running its workflows. Your team can reuse the procedures and change the steps that need to work differently.</p></div></div>
+    <ArrowRight className="adaptation-arrow" size={28} aria-hidden="true" />
+    <div className="adapted-procedures">
+      <h3>They follow your project’s rules.</h3>
+      <blockquote className="rule-example">“Use our review checklist. Ask the owning team to review changes. Include a changelog entry.”</blockquote>
+      <p>Save your rules once. Magpie reads them whenever it runs these workflows.</p>
+      <a className="project-rules-link" href="/docs/setup/agentic-overrides" target="_blank" rel="noreferrer">See how project rules work <ArrowRight size={15} aria-hidden="true" /></a>
     </div>
-    <a className="project-rules-link" href="/docs/setup/agentic-overrides" target="_blank" rel="noreferrer">See how project rules work <ArrowRight size={15} aria-hidden="true" /></a>
   </div>;
 }
 
 export function SkillComparison() {
   return <div className="skill-comparison">
-    <div className="skill-manual"><h3>Writing a skill from scratch</h3><ol className="manual-steps">{["Learn the skill format.", "Write the procedure and approval points.", "Think through the edge cases.", "Create examples and expected results.", "Run the tests and revise the skill."].map(step => <li key={step}>{step}</li>)}</ol></div>
+    <div className="skill-manual"><h3>Writing a skill from scratch</h3><ol className="manual-steps">{["Learn the format and write the procedure.", "Define approval points, edge cases, and tests.", "Run the tests and revise the skill."].map(step => <li key={step}>{step}</li>)}</ol></div>
     <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="110" height="31" /></div><blockquote className="authoring-request">“Make a skill that checks new dependencies.”</blockquote><p className="authoring-result">Magpie helps your agent write the skill, test it against examples, and improve the results.</p><p className="authoring-finish"><Check size={22} aria-hidden="true" />You review the skill and its test results before sharing it.</p></div>
   </div>;
 }
