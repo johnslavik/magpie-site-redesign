@@ -58,12 +58,13 @@ export function SoftwareLifecycle() {
   };
   return <div className="software-lifecycle" ref={sceneRef} data-scroll-driven={scrollDriven}>
     <div className="software-workbench" ref={panelRef}>
+    <div className="lifecycle-heading"><h2 id="choose-work-title">We’ve prepared workflows for the rest of your project, too.</h2><p>Choose only the skills you need, combine them when useful, and adapt them to your project.</p></div>
     <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-label={item.label} aria-controls={`lifecycle-detail-${i}`} aria-selected={active === i} tabIndex={active === i ? 0 : -1} data-complete={i < active} onClick={() => select(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); const next = event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length; select(next); document.getElementById(`lifecycle-tab-${next}`)?.focus(); } }}><span className="software-phase-icon"><item.icon size={24} strokeWidth={1.5} aria-hidden="true" /></span><span>{item.label}</span></button>)}</div>
     <div className="software-scenes">{lifecycle.map((phase, index) => <div key={phase.label} id={`lifecycle-detail-${index}`} className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${index}`} aria-hidden={active !== index} inert={active !== index} tabIndex={0}>
       <div className="lifecycle-flow">
         <div className="lifecycle-incoming"><h3>{phase.input}</h3><p>{phase.inputs.join(" ")}</p></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
-        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><p className="prepared-workflow-label">The steps are already written.</p><ul>{phase.work.map(work => <li key={work}><Check size={18} aria-hidden="true" /><span>{work}</span></li>)}</ul></div>
+        <div className="lifecycle-work"><img src="/wordmark.svg" alt="Magpie" width="120" height="34" /><p className="prepared-workflow-label">We’ve already written this workflow for your agent.</p><ul>{phase.work.map(work => <li key={work}><Check size={18} aria-hidden="true" /><span>{work}</span></li>)}</ul></div>
         <ArrowRight className="flow-connector" size={22} aria-hidden="true" />
         <div className="lifecycle-ready"><h3>{phase.outcome}</h3><ul>{phase.outputs.map(output => <li key={output}>{output}</li>)}</ul></div>
       </div>
@@ -92,6 +93,6 @@ export function ProjectRules() {
 export function SkillComparison() {
   return <div className="skill-comparison">
     <div className="skill-manual"><h3>Writing a skill from scratch</h3><ol className="manual-steps">{["Learn the format and write the procedure.", "Define approval points, edge cases, and tests.", "Run the tests and revise the skill."].map(step => <li key={step}>{step}</li>)}</ol></div>
-    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="110" height="31" /></div><blockquote className="authoring-request">“Make a skill that checks new dependencies.”</blockquote><p className="authoring-result">Magpie helps your agent write the skill, test it against examples, and improve the results.</p><p className="authoring-finish"><Check size={22} aria-hidden="true" />You review the skill and its test results before sharing it.</p></div>
+    <div className="skill-assisted"><div className="comparison-label">With <img src="/wordmark.svg" alt="Magpie" width="110" height="31" /></div><blockquote className="authoring-request">“Make a skill that checks new dependencies.”</blockquote><p className="authoring-result">Magpie helps your agent write, test, and improve the skill <strong>faster</strong>.</p></div>
   </div>;
 }

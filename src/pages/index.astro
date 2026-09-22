@@ -16,9 +16,10 @@ import MoreWays from "../components/landing/MoreWays.astro";
     <section class="hero container">
       <div class="hero-copy">
         <h1>We’ve <span>automated software <br />maintenance</span> for you.</h1>
-        <p class="hero-story">We turned the procedures we use to maintain Apache Airflow into <strong>ready-made skills for your coding agent</strong>. <BrandName /> comes with the steps, checks, and approval points already written, ready to use in your project.</p>
+        <p class="hero-story">We built <BrandName /> to handle software maintenance at <strong>Apache Airflow</strong>. Its <strong>dozens of ready-made skills</strong> bring those procedures to your coding agent, with the steps, checks, and approval points already written.</p>
+        <a class="hero-proof" href="#airflow">Already used to handle thousands of tickets at Apache Airflow <ArrowRight size={18} aria-hidden="true" /></a>
       </div>
-      <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does" hidden><ArrowDown size={22} strokeWidth={1.4} /></a>
+      <a class="hero-read-cue" href="#workflow-examples" aria-label="Keep reading: see what Magpie does"><ArrowDown size={22} strokeWidth={1.4} /></a>
     </section>
     <section id="workflow-examples" class="integration-section container" aria-labelledby="workflow-examples-title">
       <h2 id="workflow-examples-title" class="examples-heading">What can Magpie do for you?</h2>
@@ -59,20 +60,3 @@ import MoreWays from "../components/landing/MoreWays.astro";
   </main>
   <SiteFooter />
 </BaseLayout>
-
-<script>
-  const cue = document.querySelector<HTMLAnchorElement>('.hero-read-cue');
-  if (cue) {
-    let hasScrolled = window.scrollY > 4;
-    const hideAfterScroll = () => {
-      if (window.scrollY > 4) hasScrolled = true;
-      if (hasScrolled) cue.hidden = true;
-    };
-    window.addEventListener('scroll', hideAfterScroll, { passive: true });
-    const showCue = () => window.setTimeout(() => {
-      cue.hidden = hasScrolled || window.scrollY > 4;
-    }, 4000);
-    if (document.readyState === 'complete') showCue();
-    else window.addEventListener('load', showCue, { once: true });
-  }
-</script>

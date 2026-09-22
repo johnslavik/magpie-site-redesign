@@ -23,7 +23,7 @@ export default function HeroWorkflows() {
           <div className="reel-active">
             <ol className="reel-flow">
               <li className="reel-source"><small>When you have</small><span className="reel-input">{item.input}</span></li>
-              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We’ve already written this workflow for your agent.</small><ul className="reel-work">{item.work.map((step, i) => <li key={step} style={{ animationDelay: `${i * .18}s` }}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
+              <li className="reel-process"><img className="process-wordmark" src={withBase("/wordmark.svg")} alt="Magpie" width="118" height="34" /><small>We’ve already written this workflow for your agent.</small><ul className="reel-work">{item.work.map(step => <li key={step}><span aria-hidden="true">✓</span>{step}</li>)}</ul><a className="reel-doc-link" href={withBase(item.path)} target="_blank" rel="noreferrer">Explore this workflow <ArrowRight size={17} aria-hidden="true" /></a></li>
               <li className="reel-delivery"><span className="delivery-check" aria-hidden="true">✓</span><small>The result</small><strong className="reel-outcome">{item.outcome}</strong></li>
             </ol>
           </div>

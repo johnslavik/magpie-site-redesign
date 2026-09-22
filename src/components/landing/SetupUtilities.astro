@@ -1,5 +1,5 @@
 ---
-import { Check, ArrowRight, ShieldCheck } from "lucide-react";
+import { Check, ArrowRight, ShieldCheck, Bot, FolderCode, LockKeyhole } from "lucide-react";
 ---
 <section class="setup-utilities container" aria-labelledby="setup-utilities-title">
   <div class="setup-explanation">
@@ -9,13 +9,18 @@ import { Check, ArrowRight, ShieldCheck } from "lucide-react";
   </div>
   <div class="setup-example">
     <div class="setup-request">“Set up an isolated workspace for my agent.”</div>
-    <div class="setup-prepared">
+    <div class="setup-prepared setup-diagram" role="img" aria-label="Magpie configures an isolated workspace for your agent and project files, sets access rules, and verifies the setup using protections supported by your agent.">
       <img src="/wordmark.svg" alt="Magpie" width="142" height="40" />
-      <ul>
-        <li><Check size={20} aria-hidden="true" /><span>Configures isolation for your agent.</span></li>
-        <li><Check size={20} aria-hidden="true" /><span>Limits access to credentials and checks commands where your agent supports it.</span></li>
-        <li><Check size={20} aria-hidden="true" /><span>Checks the setup and reports anything missing.</span></li>
-      </ul>
+      <div class="sandbox-boundary">
+        <span class="sandbox-label"><ShieldCheck size={20} aria-hidden="true" />Isolated workspace</span>
+        <div class="sandbox-contents">
+          <div><Bot size={38} strokeWidth={1.4} aria-hidden="true" /><span>Your agent</span></div>
+          <ArrowRight className="sandbox-connection" size={28} aria-hidden="true" />
+          <div><FolderCode size={38} strokeWidth={1.4} aria-hidden="true" /><span>Project files</span></div>
+        </div>
+      </div>
+      <div class="sandbox-checks"><span><LockKeyhole size={20} aria-hidden="true" />Sets access rules</span><span><Check size={20} aria-hidden="true" />Verifies the setup</span></div>
+      <p class="sandbox-support">Uses the protections supported by your agent.</p>
     </div>
     <p class="setup-approval"><ShieldCheck size={22} aria-hidden="true" /><span>You approve the proposed changes before installation.</span></p>
   </div>
