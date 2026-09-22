@@ -23,12 +23,14 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <div class="integration-art" aria-label="Magpie connects your agent to ready-made software maintenance workflows">
         <div class="agent-shell">
           <HeroWorkflows client:load />
+          <div class="adapter-strip">
           <p class="diagram-context">Works in</p>
           <div class="supported-agents" aria-label="Supported agent tools">
             <a href="/start" target="_blank" rel="noreferrer"><img src="/vendor-logos/claude.png" width="30" height="30" alt="" /><span>Claude Code</span></a><a href="/docs/adapters/codex" target="_blank" rel="noreferrer"><img src="/vendor-logos/openai.png" width="30" height="30" alt="" /><span>Codex</span></a><a href="/docs/adapters/cursor" target="_blank" rel="noreferrer"><img src="/vendor-logos/cursor.svg" width="30" height="30" alt="" /><span>Cursor</span></a>
             <a href="/docs/adapters/copilot" target="_blank" rel="noreferrer"><img src="/vendor-logos/copilot.svg" width="30" height="30" alt="" /><span>GitHub Copilot</span></a><a href="/docs/adapters/gemini" target="_blank" rel="noreferrer"><img src="/vendor-logos/gemini.ico" width="30" height="30" alt="" /><span>Gemini CLI</span></a><a href="/docs/adapters/opencode" target="_blank" rel="noreferrer"><img src="/vendor-logos/opencode.png" width="30" height="30" alt="" /><span>OpenCode</span></a>
           </div>
-          <a class="more-adapters" href="/docs/adapters/readme" target="_blank" rel="noreferrer">and much more</a>
+          <a class="more-adapters" href="/docs/adapters/readme" target="_blank" rel="noreferrer">and more</a>
+          </div>
         </div>
       </div>
       </div>
@@ -45,7 +47,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
     <section id="how-it-works" class="section container security-story-section">
       <WorkflowExplorer client:load />
       <div id="security-summary" class="security-summary" aria-labelledby="security-summary-title">
-        <h2 id="security-summary-title">From report to resolution, with less coordination.</h2>
+        <h2 id="security-summary-title">Less work to coordinate.</h2>
         <div class="security-summary-flow">
           <div class="summary-state"><div class="summary-card summary-before"><h3>Without Magpie</h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
           <div class="summary-route"><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>
