@@ -27,7 +27,8 @@ export default function WorkflowExplorer() {
       // Use ordinary page flow when the complete story cannot fit below the header.
       driven = media.matches && panel.offsetHeight + 124 <= window.innerHeight;
       setScrollDriven(driven);
-      pinTopRef.current = 104;
+      // Center the complete story in the available viewport below the header.
+      pinTopRef.current = Math.max(104, (window.innerHeight - panel.offsetHeight + 80) / 2);
       scene.style.setProperty("--scene-top", `${pinTopRef.current}px`);
       stepRef.current = Math.min(260, Math.max(180, window.innerHeight * .22));
       scene.style.height = driven ? `${panel.offsetHeight + stepRef.current * (securityStory.length - .5)}px` : "auto";
