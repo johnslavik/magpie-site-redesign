@@ -1,12 +1,49 @@
 import { useState } from "react";
-import { Check, GitPullRequest, ShieldCheck, Inbox, PackageCheck, FileText } from "lucide-react";
+import { GitPullRequest, ShieldCheck, Inbox, PackageCheck } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
+// Illustrative sessions grounded in the synced workflow-family documentation.
 const workflows = [
-  { id: "security", label: "Security reports", icon: ShieldCheck, title: "From first report to a considered response.", text: "Check the history, assess the report, and prepare a response. Keep the sensitive details private and the next decision clear.", path: "/docs/security/readme", command: "Triage the new security reports", items: ["Checked the project’s security model", "Compared with previous reports", "Prepared a response for your review"], file: "Response draft", body: "The report is ready for review. The assessment, supporting evidence, and proposed next steps are attached.", action: "Review the assessment", tag: "Private workspace" },
-  { id: "reviews", label: "Pull requests", icon: GitPullRequest, title: "Find the reviews that need your attention.", text: "Understand what changed, spot missing context, and work through the queue with a prepared review in front of you.", path: "/docs/pr-management/readme", command: "Help me work through the PR queue", items: ["Grouped incoming changes by area", "Checked tests and project conventions", "Drafted review notes with file references"], file: "Review notes", body: "The change is scoped and the tests pass. One edge case needs a closer look; the relevant code and a suggested test are included.", action: "Review the changes", tag: "Your repository" },
-  { id: "issues", label: "Issue triage", icon: Inbox, title: "Turn a busy backlog into useful next steps.", text: "Find duplicates, reproduce reported bugs, and prepare a well-scoped fix. Give good reports the attention they deserve.", path: "/docs/issue-management/readme", command: "Triage the new issues", items: ["Checked for duplicates and related fixes", "Reproduced the reported behaviour", "Prepared a proposed disposition"], file: "Triage summary", body: "The bug is reproducible on the current branch. A regression test and a proposed fix are ready for a maintainer to review.", action: "Read the findings", tag: "Your issue tracker" },
-  { id: "releases", label: "Releases", icon: PackageCheck, title: "Keep the release moving with less chasing.", text: "Prepare the release plan, follow the checklist, and draft announcements. Signing and publishing stay with your team.", path: "/docs/release-management/readme", command: "Prepare the next release", items: ["Collected changes since the last release", "Prepared the release checklist", "Drafted the announcement"], file: "Release checklist", body: "The release plan is ready. Review the candidate, sign the artifacts, and approve the announcement when your project is ready.", action: "Review the release plan", tag: "ASF release workflow" },
+  { id: "security", label: "Security reports", icon: ShieldCheck,
+    title: "Handle a security report from intake to disclosure.",
+    text: "Import the report, check it against your security model, investigate the vulnerability, prepare a private fix, and draft the advisory. Magpie carries the context through the lifecycle and asks before changing the tracker or contacting anyone.",
+    path: "/docs/security/readme", prompt: "Investigate this security report and prepare the fix.",
+    steps: [
+      ["Read", "Project security model and report", "The reported path crosses a trust boundary."],
+      ["Investigate", "Reproduce in an isolated workspace", "Reproducer confirms the reported behaviour."],
+      ["Edit", "Private fix and regression test", "Regression test passes with the patch."],
+      ["Draft", "Reporter response and advisory", "Prepared for review. Nothing sent or published."],
+    ], result: "The fix and disclosure drafts are ready for your review.", approval: "Review the private patch before proceeding." },
+  { id: "reviews", label: "Pull requests", icon: GitPullRequest,
+    title: "Turn an incoming PR into a review you can post.",
+    text: "Read the diff, check CI and project conventions, inspect the affected code, and draft line-by-line comments. Magpie proposes approve, request changes, or comment; you confirm before the review is posted.",
+    path: "/docs/pr-management/readme", prompt: "Review this pull request against our project conventions.",
+    steps: [
+      ["Read", "Pull request diff and review criteria", "Loaded the changed files and project conventions."],
+      ["Check", "CI status and affected code paths", "CI passes. One unhandled edge case needs attention."],
+      ["Review", "Draft an inline comment", "Added a file reference and a suggested regression test."],
+      ["Draft", "REQUEST_CHANGES review", "Review prepared locally. Nothing posted."],
+    ], result: "One actionable finding, with evidence and a suggested test.", approval: "Post this review? Awaiting your confirmation." },
+  { id: "issues", label: "Bug fixes", icon: Inbox,
+    title: "Take a bug report through to a fix PR.",
+    text: "Classify the issue, find duplicates, reproduce the bug, and prepare a fix with a regression test. Magpie follows your build and contribution instructions, then drafts the PR for your review.",
+    path: "/docs/issue-management/readme", prompt: "Reproduce this bug and prepare a fix PR.",
+    steps: [
+      ["Triage", "Issue report and related issues", "No existing fix found. The report has enough detail."],
+      ["Test", "Add a minimal reproducer", "The regression test fails on the current branch."],
+      ["Edit", "Apply the fix and rerun tests", "The reproducer and related tests now pass."],
+      ["Draft", "PR description and test evidence", "Included the root cause, patch, and verification."],
+    ], result: "The patch, regression test, and PR draft are ready.", approval: "Review the changes before opening the PR." },
+  { id: "releases", label: "Releases", icon: PackageCheck,
+    title: "Carry a release from preparation to announcement.",
+    text: "Prepare the release, verify the candidate, draft the vote, tally the result, and write the announcement. Your release manager keeps signing, publishing, and sending in their hands.",
+    path: "/docs/release-management/readme", prompt: "Verify this release candidate and prepare the vote.",
+    steps: [
+      ["Read", "Release configuration and candidate", "Loaded the project’s verification requirements."],
+      ["Verify", "Checksums, signatures, and source build", "Recorded verification evidence for the candidate."],
+      ["Draft", "Release vote email", "Included candidate links and the voting window."],
+      ["Prepare", "Release manager handoff", "Vote draft ready. No mail sent."],
+    ], result: "Candidate verification and the vote draft are ready.", approval: "Review the evidence and send the vote when ready." },
 ];
 export default function WorkflowExplorer() {
   const [selected, setSelected] = useState(0);
@@ -15,8 +52,15 @@ export default function WorkflowExplorer() {
   return <div className="workflow-explorer">
     <div role="tablist" aria-label="Maintainer workflows" className="workflow-tabs">{workflows.map((item, i) => <button key={item.id} id={`workflow-tab-${i}`} role="tab" aria-selected={selected === i} aria-controls="workflow-panel" tabIndex={selected === i ? 0 : -1} onClick={() => setSelected(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); choose(event.key === "Home" ? 0 : event.key === "End" ? workflows.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + workflows.length) % workflows.length); } }}><item.icon size={18} />{item.label}</button>)}</div>
     <div role="tabpanel" id="workflow-panel" aria-labelledby={`workflow-tab-${selected}`} tabIndex={0} className="workflow-panel">
-      <div className="workflow-description" key={`${w.id}-text`}><h3>{w.title}</h3><p>{w.text}</p><a className="text-link" href={withBase(w.path)} target="_blank" rel="noreferrer">Explore this workflow </a></div>
-      <div className="workflow-preview" key={w.id}><div className="preview-top"><span>{w.tag}</span><span>Example</span></div><div className="preview-body"><div className="prompt-line"><span className="prompt-caret">›</span>{w.command}</div><ul>{w.items.map(item => <li key={item}><Check size={14} />{item}</li>)}</ul><div className="draft-preview"><div><FileText size={15} /><strong>{w.file}</strong><span>Draft</span></div><p>{w.body}</p><a href={withBase(w.path)}>{w.action}</a></div></div><div className="preview-bottom">Awaiting maintainer review</div></div>
+      <div className="workflow-description"><h3>{w.title}</h3><p>{w.text}</p><a className="text-link" href={withBase(w.path)}>Explore this workflow</a></div>
+      <figure className="agent-session" key={w.id}>
+        <div className="session-heading"><strong>Agent session</strong><span>~/your-project</span></div>
+        <div className="session-prompt"><span aria-hidden="true">❯</span><span>{w.prompt}</span></div>
+        <div className="session-transcript">{w.steps.map(([tool, label, output]) => <div className="session-step" key={tool}><div><strong>{tool}</strong><span>{label}</span></div><p>{output}</p></div>)}</div>
+        <div className="session-result">{w.result}</div>
+        <div className="session-approval">{w.approval}<span className="terminal-cursor" aria-hidden="true" /></div>
+        <figcaption>Illustrative session · Magpie workflows</figcaption>
+      </figure>
     </div>
   </div>;
 }

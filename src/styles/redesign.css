@@ -418,3 +418,79 @@ h2 { font-size: clamp(32px, 3.5vw, 48px); font-weight: 470; letter-spacing: -.04
  .agent-options .other-agents { padding-left: 14px; }
  .workflow-tabs button { font-size: 12px; padding-inline: 10px; }
 }
+
+/* Aligned endpoints share the same three-column geometry as their wires. */
+.agent-options { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 0; }
+.agent-options>span { min-height: 58px; justify-content: flex-start; }
+.agent-options .other-agents { border: 0; padding: 0; min-height: 58px; justify-content: flex-start; }
+.agent-options .other-agents>svg { height: 28px; color: #85919a; }
+.diagram-wires { display: block; width: 100%; height: 48px; overflow: visible; fill: none; stroke: #b6c9e2; stroke-width: 1; }
+.diagram-wires path { vector-effect: non-scaling-stroke; }
+.agent-outcomes { gap: 0; padding-top: 0; }
+.magpie-plugin { animation: none; }
+.case-layout { align-items: center; }
+.case-quote blockquote { margin-bottom: 22px; max-width: 360px; }
+.case-story { margin-top: 24px; font-size: 13px; }
+.testimonial-metrics { gap: 28px; }
+.testimonial-metrics p { max-width: 150px; line-height: 1.6; font-size: 14px; }
+.agent-session { margin: 0; min-width: 0; border: 1px solid #353430; border-radius: 10px; background: #201f1c; color: #e4e1d9; box-shadow: 0 12px 32px #1727230a; font: 12px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; overflow: hidden; }
+.session-heading { padding: 20px 24px 18px; display: flex; align-items: center; gap: 10px; }
+.session-heading img { object-fit: contain; }
+.session-heading strong { font-weight: 600; font-size: 14px; }
+.session-heading>span { color: #aaa69b; font-size: 11px; margin-left: auto; }
+.session-prompt { margin: 0 16px; padding: 12px; display: flex; gap: 10px; background: #302e29; border-radius: 3px; color: #f5f1e9; }
+.session-prompt>span:first-child { color: #d7a088; }
+.session-transcript { padding: 20px 24px 4px; }
+.session-step { margin-bottom: 18px; }
+.session-step>div { display: flex; flex-wrap: wrap; gap: 0 10px; }
+.session-step strong { color: #dfb394; font-weight: 500; }
+.session-step p { margin: 5px 0 0 3px; padding-left: 13px; border-left: 1px solid #575247; color: #aaa69b; font-size: 11px; }
+.session-result { margin: 0 24px 16px; color: #e2dfd5; }
+.session-approval { border-block: 1px solid #49453d; padding: 14px 24px; color: #c9d1b4; }
+.terminal-cursor { display: inline-block; width: 6px; height: 12px; vertical-align: -2px; background: #c9d1b4; margin-left: 8px; }
+.agent-session figcaption { padding: 10px 24px; color: #969287; font-size: 10px; }
+@media(min-width:801px) and (prefers-reduced-motion:no-preference) { .agent-shell { animation: skill-float 7s ease-in-out infinite; } }
+@media(max-width:800px) {
+ .hero { gap: 30px; padding-top: 30px; padding-bottom: 48px; }
+ .integration-art { order: -1; max-width: 390px; }
+ .hero-copy { text-align: center; width: 100%; max-width: 560px; margin-inline: auto; }
+ .hero-copy>p { margin-inline: auto; }
+ .hero-actions { justify-content: center; }
+ .hero h1 { font-size: clamp(36px,7vw,54px); }
+ .agent-shell { padding: 12px 4px 0; }
+ .diagram-wires { height: 36px; }
+ .magpie-plugin { padding: 18px; }
+ .agent-options>span, .agent-options .other-agents { font-size: 11px; }
+ .agent-outcomes span { font-size: 11px; }
+ .site-header[data-reveal-after-hero].hero-nav-ready { position: fixed; inset: 0 0 auto; transform: translateY(-100%); opacity: 0; visibility: hidden; transition: transform .3s ease, opacity .3s ease, visibility .3s; }
+ .site-header[data-reveal-after-hero].hero-nav-ready.is-past-hero { transform: translateY(0); opacity: 1; visibility: visible; box-shadow: 0 4px 20px #17272308; }
+ .case-layout { gap: 32px; }
+ .case-evidence { width: 100%; }
+ .testimonial-metrics p { max-width: 180px; }
+ .session-heading { padding: 18px 16px; gap: 8px; }
+ .session-heading>span { font-size: 10px; }
+ .session-transcript { padding: 18px 16px 0; }
+ .session-result { margin-inline: 16px; }
+ .session-approval { padding: 14px 16px; }
+ .agent-session figcaption { padding-inline: 16px; }
+}
+.velocity-chart { margin: 0; }
+.velocity-chart figcaption { display: flex; align-items: center; gap: 22px; margin-bottom: 15px; }
+.velocity-chart figcaption strong { font-size: 64px; font-weight: 450; letter-spacing: -.055em; line-height: 1; }
+.velocity-chart figcaption span { font-size: 13px; line-height: 1.7; color: #c5d2ca; }
+.velocity-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.velocity-grid { stroke: #385148; stroke-width: 1; }
+.velocity-axis { fill: #a8bcb0; font-size: 11px; }
+.velocity-label { fill: #c6d8ad; font-size: 11px; }
+.velocity-value { fill: #e6eddc; font-size: 14px; }
+.velocity-line { stroke: #c6d8ad; stroke-width: 2.5; fill: none; stroke-linejoin: round; }
+.velocity-area { fill: #c6d8ad; opacity: .07; }
+.velocity-adoption { stroke: #8ca889; stroke-dasharray: 3 5; }
+.velocity-caption { display: flex; justify-content: space-between; gap: 16px; color: #a8bcb0; font-size: 11px; }
+.velocity-caption a { color: #e6eddc; text-decoration: none; }
+@media(max-width:800px) { .velocity-chart { max-width: 500px; } .velocity-chart figcaption strong { font-size: 56px; } }
+.skill-tree { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+.skill-column { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding-inline: 5px; background: linear-gradient(#b6c9e2,#b6c9e2) center/1px calc(100% - 18px) no-repeat; background-position-y: top; }
+.skill-column a { position: relative; min-height: 38px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8px 5px; border: 1px solid #dbe3ed; border-radius: 5px; background: var(--paper); color: #4c6478; font-size: 11px; line-height: 1.4; text-decoration: none; transition: border-color .2s, color .2s; }
+.skill-column a:hover { color: var(--blue); border-color: #91b2dd; }
+@media(max-width:800px) { .integration-art { max-width: 440px; } .skill-column { padding-inline: 4px; gap: 11px; } .skill-column a { min-height: 42px; font-size: 10px; } }

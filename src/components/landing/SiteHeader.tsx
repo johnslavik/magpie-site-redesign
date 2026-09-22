@@ -1,14 +1,14 @@
 import { Menu, X, Search } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
-export function SiteHeader({ home = false, search = false }: { home?: boolean; search?: boolean }) {
+export function SiteHeader({ home = false, search = false, revealAfterHero = false }: { home?: boolean; search?: boolean; revealAfterHero?: boolean }) {
   const links = [
     ["Results", "/#airflow"],
     ["How it works", "/#how-it-works"],
     ["Documentation", "/docs"],
   ];
   return (
-    <header className="site-header">
+    <header className="site-header" data-reveal-after-hero={revealAfterHero || undefined}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="header-inner">
         <a className="brand-lockup" href={withBase("/")} aria-label="Apache Magpie home">
