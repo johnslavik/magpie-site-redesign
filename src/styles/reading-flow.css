@@ -441,7 +441,7 @@ main.redesign-home { position: relative; isolation: isolate; }
 .redesign-home .hero-overview .hero-credibility { font-size: clamp(20px,2vw,24px); }
 .redesign-home .hero-overview .hero-story { max-width: 800px; margin-inline: auto; }
 .redesign-home .hero-overview .hero-expertise { font-size: var(--text-body); line-height: 1.7; }
-.hero-workflows { margin-top: clamp(36px,5vw,64px); }
+.hero-workflows { margin-top: clamp(64px,8vw,112px); }
 .redesign-home .hero-overview .integration-art { padding: 0; }
 .redesign-home .hero-overview .example-navigation { margin-top: 32px; }
 .redesign-home .hero-overview .agent-shell>.diagram-context { margin: 32px auto 12px; font-size: 14px; }
@@ -478,7 +478,7 @@ main.redesign-home { position: relative; isolation: isolate; }
 
 /* A restrained technical texture and crisp surfaces carry the brand through the page. */
 .redesign-home { --card-radius: 16px; }
-.redesign-home .hero-overview { position: relative; padding-top: 64px; }
+.redesign-home .hero-overview { position: relative; padding-top: clamp(96px,10vw,144px); }
 .redesign-home .magpie-card { background: linear-gradient(140deg,#f4f8ff,var(--prepared-bg)); box-shadow: 0 2px 3px #193f6b03, 0 12px 36px -28px #193f6b40; }
 .redesign-home .reel-flow > li { border-radius: var(--card-radius); }
 .redesign-home .example-navigation button:hover { border-color: var(--blue); background: #edf4ff; }
@@ -523,3 +523,5 @@ main.redesign-home { position: relative; isolation: isolate; }
 @media(max-width:800px) { .redesign-home .lifecycle-flow { gap: 32px; } .redesign-home .lifecycle-flow > div:not(:last-child)::after { top: auto; bottom: -27px; right: calc(50% - 10px); transform: rotate(90deg); } }
 
 @media(min-width:801px) { .redesign-home .security-summary-flow { max-width: 940px; margin-inline: auto; grid-template-columns: minmax(0,1fr) 24px minmax(0,1fr); gap: 24px; } }
+
+@media(max-width:600px) { .redesign-home .hero-overview { padding-top: 64px; } .hero-workflows { margin-top: 48px; } }
