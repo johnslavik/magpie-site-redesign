@@ -503,17 +503,15 @@ main.redesign-home { position: relative; isolation: isolate; }
 .redesign-home .adapter-strip .more-adapters { display: inline; margin: 0; font-size: 12px; }
 @media(max-width:600px) { .redesign-home .adapter-strip { gap: 8px 12px; } .redesign-home .adapter-strip .supported-agents { gap: 8px 16px; } }
 
-/* Section-sized decorative fields share a visual vocabulary, not one repeating strip. */
+/* Complete ornaments live in the section padding, not in an oversized cropped field. */
 .redesign-home > section { position: relative; isolation: isolate; }
-.redesign-home > section::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--section-details, url('/illustrations/details-orbits.svg')) center center / 1440px 1000px no-repeat; mask-image: linear-gradient(transparent, #000 70px, #000 calc(100% - 70px), transparent); }
-.redesign-home > .hero-overview::after { inset-inline: -40px; background-position: center top; }
-.redesign-home > :is(.airflow-section,.setup-utilities,.invitation-band) { --section-details: url('/illustrations/details-constellation.svg'); }
-.redesign-home > :is(.choose-work,.learn-skills) { --section-details: url('/illustrations/details-branches.svg'); }
-.redesign-home > .security-story-section::after { background-repeat: repeat-y; background-size: 1440px 1400px; }
+.redesign-home > section::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: var(--ornament, url('/illustrations/ornament-orbit.svg')), url('/illustrations/ornament-grid.svg'); background-position: right 12px top 18px, left 12px bottom 18px; background-size: 100px 100px, 80px 80px; background-repeat: no-repeat; }
+.redesign-home > :is(.choose-work,.setup-utilities,.learn-skills) { --ornament: url('/illustrations/ornament-branch.svg'); }
+.redesign-home > :is(.airflow-section,.project-fit)::after { background-position: left 12px top 18px, right 12px bottom 18px; }
+.redesign-home > .hero-overview::after { background-size: 130px 130px, 80px 80px; background-position: right 0 top 36px, left 0 bottom 24px; }
 @media(max-width:800px) {
- .redesign-home > section::after { background-size: 1050px 850px; opacity: .65; }
- .redesign-home > .hero-overview::after { inset-inline: 0; }
- .redesign-home > .security-story-section::after { background-size: 1050px 1200px; }
+ .redesign-home > section::after { background-size: 56px 56px, 48px 48px; background-position: right 0 top 6px, left 0 bottom 6px; }
+ .redesign-home > .hero-overview::after { background-size: 56px 56px, 48px 48px; background-position: right 0 top 6px, left 0 bottom 6px; }
 }
 
 /* Connect the cards in the gutters, away from their checklist markers. */
