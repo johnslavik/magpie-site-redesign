@@ -505,14 +505,12 @@ main.redesign-home { position: relative; isolation: isolate; }
 
 /* Four complete, colored accents frame each section's content. */
 .redesign-home > section { position: relative; isolation: isolate; }
-.redesign-home > section::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: var(--ornament, url('/illustrations/ornament-orbit.svg')), url('/illustrations/ornament-constellation.svg'), url('/illustrations/ornament-spark.svg'), url('/illustrations/ornament-grid.svg'); background-position: right 12px top 18px, left 14px top 22px, right 28px bottom 24px, left 12px bottom 18px; background-size: 100px 100px, 76px 76px, 64px 64px, 80px 80px; background-repeat: no-repeat; opacity: .8; }
-.redesign-home > section::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse 420px 330px at 0% 12%, #f5cfad80, transparent), radial-gradient(ellipse 520px 420px at 100% 18%, #b9d5f294, transparent), radial-gradient(ellipse 440px 320px at 93% 94%, #d6c8ef80, transparent), radial-gradient(ellipse 400px 280px at 5% 93%, #bfe4cd80, transparent); }
+.redesign-home > section::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background-image: var(--ornament, url('/illustrations/ornament-code.svg')), url('/illustrations/ornament-terminal.svg'), url('/illustrations/ornament-diff.svg'), url('/illustrations/ornament-grid.svg'); background-position: right 12px top 18px, left 14px top 22px, right 28px bottom 24px, left 12px bottom 18px; background-size: 100px 100px, 76px 76px, 64px 64px, 80px 80px; background-repeat: no-repeat; opacity: .8; }
 .redesign-home > :is(.choose-work,.setup-utilities,.learn-skills) { --ornament: url('/illustrations/ornament-branch.svg'); }
 .redesign-home > :is(.airflow-section,.project-fit)::after { background-position: left 12px top 18px, right 14px top 22px, left 28px bottom 24px, right 12px bottom 18px; }
 .redesign-home > .hero-overview::after { background-size: 130px 130px, 92px 92px, 76px 76px, 90px 90px; }
 @media(max-width:800px) {
  .redesign-home > section::after, .redesign-home > .hero-overview::after { background-size: 48px 48px, 38px 38px, 36px 36px, 40px 40px; background-position: right 0 top 6px, left 0 top 8px, right 0 bottom 6px, left 0 bottom 6px; }
- .redesign-home > section::before { opacity: .6; }
 }
 
 /* Connect the cards in the gutters, away from their checklist markers. */
@@ -526,4 +524,9 @@ main.redesign-home { position: relative; isolation: isolate; }
 @media(max-width:600px) { .redesign-home .hero-overview { padding-top: 64px; } .hero-workflows { margin-top: 48px; } }
 
 /* Fade the color fields at container edges so they never read as rectangular panels. */
-.redesign-home > section::before { mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+
+/* One continuous color field, independent of section and container boundaries. */
+main.redesign-home { background-image: radial-gradient(ellipse 680px 520px at 0% 350px, #f3d9c780, transparent 80%), radial-gradient(ellipse 760px 600px at 100% 500px, #bdd6f280, transparent 80%), radial-gradient(ellipse 820px 560px at 75% 1400px, #d7c9ed80, transparent 80%), radial-gradient(ellipse 760px 580px at 0% 1900px, #c0e4d880, transparent 80%); background-size: 100% 2600px; background-repeat: repeat-y; }
+.redesign-home > :is(.section-band,.airflow-section), .redesign-home :is(.security-workbench,.software-workbench) { background: transparent; }
+.redesign-home .section-wave { display: none; }
+.redesign-home > section { border-block: 0; }
