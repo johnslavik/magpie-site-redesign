@@ -394,10 +394,8 @@ body.docs-navigation-open { overflow: hidden; }
 
 .redesign-home .example-navigation { gap: 18px; }
 .redesign-home .example-navigation :is(.example-back,.example-next) { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; padding: 0; border: 1px solid #cbd8cd; border-radius: 50%; background: #fffefa; }
-.example-position { min-width: 48px; font-size: 17px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+.example-position { min-width: 48px; font-size: 17px; text-align: center; color: var(--muted); font-family: inherit; font-variant-numeric: normal; font-feature-settings: normal; font-weight: 500; letter-spacing: normal; }
 main.redesign-home { position: relative; isolation: isolate; }
-main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-edge.svg') left top / 72px 1200px repeat-y, url('/illustrations/maintenance-edge.svg') right 600px / 72px 1200px repeat-y; }
-@media(max-width:800px) { main.redesign-home::before { opacity: .3; background-size: 28px 1200px; } }
 
 
 .security-summary-flow .summary-state { align-self: stretch; display: flex; flex-direction: column; }
@@ -481,16 +479,12 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 /* A restrained technical texture and crisp surfaces carry the brand through the page. */
 .redesign-home { --card-radius: 16px; }
 .redesign-home .hero-overview { position: relative; padding-top: 64px; }
-.redesign-home .hero-overview::before { content: ''; position: absolute; inset: 0 -40px; pointer-events: none; z-index: -1; background: url('/illustrations/maintenance-globe.svg') center top / 1440px 900px no-repeat; mask-image: linear-gradient(#000 55%, transparent 95%); }
 .redesign-home .magpie-card { background: linear-gradient(140deg,#f4f8ff,var(--prepared-bg)); box-shadow: 0 2px 3px #193f6b03, 0 12px 36px -28px #193f6b40; }
 .redesign-home .reel-flow > li { border-radius: var(--card-radius); }
 .redesign-home .example-navigation button:hover { border-color: var(--blue); background: #edf4ff; }
-@media(max-width:600px) { .redesign-home .hero-overview::before { inset-inline: 0; } }
 
 /* Continue the network through the tinted bands without crossing the reading column. */
 .redesign-home .section-band { position: relative; isolation: isolate; }
-.redesign-home .section-band::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: url('/illustrations/maintenance-edge.svg') left top / 72px 1200px repeat-y, url('/illustrations/maintenance-edge.svg') right 600px / 72px 1200px repeat-y; opacity: .6; mask-image: linear-gradient(transparent, #000 120px, #000 calc(100% - 120px), transparent); }
-@media(max-width:800px) { main.redesign-home::before { background-size: 28px 1200px; opacity: .3; } .redesign-home .section-band::after { opacity: .25; background-size: 28px 1200px; } }
 
 /* Keep adapter support together as a compact signature below the example. */
 .redesign-home .supported-agents { max-width: 700px; gap: 8px; margin-inline: auto; }
@@ -508,3 +502,24 @@ main.redesign-home::before { content: ''; position: absolute; inset: 0; z-index:
 .redesign-home .adapter-strip .supported-agents img { width: 20px; height: 20px; }
 .redesign-home .adapter-strip .more-adapters { display: inline; margin: 0; font-size: 12px; }
 @media(max-width:600px) { .redesign-home .adapter-strip { gap: 8px 12px; } .redesign-home .adapter-strip .supported-agents { gap: 8px 16px; } }
+
+/* Section-sized decorative fields share a visual vocabulary, not one repeating strip. */
+.redesign-home > section { position: relative; isolation: isolate; }
+.redesign-home > section::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--section-details, url('/illustrations/details-orbits.svg')) center center / 1440px 1000px no-repeat; mask-image: linear-gradient(transparent, #000 70px, #000 calc(100% - 70px), transparent); }
+.redesign-home > .hero-overview::after { inset-inline: -40px; background-position: center top; }
+.redesign-home > :is(.airflow-section,.setup-utilities,.invitation-band) { --section-details: url('/illustrations/details-constellation.svg'); }
+.redesign-home > :is(.choose-work,.learn-skills) { --section-details: url('/illustrations/details-branches.svg'); }
+.redesign-home > .security-story-section::after { background-repeat: repeat-y; background-size: 1440px 1400px; }
+@media(max-width:800px) {
+ .redesign-home > section::after { background-size: 1050px 850px; opacity: .65; }
+ .redesign-home > .hero-overview::after { inset-inline: 0; }
+ .redesign-home > .security-story-section::after { background-size: 1050px 1200px; }
+}
+
+/* Connect the cards in the gutters, away from their checklist markers. */
+.redesign-home .lifecycle-flow { column-gap: 32px; }
+.redesign-home .lifecycle-flow > div { position: relative; }
+.redesign-home .lifecycle-flow > div:not(:last-child)::after { content: ''; position: absolute; right: -27px; top: calc(50% - 10px); width: 20px; height: 20px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23728e78' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16m-6-6 6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat; }
+@media(max-width:800px) { .redesign-home .lifecycle-flow { gap: 32px; } .redesign-home .lifecycle-flow > div:not(:last-child)::after { top: auto; bottom: -27px; right: calc(50% - 10px); transform: rotate(90deg); } }
+
+@media(min-width:801px) { .redesign-home .security-summary-flow { max-width: 940px; margin-inline: auto; grid-template-columns: minmax(0,1fr) 24px minmax(0,1fr); gap: 24px; } }
