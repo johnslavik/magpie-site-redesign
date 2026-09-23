@@ -523,10 +523,10 @@ main.redesign-home { position: relative; isolation: isolate; }
 
 @media(max-width:600px) { .redesign-home .hero-overview { padding-top: 64px; } .hero-workflows { margin-top: 48px; } }
 
-/* Fade the color fields at container edges so they never read as rectangular panels. */
-
 /* One continuous color field, independent of section and container boundaries. */
 main.redesign-home { background-image: radial-gradient(ellipse 680px 520px at 0% 350px, #f3d9c780, transparent 80%), radial-gradient(ellipse 760px 600px at 100% 500px, #bdd6f280, transparent 80%), radial-gradient(ellipse 820px 560px at 75% 1400px, #d7c9ed80, transparent 80%), radial-gradient(ellipse 760px 580px at 0% 1900px, #c0e4d880, transparent 80%); background-size: 100% 2600px; background-repeat: repeat-y; }
-.redesign-home > :is(.section-band,.airflow-section), .redesign-home :is(.security-workbench,.software-workbench) { background: transparent; }
-.redesign-home .section-wave { display: none; }
+.redesign-home :is(.security-workbench,.software-workbench) { background: transparent; }
+/* Preserve the chapter silhouettes; color washes fade before meeting the waves. */
+.redesign-home > :is(.section-band,.airflow-section) { background: radial-gradient(ellipse at 12% 50%, #c5dcef55, transparent 65%), radial-gradient(ellipse at 90% 50%, #dccdec55, transparent 65%), var(--band-color); }
+.redesign-home .section-wave { display: block; }
 .redesign-home > section { border-block: 0; }
