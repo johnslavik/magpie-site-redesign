@@ -544,3 +544,26 @@ main.redesign-home { background-image: radial-gradient(ellipse 680px 520px at 0%
 .redesign-home .summary-band { padding-block: 64px var(--space-section); }
 .redesign-home .summary-band .security-summary { margin-top: 0; padding-top: 0; border-top: 0; }
 @media(max-width:700px) { .redesign-home .section-wave { height: 44px; } .redesign-home .chapter-emphasis > .section-wave { height: 72px; } }
+
+/* Keep a consistent reading margin beyond each wave's full painted bounds. */
+.redesign-home {
+  --transition-gap: clamp(88px, 9vw, 136px);
+  --wave-height: clamp(56px, 6vw, 88px);
+  --chapter-wave-height: clamp(88px, 10vw, 144px);
+}
+.redesign-home .section-wave { height: var(--wave-height); }
+.redesign-home .chapter-emphasis > .section-wave { height: var(--chapter-wave-height); }
+.redesign-home > section:nth-of-type(n) {
+  --leading-wave: 0px;
+  --trailing-wave: 0px;
+  padding-top: calc(var(--transition-gap) + var(--leading-wave));
+  padding-bottom: calc(var(--transition-gap) + var(--trailing-wave));
+}
+.redesign-home > section:has(> .wave-bottom) + section { --leading-wave: var(--wave-height); }
+.redesign-home > .chapter-emphasis:has(> .wave-bottom) + section { --leading-wave: var(--chapter-wave-height); }
+.redesign-home > section:has(+ section > .section-wave:not(.wave-bottom)) { --trailing-wave: var(--wave-height); }
+.redesign-home > section:has(+ .chapter-emphasis > .section-wave:not(.wave-bottom)) { --trailing-wave: var(--chapter-wave-height); }
+.redesign-home .invitation-band .docs-invitation { padding-block: 0; }
+@media(max-width:700px) {
+  .redesign-home { --wave-height: 44px; --chapter-wave-height: 72px; }
+}
