@@ -15,6 +15,7 @@ export function SiteHeader({ search = false, currentPath = "" }: { search?: bool
         <a href={withBase("/docs")} target="_blank" rel="noreferrer">Docs</a>
         {!installing && <a className="button button-small" href={withBase("/start")} target="_blank" rel="noreferrer">Get started</a>}
       </nav>}
+      <button className="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span aria-hidden="true">◐</span><span className="theme-label">Dark</span></button>
     </div>
   </header>;
 }
