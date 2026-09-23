@@ -1,7 +1,4 @@
-/* Maintainers own the work. Magpie supplies reusable assistance. */
-.magpie-card-brand { flex-wrap: wrap; gap: 8px !important; }
-.magpie-card-brand .assist-plus { font-size: 15px; opacity: .6; }
-.maintainer-label { display:flex; gap:10px; align-items:center; font-size:18px; font-weight:600; margin:0 0 18px; }
+/* Theme support and the nine-dot hero carousel. */
 .redesign-home .reel-window { overflow:hidden; }
 .reel-track { display:flex; transition:transform .5s cubic-bezier(.22,.7,.3,1); }
 .reel-slide { flex:0 0 100%; min-width:0; padding:4px; }
@@ -10,41 +7,6 @@
 .reel-dot span { width:10px; height:10px; border-radius:50%; background:var(--line); transition:background .2s,transform .2s; }
 .reel-dot[aria-pressed=true] span { background:var(--blue); transform:scale(1.3); }
 .reel-play { margin-left:12px; }
-.maintainer-handoff { text-align:center; color:var(--muted); font-size:14px; margin-top:20px; }
-.evidence-chart { margin:0; }
-.evidence-chart h3 { font-size:26px; line-height:1.25; margin:0 0 22px; }
-.chart-phases { display:grid; grid-template-columns:3fr 2fr 5fr; gap:5px; font-size:12px; }
-.chart-phases span { padding:10px; background:#adc5de40; border-radius:7px; }
-.chart-phases span:nth-child(2) { background:#dc966440; }
-.chart-phases span:nth-child(3) { background:#6bb69540; }
-.chart-phases small { display:block; margin-top:4px; }
-.evidence-chart svg { width:100%; height:auto; margin-top:18px; }
-.evidence-heading { fill:currentColor; font-size:13px; font-weight:600; }
-.evidence-tick { fill:currentColor; font-size:10px; }
-.evidence-legend { display:flex; flex-wrap:wrap; gap:18px; font-size:12px; margin-top:16px; }
-.evidence-legend span::before { content:''; display:inline-block; width:18px; height:3px; background:var(--series); margin-right:6px; vertical-align:middle; }
-.evidence-note { font-size:12px; line-height:1.6; color:var(--muted); margin-top:12px; }
-.evidence-table { overflow:auto; }
-.evidence-table table { width:100%; font-size:12px; text-align:right; }
-.evidence-table th,.evidence-table td { padding:6px; border-bottom:1px solid var(--line); }
-.evidence-chart summary { font-size:13px; margin-top:12px; }
-.content-page .tool-filters { display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
-.content-page .tool-filters>input { flex:1 1 280px; min-height:46px; }
-.content-page .tool-extra-filters { flex:1 1 100%; }
-.content-page .tool-extra-filters>div { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
-.content-page .tool-filters select { min-height:46px; background:var(--paper); flex:1; min-width:180px; }
-.content-page .tool-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; border:0; }
-.content-page .tool-entry { display:flex; flex-direction:column; align-items:stretch; padding:24px; border:1px solid var(--line); border-radius:16px; background:var(--paper); text-decoration:none; transition:border-color .2s,box-shadow .2s; }
-.content-page .tool-entry[hidden] { display:none; }
-.content-page .tool-entry:hover { border-color:var(--blue); box-shadow:0 8px 30px #004aad12; }
-.tool-card-heading { display:flex; gap:12px; align-items:center; }
-.tool-card-heading img { object-fit:contain; width:30px; height:30px; }
-.content-page .tool-card-heading h2 { font-size:19px; margin:0; overflow-wrap:anywhere; }
-.tool-glyph { color:var(--blue); font-weight:650; }
-.content-page .tool-entry p { margin-block:18px; flex:1; font-size:15px; }
-.tool-cap-tags,.tool-meta { display:flex; flex-wrap:wrap; gap:6px; }
-.tool-cap-tags span { padding:4px 8px; background:var(--surface); border-radius:6px; font-size:11px; }
-.content-page .tool-meta { margin-top:16px; font-size:12px; }
 .theme-toggle { display:flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:8px; background:var(--paper); color:var(--ink); padding:8px 10px; font-size:13px; flex-shrink:0; }
 .theme-toggle>span:first-child { font-size:20px; }
 html[data-theme=dark] { color-scheme:dark; --paper:#121c25; --surface:#1b2935; --ink:#e4edf1; --muted:#b1c1c9; --line:#3b4a57; --blue:#89b9ff; --deep:#e1eaf0; --citrus:#293e30; }
@@ -64,8 +26,6 @@ html[data-theme=dark] .button { background:#175daf; color:#fff; }
 html[data-theme=dark] .official-wordmark { filter:brightness(1.8) saturate(.6); }
 html[data-theme=dark] .chart-period,html[data-theme=dark] .story-quote { background:var(--surface); }
 html[data-theme=dark] .evidence-chart path { filter:brightness(1.65); }
-@media(max-width:900px) { .content-page .tool-list { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media(max-width:600px) { .content-page .tool-list { grid-template-columns:1fr; } .theme-toggle { padding:6px; } .site-header .header-inner { gap:8px; } }
 html[data-theme=dark] .redesign-home :is(p,.hero-expertise,.reel-outcome,.diagram-context,.summary-title,.lifecycle-heading p,.work-caption,.integration-caption) { color:var(--muted); }
 html[data-theme=dark] .redesign-home :is(h1,h2,h3,h4,.reel-outcome,.summary-title) { color:var(--ink); }
 html[data-theme=dark] .redesign-home .hero-copy h1 span,html[data-theme=dark] .magpie-card-brand { color:var(--blue); }
@@ -83,40 +43,14 @@ html[data-theme=dark] :is(.docs-sidebar .tree-summary,.docs-sidebar nav a,.docs-
 html[data-theme=dark] .docs-prose.prose code { background:var(--surface); color:var(--ink); }
 html[data-theme=dark] .docs-prose.prose pre code { background:transparent; }
 html[data-theme=dark] .docs-prose.prose .doc-callout-title { color:var(--blue); }
-@media(min-width:801px) { .redesign-home .security-summary-flow { grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; } }
-
-.improvement-note { max-width:760px; margin:40px auto 0; text-align:center; }
-.improvement-note ol { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px 22px; padding:0; list-style:none; color:var(--ink); font-size:15px; }
-.improvement-note li+li::before { content:'→'; color:var(--muted); margin-right:22px; opacity:.6; }
-.improvement-note p { font-size:15px; line-height:1.7; color:var(--muted); max-width:620px; margin:16px auto 0; }
-.redesign-home .magpie-card-brand { flex-wrap:nowrap; gap:12px !important; }
-.redesign-home .magpie-card-brand img { width:28px; height:28px; }
-.redesign-home .summary-band { --band-color:#eeeaf5; }
 html[data-theme=dark] .redesign-home .summary-band { --band-color:#252535; }
 html[data-theme=dark] .redesign-home :is(.reel-delivery,.lifecycle-ready,.allowed-workspace) { background:#203c31; color:#c0e4ce; border-color:#436554; }
-@media(max-width:600px) { .improvement-note ol { gap:10px 12px; font-size:13px; } .improvement-note li+li::before { margin-right:12px; } }
 @media(prefers-reduced-motion:reduce) { .reel-track { transition:none; } }
-
 .theme-toggle { width:38px; height:38px; padding:0; justify-content:center; border-color:transparent; background:transparent; }
 .theme-toggle:hover { background:var(--surface); }
 .theme-sun { display:none; }
 html[data-theme=dark] .theme-moon { display:none; }
 html[data-theme=dark] .theme-sun { display:block; }
-
-.redesign-home .summary-takeaway { max-width:700px; margin:0 auto; text-align:center; font-size:20px; line-height:1.7; color:var(--muted); }
-.redesign-home .skill-comparison { display:block; max-width:720px; margin-inline:auto; }
-.redesign-home .skill-assisted { text-align:left; }
-.redesign-home .choose-work .software-phases { margin-bottom:48px; }
-.redesign-home > :is(.project-fit,.learn-skills,.setup-utilities) { padding-block:clamp(80px,8vw,112px); }
-@media(max-width:600px) { .redesign-home .summary-takeaway { font-size:18px; } }
-
-/* Waves extend outside their colored section, so reserve their full height
-   in the neighboring section before applying the normal reading space. */
-.redesign-home > .security-story-section { padding-block:calc(var(--space-section) + var(--chapter-wave-height)); }
-.redesign-home > .setup-utilities { padding-block:calc(clamp(80px,8vw,112px) + var(--wave-height)); }
-.redesign-home > .learn-skills { padding-top:calc(clamp(80px,8vw,112px) + var(--wave-height)); padding-bottom:calc(clamp(80px,8vw,112px) + var(--chapter-wave-height)); }
-
-/* Keep nested surfaces and lifecycle controls in the same dark palette. */
 html[data-theme=dark] .redesign-home .software-phases button { color:var(--muted); }
 html[data-theme=dark] .redesign-home .software-phase-icon { background:#25374a; border-color:#4a6077; color:#c6d5e5; }
 html[data-theme=dark] .redesign-home .software-phases button[data-complete=true] .software-phase-icon { background:#294339; border-color:#527364; color:#bce0c8; }
@@ -129,3 +63,9 @@ html[data-theme=dark] .redesign-home .rule-example { background:#2e3831; border-
 html[data-theme=dark] .supported-agents img[src$='/copilot.svg'] { filter:brightness(0) invert(.9); }
 html[data-theme=dark] .supported-agents img[src$='/opencode.png'] { border-radius:3px; outline:1px solid #ffffff30; }
 html[data-theme=dark] .redesign-home .protected-workspace :is(.sandbox-label,svg) { color:#c0e4ce; }
+html[data-theme=dark] .redesign-home .hero-expertise mark { color:inherit; background:linear-gradient(transparent 84%,#7c956b55 84%); }
+html[data-theme=dark] .airflow-section .velocity-chart figcaption span { color:var(--muted); }
+html[data-theme=dark] .airflow-section :is(.velocity-axis,.velocity-label,.velocity-value) { fill:var(--muted); }
+html[data-theme=dark] .airflow-section .velocity-grid { stroke:var(--line); }
+html[data-theme=dark] .airflow-section .velocity-adoption { stroke:#a0b887; }
+html[data-theme=dark] .redesign-home .example-navigation button:hover { background:#89b9ff18; border-color:#89b9ff55; }

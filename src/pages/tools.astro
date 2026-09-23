@@ -3,19 +3,19 @@ import { toolSummaries } from '../lib/tool-summaries';
 import ContentLayout from '../layouts/ContentLayout.astro';
 import { buildToolsView } from '../lib/tools-view';
 const plainDescription = (text: string) => text.replace(/`([^`]+)`/g, '$1').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1');
-const { tools, contractList, substrateList, vendorChips, orgChips, stateBadge, vendorLogo, orgLogoOf, orgById } = buildToolsView('');
+const { tools, contractList, substrateList, vendorChips, orgChips, stateBadge } = buildToolsView('');
 ---
 <ContentLayout title="Tools" description="Find the adapters and utilities that connect Magpie to the services you use." wide>
   <div class="tool-filters" role="search" aria-label="Filter tools">
     <input type="search" id="tool-query" aria-label="Search tools" placeholder="Search tools…" />
     <select id="tool-capability" aria-label="Filter by capability"><option value="">All capabilities</option><optgroup label="Contracts">{contractList.map(c=><option value={`contract:${c.key}`}>{c.key}</option>)}</optgroup><optgroup label="Low-level capabilities">{substrateList.map(c=><option value={`substrate:${c.key}`}>{c.key}</option>)}</optgroup></select>
-    <div class="tool-extra-filters"><div><span id="tool-extra-count" class="tool-filter-status"></span>
+    <details class="tool-extra-filters"><summary>More filters<span id="tool-extra-count"></span></summary><div>
     <select id="tool-vendor" aria-label="Filter by vendor"><option value="">All vendors</option>{vendorChips.map(v=><option value={v.vendor}>{v.vendor}</option>)}<option value="__interface">Interface specifications</option></select>
     <select id="tool-org" aria-label="Filter by organization"><option value="">All organizations</option>{orgChips.map(o=><option value={o.id}>{o.label}</option>)}<option value="__agnostic">Organization agnostic</option></select>
-    <label><input id="tool-mcp" type="checkbox" />MCP tools</label></div></div><button id="tool-reset" hidden>Clear filters</button>
+    <label><input id="tool-mcp" type="checkbox" />MCP tools</label></div></details><button id="tool-reset" hidden>Clear filters</button>
   </div>
   <p id="tool-count" class="tool-count" role="status" aria-live="polite">{tools.length} tools</p>
-  <div class="tool-list">{tools.map(tool=><a class="tool-entry" href={`/docs/tools/${tool.name}/readme`} data-search={`${tool.title} ${tool.description} ${toolSummaries[tool.name] ?? ""} ${tool.name} ${tool.labels.map(label => label.name).join(" ")} ${tool.vendor ?? ""}`.toLowerCase()} data-caps={tool.labels.map(l=>`${l.kind}:${l.name}`).join(' ')} data-vendor={tool.vendorKind === 'interface' ? '__interface' : tool.vendor ?? ''} data-org={tool.organization ?? '__agnostic'} data-mcp={Boolean(tool.mcp)}><div class="tool-card-heading">{(vendorLogo(tool.vendor ?? "") || orgLogoOf(orgById[tool.organization ?? ""])) ? <img src={vendorLogo(tool.vendor ?? "") || orgLogoOf(orgById[tool.organization ?? ""])!} alt="" width="30" height="30" /> : <span class="tool-glyph" aria-hidden="true">&lt;/&gt;</span>}<h2>{tool.title}</h2></div><p>{toolSummaries[tool.name] ?? plainDescription(tool.description)}</p><div class="tool-cap-tags">{tool.labels.slice(0,3).map(label => <span>{label.name.replaceAll("-", " ")}</span>)}</div><div class="tool-meta">{tool.state !== 'implemented' && <span class="tool-unavailable">{stateBadge(tool).label}</span>}{tool.vendor && <span>{tool.vendor}</span>}{tool.organization && <span>{tool.organization}</span>}{tool.mcp && <span>MCP</span>}{tool.maturity === 'experimental' && <span>Experimental</span>}</div></a>)}</div>
+  <div class="tool-list">{tools.map(tool=><a class="tool-entry" href={`/docs/tools/${tool.name}/readme`} data-search={`${tool.title} ${tool.description} ${toolSummaries[tool.name] ?? ""} ${tool.name} ${tool.labels.map(label => label.name).join(" ")} ${tool.vendor ?? ""}`.toLowerCase()} data-caps={tool.labels.map(l=>`${l.kind}:${l.name}`).join(' ')} data-vendor={tool.vendorKind === 'interface' ? '__interface' : tool.vendor ?? ''} data-org={tool.organization ?? '__agnostic'} data-mcp={Boolean(tool.mcp)}><h2>{tool.title}</h2><p>{toolSummaries[tool.name] ?? plainDescription(tool.description)}</p><div class="tool-meta">{tool.state !== 'implemented' && <span class="tool-unavailable">{stateBadge(tool).label}</span>}{tool.vendor && <span>{tool.vendor}</span>}{tool.maturity === 'experimental' && <span>Experimental</span>}</div></a>)}</div>
   <p id="tool-empty" hidden>No matching tools. Try another search or clear the filters.</p>
   <div class="link-row"><a href="/architecture">How these tools fit together </a></div>
 </ContentLayout>

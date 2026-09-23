@@ -2,13 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SiteHeader } from "../components/landing/SiteHeader";
 import { SiteFooter } from "../components/landing/SiteFooter";
-import AirflowVelocity from "../components/stories/AirflowVelocity";
+import AirflowVelocity from "../components/stories/AirflowVelocity.astro";
 import WorkflowExplorer from "../components/landing/WorkflowExplorer";
 import { ArrowRight } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 import BrandName from "../components/landing/BrandName";
-import ImprovementLoop from "../components/landing/ImprovementLoop.astro";
 import SectionWave from "../components/landing/SectionWave.astro";
+import MagpieCard from "../components/landing/MagpieCard";
 import MoreWays from "../components/landing/MoreWays.astro";
 ---
 <BaseLayout title="Apache Magpie | Software maintenance, automated" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
@@ -51,8 +51,11 @@ import MoreWays from "../components/landing/MoreWays.astro";
       <SectionWave reverse />
       <div id="security-summary" class="security-summary container" aria-labelledby="security-summary-title">
         <h2 id="security-summary-title">Less work to coordinate.</h2>
-        <p class="summary-takeaway">You review the evidence, patches, and drafts. Your team makes the decisions, and the lessons you save improve the skills you use next time.</p>
-        <ImprovementLoop />
+        <div class="security-summary-flow">
+          <div class="summary-state"><div class="summary-card summary-before"><h3>Without Magpie</h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
+          <div class="summary-route"><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>
+          <MagpieCard className="summary-state summary-card summary-after"><strong class="summary-title">Your agent prepares the work</strong><p>Magpie’s ready-made workflows guide your agent through the investigation, fix, and disclosure, keeping the evidence together.</p></MagpieCard>
+        </div>
       </div>
     </section>
     <MoreWays />

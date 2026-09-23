@@ -1,8 +1,0 @@
----
-const { authoring = false } = Astro.props;
-const steps = authoring ? ['Idea', 'Design', 'Plan', 'Build', 'Refine', 'Use'] : ['Use', 'Review', 'Refine', 'Reuse'];
----
-<div class="improvement-note">
-  <ol aria-label={authoring ? 'Skill development cycle' : 'Continuous improvement'}>{steps.map(step => <li>{step}</li>)}</ol>
-  {authoring && <p>Start with a task you repeat. Build a skill, try it in your project, and improve it as you go.</p>}
-</div>
