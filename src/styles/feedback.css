@@ -109,3 +109,23 @@ html[data-theme=dark] .theme-sun { display:block; }
 .redesign-home .choose-work .software-phases { margin-bottom:48px; }
 .redesign-home > :is(.project-fit,.learn-skills,.setup-utilities) { padding-block:clamp(80px,8vw,112px); }
 @media(max-width:600px) { .redesign-home .summary-takeaway { font-size:18px; } }
+
+/* Waves extend outside their colored section, so reserve their full height
+   in the neighboring section before applying the normal reading space. */
+.redesign-home > .security-story-section { padding-block:calc(var(--space-section) + var(--chapter-wave-height)); }
+.redesign-home > .setup-utilities { padding-block:calc(clamp(80px,8vw,112px) + var(--wave-height)); }
+.redesign-home > .learn-skills { padding-top:calc(clamp(80px,8vw,112px) + var(--wave-height)); padding-bottom:calc(clamp(80px,8vw,112px) + var(--chapter-wave-height)); }
+
+/* Keep nested surfaces and lifecycle controls in the same dark palette. */
+html[data-theme=dark] .redesign-home .software-phases button { color:var(--muted); }
+html[data-theme=dark] .redesign-home .software-phase-icon { background:#25374a; border-color:#4a6077; color:#c6d5e5; }
+html[data-theme=dark] .redesign-home .software-phases button[data-complete=true] .software-phase-icon { background:#294339; border-color:#527364; color:#bce0c8; }
+html[data-theme=dark] .redesign-home .software-phases button[aria-selected=true] { color:var(--blue); }
+html[data-theme=dark] .redesign-home .software-phases button[aria-selected=true] .software-phase-icon { background:#2868b8; border-color:#89b9ff; color:#fff; box-shadow:0 0 0 5px #89b9ff20; }
+html[data-theme=dark] .redesign-home .software-phases button::after { color:#8ca3b9; }
+html[data-theme=dark] .redesign-home .protected-workspace { background:#203c31; border-color:#436554; color:#c0e4ce; }
+html[data-theme=dark] .redesign-home .adapted-procedures { background:transparent; }
+html[data-theme=dark] .redesign-home .rule-example { background:#2e3831; border-color:#a9b679; color:#e1e8d2; }
+html[data-theme=dark] .supported-agents img[src$='/copilot.svg'] { filter:brightness(0) invert(.9); }
+html[data-theme=dark] .supported-agents img[src$='/opencode.png'] { border-radius:3px; outline:1px solid #ffffff30; }
+html[data-theme=dark] .redesign-home .protected-workspace :is(.sandbox-label,svg) { color:#c0e4ce; }

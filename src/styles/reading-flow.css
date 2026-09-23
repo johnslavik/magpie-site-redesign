@@ -532,8 +532,9 @@ main.redesign-home { background-image: radial-gradient(ellipse 680px 520px at 0%
 .redesign-home > section { border-block: 0; }
 
 /* Strong boundaries mark proof, the workflow result, and the final invitation. */
-.redesign-home .section-wave { height: clamp(56px, 6vw, 88px); }
-.redesign-home .chapter-emphasis > .section-wave { height: clamp(88px, 10vw, 144px); }
+.redesign-home { --wave-height: clamp(56px, 6vw, 88px); --chapter-wave-height: clamp(88px, 10vw, 144px); }
+.redesign-home .section-wave { height: var(--wave-height); }
+.redesign-home .chapter-emphasis > .section-wave { height: var(--chapter-wave-height); }
 .section-wave .wave-ribbon { fill: var(--band-color); opacity: .18; }
 .chapter-emphasis > .section-wave .wave-ribbon { opacity: .45; }
 .section-wave .wave-contour { stroke: #748eb43d; }
@@ -543,4 +544,4 @@ main.redesign-home { background-image: radial-gradient(ellipse 680px 520px at 0%
 .redesign-home .band-lavender { --band-color: #ebe3f5; }
 .redesign-home .summary-band { padding-block: 64px var(--space-section); }
 .redesign-home .summary-band .security-summary { margin-top: 0; padding-top: 0; border-top: 0; }
-@media(max-width:700px) { .redesign-home .section-wave { height: 44px; } .redesign-home .chapter-emphasis > .section-wave { height: 72px; } }
+@media(max-width:700px) { .redesign-home { --wave-height: 44px; --chapter-wave-height: 72px; } }

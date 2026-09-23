@@ -4,7 +4,7 @@ import MagpieCard from "./MagpieCard";
 import WorkflowIllustration, { type WorkflowScene } from "./WorkflowIllustration";
 
 const examples = [
-  { scene: "security" as WorkflowScene, input: "A security report arrives", skill: "security-issue-triage", work: ["Investigate the report", "Write and tests the fix", "Coordinate release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
+  { scene: "security" as WorkflowScene, input: "A security report arrives", skill: "security-issue-triage", work: ["Investigate the report", "Write and test the fix", "Coordinate release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
   { scene: "review" as WorkflowScene, input: "A pull request needs review", skill: "pr-management-code-review", work: ["Read the code changes", "Check tests and conventions", "Draft comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
   { scene: "bug" as WorkflowScene, input: "A bug needs fixing", skill: "issue-fix-workflow", work: ["Reproduce the failure", "Write the fix", "Add a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
   { scene: "release" as WorkflowScene, input: "A release needs checking", skill: "release-verify-rc", work: ["Verify the build and signatures", "Prepare the release vote", "Draft the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
