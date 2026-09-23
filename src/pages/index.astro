@@ -35,7 +35,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
       </div>
       </div>
     </section>
-    <section id="airflow" class="airflow-section">
+    <section id="airflow" class="airflow-section chapter-emphasis">
       <SectionWave reverse /><SectionWave bottom />
       <div class="container">
       <h2 class="case-heading">How Airflow uses Magpie to keep up with security reports</h2>
@@ -46,7 +46,10 @@ import MoreWays from "../components/landing/MoreWays.astro";
     </div></section>
     <section id="how-it-works" class="section container security-story-section">
       <WorkflowExplorer client:load />
-      <div id="security-summary" class="security-summary" aria-labelledby="security-summary-title">
+    </section>
+    <section class="summary-band section-band band-lavender chapter-emphasis">
+      <SectionWave reverse />
+      <div id="security-summary" class="security-summary container" aria-labelledby="security-summary-title">
         <h2 id="security-summary-title">Less work to coordinate.</h2>
         <div class="security-summary-flow">
           <div class="summary-state"><div class="summary-card summary-before"><h3>Without Magpie</h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
@@ -56,7 +59,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
       </div>
     </section>
     <MoreWays />
-    <section class="invitation-band section-band band-blue"><SectionWave /><div class="docs-invitation container" data-reveal><img class="invitation-bird" src="/illustrations/magpie/magpie-looking-back.png" width="220" height="220" alt="" loading="lazy" /><div><h2>Ready to change how you maintain software?</h2></div><a class="button" href="/start" target="_blank" rel="noreferrer"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></div></section>
+    <section class="invitation-band section-band band-blue chapter-emphasis"><SectionWave /><div class="docs-invitation container" data-reveal><img class="invitation-bird" src="/illustrations/magpie/magpie-looking-back.png" width="220" height="220" alt="" loading="lazy" /><div><h2>Ready to change how you maintain software?</h2></div><a class="button" href="/start" target="_blank" rel="noreferrer"><ArrowRight size={20} strokeWidth={1.7} aria-hidden="true" /><span>Get started now</span></a></div></section>
   </main>
   <SiteFooter />
 </BaseLayout>

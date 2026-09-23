@@ -530,3 +530,17 @@ main.redesign-home { background-image: radial-gradient(ellipse 680px 520px at 0%
 .redesign-home > :is(.section-band,.airflow-section) { background: radial-gradient(ellipse at 12% 50%, #c5dcef55, transparent 65%), radial-gradient(ellipse at 90% 50%, #dccdec55, transparent 65%), var(--band-color); }
 .redesign-home .section-wave { display: block; }
 .redesign-home > section { border-block: 0; }
+
+/* Strong boundaries mark proof, the workflow result, and the final invitation. */
+.redesign-home .section-wave { height: clamp(56px, 6vw, 88px); }
+.redesign-home .chapter-emphasis > .section-wave { height: clamp(88px, 10vw, 144px); }
+.section-wave .wave-ribbon { fill: var(--band-color); opacity: .18; }
+.chapter-emphasis > .section-wave .wave-ribbon { opacity: .45; }
+.section-wave .wave-contour { stroke: #748eb43d; }
+.redesign-home .band-blue { --band-color: #e8eff8; }
+.redesign-home .band-mint { --band-color: #e3f0e8; }
+.redesign-home .invitation-band { --band-color: #dce9fa; }
+.redesign-home .band-lavender { --band-color: #ebe3f5; }
+.redesign-home .summary-band { padding-block: 64px var(--space-section); }
+.redesign-home .summary-band .security-summary { margin-top: 0; padding-top: 0; border-top: 0; }
+@media(max-width:700px) { .redesign-home .section-wave { height: 44px; } .redesign-home .chapter-emphasis > .section-wave { height: 72px; } }
