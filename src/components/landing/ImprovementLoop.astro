@@ -1,9 +1,8 @@
 ---
 const { authoring = false } = Astro.props;
-const help = ['Describe the task', 'Explore the approach', 'Set checks and approvals', 'Draft and test the skill', 'Review and refine', 'Run it in your project'];
-const steps = authoring ? ['Idea', 'Design', 'Plan', 'Implement', 'Optimize', 'Use'] : ['Use a skill', 'Review the result', 'Save what worked', 'Improve the skill'];
+const steps = authoring ? ['Idea', 'Design', 'Plan', 'Build', 'Refine', 'Use'] : ['Use', 'Review', 'Refine', 'Reuse'];
 ---
-<div class:list={['improvement-loop', { 'authoring-loop': authoring }]}>
-  <ol>{steps.map((step, i) => <li style={`--step:${i}`} ><span>{String(i + 1).padStart(2, '0')}</span>{step}{authoring && <small>{help[i]}</small>}</li>)}</ol>
-  <div class="loop-return"><span aria-hidden="true">↶</span>{authoring ? 'What you learn in use shapes the next version.' : 'Your feedback becomes guidance for the next run.'}</div>
+<div class="improvement-note">
+  <ol aria-label={authoring ? 'Skill development cycle' : 'Continuous improvement'}>{steps.map(step => <li>{step}</li>)}</ol>
+  {authoring && <p>Start with a task you repeat. Build a skill, try it in your project, and improve it as you go.</p>}
 </div>

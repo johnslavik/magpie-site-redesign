@@ -13,7 +13,7 @@ const rows = panels.map((panel, row) => ({ ...panel, top: 30 + row * 155, y: (v:
 const colors = { incoming: '#aa4b28', closed: '#004aad', backlog: '#7651a2', triage: '#167963' };
 export default function AirflowVelocity() { return (
 <figure className="evidence-chart">
-  <figcaption><h3>Incoming work, completed work, and the queue between them.</h3></figcaption>
+  <figcaption><h3>How the security workload changed.</h3></figcaption>
   <div className="chart-phases"><span>Before the reported surge<small>Nov–Jan</small></span><span>Growing pressure<small>Feb–Mar</small></span><span>Working with Magpie<small>Apr–Aug</small></span></div>
   <div className="evidence-legend"><span style={{ "--series": "#aa4b28" } as CSSProperties}>Reports received</span><span style={{ "--series": "#004aad" } as CSSProperties}>Tracked reports closed</span></div>
   <svg viewBox="0 0 530 500" role="img" aria-labelledby="evidence-title evidence-desc">

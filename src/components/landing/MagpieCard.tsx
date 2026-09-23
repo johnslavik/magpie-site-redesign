@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Check, UserRound } from "lucide-react";
+import { Check } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 export function Checklist({ items }: { items: string[] }) {
@@ -15,7 +15,7 @@ export default function MagpieCard({ children, work, className = "", as: Element
 }) {
   const Heading = headingLevel;
   return <Element className={`magpie-card ${className}`}>
-    <Heading className="magpie-card-brand"><UserRound size={26} aria-hidden="true" /><span className="assist-plus" aria-hidden="true">+</span><img src={withBase("/favicon.svg")} alt="" width="32" height="32" /><span>With Magpie</span></Heading>
+    <Heading className="magpie-card-brand"><img src={withBase("/favicon.svg")} alt="" width="32" height="32" /><span>With Magpie</span></Heading>
     {work && <Checklist items={work} />}
     {children}
   </Element>;

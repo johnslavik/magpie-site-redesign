@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { UserRound, Pause, Play } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 import MagpieCard from "./MagpieCard";
 import WorkflowIllustration, { type WorkflowScene } from "./WorkflowIllustration";
 
@@ -31,7 +31,7 @@ export default function HeroWorkflows() {
   }, []);
   useEffect(() => {
     if (!playing || !visible) return;
-    const timer = setInterval(() => { if (!document.hidden) setSelected(i => (i + 1) % examples.length); }, 2000);
+    const timer = setInterval(() => { if (!document.hidden) setSelected(i => (i + 1) % examples.length); }, 6000);
     return () => clearInterval(timer);
   }, [playing, visible]);
   return <div ref={root} className="workflow-reel" role="region" aria-roledescription="carousel" aria-label="Nine ways maintainers use Magpie" onMouseEnter={() => setPlaying(false)} onFocusCapture={() => setPlaying(false)}>
@@ -39,7 +39,7 @@ export default function HeroWorkflows() {
       <div className="reel-track" style={{ transform: `translateX(-${selected * 100}%)` }}>
         {examples.map((item, i) => <div className="reel-slide" key={item.scene} aria-hidden={i !== selected} inert={i !== selected} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${examples.length}: ${item.input}`}>
           <ol className="reel-flow">
-            <li className="reel-source"><h2 className="maintainer-label"><UserRound size={28} aria-hidden="true" />Maintainer</h2><span className="reel-input">{item.input}</span><WorkflowIllustration scene={item.scene} /></li>
+            <li className="reel-source"><span className="reel-input">{item.input}</span><WorkflowIllustration scene={item.scene} /></li>
             <MagpieCard as="li" headingLevel="h2" className="reel-process" work={item.work} />
             <li className="reel-delivery"><strong className="reel-outcome">{item.outcome}</strong><WorkflowIllustration scene={item.scene} result /></li>
           </ol>
