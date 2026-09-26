@@ -142,3 +142,16 @@ html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); 
 }
 .redesign-home .story-comparison h4 { height:49px; min-height:49px; align-self:stretch; }
 .redesign-home .story-comparison .workflow-checklist svg { flex-basis:22px; width:22px; height:22px; margin-top:3px; }
+/* One centered axis for the chart, maintainer takeaway and testimonial. */
+.redesign-home .airflow-section .case-quote { display:flex; flex-direction:column; align-items:center; text-align:center; gap:18px; max-width:900px; margin-inline:auto; }
+.redesign-home .airflow-section .case-quote .airflow-brand { width:140px; height:auto; }
+.redesign-home .airflow-section .case-quote blockquote { max-width:700px; }
+.redesign-home .airflow-section .case-quote .quote-person { text-align:left; }
+.redesign-home .airflow-section .case-quote .case-story { margin:0; }
+.redesign-home .airflow-section .case-quote { gap:16px; margin-top:28px; padding-top:28px; }
+.redesign-home .airflow-section .case-quote :is(blockquote,.quote-person,.case-story) { margin:0; }
+.redesign-home .airflow-section .case-quote .airflow-brand { width:120px; }
+.redesign-home .airflow-section .case-heading { display:block; max-width:900px; margin-inline:auto; text-align:center; }
+
+/* Keep section waves, but remove the background programming ornaments. */
+.redesign-home > section::after { content:none; display:none; }

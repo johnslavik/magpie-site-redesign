@@ -1,52 +1,34 @@
 ---
 import { MagpieToolkit } from "../landing/MagpieCard";
-import data from '../../data/airflow.json';
-const monthly = data.series.monthly;
-const opened = monthly.charts.c_open_vs_untriaged.find(s => s.label === 'opened in month')!.values;
-const queue = monthly.charts.c_open_vs_untriaged.find(s => s.label === 'untriaged at month-end')!.values;
-const cumulative = monthly.charts.c_cum.find(s => s.label === 'cumulative closed')!.values;
-const periods = [
-  { from:'2025-01', to:'2025-12', date:'2025', title:'A smaller stream of reports', text:'Before the surge in AI-generated contributions, fewer reports entered the tracker.', queueText:'Awaiting triage in December', end:'2025-12' },
-  { from:'2026-01', to:'2026-03', date:'January to March 2026', title:'Reports outpace the team', text:'More reports arrive, and more are closed. But incoming work outpaces the team’s capacity.', queueText:'Awaiting triage in March', end:'2026-03' },
-  { from:'2026-04', to:'2026-08', date:'April to August 2026', title:'More reports, far more work completed', text:'With Magpie in use, monthly closures rise. The triage queue shrinks, then grows again as reports keep arriving.', queueText:'Awaiting triage: March → June → August', end:'2026-08' },
-];
-const phases = periods.map(p => {
-  const indices = monthly.buckets.flatMap((m,i) => m >= p.from && m <= p.to ? [i] : []);
-  const mean = (values:number[]) => indices.reduce((sum,i) => sum + values[i],0) / indices.length;
-  const closed = cumulative.map((v,i) => v - (cumulative[i-1] ?? 0));
-  return {...p, incoming:mean(opened), closed:mean(closed), queue:queue[monthly.buckets.indexOf(p.end)]};
-});
-const ratio = (phases[2].closed / phases[1].closed).toFixed(1);
-const x = [95, 415, 735];
-const y = (value:number) => 290 - value / 35 * 215;
-const path = (key:'incoming'|'closed') => phases.map((phase,i)=>`${i ? 'L' : 'M'}${x[i]},${y(phase[key])}`).join(' ');
 ---
 <figure class="airflow-chart-story">
-  <div class="chart-legend"><span class="incoming-key">New tracked reports</span><span class="completed-key">Tracked reports closed</span></div>
-  <div class="chart-adoption"><MagpieToolkit /><span>Magpie introduced<small>April 2026</small></span></div>
-  <svg viewBox="0 0 840 355" role="img" aria-labelledby="airflow-flow-title airflow-flow-desc">
-    <title id="airflow-flow-title">Airflow handles more reports with Magpie</title>
-    <desc id="airflow-flow-desc">Monthly averages for 2025, January to March 2026, and April to August 2026. New tracked reports: {phases.map(p=>p.incoming.toFixed(1)).join(', ')}. Tracked reports closed: {phases.map(p=>p.closed.toFixed(1)).join(', ')}. Magpie was introduced in April 2026.</desc>
-    <rect class="adoption-wash" x="555" y="25" width="245" height="265" rx="12" />
-    <text class="axis-caption" x="48" y="27">Reports per month · period averages</text>
-    {[0,10,20,30].map(v=><g><line class="chart-grid" x1="48" x2="800" y1={y(v)} y2={y(v)} /><text class="chart-axis" x="35" y={y(v)+5} text-anchor="end">{v}</text></g>)}
-    <line class="adoption-line" x1="555" x2="555" y1="45" y2="290" />
-    <path class="completed-area" d={`${path('closed')} L735,290 L95,290 Z`} />
-    <path class="incoming-line" d={path('incoming')} />
-    <path class="completed-line" d={path('closed')} />
-    {phases.map((p,i)=><g><circle class="incoming-dot" cx={x[i]} cy={y(p.incoming)} r="5"/><circle class="completed-dot" cx={x[i]} cy={y(p.closed)} r="5"/></g>)}
-    {['2025','Jan–Mar 2026','Apr–Aug 2026'].map((label,i)=><text class="chart-axis" x={x[i]} y="320" text-anchor="middle">{label}</text>)}
-    {['Lower volume','Reports surge','With Magpie'].map((label,i)=><text class="phase-label" x={x[i]} y="345" text-anchor="middle">{label}</text>)}
-  </svg>
-  <figcaption class="chart-takeaway"><strong>{ratio}×</strong><span>as many tracked reports<br />closed per month with Magpie</span></figcaption>
-  <details class="chart-method"><summary>Data and methodology</summary><p>Monthly averages: {phases[1].closed.toFixed(1)} reports closed in January to March 2026, compared with {phases[2].closed.toFixed(1)} in April to August. The earlier baseline averages all of 2025. Points compare period averages, not individual months. Closed includes outcomes other than a released fix. Reports screened out before tracking are excluded. These observations do not isolate Magpie’s effect. <a href="/stories/airflow#data" target="_blank" rel="noreferrer">Explore the data ↗</a></p></details>
+  <div class="chart-legend"><span class="legend-incoming">Incoming external reports</span><span class="legend-time">Maintainer time per report</span></div>
+  <div class="chart-frame"><div class="chart-phases"><span>Before the AI boom</span><span>The AI boom</span><span class="chart-adoption"><MagpieToolkit /><span>Magpie introduced</span></span></div>
+  <svg viewBox="0 0 900 270" role="img" aria-labelledby="airflow-flow-title airflow-flow-desc">
+    <title id="airflow-flow-title">More incoming reports, less manual work per report</title>
+    <desc id="airflow-flow-desc">Illustrative trends, not measured maintainer hours. Incoming external reports rise. Manual maintainer time per report falls after adopting Magpie. Maintainers retain review and approval.</desc>
+    <rect class="chart-wash" x="600" y="0" width="300" height="270" />
+    <line class="phase-divider" x1="300" x2="300" y1="0" y2="270" />
+    <line class="adoption-line" x1="600" x2="600" y1="0" y2="270" />
+    <path class="incoming-line" d="M45 220 C130 220 210 220 300 220 C410 220 490 148 600 112 S775 52 855 34" />
+    <path class="time-line" d="M45 150 C130 150 210 150 300 150 C410 150 490 82 600 82 C700 82 700 215 855 234" />
+    <circle class="incoming-dot" cx="855" cy="34" r="5" />
+    <circle class="time-dot" cx="855" cy="234" r="5" />
+
+  </svg></div>
+
+  <p class="chart-note">Illustrative trends · <a href="/stories/airflow#data" target="_blank" rel="noreferrer">See Airflow’s measured results ↗</a></p>
 </figure>
 <style>
-.airflow-chart-story{--incoming:#a05832;--completed:#005bbb;--grid:#36583b30;margin:0 auto;max-width:900px;color:var(--ink)}
-:global(html[data-theme=dark]) .airflow-chart-story{--incoming:#efb589;--completed:#91c4ff;--grid:#b5cce333}
-.chart-legend{display:flex;gap:28px;justify-content:center;font-size:14px}.chart-legend span{display:flex;gap:9px;align-items:center}.chart-legend span:before{content:'';width:25px;border-top:3px solid var(--completed)}.chart-legend .incoming-key:before{border-color:var(--incoming);border-top-style:dashed}
-.chart-adoption{display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0 0 60%;color:var(--completed);font-size:17px;font-weight:500}.chart-adoption small{display:block;font-size:12px;font-weight:400;margin-top:4px;color:var(--muted)}.chart-adoption :global(.magpie-toolkit){width:44px;height:39px;color:inherit}
-.airflow-chart-story>svg{display:block;width:100%;overflow:visible}.chart-grid{stroke:var(--grid)}.chart-axis,.axis-caption{fill:var(--muted);font-size:14px}.axis-caption{font-size:12px}.phase-label{fill:var(--ink);font-size:15px;font-weight:500}.incoming-line,.completed-line{fill:none;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}.incoming-line{stroke:var(--incoming);stroke-dasharray:8 7}.completed-line{stroke:var(--completed)}.incoming-dot{fill:var(--incoming)}.completed-dot{fill:var(--completed)}.completed-area{fill:var(--completed);opacity:.1}.adoption-wash{fill:var(--completed);opacity:.06}.adoption-line{stroke:var(--completed);stroke-dasharray:3 5;opacity:.5}
-.chart-takeaway{display:flex;align-items:center;justify-content:center;gap:26px;margin:28px 0 18px}.chart-takeaway strong{font-size:76px;line-height:1;font-weight:500;letter-spacing:-.06em;color:var(--completed)}.chart-takeaway span{font-size:21px;line-height:1.4}.chart-method{font-size:12px;line-height:1.7;color:var(--muted);text-align:center}.chart-method summary{cursor:pointer;text-decoration:underline;text-underline-offset:4px}.chart-method p{max-width:720px;margin:15px auto}.chart-method a{color:inherit}
-@media(max-width:700px){.chart-legend{font-size:11px;gap:15px}.chart-adoption{margin-left:35%;font-size:14px}.chart-adoption :global(.magpie-toolkit){width:34px}.airflow-chart-story>svg{min-height:240px}.chart-takeaway{gap:18px}.chart-takeaway strong{font-size:60px}.chart-takeaway span{font-size:16px}.chart-axis{font-size:30px}.phase-label{font-size:28px}.axis-caption{font-size:23px}}
+.airflow-chart-story{--incoming:#a05832;--time:#005bbb;margin:0 auto;max-width:900px;color:var(--ink)}
+:global(html[data-theme=dark]) .airflow-chart-story{--incoming:#efb589;--time:#91c4ff}
+.chart-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;text-align:center;margin-bottom:20px;min-height:44px;font-size:17px;color:var(--muted)}.phase-divider{stroke:var(--muted);stroke-dasharray:3 6;opacity:.25}.chart-adoption{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--time);font-size:18px;font-weight:500;margin-bottom:0}.chart-adoption :global(.magpie-toolkit){width:44px;height:39px;color:inherit}
+.airflow-chart-story>svg{display:block;width:100%;overflow:visible}.chart-wash{fill:var(--time);opacity:.06}.adoption-line{stroke:var(--time);stroke-dasharray:3 6;opacity:.5}.incoming-line,.time-line{fill:none;stroke-width:4;stroke-linecap:round}.incoming-line{stroke:var(--incoming);stroke-dasharray:9 7}.time-line{stroke:var(--time)}.incoming-dot{fill:var(--incoming)}.time-dot{fill:var(--time)}.incoming-label,.time-label{font-size:20px;font-weight:500}.incoming-label{fill:var(--incoming)}.time-label{fill:var(--time)}.period-label{fill:var(--muted);font-size:15px}
+figcaption{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin:24px 0 0}figcaption strong{font-weight:500;font-size:25px;letter-spacing:-.025em}figcaption span{font-size:17px;color:var(--muted)}.chart-note{text-align:center;font-size:12px;color:var(--muted);margin:18px 0 0}.chart-note a{color:inherit;text-underline-offset:3px}
+.chart-phases .chart-adoption{gap:8px}
+@media(max-width:700px){.chart-phases{font-size:12px;gap:8px}.chart-phases .chart-adoption{font-size:12px;flex-direction:column;gap:4px}.chart-phases .chart-adoption :global(.magpie-toolkit){width:30px;height:27px}.chart-adoption{font-size:16px}.incoming-label,.time-label{font-size:29px}.period-label{font-size:22px}figcaption strong{font-size:23px}figcaption span{font-size:15px}.chart-note{font-size:11px}.airflow-chart-story>svg{margin-block:24px}}
+
+.chart-legend{display:flex;justify-content:center;gap:32px;margin:0 0 24px;font-size:15px}.chart-legend>span{display:flex;align-items:center;gap:10px}.chart-legend>span:before{content:'';width:28px;border-top:3px solid var(--time)}.chart-legend .legend-incoming:before{border-color:var(--incoming);border-top-style:dashed}
+.chart-frame{border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--paper) 35%,transparent)}.chart-phases{margin:0;min-height:78px;gap:0;grid-template-columns:repeat(3,1fr);border-bottom:1px solid color-mix(in srgb,var(--ink) 18%,transparent);font-size:16px}.chart-phases>span{display:flex;height:100%;align-items:center;justify-content:center;padding:12px;border-right:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}.chart-phases>span:last-child{border-right:0;background:color-mix(in srgb,var(--time) 6%,transparent)}.chart-adoption{font-size:16px}.chart-frame>svg{display:block;width:100%;height:auto}.phase-divider,.adoption-line{stroke:var(--muted);stroke-dasharray:none;opacity:.18}.chart-note{margin-top:16px}
+@media(max-width:700px){.chart-legend{flex-direction:column;align-items:center;gap:10px;font-size:13px;margin-bottom:20px}.chart-phases{font-size:12px;min-height:72px}.chart-phases>span{padding:10px 6px}.chart-frame{border-radius:10px}.chart-frame>svg{min-height:150px}.chart-phases .chart-adoption{font-size:12px}}
 </style>
