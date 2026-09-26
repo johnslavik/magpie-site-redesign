@@ -1,0 +1,48 @@
+---
+import data from '../../data/airflow.json';
+const monthly = data.series.monthly;
+const opened = monthly.charts.c_open_vs_untriaged.find(s => s.label === 'opened in month')!.values;
+const queue = monthly.charts.c_open_vs_untriaged.find(s => s.label === 'untriaged at month-end')!.values;
+const cumulative = monthly.charts.c_cum.find(s => s.label === 'cumulative closed')!.values;
+const periods = [
+  { from:'2025-01', to:'2025-12', date:'2025', title:'A smaller stream of reports.', text:'Before the surge in AI-generated contributions, fewer reports entered the tracker.', queueText:'Awaiting triage in December', end:'2025-12' },
+  { from:'2026-01', to:'2026-03', date:'January – March 2026', title:'The workload grows. The queue follows.', text:'More reports arrive, and more are closed. But incoming work outpaces the team’s capacity.', queueText:'Awaiting triage in March', end:'2026-03' },
+  { from:'2026-04', to:'2026-08', date:'April – August 2026 · With Magpie', title:'Maintainers handle more of the work.', text:'With Magpie in use, monthly closures rise. The triage queue shrinks, then grows again as reports keep arriving.', queueText:'Awaiting triage: March → June → August', end:'2026-08' },
+];
+const phases = periods.map(p => {
+  const indices = monthly.buckets.flatMap((m,i) => m >= p.from && m <= p.to ? [i] : []);
+  const mean = (values:number[]) => indices.reduce((sum,i) => sum + values[i],0) / indices.length;
+  const closed = cumulative.map((v,i) => v - (cumulative[i-1] ?? 0));
+  return {...p, incoming:mean(opened), closed:mean(closed), queue:queue[monthly.buckets.indexOf(p.end)]};
+});
+const ratio = (phases[2].closed / phases[1].closed).toFixed(1);
+---
+<div class="airflow-journey">
+  <div class="journey-key"><span><i class="intake-key"></i>New tracked reports</span><span><i class="closed-key"></i>Tracked reports closed</span><small>Monthly averages · same scale throughout</small></div>
+  {phases.map((phase,i) => <article class="journey-stage">
+    <div class="journey-chapter"><span class="journey-date"><b>{String(i+1).padStart(2,'0')}</b>{phase.date}</span><h3>{phase.title}</h3><p>{phase.text}</p></div>
+    <div class="journey-visual">
+      <div class="journey-bars" role="img" aria-label={`${phase.date}: ${phase.incoming.toFixed(1)} new tracked reports and ${phase.closed.toFixed(1)} tracked reports closed per month.`}>
+        <div class="journey-bar-row"><span>New reports</span><div class="journey-bar-track"><div class="journey-bar intake-bar" style={`--bar-width:${phase.incoming/35*100}%`}></div></div><strong>{phase.incoming.toFixed(1)}</strong></div>
+        <div class="journey-bar-row"><span>Closed</span><div class="journey-bar-track"><div class="journey-bar closed-bar" style={`--bar-width:${phase.closed/35*100}%`}></div></div><strong>{phase.closed.toFixed(1)}</strong></div>
+      </div>
+      <div class="journey-queue"><span>{phase.queueText}</span>{i === 2 ? <div class="queue-sequence"><strong>{phases[1].queue}</strong><span aria-hidden="true">→</span><strong class="queue-low">{queue[monthly.buckets.indexOf("2026-06")]}</strong><span aria-hidden="true">→</span><strong>{phase.queue}</strong></div> : <div class="queue-count"><div class="queue-dots" aria-hidden="true">{Array.from({length:phase.queue},()=><i></i>)}</div><strong>{phase.queue}</strong></div>}</div>
+    </div>
+  </article>)}
+  <div class="journey-result"><strong>{ratio}×</strong><div><h3>As many tracked reports closed per month.</h3><p>{phases[1].closed.toFixed(1)} before → {phases[2].closed.toFixed(1)} with Magpie</p><small>Jan–Mar compared with Apr–Aug 2026. Closed includes outcomes other than a released fix.</small></div></div>
+  <p class="journey-source">Airflow tracker data, complete months through August 2026. Reports screened out before tracking are excluded. These observations do not isolate Magpie’s effect. <a href="/stories/airflow#data" target="_blank" rel="noreferrer">Explore the data ↗</a></p>
+</div>
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('journey-seen'); observer.unobserve(entry.target); } });
+  }, {threshold:0.25});
+  document.querySelectorAll('.journey-stage').forEach(stage => observer.observe(stage));
+</script>
+<style>
+.airflow-journey{--intake:#9b542d;--closed:#075bb7;--track:#172b2010;--rule:#34583633;--queue:#9b542d;color:var(--ink);max-width:980px;margin:auto}
+:global(html[data-theme=dark]) .airflow-journey{--intake:#efb589;--closed:#91c4ff;--track:#ffffff09;--rule:#b5cce333;--queue:#efb589}
+.journey-key{display:flex;align-items:center;justify-content:flex-end;gap:24px;flex-wrap:wrap;font-size:14px;margin:0 0 32px}.journey-key>span{display:flex;align-items:center;gap:8px}.journey-key i{width:10px;height:10px;border-radius:3px}.intake-key{background:var(--intake)}.closed-key{background:var(--closed)}.journey-key small{width:100%;text-align:right;color:var(--muted)}
+.journey-stage{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:center;padding:72px 0;border-top:1px solid var(--rule)}.journey-date{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--muted)}.journey-date b{color:var(--closed);font-weight:500}.journey-chapter h3{font-size:clamp(25px,3vw,34px);line-height:1.2;letter-spacing:-.035em;font-weight:500;margin:22px 0 16px}.journey-chapter p{font-size:16px;line-height:1.7;color:var(--muted);margin:0;max-width:360px}.journey-bar-row{display:grid;grid-template-columns:88px minmax(0,1fr) 40px;gap:12px;align-items:center;margin:18px 0;font-size:13px}.journey-bar-row strong{font-size:18px;font-weight:500;font-variant-numeric:tabular-nums}.journey-bar-track{height:28px;background:var(--track);border-radius:4px;overflow:hidden}.journey-bar{width:var(--bar-width);height:100%;border-radius:4px}.intake-bar{background:var(--intake)}.closed-bar{background:var(--closed)}.journey-seen .journey-bar{animation:bar-enter .85s ease-out both;transform-origin:left}.journey-seen .closed-bar{animation-delay:.12s}@keyframes bar-enter{from{transform:scaleX(0)}to{transform:scaleX(1)}}.journey-queue{margin-top:38px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:13px;color:var(--muted)}.queue-count{display:flex;align-items:center;gap:16px}.queue-count strong,.queue-sequence strong{font-size:22px;font-weight:500;color:var(--queue);font-variant-numeric:tabular-nums}.queue-dots{display:grid;grid-template-columns:repeat(8,5px);gap:4px}.queue-dots i{width:5px;height:5px;background:var(--queue);border-radius:1px}.queue-sequence{display:flex;gap:13px;align-items:center;white-space:nowrap}.queue-sequence .queue-low{color:var(--closed)}.journey-result{border-top:1px solid var(--rule);padding-top:64px;margin-top:16px;display:flex;gap:36px;align-items:center}.journey-result>strong{color:var(--closed);font-size:clamp(70px,9vw,110px);font-weight:500;letter-spacing:-.07em;line-height:1}.journey-result h3{font-size:23px;letter-spacing:-.025em;font-weight:500;margin:0 0 12px}.journey-result p{margin:0 0 10px;font-size:19px}.journey-result small,.journey-source{font-size:12px;line-height:1.7;color:var(--muted)}.journey-source{max-width:720px;margin:30px 0 0}.journey-source a{color:inherit;text-underline-offset:3px}
+@media(max-width:700px){.journey-key{justify-content:flex-start;gap:12px 20px}.journey-key small{text-align:left}.journey-stage{grid-template-columns:1fr;gap:30px;padding:48px 0}.journey-chapter p{max-width:none}.journey-queue{margin-top:28px}.journey-result{align-items:flex-start;flex-direction:column;gap:25px;padding-top:44px}.journey-bar-row{grid-template-columns:80px minmax(0,1fr) 38px;gap:8px}}
+@media(prefers-reduced-motion:reduce){.journey-seen .journey-bar{animation:none}}
+</style>

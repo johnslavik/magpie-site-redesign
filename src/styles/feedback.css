@@ -83,3 +83,31 @@ html[data-theme=dark] .airflow-section .velocity-line { stroke:#91c4ff; }
 html[data-theme=dark] .airflow-section .velocity-area { fill:#91c4ff; opacity:.1; }
 html[data-theme=dark] .airflow-brand { content:url('/vendor-logos/airflow-dark.svg'); }
 html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); }
+
+/* Give the Airflow evidence room to unfold before the maintainer's quote. */
+.redesign-home .airflow-section .case-layout { display:block; max-width:980px; margin-inline:auto; }
+.redesign-home .airflow-section .case-evidence { max-width:none; }
+.redesign-home .airflow-section .case-quote { margin-top:72px; padding-top:48px; border-top:1px solid #7b92aa55; display:grid; grid-template-columns:190px 1fr; gap:20px 48px; align-items:center; }
+.redesign-home .airflow-section .case-quote .airflow-brand { grid-row:1 / 3; }
+.redesign-home .airflow-section .case-quote blockquote { margin:0; max-width:none; }
+.redesign-home .airflow-section .case-quote .case-story { grid-column:2; margin-top:12px; }
+@media(max-width:700px) {
+ .redesign-home .airflow-section .case-quote { grid-template-columns:1fr; gap:24px; }
+ .redesign-home .airflow-section .case-quote .airflow-brand { grid-row:auto; }
+ .redesign-home .airflow-section .case-quote .case-story { grid-column:auto; }
+}
+
+/* Every step contributes to the shared tracks, including inactive panels. */
+.redesign-home .security-scenes { display:grid; grid-template-rows:auto auto; }
+.redesign-home .security-scene,
+.redesign-home .security-scene[aria-hidden=true] { display:grid; grid-column:1; grid-row:1 / span 2; grid-template-rows:subgrid; opacity:1; transition:opacity 220ms ease,visibility 220ms; }
+.redesign-home .security-scene[aria-hidden=true] { opacity:0; visibility:hidden; }
+.redesign-home .security-scene .story-comparison { margin-top:4px; margin-bottom:28px; }
+.redesign-home .story-stage-point { transition:background-color 220ms ease,border-color 220ms ease,box-shadow 220ms ease; }
+.redesign-home .story-stages button { transition:color 220ms ease; }
+@media(max-width:700px) {
+ .redesign-home .security-scene .story-comparison { grid-template-rows:1fr 1.5fr; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .redesign-home .security-scene,.redesign-home .story-stage-point,.redesign-home .story-stages button { transition:none; }
+}
