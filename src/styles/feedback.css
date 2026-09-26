@@ -72,3 +72,14 @@ html[data-theme=dark] .redesign-home .example-navigation button:hover { backgrou
 .redesign-home .magpie-toolkit { width:56px; height:49px; flex:none; color:var(--prepared-accent); }
 .redesign-home .toolkit-caption { display:block; margin-top:4px; color:var(--prepared-ink); font-size:12px; line-height:1.4; font-weight:400; letter-spacing:0; }
 html[data-theme=dark] .magpie-toolkit image { filter:brightness(1.8) saturate(.6); }
+
+/* The evidence chapter needs distinct surfaces and legible chart/brand labels. */
+html[data-theme=dark] .redesign-home .airflow-section { --band-color:#1c2940; }
+html[data-theme=dark] .redesign-home .airflow-section :is(blockquote,.quote-person span,.velocity-chart figcaption span) { color:#d3deeb; }
+html[data-theme=dark] .airflow-section :is(.velocity-axis,.velocity-label,.velocity-value) { fill:#d3deeb; }
+html[data-theme=dark] .airflow-section .velocity-grid { stroke:#52647d; stroke-opacity:.7; }
+html[data-theme=dark] .airflow-section .velocity-adoption { stroke:#b3c8e2; }
+html[data-theme=dark] .airflow-section .velocity-line { stroke:#91c4ff; }
+html[data-theme=dark] .airflow-section .velocity-area { fill:#91c4ff; opacity:.1; }
+html[data-theme=dark] .airflow-brand { content:url('/vendor-logos/airflow-dark.svg'); }
+html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); }
