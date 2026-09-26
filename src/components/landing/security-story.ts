@@ -18,7 +18,7 @@ export const securityStory = [
     without: ["You reproduce the bug", "You write the patch and test", "You run the checks"],
     label: "Fix & test", kind: "fix", prompt: "The vulnerability is confirmed, so it’s time to fix it",
     title: "You receive a proposed patch, a regression test, and the check results.",
-    work: ["You review how to reproduce the bug", "You review the proposed patch and test", "You review the check results"],
+    work: ["You review how to reproduce the bug", "You review the patch and test", "You review the check results"],
     handoff: "A maintainer reviews and merges the fix.",
   },
   {

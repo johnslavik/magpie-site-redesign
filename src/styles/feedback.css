@@ -200,11 +200,20 @@ a :is(.lucide-arrow-up-right,.lucide-arrow-right) { display:none; }
 /* Center the content block, with fixed icon and text columns inside it. */
 .redesign-home .magpie-card .magpie-card-brand,
 .redesign-home :is(.story-manual,.summary-before)>:is(h3,h4) {
-  display:flex;
-  justify-content:center;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
   align-items:center;
   gap:16px;
   width:100%;
+}
+.redesign-home .magpie-card .magpie-card-brand > svg,
+.redesign-home :is(.story-manual,.summary-before)>:is(h3,h4) > svg {
+  justify-self:end;
+}
+.redesign-home .magpie-card .magpie-card-brand > span,
+.redesign-home :is(.story-manual,.summary-before)>:is(h3,h4) > span {
+  grid-column:2;
+  text-align:center;
 }
 .redesign-home :is(.magpie-card,.story-manual) .workflow-checklist {
   width:100%;
