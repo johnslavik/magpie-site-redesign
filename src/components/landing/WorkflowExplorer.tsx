@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { securityStory } from "./security-story";
-import MagpieCard from "./MagpieCard";
+import MagpieCard, { OldWayMark } from "./MagpieCard";
 
 export default function WorkflowExplorer() {
   const [stage, setStage] = useState(0);
@@ -62,7 +62,7 @@ export default function WorkflowExplorer() {
   };
   return <div className="security-walkthrough" ref={sceneRef} data-scroll-driven={scrollDriven}>
     <div className="security-workbench" ref={panelRef}>
-      <div className="security-intro"><h2>See how Magpie helps resolve a security report.</h2></div>
+      <div className="security-intro"><h2>See how Magpie helps resolve a security report</h2></div>
       <div className="story-stages" role="tablist" aria-label="Security lifecycle phases">{securityStory.map((phase, i) => <button key={phase.label} type="button" role="tab" id={`security-tab-${i}`} aria-selected={stage === i} aria-controls={`security-stage-${i}`} tabIndex={stage === i ? 0 : -1} data-complete={i < stage} onClick={() => select(i)} onKeyDown={event => {
         if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
         event.preventDefault();
@@ -72,7 +72,7 @@ export default function WorkflowExplorer() {
       <div className="security-scenes">{securityStory.map((phase, i) => <section className="security-scene" id={`security-stage-${i}`} key={phase.label} role="tabpanel" aria-labelledby={`security-tab-${i}`} aria-hidden={stage !== i} inert={stage !== i} tabIndex={0}>
         <h3>{phase.prompt}</h3>
         <div className="story-comparison">
-          <div className="story-manual"><h4>Without Magpie</h4><p>{phase.without}</p></div>
+          <div className="story-manual"><h4><OldWayMark /><span>The old way</span></h4><p>{phase.without}</p></div>
           <MagpieCard className="story-assisted" headingLevel="h4" work={phase.work} />
         </div>
       </section>)}</div>

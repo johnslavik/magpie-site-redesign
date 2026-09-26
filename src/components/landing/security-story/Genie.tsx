@@ -97,7 +97,7 @@ export function GenieBadge({
         <GenieMark className="size-14 flex-none text-brand-600 mobile:size-10" />
         <div className="min-w-0">
           <div className="truncate text-caption font-caption text-subtext-color">
-            Magpie did that — {did}
+            Magpie did that: {did}
           </div>
           {/* The month is the only figure. A per-act saving would be a claim
               about one run that nobody can check. */}

@@ -7,10 +7,10 @@ import "../../styles/terminal-demo.css";
 
 const previewLines = [
   { kind: "prompt", text: "> Help me triage this private security report." },
-  { kind: "muted", text: "1. Intake — summarize the report in the private workspace." },
-  { kind: "result", text: "2. Triage — check the evidence and affected versions." },
-  { kind: "result", text: "3. Remediation — propose a fix and regression checks." },
-  { kind: "result", text: "4. Disclosure — prepare an advisory for maintainer review." },
+  { kind: "muted", text: "1. Intake: summarize the report in the private workspace." },
+  { kind: "result", text: "2. Triage: check the evidence and affected versions." },
+  { kind: "result", text: "3. Remediation: propose a fix and regression checks." },
+  { kind: "result", text: "4. Disclosure: prepare an advisory for maintainer review." },
   { kind: "muted", text: "Fictional report. Nothing sent or published." },
   { kind: "gate", text: "Review each proposal before moving to the next step." },
 ];
@@ -84,7 +84,7 @@ export function TerminalPreview({ paused }: { paused: boolean }) {
         <div className="t-bar"><span className="t-dots" aria-hidden="true">● ● ●</span><span>codex / example-project</span><span>SIMULATION</span></div>
         <div className="t-preview-output" aria-hidden="true"><CodexStartup /><div className="t-prompt">{typed}<span className="t-cursor">▍</span></div>{previewLines.slice(1).map((entry,index) => <div key={entry.text} className={`t-${entry.kind}`} style={{visibility:index + 2 <= line ? 'visible' : 'hidden'}}>{entry.text}</div>)}</div>
       </a>
-      <div className="t-preview-heading"><h2>Your work.<br /><span>A little assistance.</span></h2><p>Walk through a security report, from private intake to a disclosure plan. Review each step at your own pace.</p><a className="k-button" href={withBase('/demo?scenario=security')}>Try the security demo </a></div>
+      <div className="t-preview-heading"><h2>Your work<br /><span>A little assistance</span></h2><p>Walk through a security report, from private intake to a disclosure plan. Review each step at your own pace.</p><a className="k-button" href={withBase('/demo?scenario=security')}>Try the security demo </a></div>
     </div>
   </section>;
 }
@@ -177,7 +177,7 @@ export default function TerminalDemo() {
   function reset() { if (timer.current) clearTimeout(timer.current); timer.current = null; setEntries([intro]); setPending(false); setBusy(false); setInput(''); setScenario('prs'); setSecurityStep(0); field.current?.focus(); }
   return <div className="t-demo-page">
     <header className="t-demo-header"><a href={withBase('/')} aria-label="Back to Magpie homepage"><img src={withBase('/subframe-mark.svg')} width="32" height="32" alt="" />Magpie</a><span>INTERACTIVE DEMO</span><a href={withBase('/start')}>Get started </a></header>
-    <main className="t-demo-main"><div className="t-demo-intro"><div><span>YOUR AGENT. YOUR CALL.</span><h1>Give it a task.<br />Keep the final say.</h1></div><p>Explore a simulated maintainer session. Read the findings, inspect a diff, and choose what happens next.</p></div>
+    <main className="t-demo-main"><div className="t-demo-intro"><div><span>YOUR AGENT. YOUR CALL.</span><h1>Give it a task<br />Keep the final say</h1></div><p>Explore a simulated maintainer session. Read the findings, inspect a diff, and choose what happens next.</p></div>
       <div className="t-window t-interactive"><div className="t-bar"><span>magpie / example-project</span><span>SIMULATION</span><button onClick={reset} aria-label="Restart demo"><RotateCcw size={16} />Restart</button></div>
         <div className="t-transcript" ref={output} role="log" aria-label="Demo terminal output" aria-live="polite" aria-relevant="additions" tabIndex={0}><CodexStartup />{entries.map((entry,index) => <pre key={index} className={`t-${entry.kind}`}>{entry.text}</pre>)}</div>
         <div className="t-suggestions" aria-label="Suggested demo commands">{(scenario === 'security' && pending ? ['details','approve','reject'] : pending ? ['details','diff','approve','reject'] : scenario === 'security' && securityStep < securityStages.length - 1 ? ['next','details','triage PRs','triage issues'] : ['security','triage PRs','triage issues','help']).map(command => <button key={command} disabled={busy} onClick={() => run(command)}>{command}</button>)}</div>

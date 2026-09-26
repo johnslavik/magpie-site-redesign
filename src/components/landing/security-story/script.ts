@@ -147,7 +147,7 @@ export const SCRIPT: Chapter[] = [
           { kind: "out", text: "Installed: magpie-setup, magpie-security, magpie-agent-guard" },
           {
             kind: "note",
-            text: "Nothing committed — the install is yours, on this machine.",
+            text: "Nothing committed: the install is yours, on this machine.",
           },
         ],
       },
@@ -194,7 +194,7 @@ export const SCRIPT: Chapter[] = [
           { kind: "ask", text: "set up isolation and the action guard" },
           {
             kind: "out",
-            text: "Sandbox: Seatbelt — Bash subprocesses see only the paths you allow",
+            text: "Sandbox: Seatbelt: Bash subprocesses see only the paths you allow",
           },
           {
             kind: "gate",
@@ -208,7 +208,7 @@ export const SCRIPT: Chapter[] = [
           },
           {
             kind: "note",
-            text: "✗ denied: force-push to a protected branch. The guard refuses — no prompt to click through.",
+            text: "✗ denied: force-push to a protected branch. The guard refuses: no prompt to click through.",
           },
         ],
       },
@@ -305,14 +305,14 @@ export const SCRIPT: Chapter[] = [
             kind: "ask",
             text: "sync the security issues that arrived in the last 2 days",
           },
-          { kind: "out", text: `${PROJECT.securityList} — 2 unimported reports` },
+          { kind: "out", text: `${PROJECT.securityList}: 2 unimported reports` },
           {
             kind: "out",
-            text: '  1. "path traversal in archive extractor"  — r.chen@example.com',
+            text: '  1. "path traversal in archive extractor" : r.chen@example.com',
           },
           {
             kind: "out",
-            text: '  2. "login page is slow"                   — anon@example.com',
+            text: '  2. "login page is slow"                  : anon@example.com',
           },
           {
             kind: "gate",
@@ -342,17 +342,17 @@ export const SCRIPT: Chapter[] = [
         title: "Classify, check the history, agree a disposition",
         lines: [
           { kind: "ask", text: "triage the two new reports" },
-          { kind: "out", text: "#41 archive extractor — path traversal on member names" },
+          { kind: "out", text: "#41 archive extractor: path traversal on member names" },
           { kind: "note", text: "Severity: high · CWE-22 · affects 3.0.0 – 3.2.0" },
           {
             kind: "note",
-            text: "Related to #12 (fixed 2024) — different code path, not a duplicate.",
+            text: "Related to #12 (fixed 2024): different code path, not a duplicate.",
           },
           {
             kind: "out",
-            text: "Team thread: 3 replies, disposition agreed — accept, fix in 3.2.1",
+            text: "Team thread: 3 replies, disposition agreed: accept, fix in 3.2.1",
           },
-          { kind: "out", text: "#42 login page is slow — no security impact" },
+          { kind: "out", text: "#42 login page is slow: no security impact" },
           {
             kind: "gate",
             text: "Close #42 as not-a-vulnerability, with a reply?",
@@ -368,7 +368,7 @@ export const SCRIPT: Chapter[] = [
           month: "4 h of writing",
         },
         scene: "mail",
-        title: "Reply to the reporter — written in an instant, sent by a human",
+        title: "Reply to the reporter: written in an instant, sent by a human",
         fields: [
           { label: "To", value: PROJECT.reporter },
           { label: "From", value: PROJECT.securityList },
@@ -412,14 +412,14 @@ export const SCRIPT: Chapter[] = [
           },
           {
             id: "#42",
-            title: "Login page is slow — closed, not a vulnerability",
+            title: "Login page is slow: closed, not a vulnerability",
             severity: "none",
             from: 0,
             to: 0,
             muted: true,
           },
         ],
-        events: ["Triaged — severity high, assigned", "Picked up for a fix"],
+        events: ["Triaged: severity high, assigned", "Picked up for a fix"],
       },
       {
         ms: 7_000,
@@ -453,7 +453,7 @@ export const SCRIPT: Chapter[] = [
           },
           {
             id: "#42",
-            title: "Login page is slow — closed, not a vulnerability",
+            title: "Login page is slow: closed, not a vulnerability",
             severity: "none",
             from: 0,
             to: 0,
@@ -525,7 +525,7 @@ export const SCRIPT: Chapter[] = [
           { label: "Product", value: `${PROJECT.name} (${PROJECT.org})` },
           { label: "Affected", value: "3.0.0 – 3.2.0" },
           { label: "Fixed in", value: PROJECT.fixVersion },
-          { label: "CWE", value: "CWE-22 — path traversal" },
+          { label: "CWE", value: "CWE-22: path traversal" },
           { label: "CVSS", value: "7.5 (high)" },
           { label: "Credit", value: "R. Chen" },
           { label: "References", value: `${PROJECT.org}/${PROJECT.repo}#${PROJECT.fixPr}` },
@@ -540,7 +540,7 @@ export const SCRIPT: Chapter[] = [
           month: "3 h of writing",
         },
         scene: "mail",
-        title: "Announce it — written in an instant, sent by a human",
+        title: "Announce it: written in an instant, sent by a human",
         fields: [
           { label: "To", value: PROJECT.announceList },
           { label: "From", value: PROJECT.securityList },
@@ -565,22 +565,22 @@ export const SCRIPT: Chapter[] = [
           "",
           `https://example.org/security/${PROJECT.cve}`,
         ],
-        gate: "The last gate in the story — and a person is still the one pressing it.",
+        gate: "The last gate in the story: and a person is still the one pressing it.",
       },
       {
         ms: 6_000,
         genie: {
           at: 0.28,
-          did: "Closed #41 — advisory out, nothing left to chase",
+          did: "Closed #41: advisory out, nothing left to chase",
           month: "31 h across 12 reports",
         },
         scene: "board",
-        title: "Closed — and off the board",
+        title: "Closed: and off the board",
         columns: BOARD_COLUMNS,
         cards: [
           {
             id: "#41",
-            title: "Path traversal in archive extractor — closed",
+            title: "Path traversal in archive extractor: closed",
             severity: "high",
             from: 4,
             to: 4,
@@ -588,7 +588,7 @@ export const SCRIPT: Chapter[] = [
           },
           {
             id: "#42",
-            title: "Login page is slow — closed, not a vulnerability",
+            title: "Login page is slow: closed, not a vulnerability",
             severity: "none",
             from: 0,
             to: 0,
@@ -597,7 +597,7 @@ export const SCRIPT: Chapter[] = [
           },
         ],
         events: [
-          `${PROJECT.cve} published — closing #41`,
+          `${PROJECT.cve} published: closing #41`,
           "Board clear. Nothing left open.",
         ],
       },
@@ -613,7 +613,7 @@ export const SCRIPT: Chapter[] = [
           { label: "Status", value: "Analyzed" },
         ],
         summary:
-          "One report, one fix, one release, one advisory — and every message that left the project was written by Magpie and sent by a person.",
+          "One report, one fix, one release, one advisory: and every message that left the project was written by Magpie and sent by a person.",
       },
     ],
   },
@@ -632,7 +632,7 @@ export function transcript(): { chapter: string; lines: string[] }[] {
       lines.push(beat.title);
       if (beat.genie)
         lines.push(
-          `Magpie did that: ${beat.genie.did} — ${beat.genie.month} last month.`,
+          `Magpie did that: ${beat.genie.did}: ${beat.genie.month} last month.`,
         );
       switch (beat.scene) {
         case "terminal":
@@ -640,7 +640,7 @@ export function transcript(): { chapter: string; lines: string[] }[] {
             if (line.kind === "cmd") lines.push(`$ ${line.text}`);
             else if (line.kind === "ask") lines.push(`You: ${line.text}`);
             else if (line.kind === "gate")
-              lines.push(`${line.text} — answered "${line.answer}"`);
+              lines.push(`${line.text}: answered "${line.answer}"`);
             else lines.push(line.text);
           }
           break;
@@ -653,7 +653,7 @@ export function transcript(): { chapter: string; lines: string[] }[] {
           lines.push(`Columns: ${beat.columns.join(" → ")}`);
           for (const c of beat.cards)
             lines.push(
-              `${c.id} ${c.title} — ${beat.columns[c.from]} to ${beat.columns[c.to]}`,
+              `${c.id} ${c.title}: ${beat.columns[c.from]} to ${beat.columns[c.to]}`,
             );
           lines.push(...beat.events);
           break;
@@ -662,7 +662,7 @@ export function transcript(): { chapter: string; lines: string[] }[] {
           lines.push(beat.gate);
           break;
         case "interlude":
-          lines.push(`${beat.did} — ${beat.month} last month.`);
+          lines.push(`${beat.did}: ${beat.month} last month.`);
           lines.push(`${beat.card.kind} ${beat.card.id}: ${beat.card.title}`);
           lines.push(...beat.card.lines);
           break;

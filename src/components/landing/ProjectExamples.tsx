@@ -59,7 +59,7 @@ export function SoftwareLifecycle() {
   };
   return <div className="software-lifecycle" ref={sceneRef} data-scroll-driven={scrollDriven}>
     <div className="software-workbench" ref={panelRef}>
-    <div className="lifecycle-heading"><h2 id="choose-work-title">We’ve prepared workflows for the rest of your project, too.</h2><p>Choose only the skills you need, combine them when useful, and adapt them to your project.</p></div>
+    <div className="lifecycle-heading"><h2 id="choose-work-title">We’ve prepared workflows for the rest of your project, too</h2><p>Choose only the skills you need, combine them when useful, and adapt them to your project.</p></div>
     <div className="software-phases" role="tablist" aria-label="Software lifecycle">{lifecycle.map((item, i) => <button role="tab" key={item.label} id={`lifecycle-tab-${i}`} aria-label={item.label} aria-controls={`lifecycle-detail-${i}`} aria-selected={active === i} tabIndex={active === i ? 0 : -1} data-complete={i < active} onClick={() => select(i)} onKeyDown={event => { if (["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) { event.preventDefault(); const next = event.key === "Home" ? 0 : event.key === "End" ? lifecycle.length - 1 : (i + (event.key === "ArrowRight" ? 1 : -1) + lifecycle.length) % lifecycle.length; select(next); document.getElementById(`lifecycle-tab-${next}`)?.focus(); } }}><span className="software-phase-icon"><item.icon size={24} strokeWidth={1.5} aria-hidden="true" /></span><span>{item.label}</span></button>)}</div>
     <div className="software-scenes">{lifecycle.map((phase, index) => <div key={phase.label} id={`lifecycle-detail-${index}`} className={`lifecycle-detail lifecycle-sequence tone-${phase.color}`} role="tabpanel" aria-labelledby={`lifecycle-tab-${index}`} aria-hidden={active !== index} inert={active !== index} tabIndex={0}>
       <div className="lifecycle-flow">
@@ -78,7 +78,7 @@ export function ProjectRules() {
     <MagpieCard className="prepared-procedures" work={["Checks the changes and CI results", "Reviews the code for problems", "Drafts actionable feedback"]} />
     <ArrowRight className="adaptation-arrow" size={28} aria-hidden="true" />
     <div className="adapted-procedures">
-      <h3>Your team adds its review rules.</h3>
+      <h3>Your team adds its review rules</h3>
       <blockquote className="rule-example">“Use our review checklist. Ask the owning team to review changes. Include a changelog entry.”</blockquote>
       <p>Save your rules once. Magpie applies them each time your agent runs this review workflow.</p>
       <a className="project-rules-link" href="/docs/setup/agentic-overrides" target="_blank" rel="noreferrer">See how project rules work <ArrowRight size={15} aria-hidden="true" /></a>

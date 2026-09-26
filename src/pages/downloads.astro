@@ -43,7 +43,7 @@ gpg --import KEYS
 # Verify the detached PGP signature
 gpg --verify ${artifact}.asc ${artifact}
 
-# Optional: Verify the SHA-512 checksum — not needed if the signature checks out
+# Optional: Verify the SHA-512 checksum: not needed if the signature checks out
 sha512sum -c ${artifact}.sha512`;
 
 const prettyDate = release.date

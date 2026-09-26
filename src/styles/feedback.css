@@ -111,3 +111,17 @@ html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); 
 @media(prefers-reduced-motion:reduce) {
  .redesign-home .security-scene,.redesign-home .story-stage-point,.redesign-home .story-stages button { transition:none; }
 }
+.magpie-toolkit { width:56px; height:49px; display:block; flex:none; color:var(--prepared-accent,var(--blue)); }
+.magpie-card-brand { display:flex; align-items:center; gap:16px; }
+.redesign-home .journey-introduction .magpie-toolkit { color:inherit; }
+@media(min-width:701px) {
+ .redesign-home .airflow-section .case-heading { font-size:clamp(28px,3vw,38px); margin-bottom:28px; }
+ .redesign-home .airflow-section .case-quote { margin-top:24px; padding-top:24px; grid-template-columns:150px 1fr; gap:12px 30px; }
+ .redesign-home .airflow-section .case-quote blockquote { font-size:20px; }
+ .redesign-home .airflow-section .case-quote .airflow-brand { width:140px; }
+ .redesign-home .airflow-section .case-quote .quote-person img { width:36px; height:36px; }
+ .redesign-home .airflow-section .case-quote .case-story { margin:0; }
+}
+.redesign-home :is(.story-manual,.summary-before,.skill-manual,.isolation-open)>:is(h3,h4) { min-height:49px; display:flex; align-items:center; }
+.old-way-mark { width:56px; height:49px; display:block; flex:none; color:var(--manual-ink); }
+.redesign-home .summary-before>h3 { gap:16px; }

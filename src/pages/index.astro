@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 import HeroWorkflows from "../components/landing/HeroWorkflows";
 import BrandName from "../components/landing/BrandName";
 import SectionWave from "../components/landing/SectionWave.astro";
-import MagpieCard from "../components/landing/MagpieCard";
+import MagpieCard, { OldWayMark } from "../components/landing/MagpieCard";
 import MoreWays from "../components/landing/MoreWays.astro";
 ---
 <BaseLayout title="Apache Magpie | Software maintenance, automated" description="Ready-to-use agent workflows for code reviews, bug fixes, security, releases, repository upkeep, and contributor onboarding.">
@@ -16,7 +16,7 @@ import MoreWays from "../components/landing/MoreWays.astro";
   <main id="main-content" class="redesign-home">
     <section class="hero hero-overview container" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <h1 id="hero-title">Maintenance skills<br /><span>for your agent.</span></h1>
+        <h1 id="hero-title">Maintenance skills<br /><span>for your agent</span></h1>
         <p class="hero-story"><span class="hero-expertise">Apache Magpie is an open-source library of <strong><mark>dozens of reusable agent skills</mark></strong> across the software lifecycle, already used to handle thousands of issues in software the world depends on.</span></p>
       </div>
       <div id="workflow-examples" class="hero-workflows">
@@ -50,9 +50,9 @@ import MoreWays from "../components/landing/MoreWays.astro";
     <section class="summary-band section-band band-lavender chapter-emphasis">
       <SectionWave reverse />
       <div id="security-summary" class="security-summary container" aria-labelledby="security-summary-title">
-        <h2 id="security-summary-title">Less work to coordinate.</h2>
+        <h2 id="security-summary-title">Less work to coordinate</h2>
         <div class="security-summary-flow">
-          <div class="summary-state"><div class="summary-card summary-before"><h3>Without Magpie</h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
+          <div class="summary-state"><div class="summary-card summary-before"><h3><OldWayMark /><span>The old way</span></h3><strong>You coordinate every step</strong><p>Gather the evidence, work out the next steps, and carry the context from investigation to disclosure.</p></div></div>
           <div class="summary-route"><ArrowRight size={32} strokeWidth={1.5} aria-hidden="true" /></div>
           <MagpieCard className="summary-state summary-card summary-after"><strong class="summary-title">Your agent prepares the work</strong><p>Magpie’s ready-made workflows guide your agent through the investigation, fix, and disclosure, keeping the evidence together.</p></MagpieCard>
         </div>
