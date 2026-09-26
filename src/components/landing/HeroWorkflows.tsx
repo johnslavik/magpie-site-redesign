@@ -77,7 +77,7 @@ export default function HeroWorkflows() {
         {examples.map((item, i) => <div className="reel-slide" key={item.scene} aria-hidden={i !== selected} inert={i !== selected} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${examples.length}: ${item.input}`}>
           <ol className="reel-flow">
             <li className="reel-source"><span className="reel-input">{item.input}</span><WorkflowIllustration scene={item.scene} /></li>
-            <MagpieCard as="li" headingLevel="h2" className="reel-process" toolkit work={item.work} />
+            <MagpieCard as="li" headingLevel="h2" className="reel-process" work={item.work} />
             <li className="reel-delivery"><strong className="reel-outcome">{item.outcome}</strong><WorkflowIllustration scene={item.scene} result /></li>
           </ol>
         </div>)}

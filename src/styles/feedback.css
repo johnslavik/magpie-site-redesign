@@ -155,3 +155,44 @@ html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); 
 
 /* Keep section waves, but remove the background programming ornaments. */
 .redesign-home > section::after { content:none; display:none; }
+
+/* Titles share a centered axis; body copy and task lists remain left aligned. */
+.redesign-home :is(h2,h3,h4) {
+  text-align:center;
+  justify-content:center;
+}
+.redesign-home .magpie-card .magpie-card-brand,
+.redesign-home :is(.story-manual,.summary-before,.skill-manual,.isolation-open)>:is(h3,h4) {
+  justify-content:center;
+  text-align:center;
+  gap:16px;
+}
+.redesign-home .reel-flow :is(.reel-input,.reel-outcome),
+.redesign-home .summary-card>strong {
+  display:block;
+  width:100%;
+  text-align:center;
+  text-wrap:balance;
+}
+.redesign-home .reel-process .magpie-card-brand {
+  min-height:49px;
+  margin-bottom:24px;
+  font-size:22px;
+  font-weight:600;
+  line-height:1.45;
+}
+
+/* Center the comparison content as well as its headings. */
+.redesign-home .story-comparison .workflow-checklist li {
+  justify-content:center;
+  text-align:center;
+}
+.redesign-home .story-comparison .workflow-checklist li span { text-wrap:balance; }
+a :is(.lucide-arrow-up-right,.lucide-arrow-right) { display:none; }
+
+.redesign-home .hero-overview .agent-shell > .hero-story {
+  margin:40px auto 0;
+  text-align:center;
+  max-width:800px;
+}
+.redesign-home .hero-overview .agent-shell > .hero-story + .adapter-strip { margin-top:40px; }
