@@ -130,3 +130,15 @@ html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); 
 .redesign-home #hero-question { display:block; min-height:2.24em; max-width:1000px; margin-inline:auto; text-wrap:balance; }
 @media(min-width:1100px) { .redesign-home #hero-question { min-height:1.12em; } }
 @media(max-width:700px) { .redesign-home #hero-title { font-size:clamp(30px,7.8vw,46px); } .redesign-home #hero-question { min-height:3.36em; } }
+/* Mirrored comparison: equal columns, heading tracks and three task rows. */
+.redesign-home .security-scene .story-comparison { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.redesign-home .story-comparison>:is(.story-manual,.story-assisted) { display:grid; grid-template-rows:49px 1fr; gap:24px; }
+.redesign-home .story-comparison h4 { margin:0; gap:16px; }
+.redesign-home .story-comparison .workflow-checklist { display:grid; grid-template-rows:repeat(3,minmax(3.2em,1fr)); gap:12px; list-style:none; margin:0; padding:0; }
+.redesign-home .story-comparison .workflow-checklist li { display:flex; align-items:flex-start; gap:10px; font-size:var(--text-body); line-height:1.6; }
+.redesign-home .story-manual .workflow-checklist svg { color:var(--manual-ink); }
+@media(max-width:700px) {
+ .redesign-home .security-scene .story-comparison { grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
+}
+.redesign-home .story-comparison h4 { height:49px; min-height:49px; align-self:stretch; }
+.redesign-home .story-comparison .workflow-checklist svg { flex-basis:22px; width:22px; height:22px; margin-top:3px; }

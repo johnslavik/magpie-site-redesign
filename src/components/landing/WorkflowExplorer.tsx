@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Smile, createLucideIcon } from "lucide-react";
 import { securityStory } from "./security-story";
-import MagpieCard, { OldWayMark } from "./MagpieCard";
+import MagpieCard, { OldWayMark, Checklist } from "./MagpieCard";
+
+const TiredFace = createLucideIcon("TiredFace", [
+  ["circle", { cx: "12", cy: "12", r: "9", key: "face" }],
+  ["path", { d: "M7 10h3m4 0h3M8 12h1m6 0h1M8 17q4-3 8 0", key: "expression" }],
+]);
 
 export default function WorkflowExplorer() {
   const [stage, setStage] = useState(0);
@@ -72,8 +77,8 @@ export default function WorkflowExplorer() {
       <div className="security-scenes">{securityStory.map((phase, i) => <section className="security-scene" id={`security-stage-${i}`} key={phase.label} role="tabpanel" aria-labelledby={`security-tab-${i}`} aria-hidden={stage !== i} inert={stage !== i} tabIndex={0}>
         <h3>{phase.prompt}</h3>
         <div className="story-comparison">
-          <div className="story-manual"><h4><OldWayMark /><span>The old way</span></h4><p>{phase.without}</p></div>
-          <MagpieCard className="story-assisted" headingLevel="h4" work={phase.work} />
+          <div className="story-manual"><h4><OldWayMark /><span>The old way</span></h4><Checklist items={phase.without} icon={TiredFace} /></div>
+          <MagpieCard className="story-assisted" headingLevel="h4" work={phase.work} checklistIcon={Smile} />
         </div>
       </section>)}</div>
       <div className="story-navigation">

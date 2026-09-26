@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Check } from "lucide-react";
+import { Check, type LucideIcon } from "lucide-react";
 import { withBase } from "@/ui/lib/utils";
 
 export function MagpieToolkit() { return <svg className="magpie-toolkit" viewBox="0 0 64 56" aria-hidden="true">
@@ -18,12 +18,13 @@ export function OldWayMark() {
   </svg>;
 }
 
-export function Checklist({ items }: { items: string[] }) {
-  return <ul className="workflow-checklist">{items.map(item => <li key={item}><Check size={18} aria-hidden="true" /><span>{item}</span></li>)}</ul>;
+export function Checklist({ items, icon: Icon = Check }: { items: string[]; icon?: LucideIcon }) {
+  return <ul className="workflow-checklist">{items.map(item => <li key={item}><Icon size={18} aria-hidden="true" /><span>{item}</span></li>)}</ul>;
 }
 
-export default function MagpieCard({ children, work, className = "", as: Element = "div", headingLevel = "h3", toolkit = false }: {
+export default function MagpieCard({ children, work, className = "", as: Element = "div", headingLevel = "h3", toolkit = false, checklistIcon }: {
   toolkit?: boolean;
+  checklistIcon?: LucideIcon;
   children?: ReactNode;
   work?: string[];
   className?: string;
@@ -33,7 +34,7 @@ export default function MagpieCard({ children, work, className = "", as: Element
   const Heading = headingLevel;
   return <Element className={`magpie-card ${className}`}>
     <Heading className="magpie-card-brand"><MagpieToolkit /><span>Magpie{toolkit && <small className="toolkit-caption">A toolkit under your control</small>}</span></Heading>
-    {work && <Checklist items={work} />}
+    {work && <Checklist items={work} icon={checklistIcon} />}
     {children}
   </Element>;
 }
