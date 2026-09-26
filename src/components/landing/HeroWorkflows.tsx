@@ -32,10 +32,13 @@ export default function HeroWorkflows() {
     return () => { observer.disconnect(); media.removeEventListener("change", change); };
   }, []);
   useEffect(() => {
-    const boundary = root.current?.closest(".hero-overview") ?? root.current;
+    const boundary = root.current;
     if (!boundary) return;
     const hover = () => setHovered(boundary.matches(":hover"));
-    const focus = (event?: Event) => setFocused(boundary.contains(event?.type === "focusout" ? (event as FocusEvent).relatedTarget as Node | null : document.activeElement));
+    const focus = (event?: Event) => {
+      const target = event?.type === "focusout" ? (event as FocusEvent).relatedTarget : document.activeElement;
+      setFocused(target instanceof Element && boundary.contains(target) && target.matches(":focus-visible"));
+    };
     boundary.addEventListener("mouseenter", hover);
     boundary.addEventListener("mouseleave", hover);
     boundary.addEventListener("focusin", focus);
@@ -61,8 +64,8 @@ export default function HeroWorkflows() {
   useEffect(() => {
     if (!advancing) return;
     const timer = setInterval(() => {
-      const boundary = root.current?.closest(".hero-overview") ?? root.current;
-      if (!document.hidden && boundary && !boundary.matches(":hover") && !boundary.contains(document.activeElement)) {
+      const boundary = root.current;
+      if (!document.hidden && boundary && !boundary.matches(":hover") && !boundary.querySelector(":focus-visible")) {
         setSelected(i => (i + 1) % examples.length);
       }
     }, 8000);
