@@ -2,33 +2,36 @@
 import { MagpieToolkit } from "../landing/MagpieCard";
 ---
 <figure class="airflow-chart-story">
-  <div class="chart-legend"><span class="legend-incoming">Incoming external reports</span><span class="legend-time">Maintainer time per report</span></div>
+  <div class="chart-legend"><span class="legend-incoming">Incoming external reports</span><span class="legend-time">Maintainer time with Magpie</span><span class="legend-without">Maintainer time without Magpie</span></div>
   <div class="chart-frame"><div class="chart-phases"><span>Before the AI boom</span><span>The AI boom</span><span class="chart-adoption"><MagpieToolkit /><span>Magpie introduced</span></span></div>
   <svg viewBox="0 0 900 270" role="img" aria-labelledby="airflow-flow-title airflow-flow-desc">
     <title id="airflow-flow-title">More incoming reports, less manual work per report</title>
-    <desc id="airflow-flow-desc">Illustrative trends, not measured maintainer hours. Incoming external reports rise. Manual maintainer time per report falls after adopting Magpie. Maintainers retain review and approval.</desc>
+    <desc id="airflow-flow-desc">Illustrative trends, not measured maintainer hours. Incoming external reports rise. Manual maintainer time per report falls after adopting Magpie. A hypothetical continuation without Magpie branches at adoption and keeps maintainer time high. Maintainers retain review and approval.</desc>
     <rect class="chart-wash" x="600" y="0" width="300" height="270" />
     <line class="phase-divider" x1="300" x2="300" y1="0" y2="270" />
     <line class="adoption-line" x1="600" x2="600" y1="0" y2="270" />
     <path class="incoming-line" d="M45 220 C130 220 210 220 300 220 C410 220 490 148 600 112 S775 52 855 34" />
+    <path class="without-line" d="M600 82 C690 82 775 62 855 60" />
     <path class="time-line" d="M45 150 C130 150 210 150 300 150 C410 150 490 82 600 82 C700 82 700 215 855 234" />
     <circle class="incoming-dot" cx="855" cy="34" r="5" />
+    <circle class="without-dot" cx="855" cy="60" r="5" />
     <circle class="time-dot" cx="855" cy="234" r="5" />
 
   </svg></div>
 
-  <p class="chart-note">Illustrative trends · <a href="/stories/airflow#data" target="_blank" rel="noreferrer">See Airflow’s measured results ↗</a></p>
+  <p class="chart-note">Time per report · Illustrative trends and scenario without Magpie · <a href="/stories/airflow#data" target="_blank" rel="noreferrer">See Airflow’s measured results ↗</a></p>
 </figure>
 <style>
-.airflow-chart-story{--incoming:#a05832;--time:#005bbb;margin:0 auto;max-width:900px;color:var(--ink)}
-:global(html[data-theme=dark]) .airflow-chart-story{--incoming:#efb589;--time:#91c4ff}
+.airflow-chart-story{--incoming:#a05832;--time:#005bbb;--without:#77569b;margin:0 auto;max-width:900px;color:var(--ink)}
+:global(html[data-theme=dark]) .airflow-chart-story{--incoming:#efb589;--time:#91c4ff;--without:#c6a9ec}
 .chart-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;text-align:center;margin-bottom:20px;min-height:44px;font-size:17px;color:var(--muted)}.phase-divider{stroke:var(--muted);stroke-dasharray:3 6;opacity:.25}.chart-adoption{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--time);font-size:18px;font-weight:500;margin-bottom:0}.chart-adoption :global(.magpie-toolkit){width:44px;height:39px;color:inherit}
-.airflow-chart-story>svg{display:block;width:100%;overflow:visible}.chart-wash{fill:var(--time);opacity:.06}.adoption-line{stroke:var(--time);stroke-dasharray:3 6;opacity:.5}.incoming-line,.time-line{fill:none;stroke-width:4;stroke-linecap:round}.incoming-line{stroke:var(--incoming);stroke-dasharray:9 7}.time-line{stroke:var(--time)}.incoming-dot{fill:var(--incoming)}.time-dot{fill:var(--time)}.incoming-label,.time-label{font-size:20px;font-weight:500}.incoming-label{fill:var(--incoming)}.time-label{fill:var(--time)}.period-label{fill:var(--muted);font-size:15px}
+.airflow-chart-story>svg{display:block;width:100%;overflow:visible}.chart-wash{fill:var(--time);opacity:.06}.adoption-line{stroke:var(--time);stroke-dasharray:3 6;opacity:.5}.incoming-line,.time-line,.without-line{fill:none;stroke-width:4;stroke-linecap:round}.incoming-line{stroke:var(--incoming);stroke-dasharray:9 7}.time-line{stroke:var(--time)}.without-line{stroke:var(--without);stroke-dasharray:2 7}.without-dot{fill:var(--without)}.incoming-dot{fill:var(--incoming)}.time-dot{fill:var(--time)}.incoming-label,.time-label{font-size:20px;font-weight:500}.incoming-label{fill:var(--incoming)}.time-label{fill:var(--time)}.period-label{fill:var(--muted);font-size:15px}
 figcaption{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin:24px 0 0}figcaption strong{font-weight:500;font-size:25px;letter-spacing:-.025em}figcaption span{font-size:17px;color:var(--muted)}.chart-note{text-align:center;font-size:12px;color:var(--muted);margin:18px 0 0}.chart-note a{color:inherit;text-underline-offset:3px}
 .chart-phases .chart-adoption{gap:8px}
 @media(max-width:700px){.chart-phases{font-size:12px;gap:8px}.chart-phases .chart-adoption{font-size:12px;flex-direction:column;gap:4px}.chart-phases .chart-adoption :global(.magpie-toolkit){width:30px;height:27px}.chart-adoption{font-size:16px}.incoming-label,.time-label{font-size:29px}.period-label{font-size:22px}figcaption strong{font-size:23px}figcaption span{font-size:15px}.chart-note{font-size:11px}.airflow-chart-story>svg{margin-block:24px}}
 
-.chart-legend{display:flex;justify-content:center;gap:32px;margin:0 0 24px;font-size:15px}.chart-legend>span{display:flex;align-items:center;gap:10px}.chart-legend>span:before{content:'';width:28px;border-top:3px solid var(--time)}.chart-legend .legend-incoming:before{border-color:var(--incoming);border-top-style:dashed}
+.chart-legend{display:flex;justify-content:center;gap:16px 24px;flex-wrap:wrap;margin:0 0 24px;font-size:14px}.chart-legend>span{display:flex;align-items:center;gap:10px}.chart-legend>span:before{content:'';width:28px;border-top:3px solid var(--time)}.chart-legend .legend-incoming:before{border-color:var(--incoming);border-top-style:dashed}
+.chart-legend .legend-without:before{border-color:var(--without);border-top-style:dotted}
 .chart-frame{border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--paper) 35%,transparent)}.chart-phases{margin:0;min-height:78px;gap:0;grid-template-columns:repeat(3,1fr);border-bottom:1px solid color-mix(in srgb,var(--ink) 18%,transparent);font-size:16px}.chart-phases>span{display:flex;height:100%;align-items:center;justify-content:center;padding:12px;border-right:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}.chart-phases>span:last-child{border-right:0;background:color-mix(in srgb,var(--time) 6%,transparent)}.chart-adoption{font-size:16px}.chart-frame>svg{display:block;width:100%;height:auto}.phase-divider,.adoption-line{stroke:var(--muted);stroke-dasharray:none;opacity:.18}.chart-note{margin-top:16px}
 @media(max-width:700px){.chart-legend{flex-direction:column;align-items:center;gap:10px;font-size:13px;margin-bottom:20px}.chart-phases{font-size:12px;min-height:72px}.chart-phases>span{padding:10px 6px}.chart-frame{border-radius:10px}.chart-frame>svg{min-height:150px}.chart-phases .chart-adoption{font-size:12px}}
 </style>
