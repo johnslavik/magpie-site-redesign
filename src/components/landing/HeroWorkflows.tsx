@@ -19,6 +19,8 @@ export default function HeroWorkflows() {
   const [selected, setSelected] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
@@ -30,17 +32,40 @@ export default function HeroWorkflows() {
     return () => { observer.disconnect(); media.removeEventListener("change", change); };
   }, []);
   useEffect(() => {
-    if (!playing || !visible) return;
-    const timer = setInterval(() => { if (!document.hidden) setSelected(i => (i + 1) % examples.length); }, 6000);
+    const boundary = root.current?.closest(".agent-shell") ?? root.current;
+    if (!boundary) return;
+    const hover = () => setHovered(boundary.matches(":hover"));
+    const focus = (event?: Event) => setFocused(boundary.contains(event?.type === "focusout" ? (event as FocusEvent).relatedTarget as Node | null : document.activeElement));
+    boundary.addEventListener("mouseenter", hover);
+    boundary.addEventListener("mouseleave", hover);
+    boundary.addEventListener("focusin", focus);
+    boundary.addEventListener("focusout", focus);
+    hover(); focus();
+    return () => {
+      boundary.removeEventListener("mouseenter", hover);
+      boundary.removeEventListener("mouseleave", hover);
+      boundary.removeEventListener("focusin", focus);
+      boundary.removeEventListener("focusout", focus);
+    };
+  }, []);
+  const advancing = playing && visible && !hovered && !focused;
+  useEffect(() => {
+    if (!advancing) return;
+    const timer = setInterval(() => {
+      const boundary = root.current?.closest(".agent-shell") ?? root.current;
+      if (!document.hidden && boundary && !boundary.matches(":hover") && !boundary.contains(document.activeElement)) {
+        setSelected(i => (i + 1) % examples.length);
+      }
+    }, 8000);
     return () => clearInterval(timer);
-  }, [playing, visible]);
-  return <div ref={root} className="workflow-reel" role="region" aria-roledescription="carousel" aria-label="Nine ways maintainers use Magpie" onMouseEnter={() => setPlaying(false)} onFocusCapture={() => setPlaying(false)}>
-    <div className="reel-window" aria-live={playing ? "off" : "polite"}>
+  }, [advancing]);
+  return <div ref={root} className="workflow-reel" role="region" aria-roledescription="carousel" aria-label="Nine ways maintainers use Magpie">
+    <div className="reel-window" aria-live={advancing ? "off" : "polite"}>
       <div className="reel-track" style={{ transform: `translateX(-${selected * 100}%)` }}>
         {examples.map((item, i) => <div className="reel-slide" key={item.scene} aria-hidden={i !== selected} inert={i !== selected} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${examples.length}: ${item.input}`}>
           <ol className="reel-flow">
             <li className="reel-source"><span className="reel-input">{item.input}</span><WorkflowIllustration scene={item.scene} /></li>
-            <MagpieCard as="li" headingLevel="h2" className="reel-process" work={item.work} />
+            <MagpieCard as="li" headingLevel="h2" className="reel-process" toolkit work={item.work} />
             <li className="reel-delivery"><strong className="reel-outcome">{item.outcome}</strong><WorkflowIllustration scene={item.scene} result /></li>
           </ol>
         </div>)}

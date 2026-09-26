@@ -69,3 +69,6 @@ html[data-theme=dark] .airflow-section :is(.velocity-axis,.velocity-label,.veloc
 html[data-theme=dark] .airflow-section .velocity-grid { stroke:var(--line); }
 html[data-theme=dark] .airflow-section .velocity-adoption { stroke:#a0b887; }
 html[data-theme=dark] .redesign-home .example-navigation button:hover { background:#89b9ff18; border-color:#89b9ff55; }
+.redesign-home .magpie-toolkit { width:56px; height:49px; flex:none; color:var(--prepared-accent); }
+.redesign-home .toolkit-caption { display:block; margin-top:4px; color:var(--prepared-ink); font-size:12px; line-height:1.4; font-weight:400; letter-spacing:0; }
+html[data-theme=dark] .magpie-toolkit image { filter:brightness(1.8) saturate(.6); }
