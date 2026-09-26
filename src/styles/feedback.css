@@ -125,3 +125,8 @@ html[data-theme=dark] .velocity-chart image { filter:brightness(0) invert(.92); 
 .redesign-home :is(.story-manual,.summary-before,.skill-manual,.isolation-open)>:is(h3,h4) { min-height:49px; display:flex; align-items:center; }
 .old-way-mark { width:56px; height:49px; display:block; flex:none; color:var(--manual-ink); }
 .redesign-home .summary-before>h3 { gap:16px; }
+/* Reserve the changing question's space so the carousel never shifts. */
+.redesign-home #hero-title { font-size:clamp(36px,5vw,64px); line-height:1.12; }
+.redesign-home #hero-question { display:block; min-height:2.24em; max-width:1000px; margin-inline:auto; text-wrap:balance; }
+@media(min-width:1100px) { .redesign-home #hero-question { min-height:1.12em; } }
+@media(max-width:700px) { .redesign-home #hero-title { font-size:clamp(30px,7.8vw,46px); } .redesign-home #hero-question { min-height:3.36em; } }

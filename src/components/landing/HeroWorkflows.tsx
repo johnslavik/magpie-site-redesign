@@ -4,15 +4,15 @@ import MagpieCard from "./MagpieCard";
 import WorkflowIllustration, { type WorkflowScene } from "./WorkflowIllustration";
 
 const examples = [
-  { scene: "security" as WorkflowScene, input: "A security report arrives", skill: "security-issue-triage", work: ["Investigates the report", "Writes and tests the fix", "Coordinates release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
-  { scene: "review" as WorkflowScene, input: "A pull request needs review", skill: "pr-management-code-review", work: ["Reads the code changes", "Checks tests and conventions", "Drafts comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
-  { scene: "bug" as WorkflowScene, input: "A bug needs fixing", skill: "issue-fix-workflow", work: ["Reproduces the failure", "Writes the fix", "Adds a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
-  { scene: "release" as WorkflowScene, input: "A release needs checking", skill: "release-verify-rc", work: ["Verifies the build and signatures", "Prepares the release vote", "Drafts the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
-  { scene: "contributor" as WorkflowScene, input: "Someone wants to contribute", skill: "newcomer-issue-explainer", work: ["Finds a suitable issue", "Explains the code to change", "Shows how to test the change"], outcome: "A clear first task to work on", path: "/docs/mentoring/readme" },
-  { scene: "dependencies" as WorkflowScene, input: "Your dependencies need updating", skill: "dependency-audit", work: ["Finds vulnerable packages", "Flags abandoned dependencies", "Prioritises the fixes"], outcome: "An actionable upgrade plan", path: "/docs/repo-health/readme" },
-  { scene: "pairing" as WorkflowScene, input: "Your code needs a second look", skill: "pairing-self-review", work: ["Reviews the local diff", "Finds bugs and missing tests", "Suggests specific fixes"], outcome: "Problems caught before a PR", path: "/docs/pairing/readme" },
-  { scene: "onboarding" as WorkflowScene, input: "A new committer joins", skill: "committer-onboarding", work: ["Checks required paperwork", "Tracks access setup", "Prepares the welcome"], outcome: "Onboarding covered, step by step", path: "/docs/contributor-growth/readme" },
-  { scene: "sandbox" as WorkflowScene, input: "Your agent needs a sandbox", skill: "setup-isolated-setup-install", work: ["Configures the sandbox", "Limits file and tool access", "Verifies the protections"], outcome: "An isolated workspace to code in", path: "/docs/setup/secure-agent-setup" },
+  { scene: "security" as WorkflowScene, question: "triaging security reports?", input: "A security report arrives", skill: "security-issue-triage", work: ["Investigates the report", "Writes and tests the fix", "Coordinates release & CVE"], outcome: "A released fix and a published CVE", path: "/docs/security/readme" },
+  { scene: "review" as WorkflowScene, question: "checking every pull request?", input: "A pull request needs review", skill: "pr-management-code-review", work: ["Reads the code changes", "Checks tests and conventions", "Drafts comments with evidence"], outcome: "A review ready to approve", path: "/docs/pr-management/readme" },
+  { scene: "bug" as WorkflowScene, question: "reproducing every bug?", input: "A bug needs fixing", skill: "issue-fix-workflow", work: ["Reproduces the failure", "Writes the fix", "Adds a regression test"], outcome: "A tested fix ready to merge", path: "/docs/issue-management/readme" },
+  { scene: "release" as WorkflowScene, question: "checking release candidates?", input: "A release needs checking", skill: "release-verify-rc", work: ["Verifies the build and signatures", "Prepares the release vote", "Drafts the announcement"], outcome: "A release ready to publish", path: "/docs/release-management/readme" },
+  { scene: "contributor" as WorkflowScene, question: "finding first tasks for newcomers?", input: "Someone wants to contribute", skill: "newcomer-issue-explainer", work: ["Finds a suitable issue", "Explains the code to change", "Shows how to test the change"], outcome: "A clear first task to work on", path: "/docs/mentoring/readme" },
+  { scene: "dependencies" as WorkflowScene, question: "auditing your dependencies?", input: "Your dependencies need updating", skill: "dependency-audit", work: ["Finds vulnerable packages", "Flags abandoned dependencies", "Prioritises the fixes"], outcome: "An actionable upgrade plan", path: "/docs/repo-health/readme" },
+  { scene: "pairing" as WorkflowScene, question: "checking your own diffs?", input: "Your code needs a second look", skill: "pairing-self-review", work: ["Reviews the local diff", "Finds bugs and missing tests", "Suggests specific fixes"], outcome: "Problems caught before a PR", path: "/docs/pairing/readme" },
+  { scene: "onboarding" as WorkflowScene, question: "chasing onboarding paperwork?", input: "A new committer joins", skill: "committer-onboarding", work: ["Checks required paperwork", "Tracks access setup", "Prepares the welcome"], outcome: "Onboarding covered, step by step", path: "/docs/contributor-growth/readme" },
+  { scene: "sandbox" as WorkflowScene, question: "setting up agent sandboxes?", input: "Your agent needs a sandbox", skill: "setup-isolated-setup-install", work: ["Configures the sandbox", "Limits file and tool access", "Verifies the protections"], outcome: "An isolated workspace to code in", path: "/docs/setup/secure-agent-setup" },
 ];
 
 export default function HeroWorkflows() {
@@ -32,7 +32,7 @@ export default function HeroWorkflows() {
     return () => { observer.disconnect(); media.removeEventListener("change", change); };
   }, []);
   useEffect(() => {
-    const boundary = root.current?.closest(".agent-shell") ?? root.current;
+    const boundary = root.current?.closest(".hero-overview") ?? root.current;
     if (!boundary) return;
     const hover = () => setHovered(boundary.matches(":hover"));
     const focus = (event?: Event) => setFocused(boundary.contains(event?.type === "focusout" ? (event as FocusEvent).relatedTarget as Node | null : document.activeElement));
@@ -48,11 +48,20 @@ export default function HeroWorkflows() {
       boundary.removeEventListener("focusout", focus);
     };
   }, []);
+  useEffect(() => {
+    const action = document.getElementById("hero-question");
+    if (!action) return;
+    action.textContent = examples[selected].question;
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const animation = action.animate([{ opacity: .35 }, { opacity: 1 }], { duration: 280, easing: "ease-out" });
+      return () => animation.cancel();
+    }
+  }, [selected]);
   const advancing = playing && visible && !hovered && !focused;
   useEffect(() => {
     if (!advancing) return;
     const timer = setInterval(() => {
-      const boundary = root.current?.closest(".agent-shell") ?? root.current;
+      const boundary = root.current?.closest(".hero-overview") ?? root.current;
       if (!document.hidden && boundary && !boundary.matches(":hover") && !boundary.contains(document.activeElement)) {
         setSelected(i => (i + 1) % examples.length);
       }
