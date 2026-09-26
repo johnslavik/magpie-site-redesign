@@ -196,3 +196,34 @@ a :is(.lucide-arrow-up-right,.lucide-arrow-right) { display:none; }
   max-width:800px;
 }
 .redesign-home .hero-overview .agent-shell > .hero-story + .adapter-strip { margin-top:40px; }
+
+/* Center the content block, with fixed icon and text columns inside it. */
+.redesign-home .magpie-card .magpie-card-brand,
+.redesign-home :is(.story-manual,.summary-before)>:is(h3,h4) {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
+.redesign-home :is(.magpie-card,.story-manual) .workflow-checklist {
+  width:100%;
+  margin-inline:auto;
+}
+.redesign-home :is(.magpie-card,.story-manual) .workflow-checklist li {
+  display:grid;
+  grid-template-columns:22px minmax(0,1fr);
+  gap:12px;
+  align-items:center;
+  justify-content:normal;
+  text-align:left;
+}
+.redesign-home :is(.magpie-card,.story-manual) .workflow-checklist li > svg {
+  width:22px;
+  height:22px;
+  margin:0;
+}
+.redesign-home :is(.magpie-card,.story-manual) .workflow-checklist li > span {
+  min-width:0;
+  text-wrap:pretty;
+}
